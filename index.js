@@ -1,8 +1,10 @@
-// const config = require('config');
-// const loginHomepage = require('./routes/loginHomepage');
+const session = require('express-session');
+const flash = require('connect-flash');
+const {
+    khalti
+} = require('./routes/khalti');
+const axios = require('./middleware/khaltiServer');
 const homepage = require('./routes/homepage');
-// const login = require('./routes/login');
-// const signup = require('./routes/signup');
 const registration = require('./routes/pubgForm');
 const express = require('express');
 const app = express();
@@ -10,22 +12,17 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 
-// if (!config.get('jwtPrivateKey' || 'jwtEmailVerification')) {
-// console.log('FATAL ERROR: jwtPrivateKey is not defined');
-// process.exit(1);
-// }
-
 mongoose.set('useCreateIndex', true);
 
 // CONNECTED TO MONGODB
-mongoose.connect('mongodb://localhost/PUBG_NEPAL', {
+mongoose.connect('mongodb://localhost/pubgNepal', {
         useNewUrlParser: true
     })
     .then(() => console.log(`Connected to MongoDB`))
     .catch((err) => console.error(`ERROR !!! Can't Connect to MongoDB ${err}`));
 
 // MIDDLEWARE FOR LOADING IMAGES AND STYLES
-app.set('view engine', ejs);
+app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
 app.use('/styles', express.static('styles'));
 
@@ -33,14 +30,28 @@ app.use('/styles', express.static('styles'));
 app.use(bodyparser.urlencoded({
     extended: false
 }));
-app.use(express.json());
+app.use(bodyparser.json());
+
+// EXPRESS SESSION MIDDLEWATE
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+}));
+
+// EXPRESS MESSAGES MIDDLEWARE
+app.use(flash());
+app.use(function (req, res, next) {
+    res.locals.messages = req.session.messages;
+    delete req.session.messages;
+    next();
+});
+
 
 // ROUTES
 app.use('/', homepage);
-// app.use('/signup', signup);
-// app.use('/login', login);
 app.use('/register', registration);
-// app.use('/loginHomepage', loginHomepage);
+app.use('/register/khalti', khalti);
 
 
 // LISTENING PORT

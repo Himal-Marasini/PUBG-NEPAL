@@ -243,16 +243,40 @@ input::-webkit-inner-spin-button {
 }.pubg_logo {
     width: 240px;
     height: auto;
+}.registration__error {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #e74c3c;
+    padding-top: 4px;
+    color: #fafafa;
+    border-radius: 3px;
+    display: none;
+}#messages {
+    width: auto;
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    display: inline-block;
+    color: #fafafa;
+}.messages_success {
+    background-color: #27ae60;
+    padding: 5px 10px;
+}.messages_error {
+    background-color: #e74c3c;
+    padding: 5px 10px;
 }.registration__name,
 .registration__teamName,
 .registration__phoneNumber,
-.registration__emailId {
+.registration__emailId,
+.registration__payGateway,
+.registration__matchType {
     display: inline-block;
 }.registration__nameLable,
 .registration__teamNameLable,
 .registration__phoneLable,
 .registration__emailLable,
-.registration__payGatewayLable {
+.registration__payGatewayLable,
+.registration__matchTypeLable {
     padding-right: 15px;
 
 }.registration__teamName,
@@ -279,7 +303,8 @@ input::-webkit-inner-spin-button {
 .registrator_teamNamefield,
 .registrator_phonefield,
 .registrator_emailfield,
-.registrator_payGatewayfield {
+.registrator_payGatewayfield,
+.registrator_matchTypefield {
     width: 205px;
     height: 32px;
     background: none;
@@ -288,6 +313,13 @@ input::-webkit-inner-spin-button {
     border-bottom-color: #e08012;
     font-size: 18px;
     padding-left: 5px;
+}.registrator_payGatewayfield {
+    margin-right: 20px;
+}.registrator_matchTypefield {
+    width: 172px;
+    border: 2px solid #e08012;
+    text-align: center;
+    font-weight: bold;
 }.registrator_namefield:focus,
 .registrator_teamNamefield:focus,
 .registrator_phonefield:focus,
@@ -322,6 +354,7 @@ input::-webkit-inner-spin-button {
     margin-bottom: 15px;
 }.registration__submitBtn {
     outline: none;
+    cursor: pointer;
     border: none;
     background: #e08012;
     color: #fafafa;

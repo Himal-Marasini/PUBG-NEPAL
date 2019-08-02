@@ -1,30 +1,23 @@
-const jwt = require('jsonwebtoken');
-const config = require('config');
 const express = require('express');
-const {
-    User
-} = require('../models/users');
 const Router = express.Router();
 
 Router.get('/', (req, res) => {
-    res.render('index.ejs');
-});
+    res.render('index', {
+        sessionFlash: res.locals.sessionFlash
+    });
+    // console.log('THIS IS RES.LOCALS.SESSION FLASH');
+    // console.log(res.locals.sessionFlash);
 
-Router.get('/verification/:token', async (req, res) => {
-    try {
-        const verifyToken = jwt.verify(req.params.token, config.get('jwtEmailVerification'));
-        if (!verifyToken) {
-            res.status(400).send('Sorry Wrong Token');
-        }
-        const user = await User.findById(verifyToken._id);
-        await user.updateOne({
-            isVerified: true
-        });
-        await user.save();
-    } catch (e) {
-        res.send('error');
-    }
-    return res.redirect('http://localhost:2000/loginHomepage');
+    // console.log('THIS IS RES.LOCALS');
+    // console.log(res.locals);
+
+    // console.log('THIS IS THE REQ.SESSION.SESSIONFLASH');
+    // console.log(req.session.sessionFlash);
+
+    // console.log('THIS IS THE REQ.SESSION');
+    // console.log(req.session);
+
+    // console.log(req.session.sessionFlash);
 });
 
 module.exports = Router;

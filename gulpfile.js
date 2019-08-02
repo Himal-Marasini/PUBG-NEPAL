@@ -27,6 +27,6 @@ gulp.task('loginHomepage', () => {
 
 gulp.task('watch', function () {
     watch('./assets/temp/css', () => {
-        gulp.start('pubgform');
+        gulp.start('homepage');
     });
 });

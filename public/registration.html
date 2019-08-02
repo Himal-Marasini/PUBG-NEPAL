@@ -8,93 +8,95 @@
     <title>Register</title>
 
     <link href="../styles/style-pubgform.css" rel="stylesheet" type="text/css">
-    <script src="https://khalti.com/static/khalti-checkout.js"></script>
+
 </head>
 
 <body>
     <section>
         <div class="row">
-
             <div class="registration__form">
                 <div class="registration__logo">
                     <img src="../assets/images/pubg_logo.png" alt="PUBG REGISTRATION" class="pubg_logo">
                 </div>
 
                 <div class="registration__error">
-                    <span class="registrationError__text"> </span>
+                    <span class="registrationError__text">Please fill out all the details</span>
                 </div>
 
-                <% if ( messages && messages.message) { %>
                 <div id="messages">
-                    <div class="messages_<%= messages.type %>">
-                        <%= messages.message %>
-                    </div>
+                    <!--I HAVE To ADD THE STYLE ABOUT IT-->
+                    <div class="messages_success">Registration has been done Please check your Mail !!!</div>
                 </div>
-                <% } %>
 
-                <form method="POST" id='registerForm' onsubmit='return false' action=<%=typeUrl%>>
+                <form method="POST" action="">
                     <div class="registration__name">
                         <span class="registration__nameLable">Registrator Name :</span>
-                        <input type="text" name="registratorName" class="registrator_namefield">
+                        <input type="text" class="registrator_namefield">
                     </div>
 
                     <div class="registration__teamName">
                         <span class="registration__teamNameLable">Team Name :</span>
-                        <input type="text" name="teamName" class="registrator_teamNamefield">
+                        <input type="text" class="registrator_teamNamefield">
                     </div>
 
                     <div class="registration__phoneNumber">
                         <span class="registration__phoneLable">Phone Number :</span>
-                        <input type="number" name="phoneNumber" class="registrator_phonefield">
+                        <input type="text" class="registrator_phonefield">
                     </div>
 
                     <div class="registration__emailId">
                         <span class="registration__emailLable">Email ID :</span>
-                        <input type="text" name="emailId" class="registrator_emailfield">
+                        <input type="text" class="registrator_emailfield">
                     </div>
 
                     <div class="registration__payGateway">
-                        <span class="registration__payGatewayLable">Khalti ID :</span>
-                        <input type="text" name="payReceiveId" class="registrator_payGatewayfield">
+                        <span class="registration__payGatewayLable">E-Sewa or Khalti ID :</span>
+                        <input type="text" class="registrator_payGatewayfield">
                     </div>
 
                     <div class="registration__matchType">
                         <span class="registration__matchTypeLable">Match Type:</span>
-                        <input type="text" name="matchType" value=<%=matchType%> class="registrator_matchTypefield"
-                            readonly>
+                        <input type="text" value="SQUAD (MOBILE)" class="registrator_matchTypefield" readonly>
                     </div>
 
                     <div class="registration__teamMembers">
                         <span class="registration__teamMembersLable">Team Members PUBG Name with Character ID:</span>
                         <span class="registrator__memberOne">
                             <input type="text" placeholder="1) Player One" class="registrator_memberNamefield"
-                                name="memberOneName" id="memberOne_name">
+                                id="memberOne_name">
                             <input type="number" placeholder="1) Character ID" class="registrator_memberCharfield"
-                                name="memberOneCharId" id="memberOne_charId">
+                                id="memberOne_charId">
                         </span>
                         <span class="registrator__memberTwo">
                             <input type="text" placeholder="2) Player Two" class="registrator_memberNamefield"
-                                name="memberTwoName" id="memberTwo_name">
+                                id="memberTwo_name">
                             <input type="number" placeholder="2) Character ID" class="registrator_memberCharfield"
-                                name="memberTwoCharId" id="memberTwo_charId">
+                                id="memberTwo_charId">
                         </span>
                         <span class="registrator__memberThree">
                             <input type="text" placeholder="3) Player Three" class="registrator_memberNamefield"
-                                name="memberThreeName" id="memberThree_name">
+                                id="memberThree_name">
                             <input type="number" placeholder="3) Character ID" class="registrator_memberCharfield"
-                                name="memberThreeCharId" id="memberThree_charId">
+                                id="memberThree_charId">
                         </span>
                         <span class="registrator__memberFour">
                             <input type="text" placeholder="4) Player Four" class="registrator_memberNamefield"
-                                name="memberFourName" id="memberFour_name">
+                                id="memberFour_name">
                             <input type="number" placeholder="4) Character ID" class="registrator_memberCharfield"
-                                name="memberFourCharId" id="memberFour_charId">
+                                id="memberFour_charId">
                         </span>
                     </div>
 
-                    <div class="registration__submt">
-                        <input type="submit" value="Submit" class="registration__submitBtn">
-                        <!-- <button id="payment-button" class="registration__submitBtn">Submit</button> -->
+                    <div class="registration__paymentGateway">
+                        <span class="registration_paymentGatewayLable">Pay Through:</span>
+                        <label><input type="radio" name="paymentGateways" class="registrator_E-sewa" value="E-Sewa"
+                                checked>E-Sewa</label>
+                        <label><input type="radio" name="paymentGateways" class="registrator_khalti"
+                                value="Khalti">Khalti</label>
+                    </div>
+
+                    <div class="registration__submit">
+                        <input type="button" value="Submit" class="registration__submitBtn">
                     </div>
                 </form>
 
@@ -112,13 +114,18 @@
                         Go Back to Home
                     </span>
                 </a>
+                <!-- <span class="goback__img">
+                    <img src="" class="goback_icon">
+                </span>
+                <span class="goback__text">
+                    Go Back To Home
+                </span> -->
+
             </div>
+
         </div>
+        <script src="../assets/js/registration.js"></script>
     </section>
-
-    <script src="/assets/js/registration/formValidation.js"></script>
-    <script src="/assets/js/registration/khalti.js"></script>
-
 </body>
 
 </html>
