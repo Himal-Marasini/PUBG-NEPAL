@@ -1,0 +1,108 @@
+.main {
+    background: url(../assets/images/Image__1.png);
+    background-position: 0 -29px;
+    background-repeat: no-repeat;
+    height: 650px;
+}
+
+.main__logo {
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.loginUser {
+    float: right;
+    margin-top: 15px;
+}
+
+.main__signUp {
+    float: right;
+    color: white;
+    outline: none;
+    background: none;
+    padding: 6px 12px 3px 12px;
+    border: 2px solid $mainYellow;
+    border-radius: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.main__heroAreaText {
+    transform: translateY(100px);
+}
+
+.main__text__background {
+    margin: 0 auto;
+    width: 544px;
+    height: 153px;
+    background-color: $mainYellow;
+    opacity: 0.4;
+}
+
+.main__text {
+    position: relative;
+    bottom: 178px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1px;
+    color: #fafafa;
+}
+
+.main__textOne {
+    font-size: 38px;
+    padding-top: 23px;
+}
+
+.main__textTwo {
+    font-size: 21px;
+}
+
+.main__text__getStarted {
+    padding-bottom: 13px;
+    padding-top: 8px;
+}
+
+.main__goDownicon {
+    /* transform: translate(20px, 100px); */
+    text-align: center;
+    transform: translateY(135px);
+    cursor: pointer;
+    animation: goDown 1000ms linear infinite;
+}
+
+.btn__getStarted {
+    border: none;
+    width: 85px;
+    text-align: center;
+    background-color: $mainBlue;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: white;
+    border-radius: 1px;
+}
+
+#logo {
+    width: 110px;
+    height: auto;
+}
+
+#goDown {
+    width: 30px;
+    height: 30px;
+}
+
+@keyframes goDown {
+    0% {
+        transform: translateY(135px);
+    }
+
+    50% {
+        transform: translateY(148px);
+    }
+
+    100% {
+        transform: translateY(135px);
+    }
+}

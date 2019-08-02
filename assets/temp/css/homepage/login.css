@@ -1,0 +1,108 @@
+.login {
+    width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    text-align: center;
+    z-index: 1;
+    position: absolute;
+    /* bottom: 700px; */
+    left: 425px;
+    border-radius: 3px;
+    transform: translateY(-480px);
+    transition: transform 0.6s linear;
+}
+
+.login__closeContainer {
+    width: auto;
+    height: 28px;
+    position: absolute;
+    margin-top: 20px;
+    transform: translateX(455px);
+    cursor: pointer;
+}
+
+.closeIcon {
+    width: 25px;
+    height: auto
+}
+
+.login__headingTwo,
+.login__headingThree {
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $mainYellow;
+}
+
+.login__headingTwo {
+    font-size: 40px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+
+}
+
+.login__headingThree {
+    font-size: 30px;
+    margin: 0 0 0px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 300px;
+    height: 35px;
+    margin-top: 5px;
+    outline: none;
+    border: 1px solid $mainYellow;
+    padding-left: 5px;
+    font-family: Raleway;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.login__password {
+    margin-bottom: 7px;
+}
+
+.login__submitBtn {
+    width: 300px;
+    height: 35px;
+    outline: none;
+    text-transform: uppercase;
+    background: $mainYellow;
+    padding-left: 5px;
+    font-size: 24px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: none;
+    color: white;
+    padding: auto;
+    display: block;
+    margin: 10px auto 20px;
+}
+
+.login__forgotPassContainer {
+    margin-right: 110px;
+}
+
+.login__createAccountContainer {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $mainYellow;
+}
+
+.login__forgotPass {
+    color: $mainYellow;
+    text-decoration: none;
+}
+
+.login__error {
+    width: 300px;
+    height: 35px;
+    background-color: red;
+    border-radius: 3px;
+    text-transform: uppercase;
+    padding-top: 5px;
+    color: #fafafa;
+    margin: 10px auto;
+    font-size: 20px;
+    display: none;
+}

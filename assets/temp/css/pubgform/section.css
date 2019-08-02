@@ -1,0 +1,177 @@
+body {
+    overflow: hidden;
+}
+
+section {
+    background: url(../assets/images/Image__4.png);
+    background-position: 0 -88px;
+    background-repeat: no-repeat;
+    height: 660px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #2d3436
+}
+
+.registration__form {
+    margin-top: 32px;
+    background: #fafafa;
+    width: 760px;
+    text-align: center;
+    float: right;
+}
+
+.registration__logo {
+    margin-top: 20px;
+}
+
+.pubg_logo {
+    width: 240px;
+    height: auto;
+}
+
+.registration__name,
+.registration__teamName,
+.registration__phoneNumber,
+.registration__emailId {
+    display: inline-block;
+}
+
+.registration__nameLable,
+.registration__teamNameLable,
+.registration__phoneLable,
+.registration__emailLable,
+.registration__payGatewayLable {
+    padding-right: 15px;
+
+}
+
+.registration__teamName,
+.registration__emailId {
+    padding-top: 10px;
+    margin-left: 50px;
+}
+
+.registration__payGateway {
+    padding-top: 20px;
+}
+
+.registrator__memberOne,
+.registrator__memberTwo,
+.registrator__memberThree,
+.registrator__memberFour {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type=number] {
+    color: #2d3436;
+    font-family: Raleway;
+    font-size: 14px
+}
+
+input[type=text] {
+    color: #2d3436;
+    font-family: Raleway;
+    font-size: 14px
+}
+
+.registrator_namefield,
+.registrator_teamNamefield,
+.registrator_phonefield,
+.registrator_emailfield,
+.registrator_payGatewayfield {
+    width: 205px;
+    height: 32px;
+    background: none;
+    outline: none;
+    border: 2px solid transparent;
+    border-bottom-color: $mainYellow;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+.registrator_namefield:focus,
+.registrator_teamNamefield:focus,
+.registrator_phonefield:focus,
+.registrator_emailfield:focus,
+.registrator_payGatewayfield:focus {
+    border: 2px solid $mainYellow;
+}
+
+.registration__teamMembers {
+    margin-top: 15px;
+}
+
+.registration__teamMembersLable {
+    padding-bottom: 10px;
+}
+
+.registrator_memberNamefield {
+    margin-right: 20px;
+}
+
+.registrator_memberNamefield,
+.registrator_memberCharfield {
+    width: 205px;
+    height: 32px;
+    outline: none;
+    border: 1px solid $mainYellow;
+    font-size: 17px;
+    padding-left: 5px;
+}
+
+.registration__paymentGateway {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.registration_paymentGatewayLable {
+    padding-right: 10px;
+}
+
+.registrator_E-sewa,
+.registrator_khalti {
+    margin-left: 10px;
+    margin-right: 7px;
+    background: rebeccapurple;
+}
+
+.registration__submit {
+    margin-bottom: 15px;
+}
+
+.registration__submitBtn {
+    outline: none;
+    border: none;
+    background: $mainYellow;
+    color: #fafafa;
+    text-transform: uppercase;
+    padding: 3px 15px 0px 15px;
+    border-radius: 3px;
+    width: 130px;
+    height: 37px;
+}
+
+.goback__container {
+    display: inline-block;
+    position: absolute;
+    top: 58px;
+    left: 41px;
+}
+
+.gobackLink {
+    text-decoration: none;
+    font-size: 26px;
+    color: $mainYellow;
+    outline: none;
+}
+
+.gobackIcon {
+    width: 35px;
+    height: auto;
+    vertical-align: bottom;
+}
+
+.gobackLink__text {
+    margin-left: 10px;
+}
