@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const schema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     registratorName: {
         type: String,
-        require: true
+        require: true,
     },
     teamName: {
         type: String,
@@ -33,9 +33,11 @@ const schema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    },
+    }
 });
 
-const registerUser = mongoose.model('useremulator', schema);
+User = (collectionName) => {
+    return mongoose.model(collectionName, Schema);
+};
 
-module.exports = registerUser;
+module.exports = User;

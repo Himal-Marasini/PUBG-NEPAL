@@ -1,45 +1,6 @@
 const Joi = require('joi');
-const mongoose = require('mongoose');
 
-const schema = new mongoose.Schema({
-    registratorName: {
-        type: String,
-        require: true,
-    },
-    teamName: {
-        type: String,
-        require: true
-    },
-    email: {
-        type: String,
-        require: true
-    },
-    phoneNumber: {
-        type: Number,
-        require: true
-    },
-    payReceiveId: {
-        type: String,
-        require: true
-    },
-    matchType: {
-        type: String,
-        require: true
-    },
-    members: {
-        type: Array,
-        "default": [],
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-const usermobile = mongoose.model('usermobo', schema);
-
-function validate(object) {
+function validate(inputData) {
 
     const objectSchema = {
         registratorName: Joi.string().required(),
@@ -91,8 +52,7 @@ function validate(object) {
         }),
     };
 
-    return Joi.validate(object, objectSchema);
+    return Joi.validate(inputData, objectSchema);
 }
 
-exports.usermobile = usermobile;
-exports.validate = validate;
+module.exports = validate;

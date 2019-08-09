@@ -53,6 +53,9 @@ app.use('/', homepage);
 app.use('/register', registration);
 app.use('/register/khalti', khalti);
 
+app.use((req, res, next) => {
+    return res.status(404).send(`<h1>Page has not been found !!`);
+});
 
 // LISTENING PORT
 const PORT = process.env.PORT || 3000;
