@@ -1,7 +1,7 @@
 const registration = require('../controllers/registration');
 
-const nodemailer = require('../middleware/sendMail');
-const khaltiServer = require('../middleware/khaltiServer');
+// const nodemailer = require('../middleware/sendMail');
+// const khaltiServer = require('../middleware/khaltiServer');
 
 const express = require('express');
 const Router = express.Router();

@@ -53,70 +53,58 @@ const validate = (function () {
         }, 5000);
     }
 
-    function validationInputField(input, message) {
-        if (input == ' ' || input.length == 0) {
-            validationError(message);
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-
     function validateInput() {
 
         const input = inputValue();
 
-        if (!validationInputField(input.registratorName, "Please Enter the Registrator Name !!!")) {
+        if (input.registratorName == ' ' || input.registratorName.length == 0) {
+            validationError("Please Enter the Registrator Name !!!");
             return false;
-        }
-        if (!validationInputField(input.teamName, "Please Enter the Team Name")) {
+        } else if (input.teamName == ' ' || input.teamName.length == 0) {
+            validationError("Please Enter the Team Name !!!");
             return false;
-        }
-        if (!validationInputField(input.phoneNumber, "Please Enter the Phone Number")) {
+        } else if (input.phoneNumber == ' ' || input.phoneNumber.length == 0) {
+            validationError("Please Enter the Phone Number !!!");
             return false;
-        }
-        if (!validationInputField(input.emailId, "Please Enter the Email ID")) {
+        } else if (input.emailId == ' ' || input.emailId.length == 0) {
+            validationError("Please Enter the Email ID");
             return false;
-        }
-        if (!validationInputField(input.payReceiveId, "Please Enter the Khalti ID")) {
+        } else if (input.payReceiveId == ' ' || input.payReceiveId.length == 0) {
+            validationError("Please Enter the Khalti ID");
             return false;
-        }
-        if (!validationInputField(input.memberOne_name, "Please Enter the Member One Name")) {
+        } else if (input.memberOne_name == ' ' || input.memberOne_name.length == 0) {
+            validationError("Please Enter the Member one Name");
             return false;
-        }
-        if (isNaN(input.memberOne_charId)) {
-            validationError('Please Enter the Member One Character ID');
+        } else if (input.memberOne_charId == ' ' || input.memberOne_charId.length == 0) {
+            validationError("Please Enter the Member one Character ID");
             return false;
-        }
-        if (!validationInputField(input.memberTwo_name, "Please Enter the Member Two Name")) {
+        } else if (input.memberTwo_name == ' ' || input.memberTwo_name.length == 0) {
+            validationError("Please Enter the Member Two Name");
             return false;
-        }
-        if (isNaN(input.memberTwo_charId)) {
-            validationError('Please Enter the Member Two Character ID');
+        } else if (input.memberTwo_charId == ' ' || input.memberTwo_charId.length == 0) {
+            validationError("Please Enter the Member Two Character ID");
             return false;
-        }
-        if (!validationInputField(input.memberThree_name, "Please Enter the Member Three Name")) {
+        } else if (input.memberThree_name == ' ' || input.memberThree_name.length == 0) {
+            validationError("Please Enter the Member Three Name");
             return false;
-        }
-        if (isNaN(input.memberThree_charId)) {
-            validationError('Please Enter the Member Three Character ID');
+        } else if (input.memberThree_charId == ' ' || input.memberThree_charId.length == 0) {
+            validationError("Please Enter the Member Three Character ID");
             return false;
-        }
-        if (!validationInputField(input.memberFour_name, "Please Enter the Member Four Name")) {
+        } else if (input.memberFour_name == ' ' || input.memberFour_name.length == 0) {
+            validationError("Please Enter the Member Four Name");
             return false;
-        }
-        if (isNaN(input.memberFour_charId)) {
-            validationError('Please Enter the Member Four Character ID');
+        } else if (input.memberFour_charId == ' ' || input.memberFour_charId.length == 0) {
+            validationError("Please Enter the Member Four Character ID");
             return false;
         } else {
             return true;
         }
     }
+    console.log('Hello From Outside');
 
     return {
-        validInput: validateInput,
-        validError: validationError
+        validInput: validateInput
+        //     validError: validationError
     };
 
 })();

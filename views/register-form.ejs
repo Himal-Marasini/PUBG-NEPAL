@@ -24,15 +24,7 @@
                     <span class="registrationError__text"> </span>
                 </div>
 
-                <% if ( messages && messages.message) { %>
-                <div id="messages">
-                    <div class="messages_<%= messages.type %>">
-                        <%= messages.message %>
-                    </div>
-                </div>
-                <% } %>
-
-                <form method="POST" id='registerForm' onsubmit='return false' action=<%=typeUrl%>>
+                <form method="POST" id='registerForm' onsubmit="return validate.validateInput()" action=<%=typeUrl%>>
                     <div class="registration__name">
                         <span class="registration__nameLable">Registrator Name :</span>
                         <input type="text" name="registratorName" class="registrator_namefield">
