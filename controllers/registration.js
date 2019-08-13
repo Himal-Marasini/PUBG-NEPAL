@@ -27,8 +27,9 @@ exports.postMoboForm = async (req, res, next) => {
     }
 
     const data = new Form(req.body);
-    const resi = await data.mobosave();
-    console.log(resi, `From the line 31`);
+
+    // with Async and Await
+    await data.mobosave();
 
 };
 
@@ -44,9 +45,13 @@ exports.postEmuForm = (req, res, next) => {
     }
 
     const data = new Form(req.body);
-    data.emusave().then(() => {
-        console.log(`Data has been received`);
-    }).catch(err => {
-        console.log(`Some Error has been Occured`);
-    });
+
+    // with then and catch 
+    data.emusave()
+        .then(() => {
+            console.log(`Data has been saved to database`);
+        })
+        .catch(err => {
+            console.log(`Some Error has been Occured`);
+        });
 };

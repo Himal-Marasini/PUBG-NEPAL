@@ -9,9 +9,9 @@ const Router = express.Router();
 
 Router.get('/moboplayer', registration.getMoboForm);
 
-Router.post('/moboplayer', registration.postMoboForm);
-
 Router.get('/emuplayer', registration.getEmuForm);
+
+Router.post('/moboplayer', registration.postMoboForm);
 
 Router.post('/emuplayer', registration.postEmuForm);
 
@@ -39,7 +39,7 @@ Router.post('/emuplayer', registration.postEmuForm);
 //         return res.status(400).send("Registration has been full. Please try on Next Game");
 //     }
 
-//     var token = req.session.token;
+//     var token = req.session.token; 
 //     const verifyPayment = await khaltiServer(token.token);
 
 //     if (!verifyPayment) {

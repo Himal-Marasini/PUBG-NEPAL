@@ -24,7 +24,8 @@
                     <span class="registrationError__text"> </span>
                 </div>
 
-                <form method="POST" id='registerForm' onsubmit="return validate.validateInput()" action=<%=typeUrl%>>
+                <form method="POST" id='registerForm' onsubmit="return validate.validInput()" action=<%=typeUrl%>>
+
                     <div class="registration__name">
                         <span class="registration__nameLable">Registrator Name :</span>
                         <input type="text" name="registratorName" class="registrator_namefield">
@@ -49,6 +50,7 @@
                         <span class="registration__payGatewayLable">Khalti ID :</span>
                         <input type="text" name="payReceiveId" class="registrator_payGatewayfield">
                     </div>
+
 
                     <div class="registration__matchType">
                         <span class="registration__matchTypeLable">Match Type:</span>
@@ -85,8 +87,7 @@
                     </div>
 
                     <div class="registration__submt">
-                        <input type="submit" value="Submit" class="registration__submitBtn">
-                        <!-- <button id="payment-button" class="registration__submitBtn">Submit</button> -->
+                        <input type="submit" placeholder="Submit" class="registration__submitBtn">
                     </div>
                 </form>
 

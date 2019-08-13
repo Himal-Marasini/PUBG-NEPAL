@@ -32,13 +32,13 @@ const validate = (function () {
             payReceiveId: domVariables.payReceiveId.value,
             matchType: domVariables.matchType.value,
             memberOne_name: domVariables.memberOne_name.value,
-            memberOne_charId: parseInt(domVariables.memberOne_charId.value),
+            memberOne_charId: domVariables.memberOne_charId.value,
             memberTwo_name: domVariables.memberTwo_name.value,
-            memberTwo_charId: parseInt(domVariables.memberTwo_charId.value),
+            memberTwo_charId: domVariables.memberTwo_charId.value,
             memberThree_name: domVariables.memberThree_name.value,
-            memberThree_charId: parseInt(domVariables.memberThree_charId.value),
+            memberThree_charId: domVariables.memberThree_charId.value,
             memberFour_name: domVariables.memberFour_name.value,
-            memberFour_charId: parseInt(domVariables.memberFour_charId.value),
+            memberFour_charId: domVariables.memberFour_charId.value,
         };
 
         return inputData;
@@ -100,11 +100,9 @@ const validate = (function () {
             return true;
         }
     }
-    console.log('Hello From Outside');
-
     return {
-        validInput: validateInput
-        //     validError: validationError
+        validInput: validateInput,
+        validError: validationError
     };
 
 })();
