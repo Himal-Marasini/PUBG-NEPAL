@@ -32,13 +32,13 @@ const validate = (function () {
             payReceiveId: domVariables.payReceiveId.value,
             matchType: domVariables.matchType.value,
             memberOne_name: domVariables.memberOne_name.value,
-            memberOne_charId: domVariables.memberOne_charId.value,
+            memberOne_charId: parseInt(domVariables.memberOne_charId.value),
             memberTwo_name: domVariables.memberTwo_name.value,
-            memberTwo_charId: domVariables.memberTwo_charId.value,
+            memberTwo_charId: parseInt(domVariables.memberTwo_charId.value),
             memberThree_name: domVariables.memberThree_name.value,
-            memberThree_charId: domVariables.memberThree_charId.value,
+            memberThree_charId: parseInt(domVariables.memberThree_charId.value),
             memberFour_name: domVariables.memberFour_name.value,
-            memberFour_charId: domVariables.memberFour_charId.value,
+            memberFour_charId: parseInt(domVariables.memberFour_charId.value),
         };
 
         return inputData;
@@ -53,53 +53,67 @@ const validate = (function () {
         }, 5000);
     }
 
+    function validationInputField(input, message) {
+        if (input == ' ' || input.length == 0) {
+            validationError(message);
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     function validateInput() {
 
         const input = inputValue();
 
-        if (input.registratorName == ' ' || input.registratorName.length == 0) {
-            validationError("Please Enter the Registrator Name !!!");
+        if (!validationInputField(input.registratorName, "Please Enter the Registrator Name !!!")) {
             return false;
-        } else if (input.teamName == ' ' || input.teamName.length == 0) {
-            validationError("Please Enter the Team Name !!!");
+        }
+        if (!validationInputField(input.teamName, "Please Enter the Team Name")) {
             return false;
-        } else if (input.phoneNumber == ' ' || input.phoneNumber.length == 0) {
-            validationError("Please Enter the Phone Number !!!");
+        }
+        if (!validationInputField(input.phoneNumber, "Please Enter the Phone Number")) {
             return false;
-        } else if (input.emailId == ' ' || input.emailId.length == 0) {
-            validationError("Please Enter the Email ID");
+        }
+        if (!validationInputField(input.emailId, "Please Enter the Email ID")) {
             return false;
-        } else if (input.payReceiveId == ' ' || input.payReceiveId.length == 0) {
-            validationError("Please Enter the Khalti ID");
+        }
+        if (!validationInputField(input.payReceiveId, "Please Enter the Khalti ID")) {
             return false;
-        } else if (input.memberOne_name == ' ' || input.memberOne_name.length == 0) {
-            validationError("Please Enter the Member one Name");
+        }
+        if (!validationInputField(input.memberOne_name, "Please Enter the Member One Name")) {
             return false;
-        } else if (input.memberOne_charId == ' ' || input.memberOne_charId.length == 0) {
-            validationError("Please Enter the Member one Character ID");
+        }
+        if (isNaN(input.memberOne_charId)) {
+            validationError('Please Enter the Member One Character ID');
             return false;
-        } else if (input.memberTwo_name == ' ' || input.memberTwo_name.length == 0) {
-            validationError("Please Enter the Member Two Name");
+        }
+        if (!validationInputField(input.memberTwo_name, "Please Enter the Member Two Name")) {
             return false;
-        } else if (input.memberTwo_charId == ' ' || input.memberTwo_charId.length == 0) {
-            validationError("Please Enter the Member Two Character ID");
+        }
+        if (isNaN(input.memberTwo_charId)) {
+            validationError('Please Enter the Member Two Character ID');
             return false;
-        } else if (input.memberThree_name == ' ' || input.memberThree_name.length == 0) {
-            validationError("Please Enter the Member Three Name");
+        }
+        if (!validationInputField(input.memberThree_name, "Please Enter the Member Three Name")) {
             return false;
-        } else if (input.memberThree_charId == ' ' || input.memberThree_charId.length == 0) {
-            validationError("Please Enter the Member Three Character ID");
+        }
+        if (isNaN(input.memberThree_charId)) {
+            validationError('Please Enter the Member Three Character ID');
             return false;
-        } else if (input.memberFour_name == ' ' || input.memberFour_name.length == 0) {
-            validationError("Please Enter the Member Four Name");
+        }
+        if (!validationInputField(input.memberFour_name, "Please Enter the Member Four Name")) {
             return false;
-        } else if (input.memberFour_charId == ' ' || input.memberFour_charId.length == 0) {
-            validationError("Please Enter the Member Four Character ID");
+        }
+        if (isNaN(input.memberFour_charId)) {
+            validationError('Please Enter the Member Four Character ID');
             return false;
         } else {
             return true;
         }
     }
+
     return {
         validInput: validateInput,
         validError: validationError
