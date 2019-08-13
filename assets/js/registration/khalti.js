@@ -22,7 +22,7 @@ const khalti = (() => {
                     },
                     body: JSON.stringify(payload)
                 };
-
+                console.log(userData);
                 await fetch(`http://localhost:3000/register/khalti`, userData);
 
             },

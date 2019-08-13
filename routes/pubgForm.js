@@ -1,4 +1,5 @@
 const registration = require('../controllers/registration');
+const khaltiVerification = require('../middleware/khaltiServer');
 
 // const nodemailer = require('../middleware/sendMail');
 // const khaltiServer = require('../middleware/khaltiServer');
@@ -14,6 +15,9 @@ Router.get('/emuplayer', registration.getEmuForm);
 Router.post('/moboplayer', registration.postMoboForm);
 
 Router.post('/emuplayer', registration.postEmuForm);
+
+Router.post('/khalti', khaltiVerification.postKhaltiData);
+
 
 
 // Router.post('/emuplayer', async (req, res) => {

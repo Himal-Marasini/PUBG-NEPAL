@@ -1,6 +1,6 @@
 const axios = require('axios');
-let khaltiServer = async function (token) {
 
+async function verification(token) {
     var data = {
         "token": token,
         "amount": 20000
@@ -13,11 +13,25 @@ let khaltiServer = async function (token) {
     };
 
     try {
-        const response = await axios.post("https://khalti.com/api/v2/payment/verify/", data, config);
-        return response;
+        const result = await axios.post("https://khalti.com/api/v2/payment/verify/", data, config)
+        return result;
     } catch (err) {
-        console.error(err.message);
+        console.error(err.message, console.log('This has been log from khaltiServer.js'));
     }
-};
+}
 
-module.exports = khaltiServer;
+exports.postKhaltiData = async (req, res, next) => {
+
+    const token = req.body.token;
+
+    const data = await verification(token);
+    console.log(data);
+    // .then(verified => {
+    //     console.log('Succesfully Payment has been done', verified);
+    //     return verified;
+    // })
+    // .catch(err => {
+    //     console.error(err);
+    // });
+    exports.data = data;
+};
