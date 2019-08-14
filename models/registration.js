@@ -1,5 +1,5 @@
+const axios = require('axios');
 const User = require('../models/database/schema');
-
 class FormData {
     constructor(client) {
         this.registratorName = client.registratorName;
@@ -22,22 +22,56 @@ class FormData {
             characterID: client.memberFourCharId
         }];
     }
-    async mobosave() {
+    static async mobosave() {
         const Usermobile = User('usermobile');
         const usermobile = new Usermobile(this);
 
         const data = await usermobile.save();
         return data;
-        // console.log(data, `The data has been console.log line 67`);
     }
 
-    async emusave() {
+    static async emusave() {
         const Useremulator = User('useremulator');
         const useremulator = new Useremulator(this);
-
-        const data = await useremulator.save();
-        // console.log(data, `The data has been console.log line 75`);
+        await useremulator.save();
     }
 }
 
-module.exports = FormData;
+class Khalti extends FormData {
+    constructor(token) {
+        super(token);
+        this.token = token;
+    }
+
+    async verified() {
+        var data = {
+            "token": this.token,
+            "amount": 20000
+        };
+
+        var config = {
+            headers: {
+                "Authorization": "Key test_secret_key_7e905fd8bdd9430897c79ce057af2512"
+            }
+        };
+
+        const verified = await axios.post("https://khalti.com/api/v2/payment/verify/", data, config);
+
+        if (verified) {
+            return true;
+        }
+
+        return false;
+
+        // .then(verified => {
+        //     FormData.emusave();
+        //     console.log("user has been saved to database", verified);
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // });
+    }
+}
+
+exports.FormData = FormData;
+exports.Khalti = Khalti;

@@ -1,4 +1,3 @@
-const khaltiVerification = require('../middleware/khaltiServer');
 const validate = require('../util/validate');
 const Form = require('../models/registration');
 
@@ -45,26 +44,6 @@ exports.postEmuForm = async (req, res, next) => {
         return res.status(400).send(`<h1>Error has been occured</h1>`);
     }
 
-    const data = new Form(req.body);
-    console.log(khaltiVerification.data);
-    // khaltiVerification
-    //     .then(response => {
-    //         console.log(response);
-    //     })
-    //     .catch(err => {
-    //         console.error(err);
-    //     });
-
-    // console.log(khaltiVerification.verification, "This has been logged from registration controllers");
-
-    data.emusave()
-        .then(() => {
-            // console.log(`Data has been saved to database`);
-        })
-        .catch(err => {
-            console.log(`Some Error has been Occured`);
-        });
-    // }
-
+    const clientData = new Form.FormData(req.body);
 
 };
