@@ -3,7 +3,7 @@ const db = require('./util/databse');
 const error = require('./controllers/error');
 
 const homepage = require('./routes/homepage');
-
+const khalti = require('./routes/khalti').Router;
 const registration = require('./routes/pubgForm');
 
 const express = require('express');
@@ -36,5 +36,11 @@ app.use(bodyparser.json());
 
 // ROUTES
 app.use('/', homepage);
+app.use(khalti);
+
+// app.use((req, res, next) => {
+//     res.render(`You have only viewed the GET METHOD `);
+// });
+
 app.use('/register', registration);
 app.use(error);

@@ -115,6 +115,7 @@ const validate = (function () {
     }
 
     return {
+        inputValue: inputValue,
         validInput: validateInput,
         validError: validationError
     };

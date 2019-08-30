@@ -16,9 +16,7 @@ Router.post('/moboplayer', registration.postMoboForm);
 
 Router.post('/emuplayer', registration.postEmuForm);
 
-Router.post('/khalti', khaltiVerification.postKhaltiData);
-
-
+// Router.post('/register/khalti', khaltiVerification.postKhaltiData);
 
 // Router.post('/emuplayer', async (req, res) => {
 //     const {

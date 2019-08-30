@@ -1,11 +1,12 @@
 const khalti = (() => {
 
     const validateInput = validate.validInput;
+    const inputValue = validate.inputValue;
 
     const config = {
         // replace the publicKey with yours
         "publicKey": "test_public_key_9c38182de1354f35821f915a2456b8f4",
-        "productIdentity": "wdaawd7890", // Here I can send the ID 
+        "productIdentity": inputValue().matchType, // Here I can send the ID 
         "productName": "PUBG NEPAL", // This Should Be PUBG NEPAL
         "productUrl": "http://localhost:3000", // This Should Be none
         "eventHandler": {
@@ -22,7 +23,8 @@ const khalti = (() => {
                     },
                     body: JSON.stringify(payload)
                 };
-                console.log(userData);
+
+                // console.log("This is the Payload", payload);
                 await fetch(`http://localhost:3000/register/khalti`, userData);
 
             },

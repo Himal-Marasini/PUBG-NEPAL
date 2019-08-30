@@ -36,8 +36,4 @@ const Schema = new mongoose.Schema({
     }
 });
 
-User = (collectionName) => {
-    return mongoose.model(collectionName, Schema);
-};
-
-module.exports = User;
+module.exports = mongoose.model('usermobile', Schema);
