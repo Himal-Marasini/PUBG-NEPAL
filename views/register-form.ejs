@@ -28,34 +28,36 @@
 
                     <div class="registration__name">
                         <span class="registration__nameLable">Registrator Name :</span>
-                        <input type="text" name="registratorName" class="registrator_namefield">
+                        <input type="text" name="registratorName" id="registrator_name" class="registrator_namefield">
                     </div>
 
                     <div class="registration__teamName">
                         <span class="registration__teamNameLable">Team Name :</span>
-                        <input type="text" name="teamName" class="registrator_teamNamefield">
+                        <input type="text" name="teamName" id="registrator_teamName" class="registrator_teamNamefield">
                     </div>
 
                     <div class="registration__phoneNumber">
                         <span class="registration__phoneLable">Phone Number :</span>
-                        <input type="number" name="phoneNumber" class="registrator_phonefield">
+                        <input type="number" name="phoneNumber" id="registrator_phoneNumber"
+                            class="registrator_phonefield">
                     </div>
 
                     <div class="registration__emailId">
                         <span class="registration__emailLable">Email ID :</span>
-                        <input type="text" name="emailId" class="registrator_emailfield">
+                        <input type="text" name="emailId" id="registrator_emailId" class="registrator_emailfield">
                     </div>
 
                     <div class="registration__payGateway">
                         <span class="registration__payGatewayLable">Khalti ID :</span>
-                        <input type="text" name="payReceiveId" class="registrator_payGatewayfield">
+                        <input type="text" name="payReceiveId" id="registrator_khaltiId"
+                            class="registrator_payGatewayfield">
                     </div>
 
 
                     <div class="registration__matchType">
                         <span class="registration__matchTypeLable">Match Type:</span>
-                        <input type="text" name="matchType" value=<%=matchType%> class="registrator_matchTypefield"
-                            readonly>
+                        <input type="text" name="matchType" value=<%=matchType%> id="registrator_matchType"
+                            class="registrator_matchTypefield" readonly>
                     </div>
 
                     <div class="registration__teamMembers">
@@ -87,7 +89,7 @@
                     </div>
 
                     <div class="registration__submt">
-                        <input type="submit" placeholder="Submit" class="registration__submitBtn">
+                        <input type="button" placeholder="Submit" class="registration__submitBtn">
                     </div>
                 </form>
 
@@ -111,7 +113,7 @@
     </section>
 
     <script src="/assets/js/registration/formValidation.js"></script>
-    <script src="/assets/js/registration/khalti.js"></script>
+    <!-- <script src="/assets/js/registration/khalti.js"></script> -->
 
 </body>
 
