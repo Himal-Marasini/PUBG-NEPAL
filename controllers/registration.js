@@ -17,6 +17,7 @@ exports.getEmuForm = (req, res, next) => {
 };
 
 exports.postMoboForm = async (req, res, next) => {
+    console.log(req.body);
     const {
         error
     } = validate(req.body);

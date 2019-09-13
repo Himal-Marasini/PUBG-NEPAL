@@ -7,7 +7,7 @@ const Router = express.Router();
 Router.use('/register/khalti', async (req, res, next) => {
     const token = req.body.token;
     const type = req.body.product_identity;
-    console.log(req);
+    // console.log(req.body);
     var data = {
         "token": token,
         "amount": 20000

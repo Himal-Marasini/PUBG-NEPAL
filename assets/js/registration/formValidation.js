@@ -121,22 +121,18 @@ const validation = (() => {
                 uiVariables.domVariables.state = true;
             }
         },
+
         userData: userData
     };
 
 
 })();
 
-const khalti = ((inputData) => {
-
-
-
-});
-
 const controller = ((uiCtrl, validCtrl) => {
     const domVariable = uiCtrl.domVariables;
 
-    domVariable.btn_submit.addEventListener('click', () => {
+    function run() {
+
         const inputVal = uiCtrl.domInputValue();
         validCtrl.validateInput(inputVal);
 
@@ -167,8 +163,11 @@ const controller = ((uiCtrl, validCtrl) => {
                             body: JSON.stringify(data)
 
                         };
-
-                        await fetch(`http://localhost:3000/register/khalti`, userData);
+                        if (inputData.registrator_matchType === 'SQUAD(MOBILE)') {
+                            await fetch(`http://localhost:3000/register/moboplayer`, userData);
+                        } else if (inputData.registrator_matchType === 'SQUAD(EMULATOR)') {
+                            await fetch(`http://localhost:3000/register/emuplayer`, userData);
+                        }
 
                     },
 
@@ -192,8 +191,8 @@ const controller = ((uiCtrl, validCtrl) => {
             // Change back the State Variable
             domVariable.state = false;
         }
-        console.log(domVariable.state);
-        console.log('The btn has been clicked');
-    });
+    }
+
+    domVariable.btn_submit.addEventListener('click', run);
 
 })(uiVariables, validation);
