@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+
+    <link href="../styles/style-pubgform.css" rel="stylesheet" type="text/css">
+    <script src="https://khalti.com/static/khalti-checkout.js"></script>
+</head>
+
+<body>
+    <section>
+        <div class="row">
+            <div class="parent__container">
+
+                <div class="registration__form">
+                    <div class="registration__logo">
+                        <img src="../assets/images/pubg_logo.png" alt="PUBG REGISTRATION" class="pubg_logo">
+                    </div>
+
+                    <div class="registration__error">
+                        <span class="registrationError__text"> </span>
+                    </div>
+
+                    <form>
+                        <div class="registration__name">
+                            <span class="registration__nameLable">Registrator Name :</span>
+                            <input type="text" name="registratorName" id="registrator_name"
+                                class="registrator_namefield">
+                        </div>
+
+                        <div class="registration__teamName">
+                            <span class="registration__teamNameLable">Team Name :</span>
+                            <input type="text" name="teamName" id="registrator_teamName"
+                                class="registrator_teamNamefield">
+                        </div>
+
+                        <div class="registration__phoneNumber">
+                            <span class="registration__phoneLable">Phone Number :</span>
+                            <input type="number" name="phoneNumber" id="registrator_phoneNumber"
+                                class="registrator_phonefield">
+                        </div>
+
+                        <div class="registration__emailId">
+                            <span class="registration__emailLable">Email ID :</span>
+                            <input type="text" name="emailId" id="registrator_emailId" class="registrator_emailfield">
+                        </div>
+
+                        <div class="registration__payGateway">
+                            <span class="registration__payGatewayLable">Khalti ID :</span>
+                            <input type="text" name="payReceiveId" id="registrator_khaltiId"
+                                class="registrator_payGatewayfield">
+                        </div>
+
+                        <div class="registration__matchType">
+                            <span class="registration__matchTypeLable">Match Type:</span>
+                            <input type="text" name="matchType" value=<%=matchType%> id="registrator_matchType"
+                                class="registrator_matchTypefield" readonly>
+                        </div>
+
+                        <div class="registration__teamMembers">
+                            <span class="registration__teamMembersLable">Team Members PUBG Name with Character
+                                ID:</span>
+                            <span class="registrator__memberOne">
+                                <input type="text" placeholder="1) Player One" class="registrator_memberNamefield"
+                                    name="memberOneName" id="memberOne_name">
+                                <input type="number" placeholder="1) Character ID" class="registrator_memberCharfield"
+                                    name="memberOneCharId" id="memberOne_charId">
+                            </span>
+                            <span class="registrator__memberTwo">
+                                <input type="text" placeholder="2) Player Two" class="registrator_memberNamefield"
+                                    name="memberTwoName" id="memberTwo_name">
+                                <input type="number" placeholder="2) Character ID" class="registrator_memberCharfield"
+                                    name="memberTwoCharId" id="memberTwo_charId">
+                            </span>
+                            <span class="registrator__memberThree">
+                                <input type="text" placeholder="3) Player Three" class="registrator_memberNamefield"
+                                    name="memberThreeName" id="memberThree_name">
+                                <input type="number" placeholder="3) Character ID" class="registrator_memberCharfield"
+                                    name="memberThreeCharId" id="memberThree_charId">
+                            </span>
+                            <span class="registrator__memberFour">
+                                <input type="text" placeholder="4) Player Four" class="registrator_memberNamefield"
+                                    name="memberFourName" id="memberFour_name">
+                                <input type="number" placeholder="4) Character ID" class="registrator_memberCharfield"
+                                    name="memberFourCharId" id="memberFour_charId">
+                            </span>
+                        </div>
+
+                        <div class="registration__submit">
+                            <input type="button" value="Submit" class="registration__submitBtn">
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="funds">
+                    <h6 class="funds__title">Load Fund to khalti account through esewa</h6>
+
+                    <p class="funds__text">Just in case,if you are <span class="funds__bold">Esewa user</span>
+                        then the pubg nepal provides you the feature of loading fund to your khalti account through
+                        esewa
+                    </p>
+
+                    <p class="funds__text">All you have to do is send a request to our esewa Id and our
+                        team will within 5 mins will reply you back by loading fund into your khalti account
+                    </p>
+
+                    <p class="funds__text">Note: The amount can be <span class="funds__bold">any
+                        </span>but
+                        should not <span class="funds__bold">Exceed</span> the 500
+                    </p>
+
+                    <div class="funds__details">
+                        <p class="funds__detail-text-black">Esewa Id:<span class="funds__detail-text-yellow">
+                                9867256406
+                            </span></p>
+                        <p class="funds__detail-text-black">Amount:<span class="funds__detail-text-yellow">
+                                200
+                            </span></p>
+                        <p class="funds__detail-text-black">Purpose:<span class="funds__detail-text-yellow">
+                                personal
+                            </span></p>
+                        <p class="funds__detail-text-black">Remarks:<span class="funds__detail-text-yellow">
+                                pubg nepal@khalti_id
+                            </span></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="/assets/js/registration/formValidation.js"></script>
+
+</body>
+
+</html>
