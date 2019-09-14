@@ -1,10 +1,16 @@
-const Verification = require('../models/registration').Khalti;
+const axios = require('axios');
 
-exports.postKhaltiData = async (req, res, next) => {
+module.exports = async (token) => {
+    var data = {
+        "token": token,
+        "amount": 20000
+    };
 
-    const token = req.body.token;
-    const type = req.body.product_identity;
+    var config = {
+        headers: {
+            "Authorization": "Key test_secret_key_7e905fd8bdd9430897c79ce057af2512"
+        }
+    };
 
-    const khaltiVerify = new Verification(token, type);
-    // return await KhaltiVerify.verified();
+    return await axios.post("https://khalti.com/api/v2/payment/verify/", data, config);
 };

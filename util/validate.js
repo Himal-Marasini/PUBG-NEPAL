@@ -3,6 +3,14 @@ const Joi = require('joi');
 function validate(inputData) {
 
     const objectSchema = {
+        idx: Joi.string().required(),
+        token: Joi.string().required(),
+        amount: Joi.number().required(),
+        mobile: Joi.string().required(),
+        product_identity: Joi.string().required(),
+        product_name: Joi.string().required(),
+        product_url: Joi.string().required(),
+        widget_id: Joi.string().required(),
         registrator_name: Joi.string().required(),
         registrator_teamName: Joi.string().required(),
         registrator_emailId: Joi.string().email().required(),
@@ -51,6 +59,7 @@ function validate(inputData) {
             };
         }),
     };
+
     return Joi.validate(inputData, objectSchema);
 }
 

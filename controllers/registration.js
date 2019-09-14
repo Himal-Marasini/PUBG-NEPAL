@@ -1,6 +1,6 @@
 const validate = require('../util/validate');
 const User = require('../models/database/schema');
-const Khalti = require('../models/registration').Khalti;
+const khaltiVerification = require('../middleware/khaltiServer');
 
 exports.getMoboForm = (req, res, next) => {
     res.render('register-form', {
@@ -17,7 +17,6 @@ exports.getEmuForm = (req, res, next) => {
 };
 
 exports.postMoboForm = async (req, res, next) => {
-    console.log(req.body);
     const {
         error
     } = validate(req.body);
@@ -27,6 +26,10 @@ exports.postMoboForm = async (req, res, next) => {
         // return res.status(400).redirect('/register/moboplayer');
         return res.status(400).send(`<h1>Error has been occured</h1>`);
     }
+
+    const verified = await khaltiVerification(req.body.token);
+
+    console.log(verified);
 
     const Usermobile = new User({
         registratorName: req.body.registratorName,
@@ -50,11 +53,6 @@ exports.postMoboForm = async (req, res, next) => {
             characterID: req.body.memberFourCharId
         }]
     });
-
-    // const data = new Khalti(Usermobile);
-    Khalti.moboSave(Usermobile);
-
-    // console.log(Usermobile);
 
 };
 
