@@ -1,25 +1,30 @@
 const validate = require('../util/validate');
-const Mobile = require('../models/database/schema').userMobile;
-const Emulator = require('../models/database/schema').userEmulator;
+const Mobile = require('../models/schema').userMobile;
+const Emulator = require('../models/schema').userEmulator;
 const khaltiVerification = require('../middleware/khaltiServer');
 const sendmail = require('../middleware/sendMail');
-const flash = require('connect-flash');
 
 
 exports.getMoboForm = (req, res, next) => {
     res.render('register-form', {
         matchType: "SQUAD(MOBILE)",
         typeUrl: "/register/moboplayer",
-        message: "We request every user to enter correct details"
+        success: req.session.success,
+        errors: req.session.errors
     });
+    req.session.errors = null;
+    req.session.success = null;
 };
 
 exports.getEmuForm = (req, res, next) => {
     res.render('register-form', {
         matchType: "SQUAD(EMULATOR)",
         typeUrl: "/register/emuplayer",
-        message: false
+        success: req.session.success,
+        errors: req.session.errors
     });
+    req.session.errors = null;
+    req.session.success = null;
 };
 
 exports.postMoboForm = async (req, res, next) => {
@@ -29,17 +34,17 @@ exports.postMoboForm = async (req, res, next) => {
 
     if (error) {
         console.log(error.details[0].message);
-        // return res.status(400).redirect('/register/moboplayer');
-        // return req.flash('alert', 'Email Id is required');
-        // return res.status(400).send(`<h1>Error has been occured</h1>`);
+        req.session.errors = error.details[0].message;
+        req.session.success = true;
+        return res.status(400).redirect('/register/moboplayer');
     }
 
     const verified = await khaltiVerification(req.body.token);
 
-    // console.log(verified.data);
     if (!verified) {
-        return res.send('Error has been occured while processing the payment');
-        // return res.send(verified.error);
+        req.session.errors = verified.error;
+        req.session.success = true;
+        return res.status(400).redirect('/register/moboplayer');
     }
 
     const Usermobile = new Mobile({
@@ -72,10 +77,12 @@ exports.postMoboForm = async (req, res, next) => {
     const userdata = await Usermobile.save();
 
     if (userdata) {
+        req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
+        req.session.success = true;
         const mailSend = await sendmail(userdata);
         console.log(mailSend);
+        return res.status(200).redirect('/register/moboplayer');
     }
-
 };
 
 
@@ -86,15 +93,17 @@ exports.postEmuForm = async (req, res, next) => {
 
     if (error) {
         console.log(error.details[0].message);
-        // return res.status(400).redirect('/register/moboplayer');
-        return res.status(400).send(`<h1>Error has been occured</h1>`);
+        req.session.errors = error.details[0].message;
+        req.session.success = true;
+        return res.status(400).redirect('/register/emuplayer');
     }
 
     const verified = await khaltiVerification(req.body.token);
 
     if (!verified) {
-        return res.send('Error has been occured while processing the payment');
-        // return res.send(verified.error);
+        req.session.errors = verified.error;
+        req.session.success = true;
+        return res.status(400).redirect('/register/emuplayer');
     }
 
     const Useremulator = new Emulator({
@@ -123,10 +132,14 @@ exports.postEmuForm = async (req, res, next) => {
             mobile: verified.data.user.mobile
         }
     });
-    const resdata = await Useremulator.save();
-    console.log(resdata);
+
+    const userdata = await Useremulator.save();
+
     if (userdata) {
+        req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
+        req.session.success = true;
         const mailSend = await sendmail(userdata);
         console.log(mailSend);
+        return res.status(200).redirect('/register/emuplayer');
     }
 };

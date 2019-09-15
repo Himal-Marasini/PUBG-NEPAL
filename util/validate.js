@@ -17,7 +17,7 @@ function validate(inputData) {
             };
         }),
         registrator_teamName: Joi.string().required(),
-        registrator_emailId: Joi.string().email().required().error(err => {
+        registrator_emailId: Joi.string().required().error(err => {
             return {
                 message: "Email Id is required and must be valid."
             };
