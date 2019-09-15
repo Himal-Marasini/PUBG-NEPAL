@@ -164,9 +164,21 @@ const controller = ((uiCtrl, validCtrl) => {
 
                         };
                         if (inputData.registrator_matchType === 'SQUAD(MOBILE)') {
-                            await fetch(`http://localhost:3000/register/moboplayer`, userData);
+                            fetch(`http://localhost:3000/register/moboplayer`, userData)
+                                .then(res => {
+                                    window.location = res.url;
+                                }).catch(err => {
+                                    console.log('error');
+                                });
                         } else if (inputData.registrator_matchType === 'SQUAD(EMULATOR)') {
-                            await fetch(`http://localhost:3000/register/emuplayer`, userData);
+                            fetch(`http://localhost:3000/register/emuplayer`, userData)
+                                .then(res => {
+                                    window.location = res.url;
+                                    console.log(window.url);
+                                    console.log(res.url);
+                                }).catch(err => {
+                                    console.log('error');
+                                });
                         }
 
                     },

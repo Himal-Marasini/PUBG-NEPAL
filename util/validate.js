@@ -11,9 +11,17 @@ function validate(inputData) {
         product_name: Joi.string().required(),
         product_url: Joi.string().required(),
         widget_id: Joi.string().required(),
-        registrator_name: Joi.string().required(),
+        registrator_name: Joi.string().required().error(err => {
+            return {
+                message: "Registrator Name is required."
+            };
+        }),
         registrator_teamName: Joi.string().required(),
-        registrator_emailId: Joi.string().email().required(),
+        registrator_emailId: Joi.string().email().required().error(err => {
+            return {
+                message: "Email Id is required and must be valid."
+            };
+        }),
         registrator_phoneNumber: Joi.number().required(),
         registrator_khaltiId: Joi.string().required(),
         registrator_matchType: Joi.string().required(),

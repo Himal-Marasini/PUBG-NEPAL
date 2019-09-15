@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 
 // CONNECTED TO MONGODB
-module.exports = mongoose.connect('mongodb://localhost/pubgNepal', {
+module.exports = mongoose.connect('mongodb+srv://Himal-Marasini:d9N5RVJwphhMJVaq@pubg-nepal-kscg2.mongodb.net/PUBG-NEPAL?retryWrites=true&w=majority', {
         useNewUrlParser: true
     })
     .then(() => {

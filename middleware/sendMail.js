@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-async function verifyEmail(userMail) {
+module.exports = async function sendMail(userdata) {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -15,7 +15,7 @@ async function verifyEmail(userMail) {
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: "contact@pubgNepal.com", // sender address
-        to: userMail, // list of receivers
+        to: userdata.emailId, // list of receivers
         subject: "MATCH DETAILS", // Subject line
         text: "Please keep this all detail to YourSelf only", // plain text body
         html: `<p>Welcome to PUBG NEPAL</a>` // html body
@@ -24,7 +24,6 @@ async function verifyEmail(userMail) {
     console.log("Message sent: %s", info.messageId);
 
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // res.render('loginHomepage.ejs');
-}
+};
 
-module.exports = verifyEmail;
+// module.exports = verifyEmail;

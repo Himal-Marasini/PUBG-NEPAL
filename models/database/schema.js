@@ -9,7 +9,7 @@ const Schema = new mongoose.Schema({
         type: String,
         require: true
     },
-    email: {
+    emailId: {
         type: String,
         require: true
     },
@@ -17,7 +17,7 @@ const Schema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    payReceiveId: {
+    khaltiId: {
         type: String,
         require: true
     },
@@ -30,10 +30,15 @@ const Schema = new mongoose.Schema({
         "default": [],
         required: true
     },
+    khaltiDetail: {
+        type: Object,
+        require: true
+    },
     date: {
         type: Date,
         default: Date.now
     }
 });
 
-module.exports = mongoose.model('usermobile', Schema);
+exports.userMobile = mongoose.model('userMobile', Schema);
+exports.userEmulator = mongoose.model('userEmulator', Schema);
