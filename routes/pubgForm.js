@@ -1,9 +1,19 @@
-const auth = require('../middleware/tokenAuth');
+const registration = require('../controllers/registration');
+const {
+    check
+} = require('express-validator/check');
+// const nodemailer = require('../middleware/sendMail');
+
 const express = require('express');
 const Router = express.Router();
 
-Router.get('/', (req, res) => {
-    res.render('pubgForm.ejs');
-});
+
+Router.get('/moboplayer', registration.getMoboForm);
+
+Router.get('/emuplayer', registration.getEmuForm);
+
+Router.post('/moboplayer', check(''), registration.postMoboForm);
+
+Router.post('/emuplayer', check(''), registration.postEmuForm);
 
 module.exports = Router;

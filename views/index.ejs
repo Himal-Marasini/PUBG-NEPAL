@@ -7,254 +7,117 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PUBG | NEPAL</title>
 </head>
-<!-- <link href="../styles/style-homepage.css" rel="stylesheet" type="text/css"> -->
-
 <link href="styles/style-homepage.css" rel="stylesheet" type="text/css">
 
 <body>
-
-    <section class="signup">
-
-        <div class="signup__closeContainer">
-            <img src="../assets/images/icons/close.svg" alt="close" class="closeIcon">
-        </div>
-
-        <h2 class="signup__headingTwo">Welcome to Pubg Nepal</h2>
-        <h3 class="signup__headingThree">Create Account</h3>
-
-        <div class="signUp__error">
-            <span class="signUperror__text">Please fill out all the details</span>
-        </div>
-
-        <form method="POST" action="localhost:2000/signup">
-            <input type="text" placeholder="Username" class="signup__username"><br>
-            <input type="text" placeholder="Email Address" class="signup__email"><br>
-            <input type="number" placeholder="Phone Number" class="signup__phoneNumber"><br>
-            <input type="password" placeholder="Password" class="signup__password"><br>
-            <input type="password" placeholder="Confirm Password" class="signup__confirmPass"><br>
-            <input type="submit" value="Submit" class="signup__submitBtn">
-        </form>
-
-    </section>
-
-    <section class="login">
-
-        <div class="login__closeContainer">
-            <img src="../assets/images/icons/close.svg" alt="close" class="closeIcon">
-        </div>
-
-        <h2 class="login__headingTwo">Welcome to Pubg Nepal</h2>
-        <h3 class="login__headingThree">Log In</h3>
-
-        <div class="login__error">
-            <span class="loginError__text">Please fill out all the details</span>
-        </div>
-
-        <form method="POST" action="localhost:2000/login">
-            <input type="text" placeholder="Email Address" class="login__email"><br>
-            <input type="password" placeholder="Password" class="login__password"><br>
-            <span class="login__forgotPassContainer">
-                <a href="#" class="login__forgotPass">Forgot Password?</a>
-            </span>
-
-            <span class="login__createAccountContainer">
-                <!-- <a href="#" class="login__createAccount">Create Account ?</a> -->
-                Create Account?
-            </span>
-            <input type="submit" value="Submit" class="login__submitBtn">
-        </form>
-
-
-    </section>
 
     <section class="main">
         <div class="row">
             <div class="main__logo">
                 <img src="../assets/images/Logo.png" alt="PUBG NEPAL" id=logo>
             </div>
-            <button class="main__signUp">
-                Log In/ Sign Up
-            </button>
+
             <div class="main__heroAreaText">
                 <div class="main__text__background"></div>
                 <div class="main__text">
                     <p class="main__textOne">Match Yourself with the High End Players</p>
                     <p class="main__textTwo">And get to win the exciting Prizes + Make this world know about you</p>
                     <div class="main__text__getStarted">
-                        <input type="button" value="Get Started" class="btn__getStarted">
+                        <a href="#match">
+                            <input type="button" value="Get Started" class="btn__getStarted">
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="main__goDownicon">
-                <img src="../assets/images/icons/double-arrow.svg" alt="Go down for registering for match" id="goDown">
+                <a href="#match">
+                    <img src="../assets/images/icons/double-arrow.svg" alt="Go down for registering for match"
+                        id="goDown">
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="match">
+    <section id="match">
         <div class="row">
 
             <div class="match__upcomingMatchesContainer">
-                <h3 class="match__headingThree">Upcoming Matches ...</h3>
+                <h3 class="match__headingThree">Upcoming Matches : (16-06-2019)</h3>
                 <div class="match__container">
 
                     <div class="match__firstContainer">
                         <p class="match__firstContainer_p">Match will start in:</p>
-                        <h2 class="match__firstContainer_time">4:00 PM</h2>
-                        <!-- nop = Number of player-->
-                        <div class="match__firstContainer_nop">
-                            <p class="nop__para">
-                                Number of Players:<span class="nop__firstPara nop__firstPara--value">55</span>
+                        <h2 class="match__firstContainer_time">10:00 PM</h2>
+
+                        <div class="firstContainer__matchType">
+                            <p class="matchTypeContainer__text">
+                                Match Type :<span class="matchTypeContainer__type match--mobile">
+                                    (SQUAD) Mobile Player
+                                </span>
                             </p>
                         </div>
-                        <div class="match__firstContainer_not">
-                            <!-- not = Number of Team-->
-                            <p class="not__para">
-                                Number of Team:<span class="not__firstPara not__firstPara--value">06</span>
+
+                        <div class="firstContainer__matchMap">
+                            <p class="matchMapContainer__text">
+                                Match Map :<span class="matchMapContainer__type">
+                                    Erangle
+                                </span>
                             </p>
                         </div>
+
                         <div class="match__prize">
-                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS 400</span></p>
+                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS 3500</span></p>
                         </div>
                         <div class="match__entryFee">
                             <p class="match__entryFee__text">Entry Fee:<span class="match__entryFee__value"> NRS
-                                    50</span>
+                                    50/Per player</span>
                             </p>
                         </div>
                         <div class="match__registerNow">
-                            <a href="./pubgForm">
+                            <a href="/register/moboplayer">
                                 <input type="button" value="register now" class="btn_register_result"
                                     id="registerBtn__first">
                             </a>
+
                         </div>
                     </div>
 
                     <div class="match__secondContainer">
                         <p class="match__secondContainer_p">Match will start in:</p>
-                        <h2 class="match__secondContainer_time">6:00 PM</h2>
-                        <!-- nop = Number of player-->
-                        <div class="match__secondContainer_nop">
-                            <p class="nop__para">
-                                Number of Players:<span class="nop__secondPara nop__secondPara--value">55</span>
+                        <h2 class="match__secondContainer_time">9:00 PM</h2>
+
+                        <div class="firstContainer__matchType">
+                            <p class="matchTypeContainer__text">
+                                Match Type :<span class="matchTypeContainer__type match--emulator">
+                                    (SQUAD) Emulator
+                                </span>
                             </p>
                         </div>
-                        <div class="match__secondContainer_not">
-                            <!-- not = Number of Team-->
-                            <p class="not__para">
-                                Number of Team:<span class="not__secondPara not__secondPara--value">06</span>
+
+                        <div class="firstContainer__matchMap">
+                            <p class="matchMapContainer__text">
+                                Match Map :<span class="matchMapContainer__type">
+                                    Erangle
+                                </span>
                             </p>
                         </div>
                         <div class="match__prize">
-                            <p class="match__prize__text">Prize:<span class="match__prize__value">NRS 400</span></p>
+                            <p class="match__prize__text">Prize:<span class="match__prize__value">NRS 3500</span></p>
                         </div>
                         <div class="match__entryFee">
                             <p class="match__entryFee__text">Entry Fee:<span class="match__entryFee__value">NRS
-                                    50</span>
+                                    50/Per player</span>
                             </p>
                         </div>
                         <div class="match__registerNow">
-                            <a href="./pubgForm">
+                            <a href="/register/emuplayer">
                                 <input type="button" value="register now" class="btn_register_result"
                                     id="registerBtn__second">
                             </a>
+
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            <div class="match__previousMatchesContainer">
-                <h3 class="match__headingThree">Result of Previous Matches ...</h3>
-                <div class="match__previousContainer">
-
-                    <div class="match__previousFirstContainer">
-                        <p class="match__previousfirstContainer_p">Match will start in:</p>
-                        <h2 class="match__previousfirstContainer_time">Game Over</h2>
-                        <!-- nop = Number of player-->
-                        <div class="match__previousfirstContainer_nop">
-                            <p class="nop__para">
-                                Number of Players:<span class="nop__firstPara nop__previousfirstPara--value">55</span>
-                            </p>
-                        </div>
-                        <div class="match__previousfirstContainer_not">
-                            <!-- not = Number of Team-->
-                            <p class="not__para">
-                                Number of Team:<span class="not__firstPara not__previousfirstPara--value">06</span>
-                            </p>
-                        </div>
-                        <div class="match__prize">
-                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS 400</span>
-                            </p>
-                        </div>
-                        <div class="match__entryFee">
-                            <p class="match__entryFee__text">Entry Fee:<span class="match__entryFee__value"> NRS
-                                    50</span>
-                            </p>
-                        </div>
-                        <div class="match__previous">
-                            <input type="button" value="check result" class="btn_register_result"
-                                id="previousBtn__first">
-                        </div>
-                    </div>
-
-                    <div class="match__previousSecondContainer">
-                        <p class="match__previoussecondContainer_p">Match will start in:</p>
-                        <h2 class="match__previoussecondContainer_time">Game Over</h2>
-                        <!-- nop = Number of player-->
-                        <div class="match__previoussecondContainer_nop">
-                            <p class="nop__para">
-                                Number of Players:<span class="nop__secondPara nop__previousSecondPara--value">55</span>
-                            </p>
-                        </div>
-                        <div class="match__previoussecondContainer_not">
-                            <!-- not = Number of Team-->
-                            <p class="not__para">
-                                Number of Team:<span class="not__secondPara not__previousSecondPara--value">06</span>
-                            </p>
-                        </div>
-                        <div class="match__prize">
-                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS 400</span>
-                            </p>
-                        </div>
-                        <div class="match__entryFee">
-                            <p class="match__entryFee__text">Entry Fee:<span class="match__entryFee__value"> NRS
-                                    50</span>
-                            </p>
-                        </div>
-                        <div class="match__previous">
-                            <input type="button" value="check result" class="btn_register_result"
-                                id="previousBtn__second">
-                        </div>
-                    </div>
-
-                    <div class="match__previousThirdContainer">
-                        <p class="match__previousthirdContainer_p">Match will start in:</p>
-                        <h2 class="match__previousthirdContainer_time">Game Over</h2>
-                        <!-- nop = Number of player-->
-                        <div class="match__previousthirdContainer_nop">
-                            <p class="nop__para">
-                                Number of Players:<span class="nop__thirdPara nop__previousthirdPara--value">55</span>
-                            </p>
-                        </div>
-                        <div class="match__previousthirdContainer_not">
-                            <!-- not = Number of Team-->
-                            <p class="not__para">
-                                Number of Team:<span class="not__thirdPara not__previousthirdPara--value">06</span>
-                            </p>
-                        </div>
-                        <div class="match__prize">
-                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS 400</span>
-                            </p>
-                        </div>
-                        <div class="match__entryFee">
-                            <p class="match__entryFee__text">Entry Fee:<span class="match__entryFee__value"> NRS
-                                    50</span>
-                            </p>
-                        </div>
-                        <div class="match__previous">
-                            <input type="button" value="check result" class="btn_register_result" id="previousBtn__">
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -351,11 +214,6 @@
             <p class="copyright">Copyright&copy;PubgNepal.All Rights Reserved</p>
         </div>
     </footer>
-
-    <script src="assets/js/homepage/login.js"></script>
-    <script src="assets/js/homepage/signup.js"></script>
-    <script src="assets/js/homepage/dom.js"></script>
-
 </body>
 
 </html>

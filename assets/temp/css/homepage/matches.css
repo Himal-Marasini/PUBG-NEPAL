@@ -6,55 +6,35 @@
 
 }
 
-.match__container,
-.match__previousContainer {
+.match__container {
     display: flex;
     font-family: "Raleway", sans-serif;
     line-height: 14px;
 }
 
 .match__firstContainer,
-.match__secondContainer,
-.match__previousFirstContainer,
-.match__previousSecondContainer,
-.match__previousThirdContainer {
-    flex-basis: 400px;
+.match__secondContainer {
+    flex-basis: 425px;
     text-align: center;
-    /* border: 1px solid $mainYellow; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.match__previousSecondContainer,
-.match__previousThirdContainer {
-    margin-left: 40px;
-}
-
 .match__firstContainer:hover,
-.match__secondContainer:hover,
-.match__previousFirstContainer:hover,
-.match__previousSecondContainer:hover,
-.match__previousThirdContainer:hover {
+.match__secondContainer:hover {
     transform: scale(1.1);
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     transition: all .2s linear;
     border: none;
 }
 
 .match__firstContainer_p,
-.match__secondContainer_p,
-.match__previousfirstContainer_p,
-.match__previoussecondContainer_p,
-.match__previousthirdContainer_p {
+.match__secondContainer_p {
     font-family: "Teko", sans-serif;
     font-size: 24px;
     color: $mainBlue;
 }
 
 .match__firstContainer_time,
-.match__secondContainer_time,
-.match__previousfirstContainer_time,
-.match__previoussecondContainer_time,
-.match__previousthirdContainer_time {
+.match__secondContainer_time {
     font-family: "Teko", sans-serif;
     font-size: 40px;
     font-weight: 400;
@@ -63,19 +43,13 @@
     margin: 35px 0;
 }
 
-.match__firstContainer_nop {}
-
-.nop__para,
-.not__para {
+.matchTypeContainer__text,
+.matchMapContainer__text {
     color: $mainBlue;
 }
 
-.nop__firstPara,
-.nop__secondPara,
-.nop__thirdPara,
-.not__firstPara,
-.not__secondPara,
-.not__thirdPara,
+.matchTypeContainer__type,
+.matchMapContainer__type,
 .match__entryFee__value,
 .match__prize__value {
     color: $mainYellow;
@@ -89,21 +63,14 @@
     color: $mainBlue;
 }
 
-.match__entryFee__value,
-.match__prize__value {}
-
 .match__prize__text {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .match__secondContainer {
     margin-left: 40px;
 }
 
-/* 
-#registerBtn__first,
-#registerBtn__second,
-#previousBtn__first */
 .btn_register_result {
     outline: none;
     font-weight: 300;
@@ -116,4 +83,5 @@
     font-size: 20px;
     color: white;
     font-family: "Teko";
+    cursor: pointer;
 }

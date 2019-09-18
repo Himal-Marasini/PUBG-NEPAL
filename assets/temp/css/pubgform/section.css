@@ -1,7 +1,3 @@
-body {
-    overflow: hidden;
-}
-
 section {
     background: url(../assets/images/Image__4.png);
     background-position: 0 -88px;
@@ -9,19 +5,20 @@ section {
     height: 660px;
     font-size: 20px;
     font-weight: 400;
-    color: #2d3436
+    color: #2d3436;
+}
+
+.parent__container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 10px;
+    margin-top: 50px;
 }
 
 .registration__form {
-    margin-top: 32px;
     background: #fafafa;
-    width: 760px;
     text-align: center;
-    float: right;
-}
-
-.registration__logo {
-    margin-top: 20px;
+    padding-top: 13px;
 }
 
 .pubg_logo {
@@ -29,10 +26,41 @@ section {
     height: auto;
 }
 
+.registration__error {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #e74c3c;
+    padding-top: 4px;
+    color: #fafafa;
+    border-radius: 3px;
+    display: none;
+}
+
+#messages {
+    width: auto;
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    display: inline-block;
+    color: #fafafa;
+}
+
+.messages_success {
+    background-color: #27ae60;
+    padding: 5px 10px;
+}
+
+.messages_error {
+    background-color: #e74c3c;
+    padding: 5px 10px;
+}
+
 .registration__name,
 .registration__teamName,
 .registration__phoneNumber,
-.registration__emailId {
+.registration__emailId,
+.registration__payGateway,
+.registration__matchType {
     display: inline-block;
 }
 
@@ -40,7 +68,8 @@ section {
 .registration__teamNameLable,
 .registration__phoneLable,
 .registration__emailLable,
-.registration__payGatewayLable {
+.registration__payGatewayLable,
+.registration__matchTypeLable {
     padding-right: 15px;
 
 }
@@ -79,7 +108,8 @@ input[type=text] {
 .registrator_teamNamefield,
 .registrator_phonefield,
 .registrator_emailfield,
-.registrator_payGatewayfield {
+.registrator_payGatewayfield,
+.registrator_matchTypefield {
     width: 205px;
     height: 32px;
     background: none;
@@ -88,6 +118,17 @@ input[type=text] {
     border-bottom-color: $mainYellow;
     font-size: 18px;
     padding-left: 5px;
+}
+
+.registrator_payGatewayfield {
+    margin-right: 20px;
+}
+
+.registrator_matchTypefield {
+    width: 172px;
+    border: 2px solid $mainYellow;
+    text-align: center;
+    font-weight: bold;
 }
 
 .registrator_namefield:focus,
@@ -137,11 +178,13 @@ input[type=text] {
 }
 
 .registration__submit {
-    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 .registration__submitBtn {
     outline: none;
+    cursor: pointer;
     border: none;
     background: $mainYellow;
     color: #fafafa;
@@ -152,26 +195,35 @@ input[type=text] {
     height: 37px;
 }
 
-.goback__container {
-    display: inline-block;
-    position: absolute;
-    top: 58px;
-    left: 41px;
+.funds {
+    background: #fafafa;
+    text-transform: uppercase;
+    text-align: center;
 }
 
-.gobackLink {
-    text-decoration: none;
-    font-size: 26px;
+.funds__title {
+    margin: 0;
+    font-size: 1.2em;
+    text-decoration: underline;
     color: $mainYellow;
-    outline: none;
 }
 
-.gobackIcon {
-    width: 35px;
-    height: auto;
-    vertical-align: bottom;
+.funds__text {
+    color: #585858;
+    font-size: 1.1em;
 }
 
-.gobackLink__text {
-    margin-left: 10px;
+.funds__bold {
+    font-weight: 600;
+}
+
+.funds__details {
+    line-height: 12px;
+    font-size: 24px;
+}
+
+.funds__detail-text-black {}
+
+.funds__detail-text-yellow {
+    color: $mainYellow;
 }

@@ -20,6 +20,7 @@ html {
 .row {
   width: 1140px;
   margin: 0 auto;
+  padding: 0.1em;
 }
 
 input::-webkit-outer-spin-button,
