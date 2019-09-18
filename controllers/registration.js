@@ -12,6 +12,7 @@ exports.getMoboForm = (req, res, next) => {
         success: req.session.success,
         errors: req.session.errors
     });
+    console.log(req.session);
     req.session.errors = null;
     req.session.success = null;
 };
@@ -138,6 +139,7 @@ exports.postEmuForm = async (req, res, next) => {
     if (userdata) {
         req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
         req.session.success = true;
+
         const mailSend = await sendmail(userdata);
         console.log(mailSend);
         return res.status(200).redirect('/register/emuplayer');
