@@ -45,6 +45,11 @@ app.use(expressSession({
     resave: false
 }));
 
+app.use(function (req, res, next) {
+    req.session.errors = null;
+    req.session.success = null;
+    next();
+});
 
 // ROUTES
 app.use('/', homepage);

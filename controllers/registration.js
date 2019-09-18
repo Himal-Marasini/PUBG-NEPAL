@@ -12,7 +12,6 @@ exports.getMoboForm = (req, res, next) => {
         success: req.session.success,
         errors: req.session.errors
     });
-    console.log(req.session);
     req.session.errors = null;
     req.session.success = null;
 };
