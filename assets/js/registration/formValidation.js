@@ -146,7 +146,7 @@ const controller = ((uiCtrl, validCtrl) => {
                 "publicKey": "test_public_key_9c38182de1354f35821f915a2456b8f4",
                 "productIdentity": inputData.registrator_matchType,
                 "productName": "PUBG NEPAL",
-                "productUrl": "http://localhost:3000",
+                "productUrl": "https://www.pubgmobonepal.com",
                 "eventHandler": {
                     async onSuccess(payload) {
                         const data = {
@@ -164,20 +164,14 @@ const controller = ((uiCtrl, validCtrl) => {
 
                         };
                         if (inputData.registrator_matchType === 'SQUAD(MOBILE)') {
-                            fetch(`http://localhost:3000/register/moboplayer`, userData)
+                            fetch(`/register/moboplayer`, userData)
                                 .then(res => {
                                     window.location = res.url;
-                                }).catch(err => {
-                                    console.log('error');
                                 });
                         } else if (inputData.registrator_matchType === 'SQUAD(EMULATOR)') {
-                            fetch(`http://localhost:3000/register/emuplayer`, userData)
+                            fetch(`/register/emuplayer`, userData)
                                 .then(res => {
                                     window.location = res.url;
-                                    console.log(window.url);
-                                    console.log(res.url);
-                                }).catch(err => {
-                                    console.log('error');
                                 });
                         }
 
@@ -188,10 +182,7 @@ const controller = ((uiCtrl, validCtrl) => {
                         validate.validError("Some Problem has Occured. Please Try it Again");
                     },
 
-                    onClose() {
-                        // if Container is closed
-                        console.log('widget is closing');
-                    }
+                    onClose() {}
                 }
             };
 

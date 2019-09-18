@@ -3,10 +3,10 @@
     const emuPlayer = document.getElementById('registerBtn__second');
 
     moboPlayer.addEventListener('click', (e) => {
-        location.href = 'http://localhost:3000/register/moboplayer';
+        location.href = '/register/moboplayer';
     });
     emuPlayer.addEventListener('click', (e) => {
-        location.href = 'http://localhost:3000/register/emuplayer';
+        location.href = '/register/emuplayer';
     });
 
 })();

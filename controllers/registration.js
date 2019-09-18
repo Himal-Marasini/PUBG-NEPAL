@@ -80,8 +80,8 @@ exports.postMoboForm = async (req, res, next) => {
     if (userdata) {
         req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
         req.session.success = true;
+
         const mailSend = await sendmail(userdata);
-        console.log(mailSend);
         return res.status(200).redirect('/register/moboplayer');
     }
 };
@@ -141,7 +141,6 @@ exports.postEmuForm = async (req, res, next) => {
         req.session.success = true;
 
         const mailSend = await sendmail(userdata);
-        console.log(mailSend);
         return res.status(200).redirect('/register/emuplayer');
     }
 };
