@@ -42,7 +42,7 @@ app.use(expressSession({
         maxAge: 60 * 10
     },
     saveUninitialized: true,
-    resave: true
+    resave: false
 }));
 
 
