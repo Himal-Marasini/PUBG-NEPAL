@@ -10,7 +10,8 @@ exports.getMoboForm = (req, res, next) => {
         matchType: "SQUAD(MOBILE)",
         typeUrl: "/register/moboplayer",
         success: req.session.success,
-        errors: req.session.errors
+        errors: req.session.errors,
+        messageType: req.session.messageType
     });
     req.session.errors = null;
     req.session.success = null;
@@ -21,7 +22,8 @@ exports.getEmuForm = (req, res, next) => {
         matchType: "SQUAD(EMULATOR)",
         typeUrl: "/register/emuplayer",
         success: req.session.success,
-        errors: req.session.errors
+        errors: req.session.errors,
+        messageType: req.session.messageType
     });
     req.session.errors = null;
     req.session.success = null;
@@ -36,6 +38,7 @@ exports.postMoboForm = async (req, res, next) => {
         console.log(error.details[0].message);
         req.session.errors = error.details[0].message;
         req.session.success = true;
+        req.session.messageType = "message__error";
         return res.status(400).redirect('/register/moboplayer');
     }
 
@@ -44,6 +47,7 @@ exports.postMoboForm = async (req, res, next) => {
     if (!verified) {
         req.session.errors = verified.error;
         req.session.success = true;
+        req.session.messageType = "message__error";
         return res.status(400).redirect('/register/moboplayer');
     }
 
@@ -79,7 +83,7 @@ exports.postMoboForm = async (req, res, next) => {
     if (userdata) {
         req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
         req.session.success = true;
-
+        req.session.messageType = "message__success";
         const mailSend = await sendmail(userdata);
         return res.status(200).redirect('/register/moboplayer');
     }
@@ -95,6 +99,7 @@ exports.postEmuForm = async (req, res, next) => {
         console.log(error.details[0].message);
         req.session.errors = error.details[0].message;
         req.session.success = true;
+        req.session.messageType = "message__error";
         return res.status(400).redirect('/register/emuplayer');
     }
 
@@ -103,6 +108,7 @@ exports.postEmuForm = async (req, res, next) => {
     if (!verified) {
         req.session.errors = verified.error;
         req.session.success = true;
+        req.session.messageType = "message__error";
         return res.status(400).redirect('/register/emuplayer');
     }
 
@@ -138,7 +144,7 @@ exports.postEmuForm = async (req, res, next) => {
     if (userdata) {
         req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
         req.session.success = true;
-
+        req.session.messageType = "message__success";
         const mailSend = await sendmail(userdata);
         return res.status(200).redirect('/register/emuplayer');
     }
