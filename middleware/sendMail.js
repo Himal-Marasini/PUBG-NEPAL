@@ -42,7 +42,7 @@ module.exports = async function sendMail(userdata) {
         }
 
         .container {
-            width: 100%;
+            width: 60%;
             background-color: #fafafa;
             margin: 0 auto;
             padding: 0 1rem;
@@ -50,7 +50,7 @@ module.exports = async function sendMail(userdata) {
 
         .parent__container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: auto;
             padding-left: 2rem;
             color: #272829;
         }
