@@ -18,7 +18,130 @@ module.exports = async function sendMail(userdata) {
         to: userdata.emailId, // list of receivers
         subject: "MATCH DETAILS", // Subject line
         text: "Please keep this all detail to YourSelf only", // plain text body
-        html: `<p>Welcome to PUBG NEPAL</a>` // html body
+        html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Detail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        html {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 32px;
+            text-rendering: optimizeLegibility;
+            color: #212121;
+        }
+
+        .container {
+            width: 60%;
+            background-color: #fafafa;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .parent__container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-left: 2rem;
+            color: #272829;
+        }
+
+        .text--bold {
+            color: #e08012;
+            font-weight: 500;
+        }
+
+        .member__text {
+            padding-left: 2rem;
+            color: #272829;
+        }
+
+        .note {
+            margin-top: 2rem;
+            color: #c0392b;
+            text-transform: uppercase;
+            font-style: italic;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>Hey ${userdata.registrator_name},<br>
+            Thanks for participating in PUBG NEPAL tournament, you will get the
+            ROOM ID and PASSWORD on registered email address before starting of
+            15 minute of match, Here are the details of your registered team:-</p>
+        <div class="parent__container">
+            <div>
+                <p>Registrator Name: <span class="text--bold">${userdata.registrator_name}</span></p>
+            </div>
+            <div>
+                <p>Email Id: <span class="text--bold">${userdata.registrator_emailId}</span></p>
+            </div>
+            <div>
+                <p>Phone Number: <span class="text--bold">${userdata.registrator_phoneNumber}</span></p>
+            </div>
+
+            <div>
+                <p>Khalti ID: <span class="text--bold">${userdata.registrator_khaltiId}</span></p>
+            </div>
+            <div>
+                <p>Match Type: <span class="text--bold">${userdata.registrator_matchType}</span></p>
+            </div>
+            <div>
+                <p>Match Map: <span class="text--bold">Erangle</span></p>
+            </div>
+
+        </div>
+        <div class="members__detail">
+            <p class="member__text">Team Member Name with Character Id: </p>
+            <div class="parent__container">
+                <div>
+                    <p>${userdata.memberOne_name}</p>
+                </div>
+                <div class="text--bold">
+                    <p>${userdata.memberOne_charId}</p>
+                </div>
+                <div>
+                    <p>${userdata.memberTwo_name}</p>
+                </div>
+                <div class="text--bold">
+                    <p>${userdata.memberTwo_charId}</p>
+                </div>
+                <div>
+                    <p>${userdata.memberThree_name}</p>
+                </div>
+                <div class="text--bold">
+                    <p>${userdata.memberThree_charId}</p>
+                </div>
+                <div>
+                    <p>${userdata.memberFour_name}</p>
+                </div>
+                <div class="text--bold">
+                    <p>${userdata.memberFour_charId}</p>
+                </div>
+            </div>
+        </div>
+        <div class="note">
+            Note:- Sharing the room id and password with others or inviting the others people
+            in a room without PERMISSION of the authorized member will lead to the harsh action immediately.
+        </div>
+    </div>
+</body>
+
+</html>`
     });
 
     console.log("Message sent: %s", info.messageId);

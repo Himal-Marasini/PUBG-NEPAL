@@ -78,15 +78,17 @@ exports.postMoboForm = async (req, res, next) => {
         }
     });
 
+    console.log(req.body);
+
     const userdata = await Usermobile.save();
 
-    if (userdata) {
-        req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
-        req.session.success = true;
-        req.session.messageType = "message__success";
-        const mailSend = await sendmail(userdata);
-        return res.status(200).redirect('/register/moboplayer');
-    }
+    // if (userdata) {
+    //     req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
+    //     req.session.success = true;
+    //     req.session.messageType = "message__success";
+    //     const mailSend = await sendmail(userdata);
+    //     return res.status(200).redirect('/register/moboplayer');
+    // }
 };
 
 
