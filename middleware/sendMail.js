@@ -14,7 +14,7 @@ module.exports = async function sendMail(userdata) {
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: "contact@pubgmobilenp.com", // sender address
+        from: '"PUBG NEPAL" <contact@pubgmobilenp.com>', // sender address
         to: userdata.emailId, // list of receivers
         subject: "MATCH DETAILS", // Subject line
         text: "Please keep this all detail to YourSelf only", // plain text body
