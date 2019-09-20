@@ -79,7 +79,7 @@ module.exports = async function sendMail(userdata) {
 
 <body>
     <div class="container">
-        <p>Hey ${userdata.name},<br>
+        <p>Hey ${userdata.registratorName},<br>
             Thanks for participating in PUBG NEPAL tournament, you will get the
             ROOM ID and PASSWORD on registered email address before starting of
             15 minute of match, Here are the details of your registered team:-</p>
