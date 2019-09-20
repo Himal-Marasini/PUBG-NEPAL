@@ -42,7 +42,7 @@ module.exports = async function sendMail(userdata) {
         }
 
         .container {
-            width: 60%;
+            width: 90%;
             background-color: #fafafa;
             margin: 0 auto;
             padding: 0 1rem;
@@ -73,6 +73,17 @@ module.exports = async function sendMail(userdata) {
             font-size: 14px;
             line-height: 18px;
             font-weight: bold;
+        }
+        @media only screen and (max-width:600px){
+            .parent__container{
+                padding-left:0;
+            }
+            .container{
+                width:100%;
+            }
+            .note{
+                font-size:10px;
+            }
         }
     </style>
 </head>
