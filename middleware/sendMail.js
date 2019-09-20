@@ -50,7 +50,7 @@ module.exports = async function sendMail(userdata) {
 
         .parent__container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: auto;
             padding-left: 2rem;
             color: #272829;
         }
@@ -79,29 +79,29 @@ module.exports = async function sendMail(userdata) {
 
 <body>
     <div class="container">
-        <p>Hey ${userdata.registrator_name},<br>
+        <p>Hey ${userdata.name},<br>
             Thanks for participating in PUBG NEPAL tournament, you will get the
             ROOM ID and PASSWORD on registered email address before starting of
             15 minute of match, Here are the details of your registered team:-</p>
         <div class="parent__container">
             <div>
-                <p>Registrator Name: <span class="text--bold">${userdata.registrator_name}</span></p>
+                <p>Registrator Name: <span class="text--bold">${userdata.registratorName}</span></p>
             </div>
             <div>
-                <p>Email Id: <span class="text--bold">${userdata.registrator_emailId}</span></p>
+                <p>Email Id: <span class="text--bold">${userdata.emailId}</span></p>
             </div>
             <div>
-                <p>Phone Number: <span class="text--bold">${userdata.registrator_phoneNumber}</span></p>
+                <p>Phone Number: <span class="text--bold">${userdata.phoneNumber}</span></p>
             </div>
 
             <div>
-                <p>Khalti ID: <span class="text--bold">${userdata.registrator_khaltiId}</span></p>
+                <p>Khalti ID: <span class="text--bold">${userdata.khaltiId}</span></p>
             </div>
             <div>
-                <p>Match Type: <span class="text--bold">${userdata.registrator_matchType}</span></p>
+                <p>Match Type: <span class="text--bold">${userdata.matchType}</span></p>
             </div>
             <div>
-                <p>Match Map: <span class="text--bold">Erangle</span></p>
+                <p>Team Name: <span class="text--bold">${userdata.teamName}</span></p>
             </div>
 
         </div>
@@ -109,28 +109,28 @@ module.exports = async function sendMail(userdata) {
             <p class="member__text">Team Member Name with Character Id: </p>
             <div class="parent__container">
                 <div>
-                    <p>${userdata.memberOne_name}</p>
+                    <p>${userdata.members[0].name}</p>
                 </div>
                 <div class="text--bold">
-                    <p>${userdata.memberOne_charId}</p>
+                    <p>${userdata.members[0].characterID}</p>
                 </div>
                 <div>
-                    <p>${userdata.memberTwo_name}</p>
+                    <p>${userdata.members[1].name}</p>
                 </div>
                 <div class="text--bold">
-                    <p>${userdata.memberTwo_charId}</p>
+                    <p>${userdata.members[1].characterID}</p>
                 </div>
                 <div>
-                    <p>${userdata.memberThree_name}</p>
+                    <p>${userdata.members[2].name}</p>
                 </div>
                 <div class="text--bold">
-                    <p>${userdata.memberThree_charId}</p>
+                    <p>${userdata.members[2].characterID}</p>
                 </div>
                 <div>
-                    <p>${userdata.memberFour_name}</p>
+                    <p>${userdata.members[3].name}</p>
                 </div>
                 <div class="text--bold">
-                    <p>${userdata.memberFour_charId}</p>
+                    <p>${userdata.members[3].characterID}</p>
                 </div>
             </div>
         </div>
