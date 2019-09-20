@@ -243,6 +243,14 @@ input::-webkit-inner-spin-button {
 }.pubg_logo {
     width: 240px;
     height: auto;
+}.registration__error {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #e74c3c;
+    padding-top: 4px;
+    color: #fafafa;
+    border-radius: 3px;
+    display: none;
 }.registration__name,
 .registration__teamName,
 .registration__phoneNumber,

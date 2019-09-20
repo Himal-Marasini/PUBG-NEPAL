@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <% if(!docs) {%>
     <section>
         <div class="row">
             <div class="parent__container">
@@ -20,10 +21,6 @@
                     <div class="registration__logo">
                         <img src="../assets/images/pubg_logo.png" alt="PUBG REGISTRATION" class="pubg_logo">
                     </div>
-
-                    <!-- <div class="message__success">
-                        Registration has been done succesully !! Please check your mail
-                    </div> -->
 
                     <% if(success) { %>
 
@@ -34,6 +31,10 @@
                     </div>
 
                     <% } %>
+
+                    <div class="registration__error">
+                        <span class="registrationError__text"> </span>
+                    </div>
 
                     <form>
                         <div class="registration__name">
@@ -143,11 +144,12 @@
             </div>
 
         </div>
-
     </section>
-
     <script src="/assets/js/registration/formValidation.min.js"></script>
-
+    <%} else {%>
+    <h1>Registration has been closed for this match, Please try on different one!!!</h1>
+    <%}%>
+        
 </body>
 
 </html>

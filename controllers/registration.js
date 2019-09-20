@@ -6,27 +6,33 @@ const sendmail = require('../middleware/sendMail');
 
 
 exports.getMoboForm = (req, res, next) => {
-    res.render('register-form', {
-        matchType: "SQUAD(MOBILE)",
-        typeUrl: "/register/moboplayer",
-        success: req.session.success,
-        errors: req.session.errors,
-        messageType: req.session.messageType
+    Mobile.estimatedDocumentCount({}, function (err, count) {
+        res.render('register-form', {
+            matchType: "SQUAD(MOBILE)",
+            typeUrl: "/register/moboplayer",
+            docs: count > 24 ? true : false,
+            success: req.session.success,
+            errors: req.session.errors,
+            messageType: req.session.messageType
+        });
+        req.session.errors = null;
+        req.session.success = null;
     });
-    req.session.errors = null;
-    req.session.success = null;
 };
 
 exports.getEmuForm = (req, res, next) => {
-    res.render('register-form', {
-        matchType: "SQUAD(EMULATOR)",
-        typeUrl: "/register/emuplayer",
-        success: req.session.success,
-        errors: req.session.errors,
-        messageType: req.session.messageType
+    Emulator.estimatedDocumentCount({}, function (err, count) {
+        res.render('register-form', {
+            matchType: "SQUAD(EMULATOR)",
+            typeUrl: "/register/emuplayer",
+            docs: count >= 24 ? true : false,
+            success: req.session.success,
+            errors: req.session.errors,
+            messageType: req.session.messageType
+        });
+        req.session.errors = null;
+        req.session.success = null;
     });
-    req.session.errors = null;
-    req.session.success = null;
 };
 
 exports.postMoboForm = async (req, res, next) => {
