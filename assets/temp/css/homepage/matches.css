@@ -1,5 +1,5 @@
 .match__headingThree {
-    font-size: 30px;
+    font-size: 1.66rem;
     text-transform: uppercase;
     font-weight: 300;
     color: $mainYellow;
@@ -7,14 +7,15 @@
 }
 
 .match__container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     font-family: "Raleway", sans-serif;
     line-height: 14px;
 }
 
 .match__firstContainer,
 .match__secondContainer {
-    flex-basis: 425px;
+    width: 100%;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -29,7 +30,7 @@
 .match__firstContainer_p,
 .match__secondContainer_p {
     font-family: "Teko", sans-serif;
-    font-size: 24px;
+    font-size: 1.33rem;
     color: $mainBlue;
 }
 

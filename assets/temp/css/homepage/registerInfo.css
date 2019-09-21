@@ -6,10 +6,6 @@
     position: relative;
 }
 
-.registration__image {
-    float: left;
-}
-
 .playerImg {
     position: absolute;
     top: 50px;
