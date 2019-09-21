@@ -380,70 +380,62 @@ input[type=password] {
     margin: 10px auto;
     font-size: 20px;
     display: none;
-}.main {
+}#logo {
+    width: 80%;
+    height: auto;
+}.heroarea {
     height: 650px;
     background: url(../assets/images/Image__1.png);
-    background-position: 0 -29px;
+    background-position: center;
     background-repeat: no-repeat;
-}.main__logo {
+}.heroarea__logo {
     display: inline-block;
     margin-top: 1.66rem;
-}.main__heroAreaText {
-    position: relative;
-    width: 100%;
-}.main__heroAreaText::after {
-    content: '';
-    width: 410px;
-    height: 50px;
-    background-color: red;
-}.main__text__background {
-    position: absolute;
+}.hero__text-title {
+    font-size: 2.5rem;
+    margin: 0;
+}.hero__text-subtitle {
+    font-size: 1.2rem;
+}.heroarea__text-container {
+    width: 60%;
     margin: 0 auto;
-    width: 59%;
-    height: 153px;
-    transform: translateX(35%);
-    background-color: #e08012;
-    opacity: 0.4;
-}.main__text {
-    width: 59%;
-    transform: translateX(35%);
     text-align: center;
     text-transform: uppercase;
-    line-height: 1px;
+    position: relative;
+}.heroarea__text-background {
+    position: relative;
+    top: 132px;
+    width: 60%;
+    height: 150px;
+    background: #e08012;
+    opacity: 0.4;
+    margin: 0 auto;
+}.heroarea__text {
     color: #fafafa;
-}.main__text-title {
-    font-size: 2.11rem;
-    padding-top: 1.8rem;
-}.main__text-subtitle {
-    font-size: 1.66rem;
-}.main__text__getStarted {
-    padding-bottom: 13px;
-    padding-top: 8px;
-}.main__goDownicon {
-    /* transform: translate(20px, 100px); */
+}.heroarea__icon {
     text-align: center;
-    transform: translateY(135px);
+    margin-top: 3.4rem;
     cursor: pointer;
     -webkit-animation: goDown 1000ms linear infinite;
             animation: goDown 1000ms linear infinite;
-}.btn__getStarted {
+}#goDown {
+    width: 30px;
+    height: 30px;
+}.heroarea__btn {
+    padding-top: 15px;
+}.btn {
     border: none;
-    padding: 5px;
-    font-size: 21px;
-    width: 5rem;
     text-align: center;
-    background-color: #34495e;
     outline: none;
     text-transform: uppercase;
     color: white;
     border-radius: 1px;
     cursor: pointer;
-}#logo {
-    width: 80%;
-    height: auto;
-}#goDown {
-    width: 30px;
-    height: 30px;
+}.btn--start {
+    font-size: 21px;
+    padding: 5px;
+    width: 6rem;
+    background-color: #34495e;
 }@-webkit-keyframes goDown {
     0% {
         transform: translateY(135px);
@@ -674,6 +666,10 @@ input[type=password] {
         font-size: 1.46rem;
     }
 }@media only screen and (max-width: 1210px) {
+    .hero__text-title {
+        font-size: 2.3rem;
+    }
+
     .registration__image {
         display: none;
     }
@@ -688,12 +684,28 @@ input[type=password] {
         display: block;
     }
 }@media only screen and (max-width: 1180px) {
-    .main__text-title {
-        font-size: 1.59rem;
+    .heroarea__text-background {
+        width: 580px;
     }
 
-    .main__text-subtitle {
-        font-size: 1.16rem;
+    .heroarea__text-container {
+        width: 580px;
+    }
+}@media only screen and (max-width: 992px) {
+    .hero__text-title {
+        font-size: 2rem;
+    }
+
+    .hero__text-subtitle {
+        font-size: 1.1rem;
+    }
+}@media only screen and (max-width: 770px) {
+    .heroarea__text-background {
+        width: 500px;
+    }
+
+    .heroarea__text-container {
+        width: 490px;
     }
 }@media only screen and (max-width: 700px) {
 
@@ -743,5 +755,21 @@ input[type=password] {
 
     .registrationText__subHeading {
         margin: 15px 0 5px 0;
+    }
+}@media only screen and (max-width: 600px) {
+    .hero__text-title {
+        font-size: 1.6rem;
+    }
+
+    .hero__text-subtitle {
+        font-size: 1rem;
+    }
+
+    .heroarea__text-background {
+        width: 420px;
+    }
+
+    .heroarea__text-container {
+        width: 420px;
     }
 }
