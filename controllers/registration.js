@@ -5,34 +5,32 @@ const khaltiVerification = require('../middleware/khaltiServer');
 const sendmail = require('../middleware/sendMail');
 
 
-exports.getMoboForm = (req, res, next) => {
-    Mobile.estimatedDocumentCount({}, function (err, count) {
-        res.render('register-form', {
-            matchType: "SQUAD(MOBILE)",
-            typeUrl: "/register/moboplayer",
-            docs: count > 24 ? true : false,
-            success: req.session.success,
-            errors: req.session.errors,
-            messageType: req.session.messageType
-        });
-        req.session.errors = null;
-        req.session.success = null;
+exports.getMoboForm = async (req, res, next) => {
+    var count = await Mobile.estimatedDocumentCount({});
+    res.status(200).render('register-form', {
+        matchType: "SQUAD(MOBILE)",
+        typeUrl: "/register/moboplayer",
+        docs: count < 24 ? true : false,
+        success: req.session.success,
+        errors: req.session.errors,
+        messageType: req.session.messageType
     });
+    req.session.errors = null;
+    req.session.success = null;
 };
 
-exports.getEmuForm = (req, res, next) => {
-    Emulator.estimatedDocumentCount({}, function (err, count) {
-        res.render('register-form', {
-            matchType: "SQUAD(EMULATOR)",
-            typeUrl: "/register/emuplayer",
-            docs: count >= 24 ? true : false,
-            success: req.session.success,
-            errors: req.session.errors,
-            messageType: req.session.messageType
-        });
-        req.session.errors = null;
-        req.session.success = null;
+exports.getEmuForm = async (req, res, next) => {
+    var count = await Mobile.estimatedDocumentCount({});
+    res.render('register-form', {
+        matchType: "SQUAD(EMULATOR)",
+        typeUrl: "/register/emuplayer",
+        docs: count < 24 ? true : false,
+        success: req.session.success,
+        errors: req.session.errors,
+        messageType: req.session.messageType
     });
+    req.session.errors = null;
+    req.session.success = null;
 };
 
 exports.postMoboForm = async (req, res, next) => {
