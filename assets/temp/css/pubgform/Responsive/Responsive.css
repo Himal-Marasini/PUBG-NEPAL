@@ -1,0 +1,76 @@
+@media only screen and (max-width:1247px) {
+    .registration__matchType {
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (max-width:1177px) {
+    .registration__phoneNumber {
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (max-width:937px) {
+    section {
+        background: #212121;
+        height: auto;
+    }
+
+    .parent__container {
+        grid-template-columns: 1fr;
+    }
+
+    .funds {
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width:817px) {
+    .row {
+        width: 90%;
+    }
+
+    .registrator_memberCharfield {
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width:780px) {
+
+    .registrator_namefield,
+    .registrator_teamNamefield,
+    .registrator_phonefield,
+    .registrator_emailfield,
+    .registrator_payGatewayfield,
+    .registrator_matchTypefield {
+        width: 180px;
+    }
+}
+
+@media only screen and (max-width:642px) {
+
+    .registration__name,
+    .registration__teamName,
+    .registration__phoneNumber,
+    .registration__emailId,
+    .registration__payGateway,
+    .registration__matchType {
+        display: block;
+    }
+
+    .registration__teamName,
+    .registration__emailId {
+        margin-left: 0;
+    }
+
+    .registrator_memberNamefield,
+    .registrator_memberCharfield {
+        width: 180px;
+    }
+}
+
+@media only screen and (max-width:520px) {
+    .pubg__logo {
+        width: 42%;
+    }
+}
