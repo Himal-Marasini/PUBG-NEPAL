@@ -441,4 +441,8 @@ input::-webkit-inner-spin-button {
     .pubg__logo {
         width: 42%;
     }
+}@media only screen and (max-width:424px) {
+    .registrator_memberNamefield {
+        margin-right: 0;
+    }
 }
