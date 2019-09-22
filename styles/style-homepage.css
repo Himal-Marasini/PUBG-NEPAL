@@ -784,7 +784,7 @@ input[type=password] {
     .heroarea__text-container {
         width: 406px;
     }
-}@media only screen and (max-width: 320px) {
+}@media only screen and (max-width: 375px) {
     .row {
         width: 100%;
     }
