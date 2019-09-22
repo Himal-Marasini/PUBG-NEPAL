@@ -149,10 +149,44 @@
     }
 
     .heroarea__text-background {
-        width: 316px;
+        width: 368px;
         margin-left: 2px;
-        top: 150px;
-        height: 160px;
+        top: 145px;
+        height: 149px;
+    }
+
+    .heroarea__text-container {
+        width: 365px;
+    }
+
+    .hero__text-title {
+        font-size: 1.4rem;
+    }
+
+    .heroarea__btn {
+        padding-top: 7px;
+    }
+
+    .btn--start {
+        width: 5rem;
+        font-size: 19px;
+    }
+
+    .registrationInfo {
+        height: 625px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .row {
+        width: 100%;
+    }
+
+    .heroarea__text-background {
+        width: 368px;
+        margin-left: 2px;
+        top: 125px;
+        height: 130px;
     }
 
     .heroarea__text-container {
