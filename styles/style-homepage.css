@@ -772,4 +772,44 @@ input[type=password] {
     .heroarea__text-container {
         width: 420px;
     }
+}@media only screen and (max-width: 426px) {
+    .row {
+        width: 95%;
+    }
+
+    .heroarea__text-background {
+        width: 405px;
+    }
+
+    .heroarea__text-container {
+        width: 406px;
+    }
+}@media only screen and (max-width: 320px) {
+    .row {
+        width: 100%;
+    }
+
+    .heroarea__text-background {
+        width: 316px;
+        margin-left: 2px;
+        top: 150px;
+        height: 160px;
+    }
+
+    .heroarea__text-container {
+        width: 316px;
+    }
+
+    .hero__text-title {
+        font-size: 1.2rem;
+    }
+
+    .heroarea__btn {
+        padding-top: 10px;
+    }
+
+    .btn--start {
+        width: 5rem;
+        font-size: 19px;
+    }
 }
