@@ -3,6 +3,7 @@ const db = require('./util/databse');
 const error = require('./controllers/error');
 
 const homepage = require('./routes/homepage');
+const authentication = require('./routes/authentication');
 const registration = require('./routes/pubgForm');
 
 const express = require('express');

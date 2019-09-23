@@ -5,4 +5,6 @@ const authorization = require('../controllers/authentication');
 
 Router.get('/sign-up', authorization.getSignup);
 
-Router.get('/login', authorization.login);
+Router.get('/login', authorization.getLogin);
+
+module.exports = Router;

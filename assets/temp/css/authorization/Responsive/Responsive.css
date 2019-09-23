@@ -1,0 +1,35 @@
+@media only screen and (max-width:500px) {
+    section {
+        height: 450px;
+    }
+
+    .text__container {
+        width: 76%;
+    }
+
+    .text__title {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width:420px) {
+    .text__container {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width:375px) {
+    .text__container {
+        width: 99%;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    .row {
+        width: 95%;
+    }
+
+    .text__container {
+        width: 100%;
+    }
+}

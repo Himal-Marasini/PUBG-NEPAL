@@ -70,13 +70,30 @@
 }
 
 @media only screen and (max-width:520px) {
-    .pubg__logo {
+    .pubg_logo {
         width: 42%;
     }
 }
 
-@media only screen and (max-width:424px) {
+@media only screen and (max-width:425px) {
+
+    .pubg_logo {
+        width: 45%;
+    }
+
     .registrator_memberNamefield {
         margin-right: 0;
+    }
+}
+
+@media only screen and (max-width:320px) {
+
+    .registrator_namefield,
+    .registrator_teamNamefield,
+    .registrator_phonefield,
+    .registrator_emailfield,
+    .registrator_payGatewayfield,
+    .registrator_matchTypefield {
+        width: 153px;
     }
 }

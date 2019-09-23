@@ -4,8 +4,6 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssvars = require('postcss-simple-vars');
 const cssimport = require('postcss-import');
-// const normalize = require('normalize-css');
-
 
 gulp.task('homepage', () => {
     return gulp.src('./assets/temp/css/homepage/style-homepage.css')
@@ -19,6 +17,12 @@ gulp.task('pubgform', () => {
         .pipe(gulp.dest('./styles'));
 });
 
+gulp.task('authorization', () => {
+    return gulp.src('./assets/temp/css/authorization/style-authorization.css')
+        .pipe(postcss([cssimport, autoprefixer, cssvars]))
+        .pipe(gulp.dest('./styles'));
+});
+
 gulp.task('loginHomepage', () => {
     return gulp.src('./assets/temp/css/loginHomepage/style-loginHomepage.css')
         .pipe(postcss([cssimport, autoprefixer, cssvars]))
@@ -27,6 +31,6 @@ gulp.task('loginHomepage', () => {
 
 gulp.task('watch', function () {
     watch('./assets/temp/css', () => {
-        gulp.start('homepage');
+        gulp.start('pubgform');
     });
 });
