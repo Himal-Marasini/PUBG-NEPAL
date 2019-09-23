@@ -7,7 +7,7 @@ const sendmail = require('../middleware/sendMail');
 
 exports.getMoboForm = async (req, res, next) => {
     var count = await Mobile.estimatedDocumentCount({});
-    res.status(200).render('register-form', {
+    res.render('register-form', {
         matchType: "SQUAD(MOBILE)",
         typeUrl: "/register/moboplayer",
         docs: count < 24 ? true : false,
