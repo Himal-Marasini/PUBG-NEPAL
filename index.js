@@ -47,5 +47,6 @@ app.use(expressSession({
 
 // ROUTES
 app.use('/', homepage);
+app.use(authentication);
 app.use('/register', registration);
 app.use(error);

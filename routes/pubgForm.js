@@ -2,7 +2,6 @@ const registration = require('../controllers/registration');
 const {
     check
 } = require('express-validator/check');
-// const nodemailer = require('../middleware/sendMail');
 
 const express = require('express');
 const Router = express.Router();
