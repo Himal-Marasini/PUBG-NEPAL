@@ -137,7 +137,6 @@ const controller = ((uiCtrl, validCtrl) => {
         validCtrl.validateInput(inputVal);
 
         if (domVariable.state) {
-
             // This is the User Data
             const inputData = validCtrl.userData;
 

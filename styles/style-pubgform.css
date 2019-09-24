@@ -378,6 +378,8 @@ input::-webkit-inner-spin-button {
     background-color: #e74c3c;
     text-transform: uppercase;
     color: #fafafa;
+}.ui.segments {
+    min-width: 0 !important;
 }@media only screen and (max-width:1247px) {
     .registration__matchType {
         margin-top: 15px;
