@@ -20,18 +20,17 @@ exports.getMoboForm = async (req, res, next) => {
 };
 
 exports.getEmuForm = async (req, res, next) => {
-    return res.status(200).send(`<h1>Sorry !!! This is not available for now`);
-    // var count = await Mobile.estimatedDocumentCount({});
-    // res.render('register-form', {
-    //     matchType: "SQUAD(EMULATOR)",
-    //     typeUrl: "/register/emuplayer",
-    //     docs: count < 24 ? true : false,
-    //     success: req.session.success,
-    //     errors: req.session.errors,
-    //     messageType: req.session.messageType
-    // });
-    // req.session.errors = null;
-    // req.session.success = null;
+    var count = await Mobile.estimatedDocumentCount({});
+    res.render('register-form', {
+        matchType: "SQUAD(EMULATOR)",
+        typeUrl: "/register/emuplayer",
+        docs: count < 24 ? true : false,
+        success: req.session.success,
+        errors: req.session.errors,
+        messageType: req.session.messageType
+    });
+    req.session.errors = null;
+    req.session.success = null;
 };
 
 exports.postMoboForm = async (req, res, next) => {
@@ -95,62 +94,62 @@ exports.postMoboForm = async (req, res, next) => {
 };
 
 
-// exports.postEmuForm = async (req, res, next) => {
-//     const {
-//         error
-//     } = validate(req.body);
+exports.postEmuForm = async (req, res, next) => {
+    const {
+        error
+    } = validate(req.body);
 
-//     if (error) {
-//         console.log(error.details[0].message);
-//         req.session.errors = error.details[0].message;
-//         req.session.success = true;
-//         req.session.messageType = "message__error";
-//         return res.status(400).redirect('/register/emuplayer');
-//     }
+    if (error) {
+        console.log(error.details[0].message);
+        req.session.errors = error.details[0].message;
+        req.session.success = true;
+        req.session.messageType = "message__error";
+        return res.status(400).redirect('/register/emuplayer');
+    }
 
-//     const verified = await khaltiVerification(req.body.token);
+    const verified = await khaltiVerification(req.body.token);
 
-//     if (!verified) {
-//         req.session.errors = verified.error;
-//         req.session.success = true;
-//         req.session.messageType = "message__error";
-//         return res.status(400).redirect('/register/emuplayer');
-//     }
+    if (!verified) {
+        req.session.errors = verified.error;
+        req.session.success = true;
+        req.session.messageType = "message__error";
+        return res.status(400).redirect('/register/emuplayer');
+    }
 
-//     const Useremulator = new Emulator({
-//         registratorName: req.body.registrator_name,
-//         teamName: req.body.registrator_teamName,
-//         emailId: req.body.registrator_emailId,
-//         phoneNumber: req.body.registrator_phoneNumber,
-//         payReceiveId: req.body.registrator_khaltiId,
-//         matchType: req.body.registrator_matchType,
-//         members: [{
-//             name: req.body.memberOne_name,
-//             characterID: req.body.memberOne_charId
-//         }, {
-//             name: req.body.memberTwo_name,
-//             characterID: req.body.memberTwo_charId
-//         }, {
-//             name: req.body.memberThree_name,
-//             characterID: req.body.memberThree_charId
-//         }, {
-//             name: req.body.memberFour_name,
-//             characterID: req.body.memberFour_charId
-//         }],
-//         khaltiDetail: {
-//             idx: verified.data.user.idx,
-//             name: verified.data.user.name,
-//             mobile: verified.data.user.mobile
-//         }
-//     });
+    const Useremulator = new Emulator({
+        registratorName: req.body.registrator_name,
+        teamName: req.body.registrator_teamName,
+        emailId: req.body.registrator_emailId,
+        phoneNumber: req.body.registrator_phoneNumber,
+        payReceiveId: req.body.registrator_khaltiId,
+        matchType: req.body.registrator_matchType,
+        members: [{
+            name: req.body.memberOne_name,
+            characterID: req.body.memberOne_charId
+        }, {
+            name: req.body.memberTwo_name,
+            characterID: req.body.memberTwo_charId
+        }, {
+            name: req.body.memberThree_name,
+            characterID: req.body.memberThree_charId
+        }, {
+            name: req.body.memberFour_name,
+            characterID: req.body.memberFour_charId
+        }],
+        khaltiDetail: {
+            idx: verified.data.user.idx,
+            name: verified.data.user.name,
+            mobile: verified.data.user.mobile
+        }
+    });
 
-//     const userdata = await Useremulator.save();
+    const userdata = await Useremulator.save();
 
-//     if (userdata) {
-//         req.session.errors = "You have been succesfully registered !!! Please Check your mail for futher details";
-//         req.session.success = true;
-//         req.session.messageType = "message__success";
-//         const mailSend = await sendmail(userdata);
-//         return res.status(200).redirect('/register/emuplayer');
-//     }
-// };
+    if (userdata) {
+        req.session.errors = "You have been succesfully registered !!! Please Check your mail for futher details";
+        req.session.success = true;
+        req.session.messageType = "message__success";
+        const mailSend = await sendmail(userdata);
+        return res.status(200).redirect('/register/emuplayer');
+    }
+};

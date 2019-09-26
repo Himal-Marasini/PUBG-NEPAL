@@ -13,6 +13,6 @@ Router.get('/emuplayer', registration.getEmuForm);
 
 Router.post('/moboplayer', check(''), registration.postMoboForm);
 
-// Router.post('/emuplayer', check(''), registration.postEmuForm);
+Router.post('/emuplayer', check(''), registration.postEmuForm);
 
 module.exports = Router;

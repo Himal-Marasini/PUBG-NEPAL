@@ -142,7 +142,7 @@ const controller = ((uiCtrl, validCtrl) => {
 
             // Call the Khalti Methods
             const config = {
-                "publicKey": "live_public_key_8c76b499577f476583c1e9a575499ca2",
+                "publicKey": "test_public_key_9c38182de1354f35821f915a2456b8f4",
                 "productIdentity": inputData.registrator_matchType,
                 "productName": "PUBG NEPAL",
                 "productUrl": "https://www.pubgmobonepal.com",
