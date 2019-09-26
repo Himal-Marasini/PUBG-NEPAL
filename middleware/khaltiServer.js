@@ -8,7 +8,7 @@ module.exports = async (token) => {
 
     var config = {
         headers: {
-            "Authorization": "Key test_secret_key_7e905fd8bdd9430897c79ce057af2512"
+            "Authorization": "Key live_secret_key_95e0c0fb0c2941fdba449459333a5cb7"
         }
     };
 

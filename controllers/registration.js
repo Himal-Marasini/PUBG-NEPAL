@@ -86,7 +86,7 @@ exports.postMoboForm = async (req, res, next) => {
     const userdata = await Usermobile.save();
 
     if (userdata) {
-        req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
+        req.session.errors = "You have been succesfully registered !!! Please Check your mail for futher details";
         req.session.success = true;
         req.session.messageType = "message__success";
         const mailSend = await sendmail(userdata);
@@ -147,7 +147,7 @@ exports.postMoboForm = async (req, res, next) => {
 //     const userdata = await Useremulator.save();
 
 //     if (userdata) {
-//         req.session.errors = "You have been succesfull registered !!! Please Check your mail for futher details";
+//         req.session.errors = "You have been succesfully registered !!! Please Check your mail for futher details";
 //         req.session.success = true;
 //         req.session.messageType = "message__success";
 //         const mailSend = await sendmail(userdata);
