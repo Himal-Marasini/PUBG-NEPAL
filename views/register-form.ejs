@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
-    <meta http-equiv="Pragma" content="no-cache">
-    <link href="/styles/style-pubgform.css" rel="stylesheet" type="text/css">
+
+    <link href="../styles/style-pubgform.css" rel="stylesheet" type="text/css">
     <script src="https://khalti.com/static/khalti-checkout.js"></script>
 </head>
 
@@ -19,10 +19,20 @@
 
                 <div class="registration__form">
                     <div class="registration__logo">
-                        <img src="/assets/images/pubg_logo.png" alt="PUBG REGISTRATION" class="pubg_logo">
+                        <img src="../assets/images/pubg_logo.png" alt="PUBG REGISTRATION" class="pubg_logo">
                     </div>
 
-                    <div id="registration__error">
+                    <% if(success) { %>
+
+                    <div class="<%=messageType%>">
+
+                        <%=errors%>
+
+                    </div>
+
+                    <% } %>
+
+                    <div class="registration__error">
                         <span class="registrationError__text"></span>
                     </div>
 
@@ -90,11 +100,12 @@
                                     name="memberFourCharId" id="memberFour_charId">
                             </span>
                         </div>
+
                         <div class="registration__submit">
-                            <input type="hidden" value="<%= id %>" id="id">
                             <input type="button" value="Submit" class="registration__submitBtn">
                         </div>
                     </form>
+
                 </div>
 
                 <div class="funds">
@@ -134,7 +145,7 @@
 
         </div>
     </section>
-    <script src="/assets/js/registration/formValidation.js"></script>
+    <script src="/assets/js/registration/formValidation.min.js"></script>
     <%} else {%>
     <h1>Registration has been closed for this match, Please try on different one!!!</h1>
     <%}%>

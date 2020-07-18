@@ -27,22 +27,18 @@ const Schema = new mongoose.Schema({
     },
     members: {
         type: Array,
+        "default": [],
         required: true
     },
     khaltiDetail: {
         type: Object,
         require: true
     },
-    matchId: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "match",
-        required: true
-    }
-}, {
-    timestamps: {
-        createdAt: true,
-        updatedAt: true
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 
-module.exports = mongoose.model('user', Schema);
+exports.userMobile = mongoose.model('userMobile', Schema);
+exports.userEmulator = mongoose.model('userEmulator', Schema);

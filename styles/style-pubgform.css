@@ -244,8 +244,9 @@ input::-webkit-inner-spin-button {
     width: 32%;
     height: auto;
 }.registration__error {
-    width: 65%;
+    width: 40%;
     margin: 0 auto;
+    background-color: #e74c3c;
     padding-top: 4px;
     color: #fafafa;
     border-radius: 3px;
