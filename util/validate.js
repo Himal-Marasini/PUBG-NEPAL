@@ -11,6 +11,7 @@ function validate(inputData) {
         product_name: Joi.string().required(),
         product_url: Joi.string().required(),
         widget_id: Joi.string().required(),
+        id: Joi.string().required(),
         registrator_name: Joi.string().required().error(err => {
             return {
                 message: "Registrator Name is required."
@@ -19,7 +20,7 @@ function validate(inputData) {
         registrator_teamName: Joi.string().required(),
         registrator_emailId: Joi.string().required().error(err => {
             return {
-                message: "Email Id is required and must be valid."
+                message: "Email Id is required"
             };
         }),
         registrator_phoneNumber: Joi.number().required(),
