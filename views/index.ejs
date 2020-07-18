@@ -57,17 +57,18 @@
         <div class="row">
 
             <div class="match__upcomingMatchesContainer">
-                <h3 class="match__headingThree">Upcoming Matches : (28-09-2019)</h3>
+                <% matchInfo.forEach((el)=>{ %>
+                <h3 class="match__headingThree">Upcoming Matches : (<%= el.date %>)</h3>
                 <div class="match__container">
-
+                    <% el.match.forEach((element)=>{ %>
                     <div class="match__firstContainer">
                         <p class="match__firstContainer_p">Match will start in:</p>
-                        <h2 class="match__firstContainer_time">9:30 PM</h2>
+                        <h2 class="match__firstContainer_time"><%= element.time %></h2>
 
                         <div class="firstContainer__matchType">
                             <p class="matchTypeContainer__text">
                                 Match Type :<span class="matchTypeContainer__type match--mobile">
-                                    (SQUAD) Mobile
+                                    (<%= element.type %>) <%= element.device %>
                                 </span>
                             </p>
                         </div>
@@ -75,28 +76,30 @@
                         <div class="firstContainer__matchMap">
                             <p class="matchMapContainer__text">
                                 Match Map :<span class="matchMapContainer__type">
-                                    Erangle
+                                    <%= element.map %>
                                 </span>
                             </p>
                         </div>
 
                         <div class="match__prize">
-                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS 3500</span></p>
+                            <p class="match__prize__text">Prize:<span class="match__prize__value"> NRS
+                                    <%= element.prize %></span></p>
                         </div>
                         <div class="match__entryFee">
                             <p class="match__entryFee__text">Entry Fee:<span class="match__entryFee__value"> NRS
-                                    50/Per player</span>
+                                    <%= element.fee %>/Per player</span>
                             </p>
                         </div>
                         <div class="match__registerNow">
-                            <a href="/register/moboplayer">
+                            <a href="/register/<%= element._id %>">
                                 <input type="button" value="register now" class="btn_register_result"
                                     id="registerBtn__first">
                             </a>
                         </div>
                     </div>
+                    <% }) %>
 
-                    <div class="match__secondContainer">
+                    <!-- <div class="match__secondContainer">
                         <p class="match__secondContainer_p">Match will start in:</p>
                         <h2 class="match__secondContainer_time">9:00 PM</h2>
 
@@ -130,9 +133,10 @@
                             </a>
 
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
+                <% }) %>
             </div>
 
         </div>

@@ -1,7 +1,7 @@
 const uiVariables = (() => {
     return {
         domVariables: {
-            errorContainer: document.querySelector('.registration__error'),
+            errorContainer: document.getElementById('registration__error'),
             errorText: document.querySelector('.registrationError__text'),
             registratorName: document.querySelector('.registrator_namefield'),
             teamName: document.querySelector('.registrator_teamNamefield'),
@@ -18,6 +18,7 @@ const uiVariables = (() => {
             memberFour_name: document.getElementById('memberFour_name'),
             memberFour_charId: document.getElementById('memberFour_charId'),
             registerForm: document.getElementById('registerForm'),
+            id: document.getElementById('id'),
             btn_submit: document.querySelector('.registration__submitBtn'),
             state: false
         },
@@ -37,7 +38,8 @@ const uiVariables = (() => {
                 memberThree_name: uiVariables.domVariables.memberThree_name.value,
                 memberThree_charId: parseInt(uiVariables.domVariables.memberThree_charId.value),
                 memberFour_name: uiVariables.domVariables.memberFour_name.value,
-                memberFour_charId: parseInt(uiVariables.domVariables.memberFour_charId.value)
+                memberFour_charId: parseInt(uiVariables.domVariables.memberFour_charId.value),
+                id: uiVariables.domVariables.id.value
             };
 
         }
@@ -46,11 +48,12 @@ const uiVariables = (() => {
 })();
 
 const validation = (() => {
-    const elms = ['registrator_name', 'registrator_teamName', 'registrator_phoneNumber', 'registrator_emailId', 'registrator_khaltiId', 'registrator_matchType', 'memberOne_name', 'memberOne_charId', 'memberTwo_name', 'memberTwo_charId', 'memberThree_name', 'memberThree_charId', 'memberFour_name', 'memberFour_charId'];
+    const elms = ['registrator_name', 'registrator_teamName', 'registrator_phoneNumber', 'registrator_emailId', 'registrator_khaltiId', 'registrator_matchType', 'memberOne_name', 'memberOne_charId', 'memberTwo_name', 'memberTwo_charId', 'memberThree_name', 'memberThree_charId', 'memberFour_name', 'memberFour_charId', 'id'];
     const userData = {};
     const domVariables = uiVariables.domVariables;
 
     function validationError(err) {
+        domVariables.errorContainer.classList = "message__error";
         domVariables.errorContainer.style.display = 'block';
         domVariables.errorText.textContent = err;
         setTimeout(function () {
@@ -121,78 +124,184 @@ const validation = (() => {
                 uiVariables.domVariables.state = true;
             }
         },
-
         userData: userData
     };
-
-
 })();
 
 const controller = ((uiCtrl, validCtrl) => {
     const domVariable = uiCtrl.domVariables;
-
+    validation.validateInput
     function run() {
 
         const inputVal = uiCtrl.domInputValue();
         validCtrl.validateInput(inputVal);
 
+        const inputData = validCtrl.userData;
+
         if (domVariable.state) {
-            // This is the User Data
-            const inputData = validCtrl.userData;
-
-            // Call the Khalti Methods
-            const config = {
-                "publicKey": "test_public_key_9c38182de1354f35821f915a2456b8f4",
-                "productIdentity": inputData.registrator_matchType,
-                "productName": "PUBG NEPAL",
-                "productUrl": "https://www.pubgmobonepal.com",
-                "eventHandler": {
-                    async onSuccess(payload) {
-                        const data = {
-                            ...payload,
-                            ...inputData
-                        };
-
-                        const userData = {
-                            method: 'POST',
-                            credentials: 'include',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data)
-
-                        };
-                        if (inputData.registrator_matchType === 'SQUAD(MOBILE)') {
-                            fetch(`/register/moboplayer`, userData)
-                                .then(res => {
-                                    window.location = res.url;
-                                });
-                        } else if (inputData.registrator_matchType === 'SQUAD(EMULATOR)') {
-                            fetch(`/register/emuplayer`, userData)
-                                .then(res => {
-                                    window.location = res.url;
-                                });
-                        }
-
-                    },
-
-                    onError(error) {
-                        // if Error come in between payment
-                        validate.validError("Some Problem has Occured. Please Try it Again");
-                    },
-
-                    onClose() {}
+            fetch(`http://localhost:3000/pubg/validation`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(inputData)
+            }).then(async res => {
+                if (res.status !== 200) {
+                    // Here I can show the Error Box
+                    // const errorContainer = document.getElementById('registration__error');
+                    // const errorText = document.querySelector('.registrationError__text');
+                    const err = await res.json();
+                    domVariable.errorContainer.classList = "message__error";
+                    domVariable.errorContainer.style.display = 'block';
+                    domVariable.errorText.textContent = err.message;
+                    setTimeout(function () {
+                        domVariable.errorContainer.style.display = "none";
+                    }, 5000);
+                    throw new Error('Error Occurred !!')
                 }
-            };
+                res.json().then(data => {
+                    if (data.status) {
+                        // This is the User Data
+                        const inputData = validCtrl.userData;
 
-            const checkout = new KhaltiCheckout(config);
-            checkout.show({
-                amount: 20000
+                        // Call the Khalti Methods
+                        const config = {
+                            "publicKey": "test_public_key_9c38182de1354f35821f915a2456b8f4",
+                            "productIdentity": inputData.registrator_matchType,
+                            "productName": "PUBG NEPAL",
+                            "productUrl": "https://www.pubgmobonepal.com",
+                            "eventHandler": {
+                                async onSuccess(payload) {
+                                    const data = {
+                                        ...payload,
+                                        ...inputData
+                                    };
+
+                                    const userData = {
+                                        method: 'POST',
+                                        credentials: 'include',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(data)
+
+                                    };
+                                    fetch(`/register`, userData)
+                                        .then(async res => {
+                                            if (res.status !== 200) {
+                                                const err = await res.json()
+                                                domVariable.errorContainer.classList = "message__error";
+                                                domVariable.errorContainer.style.display = 'block';
+                                                domVariable.errorText.textContent = err.message;
+                                                setTimeout(function () {
+                                                    domVariable.errorContainer.style.display = "none";
+                                                }, 5000);
+                                                throw new Error("Invalid Request")
+                                            }
+                                            res.json().then(data => {
+                                                domVariable.errorContainer.classList = "message__success";
+                                                domVariable.errorContainer.style.display = 'block';
+                                                domVariable.errorText.textContent = data.message;
+                                                setTimeout(function () {
+                                                    domVariable.errorContainer.style.display = "none";
+                                                }, 8000);
+                                            });
+                                            domVariable.registratorName.value = "";
+                                            domVariable.teamName.value = "";
+                                            domVariable.phoneNumber.value = "";
+                                            domVariable.emailId.value = "";
+                                            domVariable.payReceiveId.value = "";
+                                            domVariable.memberOne_name.value = "";
+                                            domVariable.memberOne_charId.value = "";
+                                            domVariable.memberTwo_name.value = "";
+                                            domVariable.memberTwo_charId.value = "";
+                                            domVariable.memberThree_name.value = "";
+                                            domVariable.memberThree_charId.value = "";
+                                            domVariable.memberFour_name.value = "";
+                                            domVariable.memberFour_charId.value = "";
+                                        }).catch(err => {
+                                            console.log(err)
+                                        })
+                                },
+                                onError(error) {
+                                    // if Error come in between payment
+                                    console.log(error)
+                                    domVariable.errorContainer.classList = "message__error";
+                                    domVariable.errorContainer.style.display = 'block';
+                                    domVariable.errorText.textContent = "Some Problem has Occured. Please Try it Again later !!";
+                                    setTimeout(function () {
+                                        domVariable.errorContainer.style.display = "none";
+                                    }, 8000);
+                                },
+                                onClose() { }
+                            }
+                        };
+
+                        const checkout = new KhaltiCheckout(config);
+                        checkout.show({
+                            amount: 20000
+                        });
+                    }
+                });
+            }).catch(err => {
+                console.log(4);
+                console.log(err);
             });
-
             // Change back the State Variable
             domVariable.state = false;
         }
+        // if (domVariable.state) {
+        //     // This is the User Data
+        //     const inputData = validCtrl.userData;
+
+        //     // Call the Khalti Methods
+        //     const config = {
+        //         "publicKey": "test_public_key_9c38182de1354f35821f915a2456b8f4",
+        //         "productIdentity": inputData.registrator_matchType,
+        //         "productName": "PUBG NEPAL",
+        //         "productUrl": "https://www.pubgmobonepal.com",
+        //         "eventHandler": {
+        //             async onSuccess(payload) {
+        //                 const data = {
+        //                     ...payload,
+        //                     ...inputData
+        //                 };
+
+        //                 const userData = {
+        //                     method: 'POST',
+        //                     credentials: 'include',
+        //                     headers: {
+        //                         'Content-Type': 'application/json',
+        //                     },
+        //                     body: JSON.stringify(data)
+
+        //                 };
+        //                 fetch(`/register`, userData)
+        //                     .then(res => {
+        //                         res.json().then(data => {
+        //                             location.replace = data.redirect;
+        //                         });
+        //                     }).catch(err => {
+        //                         console.log(err)
+        //                     })
+        //             },
+        //             onError(error) {
+        //                 // if Error come in between payment
+        //                 validate.validError("Some Problem has Occured. Please Try it Again");
+        //             },
+        //             onClose() { }
+        //         }
+        //     };
+
+        //     const checkout = new KhaltiCheckout(config);
+        //     checkout.show({
+        //         amount: 20000
+        //     });
+
+        //     // Change back the State Variable
+        //     domVariable.state = false;
+        // }
     }
 
     domVariable.btn_submit.addEventListener('click', run);
