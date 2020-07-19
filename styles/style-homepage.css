@@ -471,23 +471,20 @@ input[type=password] {
     grid-template-columns: 1fr 1fr;
     font-family: "Raleway", sans-serif;
     line-height: 14px;
-}.match__firstContainer,
-.match__secondContainer {
-    width: 100%;
+}.match{
+    width: 92%;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}.match__firstContainer:hover,
-.match__secondContainer:hover {
+    margin-bottom:3%;
+}.match:hover{
     transform: scale(1.1);
     transition: all .2s linear;
     border: none;
-}.match__firstContainer_p,
-.match__secondContainer_p {
+}.match__p{
     font-family: "Teko", sans-serif;
     font-size: 1.33rem;
     color: #34495e;
-}.match__firstContainer_time,
-.match__secondContainer_time {
+}.match__time {
     font-family: "Teko", sans-serif;
     font-size: 40px;
     font-weight: 400;

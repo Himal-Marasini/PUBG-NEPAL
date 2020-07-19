@@ -3,11 +3,9 @@ const User = require('../models/Registration');
 const khaltiVerification = require('../middleware/khaltiServer');
 const sendmail = require('../middleware/sendMail');
 const Match = require('../models/CreateMatch');
-const { validationResult } = require('express-validator/check');
 
 exports.getRegistration = async (req, res) => {
     try {
-        // let count = await Mobile.estimatedDocumentCount({});
         const { id } = req.params;
 
         const match = await Match.findOne({ _id: id })
@@ -18,30 +16,19 @@ exports.getRegistration = async (req, res) => {
                 message: 'Sorry this match is not available !!'
             });
         }
-        // let message = req.flash('message');
-        // let type = req.flash('type');
-        let message = [];
-
-        // console.log(message, "Message-18");
-        // console.log(type, "Type-19");
-
-        if (message.length <= 0) {
-            message = null;
-            type = null;
-        }
 
         return res.render('register-form', {
             matchType: `${match.type}(${match.device})`,
-            typeUrl: "/register/moboplayer",
-            id: match._id,
-            docs: 1 < 24 ? true : false,
-            errors: message,
-            messageType: type
+            id: match._id
         });
     } catch (err) {
-        return res.status(500).json({
+        return res.render('error.ejs', {
             status: false,
-            message: `Server error redirect them 505 page ${err}`
+            errorType: "Server Down",
+            message: {
+                title: '500 !!! INTERNAL SERVER ERROR',
+                subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
+            }
         });
     }
 };
@@ -59,20 +46,23 @@ exports.postRegistration = async (req, res) => {
             });
         }
 
-        // if (error) {
-        //     console.log(error.details[0].message);
-        //     // req.flash('message', error.details[0].message);
-        //     // req.flash('type', "message__error")
-        //     return res.status(400).redirect('/register/moboplayer');
-        // }
+        // Check Match is Available or Not 
+        const match = await Match.findOne({ _id: req.body.id });
 
-        const verified = await khaltiVerification(req.body.token);
+        if (!match) {
+            return res.status(503).json({
+                status: false,
+                message: "This match is not available !!"
+            });
+        }
+
+        const verified = await khaltiVerification(req.body.token, match.fee);
 
         if (!verified) {
-            console.log(verified.error);
-            // req.flash('message', verified.error);
-            // req.flash('type', "message__error");
-            return res.status(400).redirect('/register/moboplayer');
+            return res.status(400).json({
+                status: false,
+                message: verified.error
+            });
         }
 
         const user = new User({
@@ -103,39 +93,40 @@ exports.postRegistration = async (req, res) => {
             }
         });
 
-        const match = await Match.findOne({ _id: req.body.id });
-        if (!match) {
-            return res.status(404).json({
-                status: true,
-                message: "This match is not available !!"
-            })
-        }
-
+        // Push the User Object Id into Players Array of Match
         match.players.push(user._id);
 
+        // Save into db
         const updatedMatch = await match.save();
 
         if (!updatedMatch) {
-            return res.status(500).json({
-                status: true,
-                message: "Failed to update the data in DB !!"
+            return res.render('error.ejs', {
+                status: false,
+                errorType: "Server Down",
+                message: {
+                    title: '500 !!! INTERNAL SERVER ERROR',
+                    subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
+                }
             });
         }
-
 
         const userdata = await user.save();
 
         if (userdata) {
-            // const mailSend = await sendmail(userdata);
+            const mailSend = await sendmail(userdata);
             return res.status(200).json({
                 status: true,
                 message: "You have been succesfully registered !!! Please Check your mail for futher details"
             });
         }
     } catch (err) {
-        return res.status(500).json({
+        return res.render('error.ejs', {
             status: false,
-            message: `Server error redirect them 505 page ${err}`
+            errorType: "Server Down",
+            message: {
+                title: '500 !!! INTERNAL SERVER ERROR',
+                subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
+            }
         });
     }
 };
@@ -151,13 +142,13 @@ exports.validateData = async (req, res) => {
         // Check if Match Exists or Not
         if (!match) {
             return res.status(400).json({
-                status: true,
+                status: false,
                 message: "Sorry, This match is not available anymore !! Try different matches"
             });
         }
 
         // Check total number of Squad registered
-        if (match.players.length >= 24) {
+        if (match.players.length >= 2) {
             return res.status(400).json({
                 status: false,
                 message: "This match lobby is full !! Please try different matches"
@@ -177,152 +168,20 @@ exports.validateData = async (req, res) => {
         }
 
         // Check if Team Name is Unique or Not (Skipping For Now)
-
         return res.json({
             status: true,
-            message: "Success"
+            message: "Success",
+            amount: (match.fee * 4) * 100,
+            key: process.env.KHALTI_PUBLIC_KEY
         });
     } catch (err) {
-        return res.json({
+        return res.render('error.ejs', {
             status: false,
-            message: `This page should redirect 505 ${err}`
-        })
-    }
-};
-
-
-
-exports.getEmuForm = async (req, res, next) => {
-    var count = await Mobile.estimatedDocumentCount({});
-    res.render('register-form', {
-        matchType: "SQUAD(EMULATOR)",
-        typeUrl: "/register/emuplayer",
-        docs: count < 24 ? true : false,
-        success: req.session.success,
-        errors: req.session.errors,
-        messageType: req.session.messageType
-    });
-    req.session.errors = null;
-    req.session.success = null;
-};
-
-exports.postMoboForm = async (req, res, next) => {
-    const {
-        error
-    } = validate(req.body);
-
-    if (error) {
-        console.log(error.details[0].message);
-        req.flash('message', error.details[0].message);
-        req.flash('type', "message__error")
-        return res.status(400).redirect('/register/moboplayer');
-    }
-
-    const verified = await khaltiVerification(req.body.token);
-
-    if (!verified) {
-        req.flash('message', verified.error);
-        req.flash('type', "message__error");
-        return res.status(400).redirect('/register/moboplayer');
-    }
-
-    const Usermobile = new Mobile({
-        registratorName: req.body.registrator_name,
-        teamName: req.body.registrator_teamName,
-        emailId: req.body.registrator_emailId,
-        phoneNumber: req.body.registrator_phoneNumber,
-        khaltiId: req.body.registrator_khaltiId,
-        matchType: req.body.registrator_matchType,
-        members: [{
-            name: req.body.memberOne_name,
-            characterID: req.body.memberOne_charId
-        }, {
-            name: req.body.memberTwo_name,
-            characterID: req.body.memberTwo_charId
-        }, {
-            name: req.body.memberThree_name,
-            characterID: req.body.memberThree_charId
-        }, {
-            name: req.body.memberFour_name,
-            characterID: req.body.memberFour_charId
-        }],
-        khaltiDetail: {
-            idx: verified.data.user.idx,
-            name: verified.data.user.name,
-            mobile: verified.data.user.mobile
-        }
-    });
-
-    const userdata = await Usermobile.save();
-
-    if (userdata) {
-        req.flash('type', 'message__success');
-        req.flash('message', 'You have been succesfully registered !!! Please Check your mail for futher details');
-        // const mailSend = await sendmail(userdata);
-        return res.status(200).json({
-            status: true,
-            redirect: `http://localhost:3000/register/moboplayer`
+            errorType: "Server Down",
+            message: {
+                title: '500 !!! INTERNAL SERVER ERROR',
+                subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
+            }
         });
     }
 };
-
-exports.postEmuForm = async (req, res, next) => {
-    const {
-        error
-    } = validate(req.body);
-
-    if (error) {
-        console.log(error.details[0].message);
-        req.session.errors = error.details[0].message;
-        req.session.success = true;
-        req.session.messageType = "message__error";
-        return res.status(400).redirect('/register/emuplayer');
-    }
-
-    const verified = await khaltiVerification(req.body.token);
-
-    if (!verified) {
-        req.session.errors = verified.error;
-        req.session.success = true;
-        req.session.messageType = "message__error";
-        return res.status(400).redirect('/register/emuplayer');
-    }
-
-    const Useremulator = new Emulator({
-        registratorName: req.body.registrator_name,
-        teamName: req.body.registrator_teamName,
-        emailId: req.body.registrator_emailId,
-        phoneNumber: req.body.registrator_phoneNumber,
-        payReceiveId: req.body.registrator_khaltiId,
-        matchType: req.body.registrator_matchType,
-        members: [{
-            name: req.body.memberOne_name,
-            characterID: req.body.memberOne_charId
-        }, {
-            name: req.body.memberTwo_name,
-            characterID: req.body.memberTwo_charId
-        }, {
-            name: req.body.memberThree_name,
-            characterID: req.body.memberThree_charId
-        }, {
-            name: req.body.memberFour_name,
-            characterID: req.body.memberFour_charId
-        }],
-        khaltiDetail: {
-            idx: verified.data.user.idx,
-            name: verified.data.user.name,
-            mobile: verified.data.user.mobile
-        }
-    });
-
-    const userdata = await Useremulator.save();
-
-    if (userdata) {
-        req.session.errors = "You have been succesfully registered !!! Please Check your mail for futher details";
-        req.session.success = true;
-        req.session.messageType = "message__success";
-        const mailSend = await sendmail(userdata);
-        return res.status(200).redirect('/register/emuplayer');
-    }
-};
-

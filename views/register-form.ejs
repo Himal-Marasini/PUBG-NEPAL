@@ -12,7 +12,15 @@
 </head>
 
 <body>
-    <% if(docs) {%>
+    <div id="overlay"></div>
+    <div class="spinner">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <section>
         <div class="row">
             <div class="parent__container">
@@ -134,11 +142,9 @@
 
         </div>
     </section>
-    <script src="/assets/js/registration/formValidation.js"></script>
-    <%} else {%>
-    <h1>Registration has been closed for this match, Please try on different one!!!</h1>
-    <%}%>
-        
+
+    <script src="/assets/js/registration/formValidation.min.js"></script>
+
 </body>
 
 </html>

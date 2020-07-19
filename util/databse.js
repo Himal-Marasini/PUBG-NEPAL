@@ -4,7 +4,8 @@ mongoose.set('useCreateIndex', true);
 
 // CONNECTED TO MONGODB
 module.exports = mongoose.connect(process.env.DB_URI, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
     .then(() => {
         console.log('Connected to database');

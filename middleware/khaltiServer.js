@@ -1,14 +1,14 @@
 const axios = require('axios');
 
-module.exports = async (token) => {
+module.exports = async (token, fee) => {
     var data = {
         "token": token,
-        "amount": 20000
+        "amount": (fee * 4) * 100
     };
 
     var config = {
         headers: {
-            "Authorization": "Key test_secret_key_7e905fd8bdd9430897c79ce057af2512"
+            "Authorization": process.env.KHALTI_PRIVATE_KEY
         }
     };
 

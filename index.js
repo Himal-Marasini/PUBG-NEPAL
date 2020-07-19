@@ -4,9 +4,6 @@ const express = require('express');
 const app = express();
 const ejs = require('ejs');
 const bodyparser = require('body-parser');
-const expressSession = require('express-session');
-const expressValidator = require('express-validator');
-const flash = require('connect-flash')
 const dotenv = require('dotenv');
 dotenv.config({ path: "./config.env" });
 
@@ -38,15 +35,6 @@ app.use(bodyparser.urlencoded({
 // BODYPARSER - FOR JSON BODY
 app.use(bodyparser.json());
 
-// // EXPRESSION SESSION
-// app.use(expressValidator());
-// app.use(expressSession({
-//     secret: process.env.SESSION_KEY,
-//     resave: false,
-//     saveUninitialized: false
-// }));
-
-app.use(flash());
 
 // Routes
 app.use(homepage);
