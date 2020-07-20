@@ -113,7 +113,7 @@ exports.postRegistration = async (req, res) => {
         const userdata = await user.save();
 
         if (userdata) {
-            const mailSend = await sendmail(userdata);
+            const mailSend = await sendmail(userdata, res);
             return res.status(200).json({
                 status: true,
                 message: "You have been succesfully registered !!! Please Check your mail for futher details"

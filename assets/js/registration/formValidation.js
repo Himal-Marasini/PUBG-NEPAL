@@ -221,6 +221,7 @@ const controller = ((uiCtrl, validCtrl) => {
                                                 throw new Error("Invalid Request")
                                             }
                                             res.json().then(data => {
+                                                console.log(data);
                                                 // Hide
                                                 domVariable.overlay.style.display = "none";
                                                 domVariable.spinner.style.display = "none";
