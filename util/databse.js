@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 
 // CONNECTED TO MONGODB
-module.exports = mongoose.connect(process.env.DB_URI, {
+const DB_URI = process.env.development === "prod" ? process.env.DB_URI_CLOUD : process.env.DB_URI_LOCAL;
+
+module.exports = mongoose.connect(DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

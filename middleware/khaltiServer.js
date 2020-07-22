@@ -8,7 +8,7 @@ module.exports = async (token, fee) => {
 
     var config = {
         headers: {
-            "Authorization": process.env.KHALTI_PRIVATE_KEY
+            "Authorization": `Key ${process.env.KHALTI_PRIVATE_KEY}`
         }
     };
 
