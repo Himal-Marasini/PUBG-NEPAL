@@ -57,11 +57,11 @@ app.use(xss());
 
 // app.use('trust proxy');
 
-if (process.env.development === "prod") {
-    app.get("*", function (req, res) {
-        res.redirect("https://" + req.headers.host + request.url);
-    });
-}
+// if (process.env.development === "prod") {
+//     app.get("*", function (req, res) {
+//         res.redirect("https://" + req.headers.host + res.url);
+//     });
+// }
 
 // Routes
 app.use(homepage);
