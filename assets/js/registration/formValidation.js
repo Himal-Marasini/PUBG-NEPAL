@@ -144,7 +144,7 @@ const controller = ((uiCtrl, validCtrl) => {
             // Show
             domVariable.overlay.style.display = "block";
             domVariable.spinner.style.display = "block";
-            fetch(`http://localhost:3000/register/auth`, {
+            fetch(`/register/auth`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

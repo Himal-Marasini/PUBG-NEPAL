@@ -9,6 +9,7 @@ const compression = require('compression');
 const dotenv = require('dotenv');
 dotenv.config({ path: "./config.env" });
 
+const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -26,11 +27,8 @@ const error = require('./controllers/error');
 app.use(morgan('dev'));
 
 if (process.env.development === "prod") {
-    app.use(function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "https://pubg-nepal.herokuapp.com/");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
+    // app.use(cors());
+    // app.options('*', cors());
 }
 
 app.use(helmet());
