@@ -25,6 +25,14 @@ const error = require('./controllers/error');
 
 app.use(morgan('dev'));
 
+if (process.env.development === "prod") {
+    app.use(function (req, res, next) {
+        res.header("Access-Control-Allow-Origin", "https://pubg-nepal.herokuapp.com/");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+}
+
 app.use(helmet());
 
 const limit = rateLimit({
