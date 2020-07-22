@@ -1,4 +1,5 @@
-const validate = require('../util/validate');
+const validateWithoutKhaltiData = require('../util/validate').validateWithoutKhaltiData;
+const validateWithKhaltiData = require('../util/validate').validateWithKhaltiData;
 const User = require('../models/Registration');
 const khaltiVerification = require('../middleware/khaltiServer');
 const sendmail = require('../middleware/sendMail');
@@ -21,15 +22,13 @@ exports.getRegistration = async (req, res) => {
             matchType: `${match.type}(${match.device})`,
             id: match._id
         });
-    } catch (err) {
-        return res.render('error.ejs', {
-            status: false,
-            errorType: "Server Down",
-            message: {
-                title: '500 !!! INTERNAL SERVER ERROR',
-                subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
-            }
-        });
+    } catch (error) {
+        console.error(error);
+        const err = new Error("500 !!! INTERNAL SERVER ERROR");
+        err.type = "Server Down";
+        err.status = 500;
+        err.subtitle = "PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG."
+        next(err);
     }
 };
 
@@ -37,7 +36,7 @@ exports.postRegistration = async (req, res) => {
     try {
         const {
             error
-        } = validate(req.body);
+        } = validateWithKhaltiData(req.body);
 
         if (error) {
             return res.status(400).json({
@@ -45,7 +44,6 @@ exports.postRegistration = async (req, res) => {
                 message: error.details[0].message
             });
         }
-
         // Check Match is Available or Not 
         const match = await Match.findOne({ _id: req.body.id });
 
@@ -119,21 +117,32 @@ exports.postRegistration = async (req, res) => {
                 message: "You have been succesfully registered !!! Please Check your mail for futher details"
             });
         }
-    } catch (err) {
-        return res.render('error.ejs', {
-            status: false,
-            errorType: "Server Down",
-            message: {
-                title: '500 !!! INTERNAL SERVER ERROR',
-                subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
-            }
-        });
+    } catch (error) {
+        console.error(error);
+        const err = new Error("500 !!! INTERNAL SERVER ERROR");
+        err.type = "Server Down";
+        err.status = 500;
+        err.subtitle = "PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG."
+        next(err);
     }
 };
 
 exports.validateData = async (req, res) => {
     try {
         const { registrator_phoneNumber, registrator_emailId, registrator_teamName, id } = req.body;
+
+        console.log(req.body);
+
+        const {
+            error
+        } = validateWithoutKhaltiData(req.body);
+
+        if (error) {
+            return res.status(400).json({
+                status: false,
+                message: error.details[0].message
+            });
+        }
 
         const match = await Match
             .findOne({ _id: id })
@@ -148,7 +157,7 @@ exports.validateData = async (req, res) => {
         }
 
         // Check total number of Squad registered
-        if (match.players.length >= 2) {
+        if (match.players.length >= 24) {
             return res.status(400).json({
                 status: false,
                 message: "This match lobby is full !! Please try different matches"
@@ -174,14 +183,12 @@ exports.validateData = async (req, res) => {
             amount: (match.fee * 4) * 100,
             key: process.env.KHALTI_PUBLIC_KEY
         });
-    } catch (err) {
-        return res.render('error.ejs', {
-            status: false,
-            errorType: "Server Down",
-            message: {
-                title: '500 !!! INTERNAL SERVER ERROR',
-                subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
-            }
-        });
+    } catch (error) {
+        console.error(error);
+        const err = new Error("500 !!! INTERNAL SERVER ERROR");
+        err.type = "Server Down";
+        err.status = 500;
+        err.subtitle = "PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG."
+        next(err);
     }
 };

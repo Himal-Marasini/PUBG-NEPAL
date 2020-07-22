@@ -23,10 +23,12 @@ exports.postCreateMatch = async (req, res) => {
             status: true,
             data: match
         });
-    } catch (err) {
-        return res.json({
-            status: false,
-            message: `Error Occurred: ${err}`
-        });
+    } catch (error) {
+        console.error(error);
+        const err = new Error("500 !!! INTERNAL SERVER ERROR");
+        err.type = "Server Down";
+        err.status = 500;
+        err.subtitle = "PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG."
+        next(err);
     }
 };

@@ -1,10 +1,11 @@
-module.exports = (req, res, next) => {
-    return res.status(404).render('error.ejs', {
-        status: true,
-        errorType: "Page not found",
+module.exports = (err, req, res, next) => {
+    console.error(err)
+    return res.status(err.status).render('error.ejs', {
+        status: false,
+        errorType: err.type,
         message: {
-            title: '404 !!! PAGE NOT FOUND',
-            subtitle: `THIS IS NOT THE WEBPAGE YOU ARE LOOKING FOR !!`
+            title: err,
+            subtitle: err.subtitle
         }
     });
 };

@@ -8,6 +8,7 @@
     <title>Register</title>
     <meta http-equiv="Pragma" content="no-cache">
     <link href="/styles/style-pubgform.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="../assets/images/Logo.png" type="image/png">
     <script src="https://khalti.com/static/khalti-checkout.js"></script>
 </head>
 
@@ -49,19 +50,19 @@
 
                         <div class="registration__phoneNumber">
                             <span class="registration__phoneLable">Phone Number :</span>
-                            <input type="number" name="phoneNumber" id="registrator_phoneNumber"
-                                class="registrator_phonefield">
+                            <input type="number" name="phoneNumber" onkeydown="return event.keyCode !== 69"
+                                id="registrator_phoneNumber" class="registrator_phonefield">
                         </div>
 
                         <div class="registration__emailId">
                             <span class="registration__emailLable">Email ID :</span>
-                            <input type="text" name="emailId" id="registrator_emailId" class="registrator_emailfield">
+                            <input type="email" name="emailId" id="registrator_emailId" class="registrator_emailfield">
                         </div>
 
                         <div class="registration__payGateway">
                             <span class="registration__payGatewayLable">Khalti ID :</span>
-                            <input type="text" name="payReceiveId" id="registrator_khaltiId"
-                                class="registrator_payGatewayfield">
+                            <input type="number" name="payReceiveId" onkeydown="return event.keyCode !== 69"
+                                id="registrator_khaltiId" class="registrator_payGatewayfield">
                         </div>
 
                         <div class="registration__matchType">
@@ -77,25 +78,29 @@
                                 <input type="text" placeholder="1) Player One" class="registrator_memberNamefield"
                                     name="memberOneName" id="memberOne_name">
                                 <input type="number" placeholder="1) Character ID" class="registrator_memberCharfield"
-                                    name="memberOneCharId" id="memberOne_charId">
+                                    name="memberOneCharId" onkeydown="return event.keyCode !== 69"
+                                    id="memberOne_charId">
                             </span>
                             <span class="registrator__memberTwo">
                                 <input type="text" placeholder="2) Player Two" class="registrator_memberNamefield"
                                     name="memberTwoName" id="memberTwo_name">
                                 <input type="number" placeholder="2) Character ID" class="registrator_memberCharfield"
-                                    name="memberTwoCharId" id="memberTwo_charId">
+                                    name="memberTwoCharId" onkeydown="return event.keyCode !== 69"
+                                    id="memberTwo_charId">
                             </span>
                             <span class="registrator__memberThree">
                                 <input type="text" placeholder="3) Player Three" class="registrator_memberNamefield"
                                     name="memberThreeName" id="memberThree_name">
                                 <input type="number" placeholder="3) Character ID" class="registrator_memberCharfield"
-                                    name="memberThreeCharId" id="memberThree_charId">
+                                    name="memberThreeCharId" onkeydown="return event.keyCode !== 69"
+                                    id="memberThree_charId">
                             </span>
                             <span class="registrator__memberFour">
                                 <input type="text" placeholder="4) Player Four" class="registrator_memberNamefield"
                                     name="memberFourName" id="memberFour_name">
                                 <input type="number" placeholder="4) Character ID" class="registrator_memberCharfield"
-                                    name="memberFourCharId" id="memberFour_charId">
+                                    name="memberFourCharId" onkeydown="return event.keyCode !== 69"
+                                    id="memberFour_charId">
                             </span>
                         </div>
                         <div class="registration__submit">

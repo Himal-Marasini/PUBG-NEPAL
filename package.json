@@ -1,9 +1,10 @@
 {
-  "name": "Code",
+  "name": "pubg-nepal",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "debug": "ndb index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,8 @@
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "mongoose": "^5.9.25",
+    "morgan": "^1.10.0",
+    "ndb": "^1.1.5",
     "nodemailer": "^6.4.10",
     "normalize.css": "^8.0.1",
     "xss-clean": "^0.1.1"

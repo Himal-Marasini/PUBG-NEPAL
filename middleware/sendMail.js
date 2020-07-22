@@ -8,8 +8,8 @@ module.exports = async function sendMail(userdata, res) {
             host: "mail.smtp2go.com",
             port: 8025,
             auth: {
-                user: "pubgnepal",
-                pass: "endsMmo1dWphdjAw"
+                user: process.env.SMTP2_MAIL_USERNAME,
+                pass: process.env.SMTP2_MAIL_PASSWORD
             }
         });
 

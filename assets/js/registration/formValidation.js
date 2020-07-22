@@ -80,44 +80,44 @@ const validation = (() => {
             if (!validationInputField(input.registratorName, "Please Enter the Registrator Name !!!")) {
                 return false;
             }
-            if (!validationInputField(input.teamName, "Please Enter the Team Name")) {
+            if (!validationInputField(input.teamName, "Please Enter the Team Name !!!")) {
                 return false;
             }
-            if (!validationInputField(input.phoneNumber, "Please Enter the Phone Number")) {
+            if (!validationInputField(input.phoneNumber, "Please Enter the Phone Number !!!")) {
                 return false;
             }
-            if (!validationInputField(input.emailId, "Please Enter the Email ID")) {
+            if (!validationInputField(input.emailId, "Please Enter the Email ID !!!")) {
                 return false;
             }
-            if (!validationInputField(input.khaltiId, "Please Enter the Khalti ID")) {
+            if (!validationInputField(input.khaltiId, "Please Enter the Khalti ID !!!")) {
                 return false;
             }
-            if (!validationInputField(input.memberOne_name, "Please Enter the Member One Name")) {
+            if (!validationInputField(input.memberOne_name, "Please Enter the Member One Name !!!")) {
                 return false;
             }
             if (isNaN(input.memberOne_charId)) {
-                validationError('Please Enter the Member One Character ID');
+                validationError('Please Enter the Member One Character ID !!!');
                 return false;
             }
-            if (!validationInputField(input.memberTwo_name, "Please Enter the Member Two Name")) {
+            if (!validationInputField(input.memberTwo_name, "Please Enter the Member Two Name !!!")) {
                 return false;
             }
             if (isNaN(input.memberTwo_charId)) {
-                validationError('Please Enter the Member Two Character ID');
+                validationError('Please Enter the Member Two Character ID !!!');
                 return false;
             }
-            if (!validationInputField(input.memberThree_name, "Please Enter the Member Three Name")) {
+            if (!validationInputField(input.memberThree_name, "Please Enter the Member Three Name !!!")) {
                 return false;
             }
             if (isNaN(input.memberThree_charId)) {
-                validationError('Please Enter the Member Three Character ID');
+                validationError('Please Enter the Member Three Character ID !!!');
                 return false;
             }
-            if (!validationInputField(input.memberFour_name, "Please Enter the Member Four Name")) {
+            if (!validationInputField(input.memberFour_name, "Please Enter the Member Four Name !!!")) {
                 return false;
             }
             if (isNaN(input.memberFour_charId)) {
-                validationError('Please Enter the Member Four Character ID');
+                validationError('Please Enter the Member Four Character ID !!!');
                 return false;
             } else {
                 elms.forEach(elm => {
