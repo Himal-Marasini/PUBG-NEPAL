@@ -11,6 +11,5 @@ module.exports = mongoose.connect(DB_URI, {
 })
     .then(() => {
         console.log('Connected to database');
-        console.log(`Server is running at PORT ${process.env.PORT}`)
     })
     .catch((err) => console.error(`ERROR !!! Can't Connect to MongoDB ${err}`));

@@ -5,6 +5,7 @@ const app = express();
 const ejs = require('ejs');
 const bodyparser = require('body-parser');
 const morgan = require('morgan');
+const compression = require('compression');
 const dotenv = require('dotenv');
 dotenv.config({ path: "./config.env" });
 
@@ -33,6 +34,8 @@ const limit = rateLimit({
 });
 
 app.use(limit);
+
+app.use(compression());
 
 app.set('view engine', 'ejs');
 
@@ -80,7 +83,14 @@ app.all("*", function (req, res, next) {
 app.use(error);
 
 db.then(() => {
-    app.listen(process.env.PORT);
+    const server = app.listen(process.env.PORT);
+    console.log(`Server is running at PORT ${process.env.PORT}`);
+    process.on("SIGTERM", () => {
+        console.log("SIGTERM !!!! SHUTTING DOWN SERVER");
+        server.close(() => {
+            console.log('Process Terminate !!')
+        })
+    });
 }).catch(err => {
     console.error(err);
     return res.status(500).render('error.ejs', {
