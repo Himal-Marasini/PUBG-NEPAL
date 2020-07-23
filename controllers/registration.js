@@ -131,8 +131,6 @@ exports.validateData = async (req, res) => {
     try {
         const { registrator_phoneNumber, registrator_emailId, registrator_teamName, id } = req.body;
 
-        console.log(req.body);
-
         const {
             error
         } = validateWithoutKhaltiData(req.body);

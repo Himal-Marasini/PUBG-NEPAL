@@ -142,12 +142,12 @@ function validateWithKhaltiData(inputData) {
                 message: "PLEASE ENTER THE VALID EMAIL ID !!!"
             };
         }),
-        registrator_phoneNumber: Joi.number().min(10).max(10).required().error(err => {
+        registrator_phoneNumber: Joi.number().integer().min(1000000000).max(9999999999).required().error(err => {
             return {
                 message: "PLEASE ENTER THE VALID PHONE NUMBER !!!"
             }
         }),
-        registrator_khaltiId: Joi.number().min(10).max(10).required().error(err => {
+        registrator_khaltiId: Joi.number().integer().min(1000000000).max(9999999999).required().error(err => {
             return {
                 message: "PLEASE ENTER THE VALID KHALTI ID !!!"
             }
