@@ -1,12 +1,8 @@
 (() => {
-    const moboPlayer = document.getElementById('registerBtn__first');
-    const emuPlayer = document.getElementById('registerBtn__second');
-
-    moboPlayer.addEventListener('click', (e) => {
-        location.href = '/register/moboplayer';
+    window.addEventListener('pageshow', function (event) {
+        var histroyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+        if (histroyTraversal) {
+            window.location.reload();
+        }
     });
-    emuPlayer.addEventListener('click', (e) => {
-        location.href = '/register/emuplayer';
-    });
-
 })();
