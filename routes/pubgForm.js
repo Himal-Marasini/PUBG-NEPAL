@@ -1,5 +1,5 @@
 const registration = require("../Controller/registration");
-const express = require("./node_modules/express");
+const express = require("express");
 const Router = express.Router();
 
 Router.get("/register/:id", registration.getRegistration);

@@ -1,9 +1,9 @@
-const express = require("./node_modules/express");
+const express = require("express");
 const Router = express.Router();
 
 const Match = require("../Model/CreateMatch");
-const moment = require("./node_modules/moment");
-const _ = require("./node_modules/lodash");
+const moment = require("moment");
+const _ = require("lodash");
 
 Router.get("/", async (req, res, next) => {
   try {
