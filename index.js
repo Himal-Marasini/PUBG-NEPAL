@@ -15,15 +15,14 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
-
-const homepage = require("./routes/homepage");
-const authentication = require("./routes/authentication");
-const registration = require("./routes/pubgForm");
-const admin = require("./routes/admin");
+const homepage = require("./Routes/homepage");
+const authentication = require("./Routes/Authentication.Route");
+const registration = require("./Routes/pubgForm");
+const admin = require("./Routes/Admin.Route");
 
 const db = require("./util/databse");
 
-const error = require("./controllers/error");
+const error = require("./Controller/error");
 
 app.use(morgan("dev"));
 
@@ -34,13 +33,13 @@ if (process.env.development === "prod") {
 
 app.use(helmet());
 
-const limit = rateLimit({
-  max: 70,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many request from same IP, Please try again after one hour !!!",
-});
+// const limit = rateLimit({
+//   max: 70,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many request from same IP, Please try again after one hour !!!",
+// });
 
-app.use(limit);
+// app.use(limit);
 
 app.use(compression());
 
@@ -79,9 +78,17 @@ app.use(xss());
 //     });
 // }
 
+app.get("/favico.ico", (req, res) => {
+  res.sendStatus(404);
+});
+
+app.get("/", function (req, res) {
+  return res.render("Login-Dashboard");
+});
+
 // Routes
 app.use(homepage);
-// app.use(authentication);
+app.use(authentication);
 app.use(admin);
 app.use(registration);
 

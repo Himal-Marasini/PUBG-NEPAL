@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><%=title%></title>
+    <link
+      href="/Styles/style-CreateORLogin.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <% if(title === "LOGIN"){ %>
+      <section>
+        <div class="row">
+            <div class="main-wrapper">
+                <h2>Pubg Mobile Nepal</h2>
+                <h3>Login</h3>
+                <form>
+                    <input type="email" name="email" placeholder="Email Address" required><br />
+                    <input type="password" name="password" placeholder="Password" required><br />
+                    <input type="button" value="Login">
+                </form>
+                <div class="forgetPassword-wrapper">
+                    <a href="" target="_self">Forget password?</a>
+                    <a href="/sign-up" target="_self">Sign Up</a>
+                </div>
+            </div>
+      </section>
+    <% }else if(title === "SIGN-UP"){ %>
+      <section>
+        <div class="row">
+            <div class="main-wrapper sign-in">
+                <h2>Pubg Mobile Nepal</h2>
+                <h3>Create Account</h3>
+                <form>
+                    <input type="email" name="email" placeholder="Email Address" required><br />
+                    <input type="number" name="phoneNumber" placeholder="Phone Number" onkeydown="return event.keyCode !== 69" required ><br />
+                    <input type="number" name="khaltiId" placeholder="KhaltiId" onkeydown="return event.keyCode !== 69" required ><br />
+                    <input type="password" name="password" placeholder="Password" required><br />
+                    <input type="password" name="confirmPassword" placeholder="ConfirmPassword" required><br />
+                    <input type="button" value="Create Account">
+                </form>
+            </div>
+      </section>
+    <% } %>
+  </body>
+</html>

@@ -1,11 +1,11 @@
-const registration = require('../controllers/registration');
-const express = require('express');
+const registration = require("../Controller/registration");
+const express = require("./node_modules/express");
 const Router = express.Router();
 
-Router.get('/register/:id', registration.getRegistration);
+Router.get("/register/:id", registration.getRegistration);
 
-Router.post('/register', registration.postRegistration);
+Router.post("/register", registration.postRegistration);
 
-Router.post('/register/auth', registration.validateData);
+Router.post("/register/auth", registration.validateData);
 
 module.exports = Router;
