@@ -1,24 +1,25 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 module.exports = async function sendMail(userdata, res) {
-  try {
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: "mail.smtp2go.com",
-      port: 8025,
-      auth: {
-        user: process.env.SMTP2_MAIL_USERNAME,
-        pass: process.env.SMTP2_MAIL_PASSWORD,
-      },
-    });
+    try {
 
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-      from: '"PUBG NEPAL" <contact@pubgmobilenp.com>', // sender address
-      to: userdata.emailId, // list of receivers
-      subject: "Match Detail", // Subject line
-      text: "Please keep this all detail to Yourself only", // plain text body
-      html: `
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: "mail.smtp2go.com",
+            port: 8025,
+            auth: {
+                user: process.env.SMTP2_MAIL_USERNAME,
+                pass: process.env.SMTP2_MAIL_PASSWORD
+            }
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: '"PUBG NEPAL" <contact@pubgmobilenp.com>', // sender address
+            to: userdata.emailId, // list of receivers
+            subject: "Match Detail", // Subject line
+            text: "Please keep this all detail to Yourself only", // plain text body
+            html: `
             
             <!DOCTYPE html>
         <html lang="en">
@@ -143,17 +144,17 @@ module.exports = async function sendMail(userdata, res) {
         </div>
     </div>
     </body>
-    </html>`,
-    });
+    </html>`
+        });
 
-    console.log("Message sent: %s", info.messageId);
+        console.log("Message sent: %s", info.messageId);
 
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  } catch (err) {
-    console.log(err);
-    return res.json({
-      status: false,
-      message: "Fail to send a mail !! You will be updated soon",
-    });
-  }
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    } catch (err) {
+        console.log(err)
+        return res.json({
+            status: false,
+            message: "Fail to send a mail !! You will be updated soon"
+        });
+    }
 };
