@@ -1,4 +1,4 @@
-const registration = require('../controllers/registration');
+const registration = require('../Controller/registration');
 const express = require('express');
 const Router = express.Router();
 

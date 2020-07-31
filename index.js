@@ -22,7 +22,7 @@ const admin = require('./Routes/admin');
 
 const db = require('./Util/databse');
 
-const error = require('./Controllers/error');
+const error = require('./Controller/error');
 
 app.use(morgan('dev'));
 
