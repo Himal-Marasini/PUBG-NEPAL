@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Upcoming Matches</title>
+        <%- include('./Dashboard_Common/font.ejs') %>
+        <link rel="stylesheet" href="/Styles/style-UpcomingMatches.css" />
+        <link rel="icon" href="/assets/images/Logo.png" type="image/png" />
+    </head>
+    <body>
+        <section>
+            <%- include('./Dashboard_Common/side-nav.ejs') %>
+            <div class="main-wrapper">
+                <% matchInfo.forEach((el)=>{ %>
+                <div class="i_dont_know">
+                    <h3>Upcoming Matches : (<%= el.date %>)</h3>
+                    <div class="matches-wrapper">
+                        <% el.match.forEach((element)=>{ %>
+                        <div class="match">
+                            <p class="match__title">Match will start in:</p>
+                            <h2 class="match__time"><%= element.time %></h2>
+
+                            <div class="container__matchType">
+                                <p class="matchTypeContainer__text">
+                                    Match Type :<span
+                                        class="matchTypeContainer__type match--mobile"
+                                    >
+                                        (<%= element.type %>) <%= element.device
+                                        %>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="container__matchMap">
+                                <p class="matchMapContainer__text">
+                                    Match Map :<span
+                                        class="matchMapContainer__type"
+                                    >
+                                        <%= element.map %>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="match__prize">
+                                <p class="match__prize__text">
+                                    Prize:<span class="match__prize__value">
+                                        NRS <%= element.prize %></span
+                                    >
+                                </p>
+                            </div>
+                            <div class="match__entryFee">
+                                <p class="match__entryFee__text">
+                                    Entry Fee:<span
+                                        class="match__entryFee__value"
+                                    >
+                                        NRS <%= element.fee %>/Per player</span
+                                    >
+                                </p>
+                            </div>
+                            <div class="match__registerNow">
+                                <a href="/register/<%= element._id %>">
+                                    <input
+                                        type="button"
+                                        value="register now"
+                                        class="btn_register_result"
+                                        id="registerBtn__first"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </section>
+    </body>
+</html>

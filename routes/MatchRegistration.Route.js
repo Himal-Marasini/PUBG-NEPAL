@@ -12,4 +12,7 @@ Router.post("/register", registration.postRegistration);
 
 Router.post("/register/auth", registration.validateData);
 
+Router.get("/upcoming-match", registration.getUpcomingMatch);
+
+
 module.exports = Router;

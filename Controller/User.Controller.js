@@ -3,7 +3,7 @@ const moment = require("moment");
 const _ = require("lodash");
 
 exports.getHomePage = async (req, res) => {
-  const isLogin = false;
+  const isLogin = true;
   if (!isLogin) {
     try {
       let match = await Match.find();
@@ -38,7 +38,9 @@ exports.getHomePage = async (req, res) => {
       next(err);
     }
   } else {
-    return res.render("Login-Dashboard.ejs");
+    return res.render("Login-Dashboard.ejs", {
+      path: "/"
+    });
   }
 };
 

@@ -4,6 +4,7 @@ const User = require('../Model/CreateUser');
 
 const validate = require('../util/validate');
 
+// Protecting Route is pending
 exports.getLogin = (req, res) => {
   return res.status(200).render("CreateORLogin.ejs", {
     title: "LOGIN",
