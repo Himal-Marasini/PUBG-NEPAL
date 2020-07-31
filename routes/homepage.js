@@ -1,7 +1,7 @@
 const express = require('express');
 const Router = express.Router();
 
-const Match = require('../models/CreateMatch');
+const Match = require('../Model/CreateMatch');
 const moment = require('moment');
 const _ = require('lodash');
 
