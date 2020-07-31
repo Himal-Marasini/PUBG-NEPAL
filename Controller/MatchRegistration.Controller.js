@@ -20,7 +20,7 @@ exports.getRegistration = async (req, res) => {
       });
     }
 
-    return res.render("register-form", {
+    return res.render("register-form.ejs", {
       matchType: `${match.type}(${match.device})`,
       id: match._id,
     });

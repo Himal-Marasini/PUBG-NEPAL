@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = new mongoose.Schema({
     date: {
@@ -30,10 +30,9 @@ const Schema = new mongoose.Schema({
     players: [
         {
             type: mongoose.SchemaTypes.ObjectId,
-            ref: 'user'
+            ref: "user"
         }
-    ]
-    ,
+    ],
     device: {
         type: String,
         required: true,
@@ -42,7 +41,7 @@ const Schema = new mongoose.Schema({
     isFinished: {
         type: Boolean,
         default: false
-    }
+    },
 });
 
-module.exports = mongoose.model('match', Schema);
+module.exports = mongoose.model("match", Schema);

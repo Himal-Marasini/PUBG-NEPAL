@@ -15,9 +15,10 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
-const homepage = require("./Routes/homepage");
+
+const user = require("./Routes/User.Route");
 const authentication = require("./Routes/Authentication.Route");
-const registration = require("./Routes/pubgForm");
+const matchRegistration = require("./Routes/MatchRegistration.Route");
 const admin = require("./Routes/Admin.Route");
 
 const db = require("./util/databse");
@@ -82,15 +83,11 @@ app.get("/favico.ico", (req, res) => {
   res.sendStatus(404);
 });
 
-app.get("/", function (req, res) {
-  return res.render("Login-Dashboard");
-});
-
 // Routes
-app.use(homepage);
 app.use(authentication);
+app.use(user);
+app.use(matchRegistration);
 app.use(admin);
-app.use(registration);
 
 app.all("*", function (req, res, next) {
   const err = new Error("404 !!! PAGE NOT FOUND");
