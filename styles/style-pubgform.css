@@ -1,229 +1,35 @@
-
-@import url("https://fonts.googleapis.com/css?family=Raleway|Teko&display=swap");/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css *//* Document
-   ========================================================================== *//**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- */html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-}/* Sections
-   ========================================================================== *//**
- * Remove the margin in all browsers.
- */body {
-  margin: 0;
-}/**
- * Render the `main` element consistently in IE.
- */main {
-  display: block;
-}/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}/* Grouping content
-   ========================================================================== *//**
- * 1. Add the correct box sizing in Firefox.
- * 2. Show the overflow in Edge and IE.
- */hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
-}/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
-}/* Text-level semantics
-   ========================================================================== *//**
- * Remove the gray background on active links in IE 10.
- */a {
-  background-color: transparent;
-}/**
- * 1. Remove the bottom border in Chrome 57-
- * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
- */abbr[title] {
-  border-bottom: none; /* 1 */
-  text-decoration: underline; /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
-}/**
- * Add the correct font weight in Chrome, Edge, and Safari.
- */b,
-strong {
-  font-weight: bolder;
-}/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */code,
-kbd,
-samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
-}/**
- * Add the correct font size in all browsers.
- */small {
-  font-size: 80%;
-}/**
- * Prevent `sub` and `sup` elements from affecting the line height in
- * all browsers.
- */sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}sub {
-  bottom: -0.25em;
-}sup {
-  top: -0.5em;
-}/* Embedded content
-   ========================================================================== *//**
- * Remove the border on images inside links in IE 10.
- */img {
-  border-style: none;
-}/* Forms
-   ========================================================================== *//**
- * 1. Change the font styles in all browsers.
- * 2. Remove the margin in Firefox and Safari.
- */button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
-  margin: 0; /* 2 */
-}/**
- * Show the overflow in IE.
- * 1. Show the overflow in Edge.
- */button,
-input { /* 1 */
-  overflow: visible;
-}/**
- * Remove the inheritance of text transform in Edge, Firefox, and IE.
- * 1. Remove the inheritance of text transform in Firefox.
- */button,
-select { /* 1 */
-  text-transform: none;
-}/**
- * Correct the inability to style clickable types in iOS and Safari.
- */button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}/**
- * Remove the inner border and padding in Firefox.
- */button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}/**
- * Restore the focus styles unset by the previous rule.
- */button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}/**
- * Correct the padding in Firefox.
- */fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}/**
- * 1. Correct the text wrapping in Edge and IE.
- * 2. Correct the color inheritance from `fieldset` elements in IE.
- * 3. Remove the padding so developers are not caught out when they zero out
- *    `fieldset` elements in all browsers.
- */legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
-  display: table; /* 1 */
-  max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
-  white-space: normal; /* 1 */
-}/**
- * Add the correct vertical alignment in Chrome, Firefox, and Opera.
- */progress {
-  vertical-align: baseline;
-}/**
- * Remove the default vertical scrollbar in IE 10+.
- */textarea {
-  overflow: auto;
-}/**
- * 1. Add the correct box sizing in IE 10.
- * 2. Remove the padding in IE 10.
- */[type="checkbox"],
-[type="radio"] {
-  box-sizing: border-box; /* 1 */
-  padding: 0; /* 2 */
-}/**
- * Correct the cursor style of increment and decrement buttons in Chrome.
- */[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}/**
- * 1. Correct the odd appearance in Chrome and Safari.
- * 2. Correct the outline style in Safari.
- */[type="search"] {
-  -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2 */
-}/**
- * Remove the inner padding in Chrome and Safari on macOS.
- */[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}/**
- * 1. Correct the inability to style clickable types in iOS and Safari.
- * 2. Change font properties to `inherit` in Safari.
- */::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
-}/* Interactive
-   ========================================================================== *//*
- * Add the correct display in Edge, IE 10+, and Firefox.
- */details {
-  display: block;
-}/*
- * Add the correct display in all browsers.
- */summary {
-  display: list-item;
-}/* Misc
-   ========================================================================== *//**
- * Add the correct display in IE 10+.
- */template {
-  display: none;
-}/**
- * Add the correct display in IE 10.
- */[hidden] {
-  display: none;
-}/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */html {
-  font-family: "Teko", sans-serif;
-  font-size: 18px;
-  line-height: 32px;
-  text-rendering: optimizeLegibility;
-}.row {
-  width: 85%;
-  margin: 0 auto;
-  padding: 0.1em;
-}input::-webkit-outer-spin-button,
+@import url("https://fonts.googleapis.com/css?family=Raleway|Teko&display=swap"); /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */ /* Document
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-family: "Teko", sans-serif;
+    font-size: 18px;
+    line-height: 32px;
+    text-rendering: optimizeLegibility;
+}
+.row {
+    width: 85%;
+    margin: 0 auto;
+    padding: 0.1em;
+}
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-          appearance: none;
-  margin: 0;
-}input[type=number] {
-  /* Firefox */
-  -moz-appearance: textfield;
-}a {
-  outline: none;
-}section {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    /* Firefox */
+    -moz-appearance: textfield;
+}
+a {
+    outline: none;
+}
+section {
     height: 660px;
     background: url(../assets/images/Image__4.png);
     background-position: 0 -88px;
@@ -231,63 +37,79 @@ input::-webkit-inner-spin-button {
     font-size: 20px;
     font-weight: 400;
     color: #2d3436;
-}.parent__container {
+}
+.parent__container {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-column-gap: 10px;
     margin-top: 4%;
-}.registration__form {
+}
+.registration__form {
     background: #fafafa;
     text-align: center;
     padding-top: 13px;
-}.pubg_logo {
+}
+.pubg_logo {
     width: 32%;
     height: auto;
-}.registration__error {
+}
+.registration__error {
     width: 65%;
     margin: 0 auto;
     padding-top: 4px;
     color: #fafafa;
     border-radius: 3px;
     display: none;
-}.registration__name,
+}
+.registration__name,
 .registration__teamName,
 .registration__phoneNumber,
 .registration__emailId,
 .registration__payGateway,
 .registration__matchType {
     display: inline-block;
-}.registration__nameLable,
+}
+.registration__nameLable,
 .registration__teamNameLable,
 .registration__phoneLable,
 .registration__emailLable,
 .registration__payGatewayLable,
 .registration__matchTypeLable {
     padding-right: 15px;
-
-}.registration__teamName,
+}
+.registration__teamName,
 .registration__emailId {
     padding-top: 10px;
     margin-left: 6%;
-}.registration__payGateway {
+}
+.registration__payGateway {
     padding-top: 20px;
-}.registrator__memberOne,
+}
+.registrator__memberOne,
 .registrator__memberTwo,
 .registrator__memberThree,
 .registrator__memberFour {
     display: block;
     margin-top: 10px;
 }
-input[type=number],
-input[type=email] {
+input[type="number"],
+input[type="email"] {
     color: #2d3436;
     font-family: Raleway;
-    font-size: 14px
-}input[type=text] {
+    font-size: 14px;
+}
+input[type="text"] {
     color: #2d3436;
     font-family: Raleway;
-    font-size: 14px
-}.registrator_namefield,
+    font-size: 14px;
+}
+input[type="button"] {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+.registrator_namefield,
 .registrator_teamNamefield,
 .registrator_phonefield,
 .registrator_emailfield,
@@ -301,26 +123,33 @@ input[type=email] {
     border-bottom-color: #e08012;
     font-size: 18px;
     padding-left: 5px;
-}.registrator_payGatewayfield {
+}
+.registrator_payGatewayfield {
     margin-right: 20px;
-}.registrator_matchTypefield {
+}
+.registrator_matchTypefield {
     width: 172px;
     border: 2px solid #e08012;
     text-align: center;
     font-weight: bold;
-}.registrator_namefield:focus,
+}
+.registrator_namefield:focus,
 .registrator_teamNamefield:focus,
 .registrator_phonefield:focus,
 .registrator_emailfield:focus,
 .registrator_payGatewayfield:focus {
     border: 2px solid #e08012;
-}.registration__teamMembers {
+}
+.registration__teamMembers {
     margin-top: 15px;
-}.registration__teamMembersLable {
+}
+.registration__teamMembersLable {
     padding-bottom: 10px;
-}.registrator_memberNamefield {
+}
+.registrator_memberNamefield {
     margin-right: 20px;
-}.registrator_memberNamefield,
+}
+.registrator_memberNamefield,
 .registrator_memberCharfield {
     width: 205px;
     height: 32px;
@@ -328,20 +157,25 @@ input[type=email] {
     border: 1px solid #e08012;
     font-size: 17px;
     padding-left: 5px;
-}.registration__paymentGateway {
+}
+.registration__paymentGateway {
     margin-top: 15px;
     margin-bottom: 10px;
-}.registration_paymentGatewayLable {
+}
+.registration_paymentGatewayLable {
     padding-right: 10px;
-}.registrator_E-sewa,
+}
+.registrator_E-sewa,
 .registrator_khalti {
     margin-left: 10px;
     margin-right: 7px;
     background: rebeccapurple;
-}.registration__submit {
+}
+.registration__submit {
     margin-top: 15px;
     margin-bottom: 5px;
-}.registration__submitBtn {
+}
+.registration__submitBtn {
     outline: none;
     cursor: pointer;
     border: none;
@@ -352,35 +186,45 @@ input[type=email] {
     border-radius: 3px;
     width: 130px;
     height: 37px;
-}.funds {
+}
+.funds {
     background: #fafafa;
     text-transform: uppercase;
     text-align: center;
-}.funds__title {
+}
+.funds__title {
     margin: 0;
     font-size: 1.2em;
     text-decoration: underline;
     color: #e08012;
-}.funds__text {
+}
+.funds__text {
     color: #585858;
     font-size: 1.1em;
-}.funds__bold {
+}
+.funds__bold {
     font-weight: 600;
-}.funds__details {
-    line-height: 12px;
-    font-size: 24px;
-}.funds__detail-text-yellow {
+}
+.funds__details {
+    font-size: 28px;
+}
+.funds__detail-text-black {
+    margin: 26px 0;
+}
+.funds__detail-text-yellow {
     color: #e08012;
-}.message__success {
+}
+.message__success {
     background-color: #27ae60;
     text-transform: uppercase;
     color: #fafafa;
-}.message__error {
+}
+.message__error {
     background-color: #e74c3c;
     text-transform: uppercase;
     color: #fafafa;
 }
-#overlay{
+#overlay {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
@@ -389,65 +233,68 @@ input[type=email] {
     z-index: 2;
 }
 /* Spinner */
-.spinner{
-  position: fixed;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(130%, -50%);
+.spinner {
+    position: fixed;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(130%, -50%);
 }
 .lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
 
 .lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid #2ecc71;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #2ecc71 transparent transparent transparent;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #2ecc71;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #2ecc71 transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+    animation-delay: -0.45s;
 }
 
 .lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+    animation-delay: -0.3s;
 }
 
 .lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+    animation-delay: -0.15s;
 }
 
 @keyframes lds-ring {
-  0% {
-      transform: rotate(0deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
 
-  100% {
-      transform: rotate(360deg);
-  }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 .ui.segments {
     min-width: 0 !important;
-}@media only screen and (max-width:1247px) {
+}
+@media only screen and (max-width: 1247px) {
     .registration__matchType {
         margin-top: 15px;
     }
-}@media only screen and (max-width:1177px) {
+}
+@media only screen and (max-width: 1177px) {
     .registration__phoneNumber {
         margin-top: 15px;
     }
-}@media only screen and (max-width:937px) {
+}
+@media only screen and (max-width: 937px) {
     section {
         background: #212121;
         height: auto;
@@ -460,7 +307,8 @@ input[type=email] {
     .funds {
         margin-top: 30px;
     }
-}@media only screen and (max-width:817px) {
+}
+@media only screen and (max-width: 817px) {
     .row {
         width: 90%;
     }
@@ -468,8 +316,8 @@ input[type=email] {
     .registrator_memberCharfield {
         margin-top: 10px;
     }
-}@media only screen and (max-width:780px) {
-
+}
+@media only screen and (max-width: 780px) {
     .registrator_namefield,
     .registrator_teamNamefield,
     .registrator_phonefield,
@@ -478,8 +326,8 @@ input[type=email] {
     .registrator_matchTypefield {
         width: 180px;
     }
-}@media only screen and (max-width:642px) {
-
+}
+@media only screen and (max-width: 642px) {
     .registration__name,
     .registration__teamName,
     .registration__phoneNumber,
@@ -498,12 +346,13 @@ input[type=email] {
     .registrator_memberCharfield {
         width: 180px;
     }
-}@media only screen and (max-width:520px) {
+}
+@media only screen and (max-width: 520px) {
     .pubg_logo {
         width: 42%;
     }
-}@media only screen and (max-width:425px) {
-
+}
+@media only screen and (max-width: 425px) {
     .pubg_logo {
         width: 45%;
     }
@@ -511,8 +360,8 @@ input[type=email] {
     .registrator_memberNamefield {
         margin-right: 0;
     }
-}@media only screen and (max-width:320px) {
-
+}
+@media only screen and (max-width: 320px) {
     .registrator_namefield,
     .registrator_teamNamefield,
     .registrator_phonefield,

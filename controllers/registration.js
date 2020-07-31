@@ -5,7 +5,7 @@ const khaltiVerification = require('../middleware/khaltiServer');
 const sendmail = require('../middleware/sendMail');
 const Match = require('../models/CreateMatch');
 
-exports.getRegistration = async (req, res) => {
+exports.getRegistration = async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -32,7 +32,7 @@ exports.getRegistration = async (req, res) => {
     }
 };
 
-exports.postRegistration = async (req, res) => {
+exports.postRegistration = async (req, res, next) => {
     try {
         const {
             error
@@ -127,7 +127,7 @@ exports.postRegistration = async (req, res) => {
     }
 };
 
-exports.validateData = async (req, res) => {
+exports.validateData = async (req, res, next) => {
     try {
         const { registrator_phoneNumber, registrator_emailId, registrator_teamName, id } = req.body;
 

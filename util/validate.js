@@ -199,5 +199,58 @@ function validateWithKhaltiData(inputData) {
     return Joi.validate(inputData, objectSchema);
 }
 
+function validateCreateAccount(inputData) {
+
+    const objectSchema = {
+        name: Joi.string().min(3).max(40).required().error(err => {
+            return {
+                message: "The name should be more than 3 characters"
+            }
+        }),
+        email: Joi.string().email({ minDomainSegments: 2 }).required().error(err => {
+            return {
+                message: "Please enter the valid email id !!"
+            }
+        }),
+        phoneNumber: Joi.number().integer().min(1000000000).max(9999999999).required().error(err => {
+            return {
+                message: "Please enter the valid phone number !!"
+            }
+        }),
+        khaltiId: Joi.number().integer().min(1000000000).max(9999999999).required().error(err => {
+            return {
+                message: "Please enter the valid khalti Id !!"
+            }
+        }),
+        password: Joi.string().min(6).required().error(err => {
+            return {
+                message: "Password should be more than 6 characters !!"
+            }
+        }),
+        confirmPassword: Joi.ref('password')
+    };
+
+    return Joi.validate(inputData, objectSchema);
+}
+
+function validateLogin(inputData) {
+    const objectSchema = {
+        email: Joi.string().email({ minDomainSegments: 2 }).required().error(err => {
+            return {
+                message: "Please enter the valid email id !!"
+            }
+        }),
+        password: Joi.string().min(6).required().error(err => {
+            return {
+                message: "Email or Password is incorrect !!"
+            }
+        })
+    }
+
+    return Joi.validate(inputData, objectSchema);
+}
+
 exports.validateWithoutKhaltiData = validateWithoutKhaltiData;
 exports.validateWithKhaltiData = validateWithKhaltiData;
+exports.validateCreateAccount = validateCreateAccount;
+exports.validateLogin = validateLogin;

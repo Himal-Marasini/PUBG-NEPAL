@@ -1,6 +1,6 @@
 const CreateMatch = require('../models/CreateMatch');
 
-exports.postCreateMatch = async (req, res) => {
+exports.postCreateMatch = async (req, res, next) => {
     const { date, isFinished, device, time, type, map, prize, fee } = req.body;
     try {
         let validateMatch = await CreateMatch.find({ date });
