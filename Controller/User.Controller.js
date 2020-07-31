@@ -3,7 +3,7 @@ const moment = require("moment");
 const _ = require("lodash");
 
 exports.getHomePage = async (req, res) => {
-  const isLogin = true;
+  const isLogin = false;
   if (!isLogin) {
     try {
       let match = await Match.find();
@@ -44,6 +44,11 @@ exports.getHomePage = async (req, res) => {
   }
 };
 
+exports.getMatchHighlights = (req, res) => {
+  return res.render('MatchHighlights.ejs', {
+    path: "/match-highlights"
+  });
+}
 // function NotAuthenticated_Page(req,res){
 
 // };

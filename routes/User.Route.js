@@ -6,4 +6,6 @@ const isAuth = require("../middleware/isAuth");
 
 Router.get("/", user.getHomePage);
 
+Router.get('/match-highlights', user.getMatchHighlights);
+
 module.exports = Router;
