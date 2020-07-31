@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('./node_modules/express');
 const Router = express.Router();
 
 const adminController = require('../controllers/admin.controller');

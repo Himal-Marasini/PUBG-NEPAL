@@ -15,14 +15,14 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 
-const homepage = require('./routes/homepage');
-const authentication = require('./routes/authentication');
-const registration = require('./routes/pubgForm');
-const admin = require('./routes/admin');
+const homepage = require('./Routes/homepage');
+const authentication = require('./Routes/authentication');
+const registration = require('./Routes/pubgForm');
+const admin = require('./Routes/admin');
 
-const db = require('./util/databse');
+const db = require('./Util/databse');
 
-const error = require('./controllers/error');
+const error = require('./Controllers/error');
 
 app.use(morgan('dev'));
 
