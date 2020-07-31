@@ -1,9 +1,9 @@
 const validateWithoutKhaltiData = require('../util/validate').validateWithoutKhaltiData;
 const validateWithKhaltiData = require('../util/validate').validateWithKhaltiData;
-const User = require('../Model/Registration');
+const User = require('../model/Registration');
 const khaltiVerification = require('../middleware/khaltiServer');
 const sendmail = require('../middleware/sendMail');
-const Match = require('../Model/CreateMatch');
+const Match = require('../model/CreateMatch');
 
 exports.getRegistration = async (req, res, next) => {
     try {

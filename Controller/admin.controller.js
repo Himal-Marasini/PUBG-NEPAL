@@ -1,4 +1,4 @@
-const CreateMatch = require('../Model/CreateMatch');
+const CreateMatch = require('../model/CreateMatch');
 
 exports.postCreateMatch = async (req, res, next) => {
     const { date, isFinished, device, time, type, map, prize, fee } = req.body;
