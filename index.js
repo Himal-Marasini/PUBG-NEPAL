@@ -67,9 +67,9 @@ app.use(xss());
 // app.use('trust proxy');
 
 if (process.env.development === "prod") {
-  app.get("*", function (req, res) {
-    res.redirect("https://" + req.headers.host);
-  });
+  // app.get("*", function (req, res) {
+  //   res.redirect("https://" + req.headers.host);
+  // });
 }
 
 // Routes
