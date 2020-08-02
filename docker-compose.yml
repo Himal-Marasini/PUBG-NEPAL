@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+    web1:
+        build: .
+        ports:
+            - 3000
+        volumes:
+            - ./:/usr/src/pubg-nepal
+    web2:
+        build: .
+        ports:
+            - 3000
+        volumes:
+            - ./:/usr/src/pubg-nepal
+    web3:
+        build: .
+        ports:
+            - 3000
+        volumes:
+            - ./:/usr/src/pubg-nepal
+    load-balancer:
+        build: nginx/
+        ports:
+            - 80:80
+        links:
+            - web1
+            - web2
+            - web3
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
