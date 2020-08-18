@@ -48,7 +48,8 @@ WORKDIR /usr/src/pubgNepalPractice
 
 COPY . .
 
-RUN npm install -g nodemon
+# FOR DEVELOPMENT
+# RUN npm install -g nodemon
 
 RUN npm install
 
