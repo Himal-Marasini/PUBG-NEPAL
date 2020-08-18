@@ -93,6 +93,8 @@ exports.postRegistration = async (req, res, next) => {
 
         // Push the User Object Id into Players Array of Match
         match.players.push(user._id);
+        console.log(match, -1);
+        console.log(user._id);
 
         // Save into db
         const updatedMatch = await match.save();
@@ -108,10 +110,12 @@ exports.postRegistration = async (req, res, next) => {
             });
         }
 
+        console.log(user, 1)
         const userdata = await user.save();
+        console.log(userdata, 2);
 
         if (userdata) {
-            const mailSend = await sendmail(userdata, res);
+            // const mailSend = await sendmail(userdata, res);
             return res.status(200).json({
                 status: true,
                 message: "You have been succesfully registered !!! Please Check your mail for futher details"

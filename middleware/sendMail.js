@@ -154,7 +154,7 @@ module.exports = async function sendMail(userdata, res) {
         console.log(err)
         return res.json({
             status: false,
-            message: "Fail to send a mail !! You will be updated soon"
+            message: "Successfully Registered !! You will be updated soon"
         });
     }
 };

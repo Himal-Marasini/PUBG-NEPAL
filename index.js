@@ -67,12 +67,12 @@ app.use(xss());
 // app.use('trust proxy');
 
 if (process.env.development === "prod") {
-  app.use(function (req, res, next) {
-    if ((req.get('X-Forwarded-Proto') !== 'https')) {
-      res.redirect('https://' + req.get('Host') + req.url);
-    } else
-      next();
-  });
+  // app.use(function (req, res, next) {
+  //   if ((req.get('X-Forwarded-Proto') !== 'https')) {
+  //     res.redirect('https://' + req.get('Host') + req.url);
+  //   } else
+  //     next();
+  // });
   // app.get("*", function (req, res) {
   //   res.redirect("https://" + req.headers.host);
   // });
