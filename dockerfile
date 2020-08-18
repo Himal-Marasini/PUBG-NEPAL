@@ -51,6 +51,9 @@ COPY . .
 # FOR DEVELOPMENT
 # RUN npm install -g nodemon
 
+# FOR PRODUCTION
+RUN npm install -g pm2
+
 RUN npm install
 
 EXPOSE 3000
