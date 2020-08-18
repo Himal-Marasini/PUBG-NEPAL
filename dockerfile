@@ -65,4 +65,5 @@ EXPOSE 3000
 # CMD [ "npm","run", "dev" ]
 
 # This is Production
-CMD [ "npm","start"]
+# CMD [ "npm","start"]
+CMD ["pm2", "npm", "start"]
