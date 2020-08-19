@@ -5,17 +5,18 @@ module.exports = async function sendMail(userdata, res) {
 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "mail.smtp2go.com",
-            port: 8025,
+            host: "smtp.googlemail.com",
+            port: 465,
+            secure: true,
             auth: {
-                user: process.env.SMTP2_MAIL_USERNAME,
-                pass: process.env.SMTP2_MAIL_PASSWORD
+                user: process.env.SMTP_GMAIL_EMAILID,
+                pass: process.env.SMTP_GMAIL_PASSWORD
             }
         });
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: '"PUBG NEPAL" <contact@pubgmobilenp.com>', // sender address
+            from: '"PUBG NEPAL" <contactpubgnepal@gmail.com>', // sender address
             to: userdata.emailId, // list of receivers
             subject: "Match Detail", // Subject line
             text: "Please keep this all detail to Yourself only", // plain text body
