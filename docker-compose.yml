@@ -1,6 +1,50 @@
 version: "3"
 
 # Different container for db and backend and Linking it with links
+# services:
+#   pubg-server-1:
+#     build: .
+#     ports:
+#       - 3000
+#     links:
+#       - mongo
+#   pubg-server-2:
+#     build: .
+#     ports:
+#       - 3000
+#     links:
+#       - mongo
+#   pubg-server-3:
+#     build: .
+#     ports:
+#       - 3000
+#     links:
+#       - mongo
+#   load-balancer:
+#     build: nginx/
+#     ports:
+#       - 80:80
+#       - 443:443
+#     links:
+#       - pubg-server-1
+#       - pubg-server-2
+#       - pubg-server-3
+#     volumes:
+#       - ./nginx/certbot/conf: etc/letsencrypt
+#       - ./nginx/certbot/www: /var/www/certbot
+#     command: /bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'
+#   mongo:
+#     container_name: mongo
+#     image: mongo
+#     ports:
+#       - 27017:27017
+#   certbot:
+#      image: certbot/certbot
+#      volumes:
+#       - ./nginx/certbot/conf: etc/letsencrypt
+#       - ./nginx/certbot/www: /var/www/certbot
+#      entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
+
 services:
   pubg-server-1:
     build: .
@@ -21,28 +65,27 @@ services:
     links:
       - mongo
   load-balancer:
-    build: nginx/
+    image: nginx:1.15-alpine
     ports:
       - 80:80
-      # - 443:443
+      - 443:443
     links:
       - pubg-server-1
       - pubg-server-2
       - pubg-server-3
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - 27017:27017
-  # pubg-nepal:
-  #   container_name: pubg-nepal-backend
-  #   build: ./
-  #   command: npm run dev
-  #   working_dir: /usr/src/pubgNepalPractice
-  #   ports:
-  #     - "3000:3000"
-  #   restart: always
-  #   volumes:
-  #     - ./:/usr/src/pubgNepalPractice
-  #   links:
-  #     - mongo
+  certbot:
+     image: certbot/certbot
+     volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
