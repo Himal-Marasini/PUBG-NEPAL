@@ -10,7 +10,7 @@ Router.get('/', async (req, res, next) => {
         let match = await Match.find();
 
         match.sort(function (a, b) {
-            return a.date > b.date ? -1 : 1;
+            return a.date < b.date ? -1 : 1;
         });
 
         let date = function (d) {
