@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.4",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
@@ -29,7 +30,6 @@
     "mongoose": "^5.9.25",
     "morgan": "^1.10.0",
     "ndb": "^1.1.5",
-    "nodemailer": "^6.4.10",
     "normalize.css": "^8.0.1",
     "xss-clean": "^0.1.1"
   },
