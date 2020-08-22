@@ -45,4 +45,4 @@ const Schema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('user', Schema);
+// module.exports = mongoose.model('user', Schema);

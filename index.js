@@ -1,64 +1,72 @@
 // In Package.json, Change the start script from "Nodemon index.js" to "Node index.js"
 
-const express = require('express');
+const express = require("express");
 const app = express();
-const ejs = require('ejs');
-const bodyparser = require('body-parser');
-const morgan = require('morgan');
-const compression = require('compression');
-const dotenv = require('dotenv');
+const path = require("path");
+const ejs = require("ejs");
+const bodyparser = require("body-parser");
+const morgan = require("morgan");
+const compression = require("compression");
+const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
+const moment = require('moment');
+const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
+const user = require("./routes/user.Route");
+const authentication = require("./routes/authentication.Route");
+const matchRegistration = require("./routes/matchRegistration.Route");
+const admin = require("./routes/admin.Route");
 
-const homepage = require('./routes/homepage');
-const authentication = require('./routes/authentication');
-const registration = require('./routes/pubgForm');
-const admin = require('./routes/admin');
+const AppError = require('./util/applicationError');
+const db = require("./util/databse");
 
-const db = require('./util/databse');
+const errorGlobalHandler = require("./controller/error.Controller");
 
-const error = require('./controller/error');
+app.use(morgan("dev"));
 
-app.use(morgan('dev'));
-
-if (process.env.development === "prod") {
+if (process.env.NODE_ENV === "prod") {
   // app.use(cors());
   // app.options('*', cors());
 }
 
 app.use(helmet());
 
-const limit = rateLimit({
-  max: 150,
-  windowMs: 60 * 60 * 100,
-  message: "Too many request from same IP, Please try again after ten minutes !!!"
-});
+// const limit = rateLimit({
+//   max: 70,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many request from same IP, Please try again after one hour !!!",
+// });
 
-app.use(limit);
+// app.use(limit);
 
 app.use(compression());
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
+
+app.set("views", path.join(__dirname, "views"));
 
 // Middleware for Image and css
-app.use('/assets', express.static('assets'));
-app.use('/styles', express.static('styles'));
+app.use("/assets", express.static("assets"));
+app.use("/styles", express.static("styles"));
 
 // Bodyparser - FOR PARSING FORM
-app.use(bodyparser.urlencoded({
-  limit: "1mb",
-  extended: false
-}));
+app.use(
+  bodyparser.urlencoded({
+    limit: "1mb",
+    extended: false,
+  })
+);
 
 // BODYPARSER - FOR JSON BODY
-app.use(bodyparser.json({
-  limit: "1mb"
-}));
+app.use(
+  bodyparser.json({
+    limit: "1mb",
+  })
+);
 
 app.use(mongoSanitize());
 
@@ -66,33 +74,28 @@ app.use(xss());
 
 // app.use('trust proxy');
 
-if (process.env.development === "prod") {
-  // app.use(function (req, res, next) {
-  //   if ((req.get('X-Forwarded-Proto') !== 'https')) {
-  //     res.redirect('https://' + req.get('Host') + req.url);
-  //   } else
-  //     next();
-  // });
+if (process.env.NODE_ENV === "prod") {
   // app.get("*", function (req, res) {
-  //   res.redirect("https://" + req.headers.host);
+  //   res.redirect("https://" + req.headers.host + res.url);
   // });
 }
 
-// Routes
-app.use(homepage);
-// app.use(authentication);
-app.use(admin);
-app.use(registration);
-
-app.all("*", function (req, res, next) {
-  const err = new Error("404 !!! PAGE NOT FOUND");
-  err.type = "Page Not Found";
-  err.status = 404;
-  err.subtitle = `THE PAGE YOU ARE LOOKING FOR https://pubgmobilenp.com${req.originalUrl} DOESN'T EXISTS !!`
-  next(err);
+app.get("/favico.ico", (req, res) => {
+  res.sendStatus(404);
 });
 
-app.use(error);
+// Routes
+app.use(authentication);
+app.use(user);
+app.use(matchRegistration);
+app.use(admin);
+
+// 404, Page not found
+app.all("*", function (req, res, next) {
+  next(new AppError(`CAN'T FIND THE PAGE YOU ARE LOOKING FOR https://pubgmobilenp.com${req.originalUrl} ON THIS SERVER !!`, 404));
+});
+
+app.use(errorGlobalHandler);
 
 db.then(() => {
   const server = app.listen(process.env.PORT);
@@ -100,17 +103,18 @@ db.then(() => {
   process.on("SIGTERM", () => {
     console.log("SIGTERM !!!! SHUTTING DOWN SERVER");
     server.close(() => {
-      console.log('Process Terminate !!')
-    })
+      console.log("Process Terminate !!");
+    });
   });
-}).catch(err => {
+}).catch((err) => {
   console.error(err);
-  return res.status(500).render('error.ejs', {
+  // new AppError("PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.", 500);
+  return res.status(500).render("error.ejs", {
     status: false,
     errorType: "Server Down",
     message: {
-      title: '500 !!! INTERNAL SERVER ERROR',
-      subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
-    }
+      title: "500 !!! INTERNAL SERVER ERROR",
+      subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`,
+    },
   });
 });
