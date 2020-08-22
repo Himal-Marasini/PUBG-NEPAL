@@ -1,0 +1,41 @@
+@import "./common/Style-SideNav.css";
+
+.main-wrapper {
+    background: #252734;
+    font-size: 0.9em;
+}
+
+.match-highlights-wrapper {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(10, 38%);
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-height: 325px;
+}
+
+h3 {
+    font-family: Teko;
+    margin: 20px 0;
+    font-size: 1.66rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #e08012;
+}
+
+iframe {
+    width: 80%;
+    height: 245px;
+}
+
+figcaption {
+    margin-top: 12px;
+    margin-left: 73px;
+    font-family: teko;
+    font-size: 1.5em;
+    color: #e08012;
+}

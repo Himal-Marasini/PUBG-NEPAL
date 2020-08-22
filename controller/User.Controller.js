@@ -35,7 +35,6 @@ exports.getHomePage = catchAsync(async (req, res, next) => {
   } else {
     const user = await User.findById('5f237852c2bf6c189ddd42ad'); // For Development Testing
     // const user = await User.findById('5f243f5dba22cd0017cdce01'); // For Production Testing
-
     if (!user) {
       next(new AppError("No user exists !!!", 404));
     }
@@ -53,6 +52,18 @@ exports.getMatchHighlights = catchAsync(async (req, res) => {
     path: "/match-highlights"
   });
 });
+
+exports.getTournaments = (req, res, next) => {
+  return res.render('Tournaments', {
+    path: '/upcoming-tournament'
+  });
+};
+
+exports.getRecentWinners = (req, res, next) => {
+  return res.render('RecentWinner', {
+    path: "/recent-winner"
+  });
+};
 
 // function NotAuthenticated_Page(req,res){
 

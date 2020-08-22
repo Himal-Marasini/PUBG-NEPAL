@@ -8,4 +8,8 @@ Router.get("/", user.getHomePage);
 
 Router.get("/match-highlights", user.getMatchHighlights);
 
+Router.get("/upcoming-tournament", user.getTournaments);
+
+Router.get("/recent-winner", user.getRecentWinners);
+
 module.exports = Router;

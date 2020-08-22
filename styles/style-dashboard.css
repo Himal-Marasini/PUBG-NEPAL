@@ -1,0 +1,141 @@
+@import "./common/Style-SideNav.css";
+
+.main-wrapper {
+  background: #252734;
+  font-size: 0.9em;
+}
+
+.header-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 30px;
+}
+
+.header-wrapper div:first-child {
+  margin-left: 8%;
+}
+
+.statistics-wrapper {
+  width: 92%;
+  margin: 2% auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #fafafa;
+  padding: 10px 30px;
+  min-height: 25%;
+}
+
+.statistics-text {
+  grid-column: 1/3;
+  text-transform: uppercase;
+  font-family: "Raleway Medium";
+}
+
+.statistics-season {
+  padding-right: 30px;
+  text-align: right;
+}
+
+select {
+  padding: 4px;
+  font-family: Raleway;
+  outline: none;
+  background: none;
+  border: 1px solid #fafafa;
+  color: #fafafa;
+}
+
+option {
+  background: #252743;
+}
+
+.statistics-matchPlayed,
+.statistics-matchWon,
+.statistics-currentLeague {
+  align-self: center;
+  justify-self: center;
+}
+
+.statistics-matchPlayed {
+  justify-self: flex-start;
+}
+
+.statistics-matchPlayed p,
+.statistics-matchWon p,
+.statistics-currentLeague p {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.statistics--uppercase {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.statistics--fontSize {
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.upcoming-registration-wrapper {
+  border: 1px solid #fafafa;
+  width: 92%;
+  margin: 0 auto;
+  overflow-y: auto;
+  min-height: 200px;
+  max-height: 410px;
+}
+
+.upcoming-registration-header {
+  background-color: #626ed4;
+  padding: 12px 28px;
+  font-family: "Raleway Medium";
+  text-transform: uppercase;
+}
+
+.upcoming-registration-match-wrapper {
+  background-color: #36394c;
+  margin-bottom: 5px;
+}
+
+.matches-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2em;
+  padding-top: 1%;
+  padding-left: 30px;
+}
+
+.match--bold {
+  font-weight: 600;
+}
+
+.btn {
+  outline: none;
+  font-family: Raleway;
+  background: transparent;
+  border: none;
+  color: #fafafa;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+
+.upcoming-registration-btn-wrapper {
+  margin-left: 30px;
+}
+
+.btn-discord {
+  background-color: #02a398;
+  padding: 12px 21px;
+  margin-top: 20px;
+}
+
+.btn-discord-label {
+  font-size: 0.725em;
+  padding: 5px 0 10px;
+}

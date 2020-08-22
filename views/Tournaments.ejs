@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tournament</title>
+    <%- include('./Dashboard_Common/font.ejs') %>
+    <link rel="stylesheet" href="/Styles/style-UpcomingTournament.css" type="text/css" />
+    <link rel="icon" href="/assets/images/Logo.png" type="image/png" />
+
+    <!-- <link rel="shortcut icon" href="" /> -->
+</head>
+
+<body>
+    <section>
+        <%- include('./Dashboard_Common/side-nav.ejs') %>
+        <div class="main-wrapper">
+            <div class="tournament-wrapper">
+                <div class="row">
+                    <h1 class="tournament-heading">winter tournament bronze league (Jan - Feb)</h1>
+                    <p>The big mega tournament is coming for the players whose current league is BRONZE (To know more
+                        about
+                        league follow this article: <a href="https://localhost:3000/blogs/league" target="_self"
+                            class="link--text">https://localhost:3000/blogs/league</a>)</p>
+                    <p>We always make sure of the players who played on our website should get an opportunity to earn a
+                        big amount of cashback and some exciting prizes because not every players get an opportunity to
+                        play on a big event
+                        or platform like PMCO (PUBG MOBILE CLUB OPEN) and PMWL (PUBG MOBILE WORLD LEAGUE).</p>
+                    <div class="winning-text--wrapper">
+                        <h2 class="tournament-subheading">The Winning team will get:</h2>
+                        <ul type="-">
+                            <li>50,000 NRS</li>
+                            <li>1000 UC PER PLAYER</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="tournament-subheading">Before applying, please check the requirments
+                            and rules:</h2>
+                        <div class="btn-wrapper">
+                            <a href="/blog/requirments" target="_blank" class="btn btn--requirments">Requirments</a>
+                            <a href="/blog/tournamet-rules" target="_black" class="btn btn--rules">Rules</a>
+                        </div>
+                    </div>
+                    <div class="apply-text--wrapper">
+                        <h2 class="tournament-subheading">After checking requirments and rules, Apply
+                            for tournament:
+                        </h2>
+                        <div class="btn-wrapper">
+                            <a href="/register/tournament" target="_self" class="btn btn--apply">Apply Now</a>
+                        </div>
+                    </div>
+                    <h2 class="tournament-subheading" style="padding-bottom: 10px;">Registration will end on: <span
+                            class=" registration-endDate">30-DEC-2020</span></h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -38,9 +38,15 @@ const Schema = new mongoose.Schema({
         required: true,
         uppercase: true
     },
-    isFinished: {
-        type: Boolean,
-        default: false
+    status: {
+        isFinished: {
+            type: String,
+            enum: ["technical error", true, false],
+            default: false
+        },
+        remark: {
+            type: String
+        }
     }
 }, {
     timestamps: {

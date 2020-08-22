@@ -187,8 +187,12 @@ exports.validateData = catchAsync(async (req, res, next) => {
 exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
   let match = await Match.find();
 
-  match.sort(function (a, b) {
-    return a.date > b.date ? -1 : 1;
+  let existingMatch = match.filter(el => {
+    return el.status.isFinished == "false";
+  });
+
+  existingMatch.sort(function (a, b) {
+    return a.date < b.date ? -1 : 1;
   });
 
   let date = function (d) {
@@ -198,11 +202,11 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
   let groupDate = function (group, date) {
     return {
       date: date,
-      match: group,
+      existingMatch: group,
     };
   };
 
-  const newVal = _(match).groupBy(date).map(groupDate).value();
+  const newVal = _(existingMatch).groupBy(date).map(groupDate).value();
 
   return res.render("UpcomingMatches", {
     matchInfo: newVal,

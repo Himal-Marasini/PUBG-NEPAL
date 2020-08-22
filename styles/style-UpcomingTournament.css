@@ -1,0 +1,97 @@
+@import "./common/Style-SideNav.css";
+
+.main-wrapper {
+  background: #252734;
+  font-size: 0.9em;
+}
+
+.tournament-wrapper {
+  width: 94%;
+  margin: 0 auto;
+  margin-top: 24px;
+  background-color: #fafafa;
+  color: #212121;
+}
+
+.tournament-heading {
+  font-family: TEKO;
+  text-transform: uppercase;
+  color: #e08012;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.row {
+  width: 95%;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.row p {
+  word-spacing: 2px;
+  line-height: 24px;
+}
+
+.tournament-subheading {
+  font-family: Teko;
+  font-weight: 400;
+  font-size: 24px;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+.link--text {
+  color: #212121;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.winning-text--wrapper li {
+  list-style-type: "-";
+  margin-left: 30px;
+  padding: 10px 0 0 13px;
+  font-family: "Raleway Medium";
+}
+
+.btn-wrapper {
+  margin-top: 15px;
+}
+
+.btn {
+  border-radius: 2px;
+  color: #fafafa;
+  background-color: #252734;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.btn--requirments {
+  padding: 12px 20px;
+}
+
+.btn--rules {
+  padding: 12px 40px;
+  margin-left: 30px;
+}
+
+.btn--apply {
+  background-color: transparent;
+  border: 1px solid #e08012;
+  color: #212121;
+  padding: 10px 20px;
+}
+
+.btn--apply:hover {
+  background-color: #e08012;
+  color: #fafafa;
+}
+
+.apply-text--wrapper {
+  margin-top: 12px;
+}
+
+.registration-endDate {
+  color: #e08012;
+  margin-bottom: 21px;
+}
