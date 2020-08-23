@@ -10,6 +10,7 @@ const compression = require("compression");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const moment = require('moment');
+const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
@@ -68,6 +69,7 @@ app.use(
   })
 );
 
+app.use(cookieParser());
 app.use(mongoSanitize());
 
 app.use(xss());

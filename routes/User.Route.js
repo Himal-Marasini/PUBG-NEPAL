@@ -4,12 +4,12 @@ const Router = express.Router();
 const user = require("../controller/user.Controller");
 const isAuth = require("../middleware/isAuth");
 
-Router.get("/", user.getHomePage);
+Router.get("/", isAuth, user.getHomePage);
 
-Router.get("/match-highlights", user.getMatchHighlights);
+Router.get("/match-highlights", isAuth, user.getMatchHighlights);
 
-Router.get("/upcoming-tournament", user.getTournaments);
+Router.get("/upcoming-tournament", isAuth, user.getTournaments);
 
-Router.get("/recent-winner", user.getRecentWinners);
+Router.get("/recent-winner", isAuth, user.getRecentWinners);
 
 module.exports = Router;

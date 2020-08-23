@@ -1,5 +1,18 @@
 const mongoose = require("mongoose");
 
+const playerSchema = new mongoose.Schema({
+    user_id: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'user'
+    },
+    team_members: {
+        type: Array
+    },
+    khaltiDetail: {
+        type: Object
+    }
+});
+
 const Schema = new mongoose.Schema({
     date: {
         type: String,
@@ -27,12 +40,7 @@ const Schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    players: [
-        {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: "user"
-        }
-    ],
+    players: [playerSchema],
     device: {
         type: String,
         required: true,

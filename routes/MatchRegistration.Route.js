@@ -6,12 +6,12 @@ const registration = require("../controller/matchRegistration.Controller");
 // Protecting Route Module at last
 const isAuth = require("../middleware/isAuth");
 
-Router.get("/register/:id", registration.getRegistration);
+Router.get("/register/:id", isAuth, registration.getRegistration);
 
-Router.post("/register", registration.postRegistration);
+Router.post("/register", isAuth, registration.postRegistration);
 
-Router.post("/register/auth", registration.validateData);
+Router.post("/register/auth", isAuth, registration.validateData);
 
-Router.get("/upcoming-match", registration.getUpcomingMatch);
+Router.get("/upcoming-match", isAuth, registration.getUpcomingMatch);
 
 module.exports = Router;

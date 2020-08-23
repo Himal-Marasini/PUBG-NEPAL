@@ -9,13 +9,6 @@ function validateWithoutKhaltiData(inputData) {
           message: "Sorry, Some problem has occured !!!",
         };
       }),
-    registrator_name: Joi.string()
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE REGISTRATOR NAME !!!",
-        };
-      }),
     registrator_teamName: Joi.string()
       .required()
       .error((err) => {
@@ -23,36 +16,6 @@ function validateWithoutKhaltiData(inputData) {
           message: "PLEASE ENTER THE TEAM NAME !!!",
         };
       }),
-    registrator_emailId: Joi.string()
-      .email({ minDomainSegments: 2 })
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE VALID EMAIL ID !!!",
-        };
-      }),
-    registrator_phoneNumber: Joi.number()
-      .integer()
-      .min(1000000000)
-      .max(9999999999)
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE VALID PHONE NUMBER !!!",
-        };
-      }),
-    registrator_khaltiId: Joi.number()
-      .integer()
-      .min(1000000000)
-      .max(9999999999)
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE VALID KHALTI ID !!!",
-        };
-      }),
-    registrator_matchType: Joi.string().required(),
-
     memberOne_name: Joi.string()
       .required()
       .error((errors) => {
@@ -112,7 +75,7 @@ function validateWithoutKhaltiData(inputData) {
   };
 
   return Joi.validate(inputData, objectSchema);
-}
+};
 
 function validateWithKhaltiData(inputData) {
   const objectSchema = {
@@ -188,13 +151,6 @@ function validateWithKhaltiData(inputData) {
             "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
         };
       }),
-    registrator_name: Joi.string()
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE REGISTRATOR NAME !!!",
-        };
-      }),
     registrator_teamName: Joi.string()
       .required()
       .error((err) => {
@@ -202,36 +158,6 @@ function validateWithKhaltiData(inputData) {
           message: "PLEASE ENTER THE TEAM NAME !!!",
         };
       }),
-    registrator_emailId: Joi.string()
-      .email({ minDomainSegments: 2 })
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE VALID EMAIL ID !!!",
-        };
-      }),
-    registrator_phoneNumber: Joi.number()
-      .integer()
-      .min(1000000000)
-      .max(9999999999)
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE VALID PHONE NUMBER !!!",
-        };
-      }),
-    registrator_khaltiId: Joi.number()
-      .integer()
-      .min(1000000000)
-      .max(9999999999)
-      .required()
-      .error((err) => {
-        return {
-          message: "PLEASE ENTER THE VALID KHALTI ID !!!",
-        };
-      }),
-    registrator_matchType: Joi.string().required(),
-
     memberOne_name: Joi.string()
       .required()
       .error((errors) => {
@@ -291,7 +217,7 @@ function validateWithKhaltiData(inputData) {
   };
 
   return Joi.validate(inputData, objectSchema);
-}
+};
 
 function validateCreateAccount(inputData) {
   const objectSchema = {
@@ -344,7 +270,7 @@ function validateCreateAccount(inputData) {
   };
 
   return Joi.validate(inputData, objectSchema);
-}
+};
 
 function validateLogin(inputData) {
   const objectSchema = {
@@ -367,7 +293,7 @@ function validateLogin(inputData) {
   };
 
   return Joi.validate(inputData, objectSchema);
-}
+};
 
 exports.validateWithoutKhaltiData = validateWithoutKhaltiData;
 exports.validateWithKhaltiData = validateWithKhaltiData;

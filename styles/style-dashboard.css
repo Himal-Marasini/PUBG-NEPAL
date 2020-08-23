@@ -125,6 +125,15 @@ option {
   -o-border-radius: 2px;
 }
 
+.btn--register {
+  background-color: #02a398;
+  margin-top: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  display: inline-block;
+}
+
 .upcoming-registration-btn-wrapper {
   margin-left: 30px;
 }

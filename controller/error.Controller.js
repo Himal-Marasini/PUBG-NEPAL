@@ -5,6 +5,20 @@ function handleObjectIdError(err) {
     return new AppError(message, 400);
 };
 
+function handleDuplicateDataError(err) {
+    let message = "";
+    if (err.keyPattern.phoneNumber === 1) {
+        message = `Phone Number already added on different account`;
+    } else if (err.keyPattern.khaltiId === 1) {
+        message = `Khalti Id already added on different account`;
+    }
+    return new AppError(message, 400)
+};
+
+function handleJsonWebTokenError(err) {
+    return new AppError("Invalid Token !! Please login again", 401);
+}
+
 function sendErrorDev(err, res) {
     return res.status(err.statusCode).json({
         success: err.success,
@@ -49,17 +63,12 @@ module.exports = (err, req, res, next) => {
         sendErrorDev(err, res);
     } else if (process.env.NODE_ENV === 'prod') {
         let error = { ...err };
-        // Handles the OBJECT ID
+
+        // Handles the INVALID OBJECT ID OF MONGOOSE
         if (error.kind === "ObjectId") error = handleObjectIdError(error);
+        // Handles the DUPLICATE KEY OF MONGOOSE (UNIQUE OF MONGOOSE THROWS ERROR VALIDATION IF DATA IS NOT UNIQUE)
+        if (error.name === "MongoError") error = handleDuplicateDataError(error);
+        if (error.name === "JsonWebTokenError") error = handleJsonWebTokenError(error);
         sendErrorProd(error, res);
     }
-
-    // return res.status(err.status).render('error.ejs', {
-    //     status: false,
-    //     errorType: err.type,
-    //     message: {
-    //         title: err,
-    //         subtitle: err.subtitle
-    //     }
-    // });
 };

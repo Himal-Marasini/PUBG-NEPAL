@@ -5,12 +5,7 @@ const uiVariables = (() => {
             errorText: document.querySelector('.registrationError__text'),
             spinner: document.querySelector('.spinner'),
             overlay: document.getElementById('overlay'),
-            registratorName: document.querySelector('.registrator_namefield'),
-            teamName: document.querySelector('.registrator_teamNamefield'),
-            phoneNumber: document.querySelector('.registrator_phonefield'),
-            emailId: document.querySelector('.registrator_emailfield'),
-            payReceiveId: document.querySelector('.registrator_payGatewayfield'),
-            matchType: document.querySelector('.registrator_matchTypefield'),
+            teamName: document.getElementById('registrator_teamName'),
             memberOne_name: document.getElementById('memberOne_name'),
             memberOne_charId: document.getElementById('memberOne_charId'),
             memberTwo_name: document.getElementById('memberTwo_name'),
@@ -27,12 +22,7 @@ const uiVariables = (() => {
 
         domInputValue: function () {
             return {
-                registratorName: uiVariables.domVariables.registratorName.value,
                 teamName: uiVariables.domVariables.teamName.value,
-                phoneNumber: uiVariables.domVariables.phoneNumber.value,
-                emailId: uiVariables.domVariables.emailId.value,
-                khaltiId: uiVariables.domVariables.payReceiveId.value,
-                matchType: uiVariables.domVariables.matchType.value,
                 memberOne_name: uiVariables.domVariables.memberOne_name.value,
                 memberOne_charId: parseInt(uiVariables.domVariables.memberOne_charId.value),
                 memberTwo_name: uiVariables.domVariables.memberTwo_name.value,
@@ -50,7 +40,7 @@ const uiVariables = (() => {
 })();
 
 const validation = (() => {
-    const elms = ['registrator_name', 'registrator_teamName', 'registrator_phoneNumber', 'registrator_emailId', 'registrator_khaltiId', 'registrator_matchType', 'memberOne_name', 'memberOne_charId', 'memberTwo_name', 'memberTwo_charId', 'memberThree_name', 'memberThree_charId', 'memberFour_name', 'memberFour_charId', 'id'];
+    const elms = ['registrator_teamName', 'memberOne_name', 'memberOne_charId', 'memberTwo_name', 'memberTwo_charId', 'memberThree_name', 'memberThree_charId', 'memberFour_name', 'memberFour_charId', 'id'];
     const userData = {};
     const domVariables = uiVariables.domVariables;
 
@@ -74,22 +64,8 @@ const validation = (() => {
 
     return {
         validateInput: function (domVar) {
-
             const input = domVar;
-
-            if (!validationInputField(input.registratorName, "Please Enter the Registrator Name !!!")) {
-                return false;
-            }
             if (!validationInputField(input.teamName, "Please Enter the Team Name !!!")) {
-                return false;
-            }
-            if (!validationInputField(input.phoneNumber, "Please Enter the Phone Number !!!")) {
-                return false;
-            }
-            if (!validationInputField(input.emailId, "Please Enter the Email ID !!!")) {
-                return false;
-            }
-            if (!validationInputField(input.khaltiId, "Please Enter the Khalti ID !!!")) {
                 return false;
             }
             if (!validationInputField(input.memberOne_name, "Please Enter the Member One Name !!!")) {
@@ -156,6 +132,7 @@ const controller = ((uiCtrl, validCtrl) => {
                     // Here I can show the Error Box
                     // const errorContainer = document.getElementById('registration__error');
                     // const errorText = document.querySelector('.registrationError__text');
+                    console.log(res)
                     const err = await res.json();
                     // Hide
                     domVariable.overlay.style.display = "none";
@@ -178,13 +155,12 @@ const controller = ((uiCtrl, validCtrl) => {
                     if (data.status) {
                         // This is the User Data
                         const inputData = validCtrl.userData;
-
                         // Call the Khalti Methods
                         const config = {
                             "publicKey": data.key,
                             "productIdentity": inputData.registrator_matchType,
                             "productName": "PUBG NEPAL",
-                            "productUrl": "https://www.pubgmobonepal.com",
+                            "productUrl": `https://www.pubgmobilenp.com/register/${inputData.id}`,
                             "eventHandler": {
                                 async onSuccess(payload) {
                                     const data = {
@@ -233,11 +209,8 @@ const controller = ((uiCtrl, validCtrl) => {
                                                     domVariable.errorContainer.style.display = "none";
                                                 }, 8000);
                                             });
-                                            domVariable.registratorName.value = "";
+
                                             domVariable.teamName.value = "";
-                                            domVariable.phoneNumber.value = "";
-                                            domVariable.emailId.value = "";
-                                            domVariable.payReceiveId.value = "";
                                             domVariable.memberOne_name.value = "";
                                             domVariable.memberOne_charId.value = "";
                                             domVariable.memberTwo_name.value = "";

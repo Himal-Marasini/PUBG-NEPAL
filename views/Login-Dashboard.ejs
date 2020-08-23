@@ -36,15 +36,15 @@
                     </select>
                 </div>
                 <div class="statistics-matchPlayed">
-                    <p class="statistics--fontSize">131</p>
+                    <p class="statistics--fontSize"><%= data.matchPlayed %></p>
                     <p class="statistics--uppercase">Match Played</p>
                 </div>
                 <div class="statistics-matchWon">
-                    <p class="statistics--fontSize">13</p>
+                    <p class="statistics--fontSize"><%= data.matchWon %></p>
                     <p class="statistics--uppercase">Match Won</p>
                 </div>
                 <div class="statistics-currentLeague">
-                    <p class="statistics--fontSize">Gold</p>
+                    <p class="statistics--fontSize"><%= data.currentLeague %></p>
                     <p class="statistics--uppercase">Current League</p>
                 </div>
             </div>
@@ -52,7 +52,69 @@
                 <div class="upcoming-registration-header">
                     <p>Upcoming Registered Match</p>
                 </div>
+                <% if(data.recentMatches.length > 0) { %>
+                <% data.recentMatches.forEach((el) => { %>
                 <div class="upcoming-registration-match-wrapper">
+                    <div class="matches-wrapper">
+                        <div class="matches-date-wrapper">
+                            <p>
+                                <span class="match--bold">Match Date: </span><%= el.date %>
+                            </p>
+                        </div>
+                        <div class="matches-time-wrapper">
+                            <p>
+                                <span class="match--bold">Match Time: </span><%= el.time %>
+                            </p>
+                        </div>
+                        <div class="matches-totalTeam-wrapper">
+                            <p>
+                                <span class="match--bold">Total Team: </span><%= el.totalTeam %>
+                            </p>
+                        </div>
+                        <div class="matches-teamName-wrapper">
+                            <p>
+                                <span class="match--bold">Team Name: </span>RANA'S <%= el.teamName %>
+                            </p>
+                        </div>
+                        <div class="matches-type-wrapper">
+                            <p>
+                                <span class="match--bold">Match Type: </span><%= el.device %> (<%= el.type %>)
+                            </p>
+                        </div>
+                        <div class="matches-map-wrapper">
+                            <p>
+                                <span class="match--bold">Match Map: </span><%= el.map %>
+                            </p>
+                        </div>
+                        <div class="matches-mode-wrapper">
+                            <p>
+                                <span class="match--bold">Match Mode: </span><%= el.map %>(TPP)
+                            </p>
+                        </div>
+                        <div class="matches-winningPrize-wrapper">
+                            <p>
+                                <span class="match--bold">Winning Prize: </span>NRS <%= el.prize %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="upcoming-registration-btn-wrapper">
+                        <button class="btn btn-discord">
+                            Join Discord
+                        </button>
+                        <p class="btn-discord-label">
+                            *Join Discord for latest update about matches
+                        </p>
+                    </div>
+                </div>
+                <% }) %>
+                <% } else { %>
+                <div style="margin: 10px 0 0 30px;">
+                    <h1>No match has been registered yet !!</h1>
+                    <a href="/upcoming-match" target="_self" class="btn btn--register">Register Now</a>
+                </div>
+                <% } %>
+
+                <!-- <div class="upcoming-registration-match-wrapper">
                     <div class="matches-wrapper">
                         <div class="matches-date-wrapper">
                             <p>
@@ -103,111 +165,8 @@
                             *Join Discord for latest update about matches
                         </p>
                     </div>
-                </div>
-                <div class="upcoming-registration-match-wrapper">
-                    <div class="matches-wrapper">
-                        <div class="matches-date-wrapper">
-                            <p>
-                                <span class="match--bold">Match Date: </span>28-07-2020
-                            </p>
-                        </div>
-                        <div class="matches-time-wrapper">
-                            <p>
-                                <span class="match--bold">Match Time: </span>8:00 PM
-                            </p>
-                        </div>
-                        <div class="matches-totalTeam-wrapper">
-                            <p>
-                                <span class="match--bold">Total Team: </span>23
-                            </p>
-                        </div>
-                        <div class="matches-teamName-wrapper">
-                            <p>
-                                <span class="match--bold">Team Name: </span>RANA'S
-                            </p>
-                        </div>
-                        <div class="matches-type-wrapper">
-                            <p>
-                                <span class="match--bold">Match Type: </span>MOBILE(SQUAD)
-                            </p>
-                        </div>
-                        <div class="matches-map-wrapper">
-                            <p>
-                                <span class="match--bold">Match Map: </span>ERANGLE
-                            </p>
-                        </div>
-                        <div class="matches-mode-wrapper">
-                            <p>
-                                <span class="match--bold">Match Mode: </span>CLASSIC(TPP)
-                            </p>
-                        </div>
-                        <div class="matches-winningPrize-wrapper">
-                            <p>
-                                <span class="match--bold">Winning Prize: </span>NRS 3500
-                            </p>
-                        </div>
-                    </div>
-                    <div class="upcoming-registration-btn-wrapper">
-                        <button class="btn btn-discord">
-                            Join Discord
-                        </button>
-                        <p class="btn-discord-label">
-                            *Join Discord for latest update about matches
-                        </p>
-                    </div>
-                </div>
-                <div class="upcoming-registration-match-wrapper">
-                    <div class="matches-wrapper">
-                        <div class="matches-date-wrapper">
-                            <p>
-                                <span class="match--bold">Match Date: </span>28-07-2020
-                            </p>
-                        </div>
-                        <div class="matches-time-wrapper">
-                            <p>
-                                <span class="match--bold">Match Time: </span>8:00 PM
-                            </p>
-                        </div>
-                        <div class="matches-totalTeam-wrapper">
-                            <p>
-                                <span class="match--bold">Total Team: </span>23
-                            </p>
-                        </div>
-                        <div class="matches-teamName-wrapper">
-                            <p>
-                                <span class="match--bold">Team Name: </span>RANA'S
-                            </p>
-                        </div>
-                        <div class="matches-type-wrapper">
-                            <p>
-                                <span class="match--bold">Match Type: </span>MOBILE(SQUAD)
-                            </p>
-                        </div>
-                        <div class="matches-map-wrapper">
-                            <p>
-                                <span class="match--bold">Match Map: </span>ERANGLE
-                            </p>
-                        </div>
-                        <div class="matches-mode-wrapper">
-                            <p>
-                                <span class="match--bold">Match Mode: </span>CLASSIC(TPP)
-                            </p>
-                        </div>
-                        <div class="matches-winningPrize-wrapper">
-                            <p>
-                                <span class="match--bold">Winning Prize: </span>NRS 3500
-                            </p>
-                        </div>
-                    </div>
-                    <div class="upcoming-registration-btn-wrapper">
-                        <button class="btn btn-discord">
-                            Join Discord
-                        </button>
-                        <p class="btn-discord-label">
-                            *Join Discord for latest update about matches
-                        </p>
-                    </div>
-                </div>
+                </div> -->
+
             </div>
         </div>
     </section>

@@ -7,7 +7,6 @@ const AppError = require('../util/applicationError');
 const catchAsync = require("../util/catchAsync");
 
 
-// Protecting Route is pendingg
 exports.getLogin = (req, res) => {
   return res.status(200).render("CreateORLogin.ejs", {
     title: "LOGIN",
@@ -21,10 +20,7 @@ exports.postLogin = catchAsync(async (req, res, next) => {
 
   if (error) {
     next(new AppError(error.details[0].message, 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: error.details[0].message,
-    // });
+    return;
   }
 
   const user = await User.findOne({ email: email.toLowerCase() }).select(
@@ -32,28 +28,22 @@ exports.postLogin = catchAsync(async (req, res, next) => {
   );
 
   if (!user) {
-    next(new AppError(`User doesn't exist !! Please Create Account before login`, 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: "User doesn't exist !! Please Create Account before login",
-    // });
+    return next(new AppError(`User doesn't exist !! Please Create Account before login`, 400));
   }
+
   const doMatch = await bcrypt.compare(password, user.password);
+
   if (!doMatch) {
-    next(new AppError("Invalid Credentials !!", 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: "Invalid Credentials !!",
-    // });
-  }
+    return next(new AppError("Invalid Credentials !!", 400));
+  };
+
+  // GENERATING AUTH TOKEN
   const token = user.generateAuthToken();
 
-  res.setHeader("x-auth-token", token);
-  return res.status(200).json({
-    success: true,
-    message: "You have been succesfully login !!",
-    data: token,
-  });
+  // SETTING THE TOKEN IN COOKIES AND SENDING THEM TO FRONT END
+  sendTokenInCookie(token, res);
+
+  return res.redirect('/');
 });
 
 exports.getCreateAccount = (req, res) => {
@@ -72,21 +62,15 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
     if (err.includes("confirmPassword")) {
       err = "Confirm password doesn't match !!";
     }
-    next(new AppError(err, 400))
-    // return res.status(400).json({
-    //   success: false,
-    //   message: err,
-    // });
+    next(new AppError(err, 400));
+    return;
   }
 
   const userDoc = await User.findOne({ email });
 
   if (userDoc) {
-    next(new AppError('User already exists with this Email or Phone Number !!', 200))
-    // return res.json({
-    //   success: true,
-    //   message: "ser already exists with this Email or Phone Number !!",
-    // });
+    next(new AppError('User already exists with this Email or Phone Number !!', 200));
+    return;
   }
 
   const hashedPassword = await bcrypt.hash(password, 13);
@@ -101,11 +85,27 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
 
   await user.save();
 
+  // GENERATING AUTH TOKEN
   const token = user.generateAuthToken();
 
-  return res.setHeader("x-auth-token", token).json({
-    data: true,
-    message: user,
-  });
+  // SETTING THE TOKEN IN COOKIES AND SENDING THEM TO FRONT END
+  sendTokenInCookie(token, res);
 
+  return res.json({
+    status: true,
+    token,
+    data: user
+  });
 });
+
+function sendTokenInCookie(token, res) {
+  // EXPIRES TIME Is CONVERTED INTO MILLISECONDS
+  const cookieOptions = {
+    expires: new Date(Date.now() + process.env.JTW_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    httpOnly: true
+  };
+
+  if (process.env.NODE_ENV === 'prod') cookieOptions.secure = true;
+
+  res.cookie('jwt', token, cookieOptions);
+};

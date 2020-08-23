@@ -15,20 +15,29 @@ const catchAsync = require('../util/catchAsync');
 exports.getRegistration = catchAsync(async (req, res, next) => {
 
   const { id } = req.params;
+  const user = req.user;
 
   const match = await Match.findOne({ _id: id });
 
   if (!match) {
-    next(new AppError("Sorry this match is not available !!", 400));
+    return next(new AppError("Sorry this match is not available !!", 400));
     // return res.json({
     //   success: true,
     //   message: "Sorry this match is not available !!",
     // });
   }
 
-  return res.render("register-form.ejs", {
-    matchType: `${match.type}(${match.device})`,
+  const matchData = {
     id: match._id,
+    registratorName: user.name,
+    phoneNumber: user.phoneNumber,
+    email: user.email,
+    khaltiId: user.khaltiId,
+    matchType: `${match.type}(${match.device})`,
+  };
+
+  return res.render("Register-Form.ejs", {
+    data: matchData
   });
 
 });
@@ -37,12 +46,9 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
   const { error } = validateWithKhaltiData(req.body);
 
   if (error) {
-    next(new AppError(error.details[0].message, 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: error.details[0].message,
-    // });
+    return next(new AppError(error.details[0].message, 400));
   }
+
   // Check Match is Available or Not
   const match = await Match.findOne({ _id: req.body.id });
   console.log(match);
@@ -121,13 +127,6 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
 });
 
 exports.validateData = catchAsync(async (req, res, next) => {
-  const {
-    registrator_phoneNumber,
-    registrator_emailId,
-    registrator_teamName,
-    id,
-  } = req.body;
-
   const { error } = validateWithoutKhaltiData(req.body);
 
   if (error) {
@@ -138,7 +137,7 @@ exports.validateData = catchAsync(async (req, res, next) => {
     // });
   }
 
-  const match = await Match.findOne({ _id: id }).populate("players");
+  const match = await Match.findOne({ _id: req.body.id }).populate("players");
 
   // Check if Match Exists or Not
   if (!match) {
@@ -162,8 +161,8 @@ exports.validateData = catchAsync(async (req, res, next) => {
   // Check if user already registered with Email || Phone number
   const checkUser = match.players.find((el) => {
     return (
-      el.emailId == registrator_emailId ||
-      el.phoneNumber == registrator_phoneNumber
+      el.emailId == req.user.email ||
+      el.phoneNumber == req.user.phoneNumber
     );
   });
 
