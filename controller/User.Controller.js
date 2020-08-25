@@ -12,7 +12,10 @@ const catchAsync = require('../util/catchAsync');
 async function NotAuthenticated_Page(req, res, next) {
   let match = await Match.find();
 
-  match.sort(function (a, b) {
+  // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
+  let existingMatch = match.filter(el => el.status.isFinished !== "true" && el.status.isFinished !== 'technical error');
+
+  existingMatch.sort(function (a, b) {
     return a.date > b.date ? -1 : 1;
   });
 
@@ -27,7 +30,7 @@ async function NotAuthenticated_Page(req, res, next) {
     };
   };
 
-  const newVal = _(match).groupBy(date).map(groupDate).value();
+  const newVal = _(existingMatch).groupBy(date).map(groupDate).value();
 
   return res.render("index", {
     matchInfo: newVal,
@@ -41,20 +44,19 @@ async function Authenticated_Page(req, res, next) {
 
   if (user.registerMatches.length > 0) match = await User.findById(user._id).populate('registerMatches');
 
-
-
   // user.isMatchFinished()
 
-  const userObj = {
+  const result = {
     matchPlayed: user.totalMatch,
     matchWon: user.matchWon,
     currentLeague: user.currentLeague,
-    recentMatches: match
+    upcoming_matches: match.registerMatches === undefined ? match.registerMatches = [] : match.registerMatches
   };
+
 
   return res.render("Login-Dashboard.ejs", {
     path: "/",
-    data: userObj
+    data: result
   });
 }
 

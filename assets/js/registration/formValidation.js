@@ -6,6 +6,7 @@ const uiVariables = (() => {
             spinner: document.querySelector('.spinner'),
             overlay: document.getElementById('overlay'),
             teamName: document.getElementById('registrator_teamName'),
+            matchType: document.querySelector('.registrator_matchTypefield'),
             memberOne_name: document.getElementById('memberOne_name'),
             memberOne_charId: document.getElementById('memberOne_charId'),
             memberTwo_name: document.getElementById('memberTwo_name'),
@@ -40,7 +41,7 @@ const uiVariables = (() => {
 })();
 
 const validation = (() => {
-    const elms = ['registrator_teamName', 'memberOne_name', 'memberOne_charId', 'memberTwo_name', 'memberTwo_charId', 'memberThree_name', 'memberThree_charId', 'memberFour_name', 'memberFour_charId', 'id'];
+    const elms = ['registrator_teamName', 'registrator_matchType', 'memberOne_name', 'memberOne_charId', 'memberTwo_name', 'memberTwo_charId', 'memberThree_name', 'memberThree_charId', 'memberFour_name', 'memberFour_charId', 'id'];
     const userData = {};
     const domVariables = uiVariables.domVariables;
 
@@ -152,7 +153,7 @@ const controller = ((uiCtrl, validCtrl) => {
                     domVariable.overlay.style.display = "none";
                     domVariable.spinner.style.display = "none";
                     let amt = data.amount;
-                    if (data.status) {
+                    if (data.success) {
                         // This is the User Data
                         const inputData = validCtrl.userData;
                         // Call the Khalti Methods

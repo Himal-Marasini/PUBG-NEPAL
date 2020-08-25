@@ -1,7 +1,7 @@
 const moment = require("moment");
 const _ = require("lodash");
 
-const User = require("../model/registration");
+const User = require("../model/createUser");
 const Match = require("../model/createMatch");
 
 const khaltiVerification = require("../middleware/khaltiServer");
@@ -42,6 +42,7 @@ exports.getRegistration = catchAsync(async (req, res, next) => {
 
 });
 
+// WITH KHALTI DATA (THIS WILL BE TRIGGERED)
 exports.postRegistration = catchAsync(async (req, res, next) => {
   const { error } = validateWithKhaltiData(req.body);
 
@@ -51,130 +52,113 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
 
   // Check Match is Available or Not
   const match = await Match.findOne({ _id: req.body.id });
-  console.log(match);
+
   if (!match) {
-    next(new AppError('This match is not available !!', 503));
-    // return res.status(503).json({
-    //   success: false,
-    //   message: "This match is not available !!",
-    // });
+    return next(new AppError('This match is not available !!', 503));
   }
 
   const verified = await khaltiVerification(req.body.token, match.fee);
 
   if (!verified) {
-    next(new AppError(verified.error, 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: verified.error,
-    // });
+    return next(new AppError(verified.error, 400));
   }
 
-  const user = new User({
-    registratorName: req.body.registrator_name,
-    teamName: req.body.registrator_teamName,
-    emailId: req.body.registrator_emailId,
-    phoneNumber: req.body.registrator_phoneNumber,
-    khaltiId: req.body.registrator_khaltiId,
-    matchType: req.body.registrator_matchType,
-    members: [
-      {
-        name: req.body.memberOne_name,
-        characterID: req.body.memberOne_charId,
-      },
-      {
-        name: req.body.memberTwo_name,
-        characterID: req.body.memberTwo_charId,
-      },
-      {
-        name: req.body.memberThree_name,
-        characterID: req.body.memberThree_charId,
-      },
-      {
-        name: req.body.memberFour_name,
-        characterID: req.body.memberFour_charId,
-      },
+  const user = await User.findOne({ _id: req.user._id });
+
+  const playerobj = {
+    user_id: user._id,
+    team_name: req.body.registrator_teamName,
+    team_members: [
+      { name: req.body.memberOne_name, character_id: req.body.memberOne_charId },
+      { name: req.body.memberTwo_name, character_id: req.body.memberTwo_charId },
+      { name: req.body.memberThree_name, character_id: req.body.memberThree_charId },
+      { name: req.body.memberFour_name, character_id: req.body.memberFour_charId }
     ],
-    matchId: req.body.id,
-    khaltiDetail: {
+    khalti_detail: {
       idx: verified.data.user.idx,
       name: verified.data.user.name,
-      mobile: verified.data.user.mobile,
-    },
-  });
+      mobile: verified.data.user.mobile
+    }
+  };
 
-  // Push the User Object Id into Players Array of Match
-  match.players.push(user._id);
+  // Push the PLAYER OBJ with USER_ID,TEAM_MEMBERS AND KHALTI_ID into match players array
+  match.players.push(playerobj);
 
-  // Save into db
+  // Save the MATCH ID into USER REGISTERED MATCH ARRAY
+  user.registerMatches.push(match._id);
+
+  // Save to DB (MATCH)
   const updatedMatch = await match.save();
 
   if (!updatedMatch) {
-    next(new AppError(`Match doesn't exist anymore !!`, 400));
+    return next(new AppError(`Match doesn't exist anymore !!`, 400));
   }
 
+  //  SAVE TO DB USER
   const userdata = await user.save();
 
+  const matchInfo = {
+    registrator: userdata.name,
+    team_name: req.body.registrator_teamName,
+    phone_number: userdata.phoneNumber,
+    email: userdata.email,
+    khalti_id: userdata.khaltiId,
+    match_type: `${match.type}(${match.device})`,
+    members: [
+      { name: req.body.memberOne_name, character_id: req.body.memberOne_charId },
+      { name: req.body.memberTwo_name, character_id: req.body.memberTwo_charId },
+      { name: req.body.memberThree_name, character_id: req.body.memberThree_charId },
+      { name: req.body.memberFour_name, character_id: req.body.memberFour_charId }
+    ]
+  };
+
+
   if (userdata) {
-    const mailSend = await sendmail(userdata, res);
+    await sendmail(matchInfo, res);
     return res.status(200).json({
       success: true,
       message:
         "You have been succesfully registered !!! Please Check your mail for futher details",
     });
-  }
+  };
 
 });
 
+// WITHOUT KHALTI DATA (THIS WILL BE TRIGGERED)
 exports.validateData = catchAsync(async (req, res, next) => {
   const { error } = validateWithoutKhaltiData(req.body);
 
   if (error) {
-    next(error.details[0].message, 400);
-    // return res.status(400).json({
-    //   success: false,
-    //   message: error.details[0].message,
-    // });
+    // JOI INVALID STATUS CODE: UNDEFINED (WHEN WE SEND EXTRA VALUE FROM FRONT END) ======/ NEED TO FIX THIS LATER 
+    return next(error.details[0].message, 400);
   }
 
   const match = await Match.findOne({ _id: req.body.id }).populate("players");
+  console.log(match.status.isFinished != 'true' ? "Match has not been finished" : "Match has been finished")
 
-  // Check if Match Exists or Not
+  // CHECK IF MATCH EXISTS AND CHECK IF IT'S STILL AVALIABLE
   if (!match) {
-    next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
-    // return res.status(400).json({
-    //   success: false,
-    //   message:
-    //     "Sorry, This match is not available anymore !! Try different matches",
-    // });
+    return next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
+  } else if (match.status.isFinished == 'true' || match.status.isFinished == 'technical error') {
+    return next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
   }
 
   // Check total number of Squad registered
   if (match.players.length >= 24) {
-    next(new AppError("This match lobby is full !! Please try different matches", 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: "This match lobby is full !! Please try different matches",
-    // });
+    return next(new AppError("This match lobby is full !! Please try different matches", 400));
   }
 
-  // Check if user already registered with Email || Phone number
+  // Check if user already registered with Email || Phone number (RETHINK ABOUT THIS)
+  // Checking if current user is already registered or not
   const checkUser = match.players.find((el) => {
-    return (
-      el.emailId == req.user.email ||
-      el.phoneNumber == req.user.phoneNumber
-    );
+    return req.user._id.toString() === el.user_id.toString();
   });
 
   if (checkUser) {
-    next(new AppError('Email or Phone number has been already registered !!', 400));
-    // return res.status(400).json({
-    //   success: false,
-    //   message: "Email or Phone number has been already registered !!",
-    // });
+    return next(new AppError('You have already been registered for this match !!', 400));
   }
 
-  // Check if Team Name is Unique or Not (Skipping For Now)
+  // Check if Team Name is Unique or Not (This functionality is Skipping For Now)
   return res.status(200).json({
     success: true,
     message: "Success",
@@ -184,11 +168,10 @@ exports.validateData = catchAsync(async (req, res, next) => {
 });
 
 exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
-  let match = await Match.find();
+  let match = await Match.find().populate('players');
 
-  let existingMatch = match.filter(el => {
-    return el.status.isFinished == "false";
-  });
+  // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
+  let existingMatch = match.filter(el => el.status.isFinished !== "true" && el.status.isFinished !== 'technical error');
 
   existingMatch.sort(function (a, b) {
     return a.date < b.date ? -1 : 1;

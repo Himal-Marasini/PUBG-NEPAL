@@ -1,11 +1,11 @@
 const sgMail = require('@sendgrid/mail');
 
-module.exports = async function sendMail(userdata, res) {
+module.exports = async function sendMail(matchInfo, res) {
     try {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
         const msg = {
-            to: userdata.emailId,
+            to: matchInfo.email,
             from: 'PUBG MOBILE NEPAL <contact@pubgmobilenp.com>',
             subject: 'Match Details',
             text: 'Please keep this all detail to Yourself only',
@@ -84,28 +84,28 @@ module.exports = async function sendMail(userdata, res) {
                 
                 <body>
                 <div class="container">
-                <p>Hii ${userdata.registratorName},<br>
+                <p>Hii ${matchInfo.registrator},<br>
                     Thanks for participating in PUBG NEPAL tournament, you will get the
                     ROOM ID and PASSWORD on registered email address before starting of
                     15 minute of match, Here are the details of your registered team:-</p>
                 <table>
                     <tr>
                         <td width="20%">Registrator Name :</td>
-                        <td class="text--bold" width="30%">${userdata.registratorName}</td>
+                        <td class="text--bold" width="30%">${matchInfo.registrator}</td>
                         <td width="13%">Email Id :</td>
-                        <td class="text--bold" width="35%">${userdata.emailId}</td>
+                        <td class="text--bold" width="35%">${matchInfo.email}</td>
                     </tr>
                     <tr>
                         <td>Phone Number :</td>
-                        <td class="text--bold">${userdata.phoneNumber}</td>
+                        <td class="text--bold">${matchInfo.phone_number}</td>
                         <td>Khalti Id :</td>
-                        <td class="text--bold">${userdata.khaltiId}</td>
+                        <td class="text--bold">${matchInfo.khalti_id}</td>
                     </tr>
                     <tr>
                         <td>Team Name :</td>
-                        <td class="text--bold" style="text-transform: uppercase;">${userdata.teamName}</td>
+                        <td class="text--bold" style="text-transform: uppercase;">${matchInfo.team_name}</td>
                         <td>Match Type :</td>
-                        <td class="text--bold">${userdata.matchType}</td>
+                        <td class="text--bold">${matchInfo.match_type}</td>
                     </tr>
                     <tr>
                         <td colspan="2">Team Members name with Character Id:</td>
@@ -113,16 +113,16 @@ module.exports = async function sendMail(userdata, res) {
                 </table>
                 <table width="100%">
                     <tr>
-                        <td width="30%">${userdata.members[0].name}</td>
-                        <td width="10%" class="text--bold">${userdata.members[0].characterID}</td>
-                        <td width="30%">${userdata.members[1].name}</td>
-                        <td width="10%" class="text--bold">${userdata.members[1].characterID}</td>
+                        <td width="30%">${matchInfo.members[0].name}</td>
+                        <td width="10%" class="text--bold">${matchInfo.members[0].character_id}</td>
+                        <td width="30%">${matchInfo.members[1].name}</td>
+                        <td width="10%" class="text--bold">${matchInfo.members[1].character_id}</td>
                     </tr>
                     <tr>
-                        <td>${userdata.members[2].name}</td>
-                        <td class="text--bold">${userdata.members[2].characterID}</td>
-                        <td>${userdata.members[3].name}</td>
-                        <td class="text--bold">${userdata.members[3].characterID}</td>
+                        <td>${matchInfo.members[2].name}</td>
+                        <td class="text--bold">${matchInfo.members[2].character_id}</td>
+                        <td>${matchInfo.members[3].name}</td>
+                        <td class="text--bold">${matchInfo.members[3].character_id}</td>
                     </tr>
                 </table>
                 <div class="note">

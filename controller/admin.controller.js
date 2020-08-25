@@ -9,11 +9,10 @@ exports.postCreateMatch = catchAsync(async (req, res) => {
 
   // el.status.isFinished === true means MATCH HAS BEEN FINISHED
   // Here, Find the match whose (front end time === matches.time) && Check if current time get matched with 
-  // (status.isFinished == false || status.isFinished == technical error) => It mean with current time match already exists on DB, It's not finished
+  // (status.isFinished == false || status.isFinished == technical error) => It mean with current time, match already exists on DB, It's not finished
   validateMatch = validateMatch.find((el) => {
-    return el.time === time && (el.status.isFinished == false || el.status.isFinished == 'technical error');
+    return el.time == time && (el.status.isFinished == 'false' || el.status.isFinished == 'technical error');
   });
-
 
   if (validateMatch) {
     return res.status(400).json({

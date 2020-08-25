@@ -5,6 +5,9 @@ const playerSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'user'
     },
+    team_name: {
+        type: String
+    },
     team_members: {
         type: Array
     },

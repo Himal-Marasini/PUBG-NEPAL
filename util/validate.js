@@ -16,6 +16,7 @@ function validateWithoutKhaltiData(inputData) {
           message: "PLEASE ENTER THE TEAM NAME !!!",
         };
       }),
+    registrator_matchType: Joi.string().required(),
     memberOne_name: Joi.string()
       .required()
       .error((errors) => {
@@ -158,6 +159,7 @@ function validateWithKhaltiData(inputData) {
           message: "PLEASE ENTER THE TEAM NAME !!!",
         };
       }),
+    registrator_matchType: Joi.string().required(),
     memberOne_name: Joi.string()
       .required()
       .error((errors) => {

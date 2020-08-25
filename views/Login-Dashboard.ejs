@@ -52,8 +52,8 @@
                 <div class="upcoming-registration-header">
                     <p>Upcoming Registered Match</p>
                 </div>
-                <% if(data.recentMatches.length > 0) { %>
-                <% data.recentMatches.forEach((el) => { %>
+                <% if(data.upcoming_matches.length > 0) { %>
+                <% data.upcoming_matches.forEach((el) => { %>
                 <div class="upcoming-registration-match-wrapper">
                     <div class="matches-wrapper">
                         <div class="matches-date-wrapper">
@@ -113,7 +113,6 @@
                     <a href="/upcoming-match" target="_self" class="btn btn--register">Register Now</a>
                 </div>
                 <% } %>
-
                 <!-- <div class="upcoming-registration-match-wrapper">
                     <div class="matches-wrapper">
                         <div class="matches-date-wrapper">
@@ -166,7 +165,6 @@
                         </p>
                     </div>
                 </div> -->
-
             </div>
         </div>
     </section>
