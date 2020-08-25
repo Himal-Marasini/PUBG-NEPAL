@@ -9,6 +9,9 @@ Router.get('/', async (req, res, next) => {
     try {
         let match = await Match.find();
 
+        // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
+        match = match.filter(el => el.isFinished !== "true");
+
         match.sort(function (a, b) {
             return a.date < b.date ? -1 : 1;
         });

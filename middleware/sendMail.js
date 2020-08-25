@@ -125,6 +125,12 @@ module.exports = async function sendMail(userdata, res) {
                         <td class="text--bold">${userdata.members[3].characterID}</td>
                     </tr>
                 </table>
+                <br />
+                <p>1. Winning Team : <b> 2500 </b> </p>
+                <p>2. Second Position : <b> 200 </b> </p>
+                <p>3. Team with highest kill :  <b> 800</b> </p>
+                <br />
+                <p>The Total amount : <b> 3500 </b> </p>
                 <div class="note">
                     Note:- Sharing the room id and password with others or inviting the others people
                     in a room without PERMISSION of the authorized member will lead to the harsh action immediately.
