@@ -55,6 +55,15 @@ const Schema = new mongoose.Schema({
             enum: ["technical error", true, false],
             default: false
         },
+        winner: {
+            team_name: {
+                type: String
+            },
+            members: {
+                type: Array,
+                default: []
+            }
+        },
         remark: {
             type: String
         }

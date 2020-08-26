@@ -53,7 +53,7 @@
                     <p>Upcoming Registered Match</p>
                 </div>
                 <% if(data.upcoming_matches.length > 0) { %>
-                <% data.upcoming_matches.forEach((el) => { %>
+                <% data.upcoming_matches.forEach((el,i) => { %>
                 <div class="upcoming-registration-match-wrapper">
                     <div class="matches-wrapper">
                         <div class="matches-date-wrapper">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="matches-teamName-wrapper">
                             <p>
-                                <span class="match--bold">Team Name: </span>RANA'S <%= el.teamName %>
+                                <span class="match--bold">Team Name: </span> <%= el.players[i].team_name %>
                             </p>
                         </div>
                         <div class="matches-type-wrapper">

@@ -1,112 +1,112 @@
 @import "./common/Style-SideNav.css";
 
 .main-wrapper {
-    background: #252734;
-    font-size: 0.9em;
+  background: #252734;
+  font-size: 0.9em;
 }
 
 .match {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    margin: 10px 40px 20px 0;
-    padding-bottom: 25px;
-    background-color: #ecf0f1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  margin: 10px 40px 20px 0;
+  padding-bottom: 25px;
+  background-color: #ecf0f1;
 }
 
 .match:hover {
-    transform: scale(1.1);
-    transition: all 0.2s linear;
-    border: none;
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: all 0.2s linear;
+  border: none;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 
-.i_dont_know {
-    width: 95%;
-    margin: 0 auto;
+.row {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 h3 {
-    font-family: Teko;
-    margin: 20px 0;
-    font-size: 1.66rem;
-    text-transform: uppercase;
-    font-weight: 300;
-    color: #e08012;
+  font-family: Teko;
+  font-size: 1.66rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #e08012;
 }
 
 .matches-wrapper {
-    display: grid;
-    grid-template-columns: repeat(10, 38%);
-    max-height: 380px;
-    overflow-x: auto;
-    overflow-y: hidden;
+  display: grid;
+  grid-template-columns: repeat(10, 38%);
+  max-height: 380px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .match__title {
-    font-family: "Teko", sans-serif;
-    font-size: 1.83rem;
-    color: #34495e;
-    margin-top: 20px;
+  font-family: "Teko", sans-serif;
+  font-size: 1.83rem;
+  color: #34495e;
+  margin-top: 20px;
 }
 
 .match__time {
-    font-family: "Teko", sans-serif;
-    font-size: 40px;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: #e08012;
-    margin-top: 10px;
+  font-family: "Teko", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #e08012;
+  margin-top: 10px;
 }
 
 .container__matchType {
-    padding: 15px 0;
+  padding: 15px 0;
 }
 
 .container__matchMap {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 .match__registerNow {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .matchTypeContainer__text,
 .matchMapContainer__text {
-    color: #34495e;
+  color: #34495e;
 }
 
 .matchTypeContainer__type,
 .matchMapContainer__type,
 .match__entryFee__value,
 .match__prize__value {
-    color: #e08012;
-    margin-left: 10px;
-    font-weight: 600;
+  color: #e08012;
+  margin-left: 10px;
+  font-weight: 600;
 }
 
 .match__prize,
 .match__entryFee {
-    display: inline-block;
-    color: #34495e;
+  display: inline-block;
+  color: #34495e;
 }
 
 .match__prize__text {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .btn_register_result {
-    outline: none;
-    font-weight: 300;
-    border-radius: 3px;
-    margin-top: 15px;
-    text-transform: uppercase;
-    border: none;
-    background: #34495e;
-    padding: 3px 10px 3px 10px;
-    font-size: 20px;
-    color: white;
-    font-family: "Teko";
-    cursor: pointer;
+  outline: none;
+  font-weight: 300;
+  border-radius: 3px;
+  margin-top: 15px;
+  text-transform: uppercase;
+  border: none;
+  background: #34495e;
+  padding: 3px 10px 3px 10px;
+  font-size: 20px;
+  color: white;
+  font-family: "Teko";
+  cursor: pointer;
 }

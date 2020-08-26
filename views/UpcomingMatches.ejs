@@ -15,7 +15,7 @@
         <%- include('./Dashboard_Common/side-nav.ejs') %>
         <div class="main-wrapper">
             <% matchInfo.forEach((el)=>{ %>
-            <div class="i_dont_know">
+            <div class="row">
                 <h3>Upcoming Matches : (<%= el.date %>)</h3>
                 <div class="matches-wrapper">
                     <% el.existingMatch.forEach((element)=>{ %>

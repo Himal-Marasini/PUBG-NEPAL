@@ -1,0 +1,50 @@
+@import "./common/Style-SideNav.css";
+
+.main-wrapper {
+  background: #252734;
+  font-size: 0.9em;
+  color: #212121;
+  font-family: Teko;
+}
+
+.row {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 30px;
+  background-color: #ecf0f1;
+  padding: 10px 0 30px 10px;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+p {
+  font-size: 1.4em;
+}
+
+.text-bold-color {
+  color: #e08012;
+}
+
+.update--heading {
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.social-media-icons--wrapper {
+  margin-top: 15px;
+}
+
+#facebook {
+  margin-left: 0;
+}
+
+.social-media-icons {
+  width: 35px;
+  margin-left: 30px;
+}

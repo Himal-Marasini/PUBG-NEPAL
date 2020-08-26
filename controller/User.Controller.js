@@ -53,7 +53,6 @@ async function Authenticated_Page(req, res, next) {
     upcoming_matches: match.registerMatches === undefined ? match.registerMatches = [] : match.registerMatches
   };
 
-
   return res.render("Login-Dashboard.ejs", {
     path: "/",
     data: result
@@ -86,4 +85,16 @@ exports.getRecentWinners = (req, res, next) => {
     path: "/recent-winner"
   });
 };
+
+exports.getBlogs = (req, res, next) => {
+  return res.render('Update-Blogs', {
+    path: '/blogs'
+  })
+};
+
+exports.getContactUs = (req, res, next) => {
+  return res.render('ContactUs', {
+    path: '/contact-us'
+  });
+}
 

@@ -114,11 +114,11 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
 
 
   if (userdata) {
-    await sendmail(matchInfo, res);
+    if (process.env.NODE_ENV === "prod") await sendmail(matchInfo, res);
     return res.status(200).json({
       success: true,
       message:
-        "You have been succesfully registered !!! Please Check your mail for futher details",
+        "You have been succesfully registered !! Please Check your mail for futher details",
     });
   };
 

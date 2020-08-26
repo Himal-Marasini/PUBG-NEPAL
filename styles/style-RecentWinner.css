@@ -4,3 +4,116 @@
   background: #252734;
   font-size: 0.9em;
 }
+
+.match {
+  display: grid;
+  grid-template-columns: 48% 7% 45%;
+  text-align: center;
+  margin: 10px 40px 20px 0;
+  padding-bottom: 20px;
+  background-color: #ecf0f1;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 200px;
+  margin-top: 23px;
+  margin-left: 20px;
+  background: #212121;
+}
+
+.row {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+h3 {
+  font-family: Teko;
+  font-size: 1.66rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #e08012;
+}
+
+.matches-wrapper {
+  display: grid;
+  grid-template-columns: repeat(10, 50%);
+  max-height: 380px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.match__title {
+  font-family: "Teko", sans-serif;
+  font-size: 1.83rem;
+  color: #34495e;
+  margin-top: 20px;
+}
+
+.match__time {
+  font-family: "Teko", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #e08012;
+  margin-top: 10px;
+}
+
+.container__matchType {
+  padding: 15px 0;
+}
+
+.container__matchMap {
+  padding-bottom: 20px;
+}
+
+.matchTypeContainer__text,
+.matchMapContainer__text {
+  color: #34495e;
+}
+
+.matchTypeContainer__type,
+.matchMapContainer__type,
+.match__entryFee__value,
+.match__prize__value {
+  color: #e08012;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+.match__prize,
+.match__entryFee {
+  display: inline-block;
+  color: #34495e;
+}
+
+.match__prize__text {
+  margin-right: 10px;
+}
+
+.winner-text--wrapper {
+  padding-top: 20px;
+}
+
+.winner--title {
+  color: #34495e;
+}
+
+.winner--subtitle {
+  color: #e08012;
+}
+
+.member-name-bold {
+  color: #e08012;
+  font-weight: 600;
+}
+
+.member-charId-bold {
+  color: #34495e;
+  font-weight: 600;
+}
+
+td {
+  padding-top: 15px;
+}
