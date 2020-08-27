@@ -14,10 +14,32 @@
     <section>
         <%- include('./Dashboard_Common/side-nav.ejs') %>
         <div class="main-wrapper">
+            <% if(data.length > 0) { %>
+            <% data.forEach((el) =>{ %>
+            <div class="match-highlights-wrapper">
+                <h3>Match Highlights: (<%= el.date %>)</h3>
+                <div class="highlights">
+                    <% el.match.forEach((element) => { %>
+                    <div>
+                        <% if(element.highlights === undefined) { %>
+                        <iframe src="/assets/images/Image__1.png" class="video"></iframe>
+                        <% } else { %>
+                        <iframe src="<%= element.highlights %>" class="video"></iframe>
+                        <% } %>
+                        <figcaption>(<%= element.time %> - <%= element.device %> <%= element.type %>)</figcaption>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            <% }) %>
+            <% }else { %>
+            <h1 style="margin-top: 30px; margin-left: 4%;">No match highlights are available for now !! Please check
+                after some time.</h1>
+            <% } %>
+
             <!-- First -->
-            <div class="match-highlights-wrapper">
+            <!-- <div class="match-highlights-wrapper">
                 <h3>Upcoming Matches: (23-07-2020)</h3>
-
                 <div class="highlights">
                     <div>
                         <iframe class="video" src="https://www.youtube.com/embed/tgbNymZ7vqY">
@@ -38,35 +60,7 @@
                     </div>
 
                 </div>
-            </div>
-
-            <!-- Second -->
-            <div class="match-highlights-wrapper">
-                <h3>Upcoming Matches: (23-07-2020)</h3>
-
-                <div class="highlights">
-                    <div>
-                        <iframe class="video" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                        </iframe>
-                        <figcaption>21-MAY-2019(4 PM - MOBO SQUAD)</figcaption>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Third -->
-            <div class="match-highlights-wrapper">
-                <h3>Upcoming Matches: (23-07-2020)</h3>
-
-                <div class="highlights">
-                    <div>
-                        <iframe class="video" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                        </iframe>
-                        <figcaption>21-MAY-2019(4 PM - MOBO SQUAD)</figcaption>
-                    </div>
-
-                </div>
-            </div>
+            </div> -->
         </div>
     </section>
 

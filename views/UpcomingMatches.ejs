@@ -14,11 +14,13 @@
     <section>
         <%- include('./Dashboard_Common/side-nav.ejs') %>
         <div class="main-wrapper">
+            <% if(matchInfo.length > 0) { %>
+
             <% matchInfo.forEach((el)=>{ %>
             <div class="row">
                 <h3>Upcoming Matches : (<%= el.date %>)</h3>
                 <div class="matches-wrapper">
-                    <% el.existingMatch.forEach((element)=>{ %>
+                    <% el.match.forEach((element)=>{ %>
                     <div class="match">
                         <p class="match__title">Match will start in:</p>
                         <h2 class="match__time"><%= element.time %></h2>
@@ -63,6 +65,10 @@
                 </div>
             </div>
             <% }) %>
+            <% } else { %>
+            <h1 style="margin-top: 30px; margin-left: 4%;">No upcoming match is available for now !! Please check after
+                some time.</h1>
+            <% } %>
         </div>
     </section>
 </body>

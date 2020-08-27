@@ -1,12 +1,9 @@
-const moment = require("moment");
-const _ = require("lodash");
-
 const Match = require("../model/createMatch");
 const User = require("../model/createUser");
 
 const AppError = require('../util/applicationError');
 const catchAsync = require('../util/catchAsync');
-
+const sortMatches = require('../util/sortMatches');
 
 // !LOGIN PAGE
 async function NotAuthenticated_Page(req, res, next) {
@@ -15,22 +12,8 @@ async function NotAuthenticated_Page(req, res, next) {
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
   let existingMatch = match.filter(el => el.status.isFinished !== "true" && el.status.isFinished !== 'technical error');
 
-  existingMatch.sort(function (a, b) {
-    return a.date > b.date ? -1 : 1;
-  });
-
-  let date = function (d) {
-    return moment(new Date(d.date)).format("DD-MM-YYYY");
-  };
-
-  let groupDate = function (group, date) {
-    return {
-      date: date,
-      match: group,
-    };
-  };
-
-  const newVal = _(existingMatch).groupBy(date).map(groupDate).value();
+  // SORT AND GROUP MATCHES ACCORDING TO DATE
+  const newVal = sortMatches(existingMatch);
 
   return res.render("index", {
     matchInfo: newVal,
@@ -41,8 +24,12 @@ async function NotAuthenticated_Page(req, res, next) {
 async function Authenticated_Page(req, res, next) {
   const user = req.user;
   let match = [];
+  let existingRegisteredMatches = [];
 
   if (user.registerMatches.length > 0) match = await User.findById(user._id).populate('registerMatches');
+
+  // Filter the matches whose status is !== true; (Basically that is available)
+  if (match.registerMatches !== undefined) existingRegisteredMatches = match.registerMatches.filter(el => el.status.isFinished !== 'true' || 'technical error');
 
   // user.isMatchFinished()
 
@@ -50,7 +37,7 @@ async function Authenticated_Page(req, res, next) {
     matchPlayed: user.totalMatch,
     matchWon: user.matchWon,
     currentLeague: user.currentLeague,
-    upcoming_matches: match.registerMatches === undefined ? match.registerMatches = [] : match.registerMatches
+    upcoming_matches: existingRegisteredMatches
   };
 
   return res.render("Login-Dashboard.ejs", {
@@ -69,8 +56,14 @@ exports.getHomePage = catchAsync(async (req, res, next) => {
 });
 
 exports.getMatchHighlights = catchAsync(async (req, res) => {
+  const match = await Match.find({ 'status.isFinished': true });
+
+  // SORT AND GROUP MATCHES ACCORDING TO DATE
+  const data = sortMatches(match);
+
   return res.render('Match-Highlights', {
-    path: "/match-highlights"
+    path: "/match-highlights",
+    data: data
   });
 });
 
@@ -80,11 +73,18 @@ exports.getTournaments = (req, res, next) => {
   });
 };
 
-exports.getRecentWinners = (req, res, next) => {
+exports.getRecentWinners = catchAsync(async (req, res, next) => {
+
+  const match = await Match.find({ 'status.isFinished': true });
+
+  // SORT AND GROUP MATCHES ACCORDING TO DATE
+  const data = sortMatches(match);
+
   return res.render('RecentWinner', {
-    path: "/recent-winner"
+    path: "/recent-winner",
+    data: data
   });
-};
+});
 
 exports.getBlogs = (req, res, next) => {
   return res.render('Update-Blogs', {

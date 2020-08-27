@@ -17,17 +17,20 @@
         <%- include('./Dashboard_Common/side-nav.ejs') %>
         <div class="main-wrapper">
             <div class="row">
-                <h3>Matches Results : (29-08-2020)</h3>
+                <% if(data.length > 0) { %>
+                <% data.forEach((el)=>{ %>
+                <h3>Matches Results : (<%= el.date %>)</h3>
                 <div class="matches-wrapper">
+                    <% el.match.forEach((element) => { %>
                     <div class="match">
                         <div>
-                            <p class="match__title">Match Finished At</p>
-                            <h2 class="match__time"> 1:45 PM</h2>
+                            <p class="match__title">Match Started At</p>
+                            <h2 class="match__time"> <%= element.time %> </h2>
 
                             <div class="container__matchType">
                                 <p class="matchTypeContainer__text">
                                     Match Type :<span class="matchTypeContainer__type match--mobile">
-                                        (SQUAD) EMULATOR
+                                        (<%= element.type %>) <%= element.device %>
                                     </span>
                                 </p>
                             </div>
@@ -35,7 +38,7 @@
                             <div class="container__matchMap">
                                 <p class="matchMapContainer__text">
                                     Match Map :<span class="matchMapContainer__type">
-                                        ERANGLE
+                                        <%= element.map %>
                                     </span>
                                 </p>
                             </div>
@@ -43,7 +46,7 @@
                             <div class="match__prize">
                                 <p class="match__prize__text">
                                     Winning Prize:<span class="match__prize__value">
-                                        NRS 3500</span>
+                                        NRS <%= element.prize %></span>
                                 </p>
                             </div>
                         </div>
@@ -51,191 +54,50 @@
                             <div class="vertical-line"></div>
                         </div>
                         <div class="winner-text--wrapper">
+                            <% if(element.status.winner.members.length > 0) { %>
                             <h3 class="winner--title">WINNER</h3>
-                            <h2 class="winner--subtitle">DOMINAX</h2>
+                            <h2 class="winner--subtitle"><%= element.status.winner.team_name %></h2>
                             <table width="100%">
                                 <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
+                                    <td width="30%" class="member-name-bold">
+                                        <%= element.status.winner.members[0].name %>
+                                    </td>
+                                    <td width="30%" class="member-charId-bold">
+                                        <%= element.status.winner.members[0].character_id %></td>
                                 </tr>
                                 <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
+                                    <td width="30%" class="member-name-bold">
+                                        <%= element.status.winner.members[1].name %>
+                                    </td>
+                                    <td width="30%" class="member-charId-bold">
+                                        <%= element.status.winner.members[1].character_id %></td>
                                 </tr>
                                 <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
+                                    <td width="30%" class="member-name-bold">
+                                        <%= element.status.winner.members[2].name %>
+                                    </td>
+                                    <td width="30%" class="member-charId-bold">
+                                        <%= element.status.winner.members[2].character_id %></td>
                                 </tr>
                                 <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
+                                    <td width="30%" class="member-name-bold">
+                                        <%= element.status.winner.members[3].name %>
+                                    </td>
+                                    <td width="30%" class="member-charId-bold">
+                                        <%= element.status.winner.members[3].character_id %></td>
                                 </tr>
                             </table>
+                            <% } else { %>
+                            <h3 class="winner--title" style="padding-right: 20px;">Result will be updated soon !!</h3>
+                            <% } %>
                         </div>
                     </div>
-                    <div class="match">
-                        <div>
-                            <p class="match__title">Match Finished At</p>
-                            <h2 class="match__time"> 1:45 PM</h2>
-
-                            <div class="container__matchType">
-                                <p class="matchTypeContainer__text">
-                                    Match Type :<span class="matchTypeContainer__type match--mobile">
-                                        (SQUAD) EMULATOR
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="container__matchMap">
-                                <p class="matchMapContainer__text">
-                                    Match Map :<span class="matchMapContainer__type">
-                                        ERANGLE
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="match__prize">
-                                <p class="match__prize__text">
-                                    Winning Prize:<span class="match__prize__value">
-                                        NRS 3500</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="vertical-line"></div>
-                        </div>
-                        <div class="winner-text--wrapper">
-                            <h3 class="winner--title">WINNER</h3>
-                            <h2 class="winner--subtitle">DOMINAX</h2>
-                            <table width="100%">
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="match">
-                        <div>
-                            <p class="match__title">Match Finished At</p>
-                            <h2 class="match__time"> 1:45 PM</h2>
-
-                            <div class="container__matchType">
-                                <p class="matchTypeContainer__text">
-                                    Match Type :<span class="matchTypeContainer__type match--mobile">
-                                        (SQUAD) EMULATOR
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="container__matchMap">
-                                <p class="matchMapContainer__text">
-                                    Match Map :<span class="matchMapContainer__type">
-                                        ERANGLE
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="match__prize">
-                                <p class="match__prize__text">
-                                    Winning Prize:<span class="match__prize__value">
-                                        NRS 3500</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="vertical-line"></div>
-                        </div>
-                        <div class="winner-text--wrapper">
-                            <h3 class="winner--title">WINNER</h3>
-                            <h2 class="winner--subtitle">DOMINAX</h2>
-                            <table width="100%">
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="match">
-                        <div>
-                            <p class="match__title">Match Finished At</p>
-                            <h2 class="match__time"> 1:45 PM</h2>
-
-                            <div class="container__matchType">
-                                <p class="matchTypeContainer__text">
-                                    Match Type :<span class="matchTypeContainer__type match--mobile">
-                                        (SQUAD) EMULATOR
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="container__matchMap">
-                                <p class="matchMapContainer__text">
-                                    Match Map :<span class="matchMapContainer__type">
-                                        ERANGLE
-                                    </span>
-                                </p>
-                            </div>
-
-                            <div class="match__prize">
-                                <p class="match__prize__text">
-                                    Winning Prize:<span class="match__prize__value">
-                                        NRS 3500</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="vertical-line"></div>
-                        </div>
-                        <div class="winner-text--wrapper">
-                            <h3 class="winner--title">WINNER</h3>
-                            <h2 class="winner--subtitle">DOMINAX</h2>
-                            <table width="100%">
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="member-name-bold">Himanshu</td>
-                                    <td width="30%" class="member-charId-bold">!!!!!!</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                    <% }) %>
                 </div>
+                <% }) %>
+                <% } else { %>
+                <h1 style="margin-top: 30px; margin-left: 19px;">No recent winners are available for now !!</h1>
+                <% } %>
             </div>
         </div>
     </section>

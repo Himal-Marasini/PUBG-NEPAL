@@ -1,6 +1,3 @@
-const moment = require("moment");
-const _ = require("lodash");
-
 const User = require("../model/createUser");
 const Match = require("../model/createMatch");
 
@@ -11,6 +8,7 @@ const validateWithoutKhaltiData = require("../util/validate").validateWithoutKha
 const validateWithKhaltiData = require("../util/validate").validateWithKhaltiData;
 const AppError = require('../util/applicationError');
 const catchAsync = require('../util/catchAsync');
+const sortMatches = require('../util/sortMatches');
 
 exports.getRegistration = catchAsync(async (req, res, next) => {
 
@@ -139,8 +137,8 @@ exports.validateData = catchAsync(async (req, res, next) => {
   // CHECK IF MATCH EXISTS AND CHECK IF IT'S STILL AVALIABLE
   if (!match) {
     return next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
-  } else if (match.status.isFinished == 'true' || match.status.isFinished == 'technical error') {
-    return next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
+  } else if (match.status.isFinished == 'true' || 'technical error' || 'registration closed') {
+    return next(new AppError('Registration has been closed for this match !!'), 400);
   }
 
   // Check total number of Squad registered
@@ -171,27 +169,15 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
   let match = await Match.find().populate('players');
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
-  let existingMatch = match.filter(el => el.status.isFinished !== "true" && el.status.isFinished !== 'technical error');
+  let existingMatch = match.filter(el => el.status.isFinished !== "true" || 'technical error' || 'registration closed');
+  console.log(existingMatch)
+  console.log(match[0].status.isFinished)
 
-  existingMatch.sort(function (a, b) {
-    return a.date < b.date ? -1 : 1;
-  });
-
-  let date = function (d) {
-    return moment(new Date(d.date)).format("DD-MM-YYYY");
-  };
-
-  let groupDate = function (group, date) {
-    return {
-      date: date,
-      existingMatch: group,
-    };
-  };
-
-  const newVal = _(existingMatch).groupBy(date).map(groupDate).value();
+  // SORT AND GROUP MATCHES ACCORDING TO DATE
+  const newVal = sortMatches(existingMatch);
 
   return res.render("UpcomingMatches", {
-    matchInfo: newVal,
     path: "/upcoming-match",
+    matchInfo: newVal
   });
 });

@@ -92,7 +92,7 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
   sendTokenInCookie(token, res);
 
   return res.json({
-    status: true,
+    success: true,
     token,
     data: user
   });

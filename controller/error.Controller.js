@@ -33,7 +33,7 @@ function sendErrorProd(err, res) {
     // Example(USER NOT FOUND, INVALID PASSWORD)
     if (err.isOperational) {
         return res.status(err.statusCode).json({
-            status: err.success,
+            success: err.success,
             message: err.message
         });
 

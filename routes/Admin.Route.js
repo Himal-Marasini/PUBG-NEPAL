@@ -5,4 +5,10 @@ const adminController = require("../controller/admin.Controller");
 
 Router.post("/admin/create-match", adminController.postCreateMatch);
 
+// UPDATE THE MATCH HIGHLIGHTS AND WINNER NAME
+Router.post("/admin/update-match", adminController.postUpdateMatch);
+
+// UPDATE THE STAUS OF THE MATCH
+Router.get("/admin/update-match/status", adminController.getUpdateMatchStatus);
+
 module.exports = Router;

@@ -138,7 +138,7 @@ module.exports = async function sendMail(matchInfo, res) {
     } catch (err) {
         console.log(err);
         return res.json({
-            status: false,
+            success: false,
             message: "Fail to send a mail !! You will be updated soon",
         });
     }

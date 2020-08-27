@@ -106,7 +106,7 @@ db.then(() => {
   console.error(err);
   // new AppError("PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.", 500);
   return res.status(500).render("error.ejs", {
-    status: false,
+    success: false,
     errorType: "Server Down",
     message: {
       title: "500 !!! INTERNAL SERVER ERROR",

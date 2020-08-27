@@ -52,7 +52,7 @@ const Schema = new mongoose.Schema({
     status: {
         isFinished: {
             type: String,
-            enum: ["technical error", true, false],
+            enum: ["technical error", "registration closed", true, false],
             default: false
         },
         winner: {
@@ -67,6 +67,9 @@ const Schema = new mongoose.Schema({
         remark: {
             type: String
         }
+    },
+    highlights: {
+        type: String
     }
 }, {
     timestamps: {
