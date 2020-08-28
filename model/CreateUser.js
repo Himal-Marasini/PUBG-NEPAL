@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+const moment = require('moment');
+
 const Schema = new mongoose.Schema({
   name: {
     type: String,
@@ -63,7 +65,7 @@ Schema.methods.generateAuthToken = function () {
 
 Schema.methods.isMatchFinished = function () {
   console.log(this);
-  return this;
+
   // // Yesterday date
   // let yesterday = moment().subtract(1, "days");
   // yesterday = moment(yesterday).format("YYYY-MM-DD")

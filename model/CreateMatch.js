@@ -56,6 +56,9 @@ const Schema = new mongoose.Schema({
             default: false
         },
         winner: {
+            user_id:{
+                type:String
+            },
             team_name: {
                 type: String
             },

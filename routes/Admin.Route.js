@@ -3,6 +3,8 @@ const Router = express.Router();
 
 const adminController = require("../controller/admin.Controller");
 
+Router.get("/admin/match-details", adminController.getMatchInformation);
+
 Router.post("/admin/create-match", adminController.postCreateMatch);
 
 // UPDATE THE MATCH HIGHLIGHTS AND WINNER NAME

@@ -29,9 +29,9 @@ async function Authenticated_Page(req, res, next) {
   if (user.registerMatches.length > 0) match = await User.findById(user._id).populate('registerMatches');
 
   // Filter the matches whose status is !== true; (Basically that is available)
-  if (match.registerMatches !== undefined) existingRegisteredMatches = match.registerMatches.filter(el => el.status.isFinished !== 'true' || 'technical error');
+  if (match.registerMatches !== undefined) existingRegisteredMatches = match.registerMatches.filter(el => el.status.isFinished !== 'true' && el.status.isFinished !== 'technical error');
 
-  // user.isMatchFinished()
+  user.isMatchFinished()
 
   const result = {
     matchPlayed: user.totalMatch,
@@ -97,4 +97,3 @@ exports.getContactUs = (req, res, next) => {
     path: '/contact-us'
   });
 }
-

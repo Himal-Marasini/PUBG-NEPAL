@@ -132,12 +132,11 @@ exports.validateData = catchAsync(async (req, res, next) => {
   }
 
   const match = await Match.findOne({ _id: req.body.id }).populate("players");
-  console.log(match.status.isFinished != 'true' ? "Match has not been finished" : "Match has been finished")
 
   // CHECK IF MATCH EXISTS AND CHECK IF IT'S STILL AVALIABLE
   if (!match) {
     return next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
-  } else if (match.status.isFinished == 'true' || 'technical error' || 'registration closed') {
+  } else if (match.status.isFinished == 'true' || match.status.isFinished == 'technical error' || match.status.isFinished == 'registration closed') {
     return next(new AppError('Registration has been closed for this match !!'), 400);
   }
 
@@ -169,9 +168,7 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
   let match = await Match.find().populate('players');
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
-  let existingMatch = match.filter(el => el.status.isFinished !== "true" || 'technical error' || 'registration closed');
-  console.log(existingMatch)
-  console.log(match[0].status.isFinished)
+  let existingMatch = match.filter(el => el.status.isFinished !== 'true' && el.status.isFinished !== 'technical error' && el.status.isFinished !== 'registration closed');
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const newVal = sortMatches(existingMatch);

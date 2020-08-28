@@ -1,7 +1,20 @@
 const Match = require("../model/createMatch");
+const User = require("../model/createUser");
 
 const catchAsync = require("../util/catchAsync");
 const AppError = require("../util/applicationError");
+
+exports.getMatchInformation = catchAsync(async (req,res,next) =>{
+  const {id,date,time} = req.query;
+  let match = [];
+  if(id) match = await Match.findById(id);
+  else match = await Match.findOne({date, time});
+
+  return res.json({
+    success:true,
+    data:match.players
+  });
+});
 
 exports.postCreateMatch = catchAsync(async (req, res) => {
   const { date, device, time, type, map, prize, fee, status } = req.body;
@@ -48,6 +61,7 @@ exports.postCreateMatch = catchAsync(async (req, res) => {
 
 exports.postUpdateMatch = catchAsync(async (req, res, next) => {
   const { winners, match_highlights, match_id, isFinished } = req.body;
+  let user = null;
 
   const match = await Match.findById(match_id);
 
@@ -55,13 +69,39 @@ exports.postUpdateMatch = catchAsync(async (req, res, next) => {
     return next(new AppError("The match you have requested for is not available !!"), 400);
   }
 
-  match.status.winner.team_name = winners.team_name;
-  match.status.winner.members = [
-    { name: winners.members[0].name, character_id: winners.members[0].character_id },
-    { name: winners.members[1].name, character_id: winners.members[1].character_id },
-    { name: winners.members[2].name, character_id: winners.members[2].character_id },
-    { name: winners.members[3].name, character_id: winners.members[3].character_id }
-  ];
+  if(match.status.winner.user_id !== undefined){
+    return next(new AppError('Match Winner has already been updated', 406));
+  }
+
+  if(winners !== undefined) {
+    match.status.winner.user_id = winners.user_id;
+    match.status.winner.team_name = winners.team_name;
+    match.status.winner.members = [
+      { name: winners.members[0].name, character_id: winners.members[0].character_id },
+      { name: winners.members[1].name, character_id: winners.members[1].character_id },
+      { name: winners.members[2].name, character_id: winners.members[2].character_id },
+      { name: winners.members[3].name, character_id: winners.members[3].character_id }
+    ];
+
+      if(isFinished == 'true'){
+        // Updating the Match Playerd of All the users by 1
+        for(var i=0; i < match.players.length; i++){
+          const element = match.players[i];
+           user = await User.findById(element.user_id);
+           user.totalMatch += 1
+        }
+       if(user !== null) await user.save();
+  
+       // Updating the Match Won By 1
+       const matchWinner = await User.findById(match.status.winner.user_id);
+        if(!matchWinner){
+          return next(new AppError("The Match Winner Doesn't exisit !!", 400));
+        }
+        matchWinner.matchWon += 1;
+        await matchWinner.save();
+      }
+    }
+
   match.status.isFinished = isFinished;
   match.highlights = match_highlights;
 
