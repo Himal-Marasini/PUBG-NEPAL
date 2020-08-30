@@ -51,8 +51,6 @@
             body: JSON.stringify(data)
         };
 
-        console.log(userData);
-
         fetch('/login', userData);
         // console.log(window.location.href);
     };

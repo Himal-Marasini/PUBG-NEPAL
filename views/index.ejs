@@ -30,7 +30,7 @@
                 <div class="heroarea__logo">
                     <img src="/assets/images/Logo.png" alt="PUBG NEPAL" id=logo>
                 </div>
-                <div>
+                <div class="auth--wrapper">
                     <a href="/login" target="_self">LOGIN</a>
                     <a href="/sign-up" target="_self">SIGN UP</a>
                 </div>
@@ -68,6 +68,7 @@
         <div class="row">
 
             <div class="match__upcomingMatchesContainer">
+                <% if(matchInfo.length < 0) { %>
                 <% matchInfo.forEach((el)=>{ %>
                 <h3 class="match__headingThree">Upcoming Matches : (<%= el.date %>)</h3>
                 <div class="match__container">
@@ -111,6 +112,10 @@
                     <% }) %>
                 </div>
                 <% }) %>
+                <% } else { %>
+                <h3 class="match__headingThree">Upcoming Matches </h3>
+                <h2 style="text-transform: uppercase; font-weight: 400;">No matches are available for now !!</h2>
+                <% } %>
             </div>
 
         </div>

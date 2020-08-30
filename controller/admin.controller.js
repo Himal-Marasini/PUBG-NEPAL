@@ -82,30 +82,33 @@ exports.postUpdateMatch = catchAsync(async (req, res, next) => {
       { name: winners.members[2].name, character_id: winners.members[2].character_id },
       { name: winners.members[3].name, character_id: winners.members[3].character_id }
     ];
+    // After setting the value, Save it
+    await match.save();
 
-      if(isFinished == 'true'){
-        // Updating the Match Playerd of All the users by 1
+    // Now Update the Match Played and Match Won
+      if(match.status.isFinished == 'true'){
+
+        // Updating the Match Played of All the users by 1
         for(var i=0; i < match.players.length; i++){
           const element = match.players[i];
            user = await User.findById(element.user_id);
            user.totalMatch += 1
         }
        if(user !== null) await user.save();
-  
        // Updating the Match Won By 1
        const matchWinner = await User.findById(match.status.winner.user_id);
         if(!matchWinner){
-          return next(new AppError("The Match Winner Doesn't exisit !!", 400));
+          return next(new AppError("The Match Winner user account Doesn't exisit !!", 400));
         }
+
         matchWinner.matchWon += 1;
         await matchWinner.save();
       }
+    }else{
+      match.status.isFinished = isFinished;
+      match.highlights = match_highlights;
+      await match.save();
     }
-
-  match.status.isFinished = isFinished;
-  match.highlights = match_highlights;
-
-  await match.save();
 
   return res.json({
     success: true,

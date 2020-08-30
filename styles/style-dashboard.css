@@ -7,12 +7,30 @@
 
 .header-wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: 9fr 1fr;
   margin-top: 30px;
 }
 
 .header-wrapper div:first-child {
-  margin-left: 8%;
+  margin-left: 4%;
+}
+
+.profile-circle {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url("../assets/images/Image__3.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  position: absolute;
+  right: 110px;
+  top: 14px;
 }
 
 .statistics-wrapper {
