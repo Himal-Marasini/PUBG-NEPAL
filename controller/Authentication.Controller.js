@@ -8,8 +8,19 @@ const catchAsync = require("../util/catchAsync");
 
 
 exports.getLogin = (req, res) => {
+  let message = req.flash('error');
+  let messageType;
+
+  if(message.length > 0){
+    messageType = 'error-active';
+  }
+
   return res.status(200).render("CreateORLogin.ejs", {
     title: "LOGIN",
+    error:{
+      type:messageType,
+      message:message[0]
+    }
   });
 };
 
@@ -34,7 +45,7 @@ exports.postLogin = catchAsync(async (req, res, next) => {
   const doMatch = await bcrypt.compare(password, user.password);
 
   if (!doMatch) {
-    return next(new AppError("Invalid Credentials !!", 400));
+    return next(new AppError("Email or password is incorrect !!", 400));
   };
 
   // GENERATING AUTH TOKEN

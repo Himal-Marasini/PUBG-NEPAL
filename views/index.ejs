@@ -68,7 +68,7 @@
         <div class="row">
 
             <div class="match__upcomingMatchesContainer">
-                <% if(matchInfo.length < 0) { %>
+                <% if(matchInfo.length > 0) { %>
                 <% matchInfo.forEach((el)=>{ %>
                 <h3 class="match__headingThree">Upcoming Matches : (<%= el.date %>)</h3>
                 <div class="match__container">

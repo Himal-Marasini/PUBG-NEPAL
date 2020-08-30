@@ -93,6 +93,15 @@ exports.postUpdateMatch = catchAsync(async (req, res, next) => {
           const element = match.players[i];
            user = await User.findById(element.user_id);
            user.totalMatch += 1
+
+          //  Updating the league of the player
+           if(user.totalMatch >= 20){
+             user.currentLeague = 'Gold'
+           }else if(user.totalMatch >= 45){
+             user.currentLeague = 'Diamond'
+           }else if(user.totalMatch >= 90){
+             user.currentLeague = 'Crown'
+           }
         }
        if(user !== null) await user.save();
        // Updating the Match Won By 1

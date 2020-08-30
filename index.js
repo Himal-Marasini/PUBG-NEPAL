@@ -9,6 +9,9 @@ const morgan = require("morgan");
 const compression = require("compression");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
+const flash = require('connect-flash');
+const session = require('express-session');
+
 const moment = require('moment');
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
@@ -73,6 +76,14 @@ app.use(cookieParser());
 app.use(mongoSanitize());
 
 app.use(xss());
+
+app.use(session({
+  secret:process.env.SESSION_SECRET,
+  saveUninitialized:true,
+  resave:true
+}));
+
+app.use(flash());
 
 // app.use('trust proxy');
 

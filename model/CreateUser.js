@@ -17,10 +17,12 @@ const Schema = new mongoose.Schema({
   phoneNumber: {
     type: Number,
     required: true,
+    unique:true
   },
   khaltiId: {
     type: Number,
     required: true,
+    unique:true
   },
   password: {
     type: String,
@@ -43,7 +45,8 @@ const Schema = new mongoose.Schema({
   },
   currentLeague: {
     type: String,
-    default: "Gold",
+    enum:['Bronze', 'Gold', 'Diamond', 'Crown'],
+    default: 'Bronze',
   }
 }, {
   timestamps: {

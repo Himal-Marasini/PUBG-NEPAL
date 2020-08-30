@@ -18,10 +18,13 @@
       <div class="main-wrapper">
         <h2>Pubg Mobile Nepal</h2>
         <h3>Login</h3>
-        <form action="/login" method="POST">
-          <input type="email" name="email" placeholder="Email Address" required><br />
-          <input type="password" name="password" placeholder="Password" required><br />
-          <input type="submit" value="Login">
+        <div class="error-wrapper <%= error.type %>">
+          <div class="text-message"><%= error.message %></div>
+        </div>
+        <form>
+          <input type="email" id="email" name="email" placeholder="Email Address" required><br />
+          <input type="password" id="password" name="password" placeholder="Password" required><br />
+          <input type="button" id="btn-submit" value="Login">
         </form>
         <div class="forgetPassword-wrapper">
           <a href="" target="_self">Forget password?</a>
@@ -29,25 +32,31 @@
         </div>
       </div>
   </section>
+  <script src="/assets/js/homepage/login.js"></script>
   <% }else if(title === "SIGN-UP"){ %>
   <section>
     <div class="row">
       <div class="main-wrapper sign-in">
         <h2>Pubg Mobile Nepal</h2>
         <h3>Create Account</h3>
-        <form action="/sign-up" method="POST">
-          <input type="text" name="name" placeholder="Name" required><br />
-          <input type="email" name="email" placeholder="Email Address" required><br />
-          <input type="number" name="phoneNumber" placeholder="Phone Number" onkeydown="return event.keyCode !== 69"
+        <div class="error-wrapper">
+          <div class="text-message"></div>
+        </div>
+        <form>
+          <input type="text" name="name" placeholder="Name" id="name" required><br />
+          <input type="email" name="email" placeholder="Email Address" id="email" required><br />
+          <input type="number" name="phoneNumber" placeholder="Phone Number" id="phone_number"
+            onkeydown="return event.keyCode !== 69" required><br />
+          <input type="number" name="khaltiId" placeholder="Khalti Id" id="khalti_id"
+            onkeydown="return event.keyCode !== 69" required><br />
+          <input type="password" name="password" placeholder="Password" id="password" required><br />
+          <input type="password" name="confirmPassword" placeholder="ConfirmPassword" id="confirm_password"
             required><br />
-          <input type="number" name="khaltiId" placeholder="Khalti Id" onkeydown="return event.keyCode !== 69"
-            required><br />
-          <input type="password" name="password" placeholder="Password" required><br />
-          <input type="password" name="confirmPassword" placeholder="ConfirmPassword" required><br />
-          <input type="submit" value="Create Account">
+          <input type="button" id="btn-submit" value="Create Account">
         </form>
       </div>
   </section>
+  <script src="/assets/js/homepage/signup.js"></script>
   <% } %>
 </body>
 

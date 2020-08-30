@@ -15,6 +15,7 @@ async function NotAuthenticated_Page(req, res, next) {
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const newVal = sortMatches(existingMatch);
 
+  console.log(newVal.length)
   return res.render("index", {
     matchInfo: newVal,
   });

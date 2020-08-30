@@ -20,6 +20,7 @@ module.exports = catchAsync(async function (req, res, next) {
   } else {
     // ELSE BLOCK, TRIGGER IN EVERY ROUTE WHOSE ORIGINAL URL !== "/" [HOMEPAGE]
     if (!token) {
+      req.flash('error', 'You are not logged in ! Please login to get access');
       return res.redirect('/login');
       // next(new AppError('You are not logged in! Please login to get access', 401));
     };
@@ -35,7 +36,10 @@ module.exports = catchAsync(async function (req, res, next) {
   const currentUser = await User.findById(decode.id);
 
   if (!currentUser) {
-    return next(new AppError("The user no more exists", 401));
+    req.flash('error', "User no more exists !! Please login to get access")
+    return res.redirect('/login');
+    // Don't remove below line, It will be useful while building REST API
+    // return next(new AppError("The user no more exists", 401));
   };
 
   // Here, Storing our user data on req so that we don't have to reach everytime to database for data

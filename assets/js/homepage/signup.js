@@ -3,24 +3,26 @@
     let domVar, getInput, validation, inputData;
 
     domVar = {
-        username: document.querySelector('.signup__username'),
-        email: document.querySelector('.signup__email'),
-        phoneNumber: document.querySelector('.signup__phoneNumber'),
-        password: document.querySelector('.signup__password'),
-        confirmPassword: document.querySelector('.signup__confirmPass'),
-        errorContainer: document.querySelector('.signUp__error'),
-        errorText: document.querySelector('.signUperror__text'),
-        submit: document.querySelector('.signup__submitBtn'),
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        phoneNumber: document.getElementById('phone_number'),
+        khaltiId:document.getElementById('khalti_id'),
+        password: document.getElementById('password'),
+        confirmPassword: document.getElementById('confirm_password'),
+        errorContainer: document.querySelector('.error-wrapper'),
+        errorText: document.querySelector('.text-message'),
+        submit: document.getElementById('btn-submit'),
         stateVariable: false
     };
 
     getInput = function () {
         return {
-            username: domVar.username.value,
+            name: domVar.name.value,
             email: domVar.email.value,
-            phoneNumber: parseInt(domVar.phoneNumber.value),
+            phoneNumber: domVar.phoneNumber.value,
+            khaltiId:domVar.khaltiId.value,
             password: domVar.password.value,
-            // confirmPassword: domVar.confirmPassword.value
+            confirmPassword: domVar.confirmPassword.value
         };
     };
 
@@ -36,29 +38,31 @@
     validation = function () {
         let domInput = getInput();
 
-        if (domInput.username == " " || domInput.username.length == 0) {
-            validationError('Username Should be bigger than 4 words and Lesser than 20 words');
+        if (domInput.name == " " || domInput.name.length <= 4) {
+            validationError('Name should be bigger than 4 letters');
             return;
         }
         if (domInput.email == " " || domInput.email.length == 0) {
-            validationError('Not an Valid Email ID');
+            validationError('Please enter a valid email id !!');
             return;
         }
         if (domInput.phoneNumber == " " || domInput.phoneNumber == 0 || domInput.phoneNumber.length < 10) {
-            validationError('Not an Valid Phone Number');
+            validationError('Please enter a valid phone number !!');
+            return;
+        }
+        if (domInput.khaltiId == " " || domInput.khaltiId == 0 ) {
+            validationError('Please enter a valid Khalti ID');
             return;
         }
         if (domInput.password == " " || domInput.password.length == 0 || domInput.password.length < 6) {
             validationError('Password must be bigger than 6 Characters');
-            domVar.errorContainer.style.width = "330px";
-            console.log('Hello from pw');
+            return;
+        }
+        if (domInput.confirmPassword == " " || domInput.confirmPassword.length == 0 || domInput.confirmPassword.length < 6) {
+            validationError('Confirm password not matched !!');
             return;
         }
         domVar.stateVariable = true;
-        // if (domInput.confirmPassword == " " || domInput.confirmPassword.length == 0 || domInput.password == domInput.confirmPassword) {
-        //     validationError(`Password doesn't Match`);
-        //     return;
-        // }
     };
 
     inputData = function (data) {
@@ -70,29 +74,34 @@
             body: JSON.stringify(data)
         };
 
-        fetch('/signup', userData);
-    };
-
-    clearField = function () {
-        domVar.username.value = "";
-        domVar.email.value = "";
-        domVar.phoneNumber.value = "";
-        domVar.password.value = "";
-        domVar.confirmPassword.value = "";
+        fetch('/sign-up', userData).then(async res =>{
+            if(res.status !== 200){
+                const err = await res.json();
+                validationError(err.message);
+                throw new Error('Error Occurred !!');
+            }else{
+                domVar.errorContainer.classList = "success-wrapper"
+                domVar.errorContainer.style.display = "block";
+    
+                domVar.errorText.textContent = "Account has been created successfully !!";
+        
+                setTimeout(function () {
+                    domVar.errorContainer.style.display = "none";
+                    window.location.href = "/";
+                }, 1500);
+            };
+        }).catch(err=>{
+            console.log(err);
+        });
     };
 
     function validationInput() {
-
         validation();
-
         if (domVar.stateVariable) {
             inputData(getInput());
-            clearField();
-            console.log('Data has been send to the server');
             domVar.stateVariable = false;
         }
-
-    }
+    };
 
     domVar.submit.addEventListener('click', validationInput);
 
