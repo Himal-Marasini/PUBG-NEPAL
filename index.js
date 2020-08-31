@@ -24,6 +24,7 @@ const user = require("./routes/user.Route");
 const authentication = require("./routes/authentication.Route");
 const matchRegistration = require("./routes/matchRegistration.Route");
 const admin = require("./routes/admin.Route");
+const store = require("./routes/store.Route");
 
 const AppError = require('./util/applicationError');
 const db = require("./util/databse");
@@ -95,6 +96,7 @@ app.get("/favico.ico", (req, res) => {
 app.use(authentication);
 app.use(user);
 app.use(matchRegistration);
+app.use(store);
 app.use(admin);
 
 // 404, Page not found

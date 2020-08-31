@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG MOBILE NEPAL STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet" />
+    <link href="/styles/store/store.css" rel="stylesheet">
+</head>
+
+<body>
+    <section class="hero-area">
+        <div class="row">
+            <header>
+                <div>
+                    <a href="/" target="_self">
+                        <img src="/assets/images/Logo.png" alt="PUBG NEPAL" id=logo>
+                    </a>
+                </div>
+                <div>
+                    <h1>Pubg Mobile Nepal store</h1>
+                </div>
+            </header>
+        </div>
+
+    </section>
+
+    <section class="main-wrapper ">
+        <div class="heading-title--wrapper">
+            <h2>Buy pubg mobile uc or Free Fire Diamonds</h2>
+        </div>
+
+        <div class="store-wrapper">
+
+            <div class="pubg-store--wrapper ">
+                <div class="row">
+                    <div class="pubg-store-header--wrapper">
+                        <h2>Pubg mobile (uc)</h2>
+                    </div>
+
+                    <div class="error-wrapper" id="pubg-error--wrapper">
+                        <div class="text-message" id="pubg-text--wrapper"></div>
+                    </div>
+
+                    <!-- ENTER PLAYER ID -->
+                    <div class="player-id--wrapper">
+                        <h3 class="store-title">1. Enter Player ID</h3>
+                        <input type="text" id="pubg_id" placeholder="Enter Player ID" />
+                    </div>
+
+                    <!-- SELECT THE RECHARGE (ROYAL PASS || TOP UP RECHARGE) -->
+                    <div class="player-recharge--wrapper">
+                        <h3 class="store-title">2. Select Recharge</h3>
+
+                        <div class="player-recharge-uc--wrapper">
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_1" checked="checked" />
+                                    <div>30 + 2 UC</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_2" />
+                                    <div>60 + 3 UC</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_3" />
+                                    <div>300 + 40 UC</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_4" />
+                                    <div>600 + 90 UC</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_5" />
+                                    <div>1500 + 375 UC</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_6" />
+                                    <div>3000 + 1000 UC</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="uc" value="uc_7" />
+                                    <div>6000 + 2400 UC</div>
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <h3 class="store-title"> - Royal Pass</h3>
+                        <div>
+                            <label class="labl elite-royalpass">
+                                <input type="radio" name="uc" value="uc_8" />
+                                <div>Royal Pass Upgrade Card (Season 14) + 70 UC</div>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="labl elite-royalpass">
+                                <input type="radio" name="uc" value="uc_9" />
+                                <div>Elite Pass Plus Upgrade Card (Season 14) + Classic Create Coupon</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- EMAIL ID WRAPPER -->
+                    <div class="email-id--wrapper">
+                        <h3 class="store-title">3. Enter your email address</h3>
+                        <input type="email" id="pubg_emailId" placeholder="Enter your email address" />
+                    </div>
+
+                    <!-- TOTAL AMOUNT WRAPPER -->
+                    <div class="total-amount--wrapper">
+                        <h3 class="store-title">4. Total Amount</h3>
+                        <table class="pubg_table">
+                            <tr>
+                                <td>Quantity</td>
+                                <td>Amount</td>
+                            </tr>
+                            <tr>
+                                <td>50.00</td>
+                                <td>160.00</td>
+                            </tr>
+                            <tr>
+                                <td class="horizontal-line"></td>
+                                <td class="horizontal-line">20.00
+                                    <span class="table-inline--text">(Service Charge)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>180.00</td>
+                            </tr>
+                        </table>
+                        <button type="button" id="pubg_pay">PAY KHALTI</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="freeFire-store--wrapper active-wrapper">
+                <div class="row">
+
+                    <div class="pubg-store-header--wrapper">
+                        <h2>Free Fire (Diamonds)</h2>
+                    </div>
+
+                    <div class="error-wrapper" id="freefire-error--wrapper">
+                        <div class="text-message" id="freefire-text--wrapper"></div>
+                    </div>
+
+                    <!-- ENTER PLAYER ID -->
+                    <div class="player-id--wrapper">
+                        <h3 class="store-title">1. Enter Player ID</h3>
+                        <input type="text" id="freeFire_id" placeholder="Enter Player ID" />
+                    </div>
+
+                    <!-- SELECT THE RECHARGE (ROYAL PASS || TOP UP RECHARGE) -->
+                    <div class="player-recharge--wrapper">
+                        <h3 class="store-title">2. Select Recharge</h3>
+
+                        <div class="player-recharge-uc--wrapper">
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="one_value" checked="checked" />
+                                    <div>50 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="another" />
+                                    <div>100 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="another" />
+                                    <div>310 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="another" />
+                                    <div>520 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="another" />
+                                    <div>1060 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="another" />
+                                    <div>2180 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="labl">
+                                    <input type="radio" name="diamonds" value="another" />
+                                    <div>5600 DIAMONDS</div>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- EMAIL ID WRAPPER -->
+                    <div class="email-id--wrapper">
+                        <h3 class="store-title">3. Enter your email address</h3>
+                        <input type="email" id="freeFire_emailId" placeholder="Enter your email address" />
+                    </div>
+
+                    <!-- TOTAL AMOUNT WRAPPER -->
+                    <div class="total-amount--wrapper">
+                        <h3 class="store-title">4. Total Amount</h3>
+                        <table class="freeFire_table">
+                            <tr>
+                                <td>Quantity</td>
+                                <td>Amount</td>
+                            </tr>
+                            <tr>
+                                <td>50.00</td>
+                                <td>160.00</td>
+                            </tr>
+                            <tr>
+                                <td class="horizontal-line"></td>
+                                <td class="horizontal-line">20.00
+                                    <span class="table-inline--text">(Service Charge)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>180.00</td>
+                            </tr>
+                        </table>
+                        <button type="button" id="freeFire_pay">PAY KHALTI</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact-us">
+        <div class="heading-title--wrapper">
+            <h2>For any queries, you can contact us on :</h2>
+        </div>
+        <div class="contact-us--wrapper">
+            <div class="row">
+                <h3><span class="contact-us--inline">Email :</span>contact@pubgmobilenp.com</h3>
+                <h3><span class="contact-us--inline">Facebook :</span>
+                    <a href="https://www.facebook.com/pubgmobilefornepal/" ,
+                        target="_self">https://www.facebook.com/pubgmobilefornepal/</a></h3>
+            </div>
+        </div>
+    </section>
+    <script src="/assets/js/store/pubg-uc.js"></script>
+</body>
+
+</html>
