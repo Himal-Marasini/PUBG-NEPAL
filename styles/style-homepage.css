@@ -458,6 +458,9 @@ hr {
   }
 }
 @media only screen and (max-width: 1180px) {
+  .container__matchMap {
+    padding-bottom: 0;
+  }
   .heroarea__text-background {
     width: 580px;
     height: 180px;

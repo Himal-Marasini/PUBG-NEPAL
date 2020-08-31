@@ -85,7 +85,7 @@ module.exports = async function sendMail(userdata, res) {
                 <body>
                 <div class="container">
                 <p>Hii ${userdata.registratorName},<br>
-                    Thanks for participating in PUBG NEPAL tournament, you will get the
+                    Thanks for participating in PUBG NEPAL matches, you will get the
                     ROOM ID and PASSWORD on registered email address before starting of
                     15 minute of match, Here are the details of your registered team:-</p>
                 <table>
@@ -126,11 +126,11 @@ module.exports = async function sendMail(userdata, res) {
                     </tr>
                 </table>
                 <br />
-                <p>1. Winning Team : <b> 2500 </b> </p>
-                <p>2. Second Position : <b> 200 </b> </p>
-                <p>3. Team with highest kill :  <b> 800</b> </p>
+                <p>1. First Position : <b> 1200 </b> </p>
+                <p>2. Second Position : <b> 600 </b> </p>
+                <p>3. Second Position : <b> 300 </b> </p>
+                <p>4. Team with highest kill :  <b> Per Kill * 20</b> </p>
                 <br />
-                <p>The Total amount : <b> 3500 </b> </p>
                 <div class="note">
                     Note:- Sharing the room id and password with others or inviting the others people
                     in a room without PERMISSION of the authorized member will lead to the harsh action immediately.
