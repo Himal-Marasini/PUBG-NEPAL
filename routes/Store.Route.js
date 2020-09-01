@@ -1,8 +1,12 @@
 const express = require('express');
-const Route = express.Router();
+const Router = express.Router();
 
 const store = require('../controller/store.controller');
 
-Route.get('/store', store.getStore );
+Router.get('/store', store.getStore );
 
-module.exports = Route;
+Router.post('/auth/store', store.postAuthShop);
+
+Router.post('/store', store.postStore);
+
+module.exports = Router;

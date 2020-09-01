@@ -297,7 +297,132 @@ function validateLogin(inputData) {
   return Joi.validate(inputData, objectSchema);
 };
 
+// function shopAuthWithoutKhaltiData(inputData){
+//   const objectSchema = {
+//     email: Joi.string()
+//     .email({ minDomainSegments: 2 })
+//     .required()
+//     .error((err) => {
+//       return {
+//         message: "Please enter the valid email id !!",
+//       };
+//     }),
+//     player_id: Joi.number()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message: "Please enter the valid phone number !!"
+//       }
+//     }),
+//     items: Joi.object()
+//     .required()
+//     .error((err)=> { 
+//       return {
+//         message: "Validation Error !! Please refresh the page and Try again !"
+//       }
+//     })
+//   };
+
+//   return Joi.validate(inputData, objectSchema);
+// };
+
+// function shopAuthWithKhaltiData(inputData){
+//   const objectSchema = {
+//     idx: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   token: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   amount: Joi.number()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   mobile: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   product_identity: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   product_name: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   product_url: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//   widget_id: Joi.string()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message:
+//           "Sorry, Some problem has occured !! Contact us on (contact@pubgnepal.com)",
+//       };
+//     }),
+//     email: Joi.string()
+//     .email({ minDomainSegments: 2 })
+//     .required()
+//     .error((err) => {
+//       return {
+//         message: "Please enter the valid email id !!",
+//       };
+//     }),
+//     player_id: Joi.number()
+//     .required()
+//     .error((err) => {
+//       return {
+//         message: "Please enter the valid phone number !!"
+//       }
+//     }),
+//     items: Joi.object()
+//     .required()
+//     .error((err)=> { 
+//       return {
+//         message: "Validation Error !! Please refresh the page and Try again !"
+//       }
+//     })
+//   };
+
+//   return Joi.validate(inputData, objectSchema);
+// };
+
+
 exports.validateWithoutKhaltiData = validateWithoutKhaltiData;
 exports.validateWithKhaltiData = validateWithKhaltiData;
 exports.validateCreateAccount = validateCreateAccount;
 exports.validateLogin = validateLogin;
+// exports.shopAuth = shopAuthWithoutKhaltiData;
+// exports.shopAuthWithKhaltiData = shopAuthWithKhaltiData;

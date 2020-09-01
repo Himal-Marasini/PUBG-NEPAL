@@ -7,6 +7,8 @@
     <title>PUBG MOBILE NEPAL STORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet" />
     <link href="/styles/store/store.css" rel="stylesheet">
+    <link rel="icon" href="/assets/images/Logo.png" type="image/png">
+    <script src="https://khalti.com/static/khalti-checkout.js"></script>
 </head>
 
 <body>
@@ -31,6 +33,10 @@
             <h2>Buy pubg mobile uc or Free Fire Diamonds</h2>
         </div>
 
+        <div class="error-wrapper" id="main-error--wrapper">
+            <div class="text-message" id="main-text--wrapper"></div>
+        </div>
+
         <div class="store-wrapper">
 
             <div class="pubg-store--wrapper ">
@@ -46,7 +52,8 @@
                     <!-- ENTER PLAYER ID -->
                     <div class="player-id--wrapper">
                         <h3 class="store-title">1. Enter Player ID</h3>
-                        <input type="text" id="pubg_id" placeholder="Enter Player ID" />
+                        <input type="number" id="pubg_id" onkeydown="return event.keyCode !== 69"
+                            placeholder="Enter Player ID" />
                     </div>
 
                     <!-- SELECT THE RECHARGE (ROYAL PASS || TOP UP RECHARGE) -->
@@ -57,7 +64,7 @@
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="uc" value="uc_1" checked="checked" />
+                                    <input type="radio" name="uc" value="uc_1" />
                                     <div>30 + 2 UC</div>
                                 </label>
                             </div>
@@ -136,18 +143,18 @@
                                 <td>Amount</td>
                             </tr>
                             <tr>
-                                <td>50.00</td>
-                                <td>160.00</td>
+                                <td id="pubg-quantity--wrapper"></td>
+                                <td id="pubg-amount--wrapper"></td>
                             </tr>
                             <tr>
                                 <td class="horizontal-line"></td>
-                                <td class="horizontal-line">20.00
-                                    <span class="table-inline--text">(Service Charge)</span>
+                                <td class="horizontal-line" id="pubg-serviceCharge--wrapper">
+
                                 </td>
                             </tr>
                             <tr>
                                 <td>Total</td>
-                                <td>180.00</td>
+                                <td id="pubg-total--wrapper"></td>
                             </tr>
                         </table>
                         <button type="button" id="pubg_pay">PAY KHALTI</button>
@@ -169,7 +176,8 @@
                     <!-- ENTER PLAYER ID -->
                     <div class="player-id--wrapper">
                         <h3 class="store-title">1. Enter Player ID</h3>
-                        <input type="text" id="freeFire_id" placeholder="Enter Player ID" />
+                        <input type="number" id="freeFire_id" onkeydown="return event.keyCode !== 69"
+                            placeholder="Enter Player ID" />
                     </div>
 
                     <!-- SELECT THE RECHARGE (ROYAL PASS || TOP UP RECHARGE) -->
@@ -180,49 +188,49 @@
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="one_value" checked="checked" />
+                                    <input type="radio" name="diamonds" value="diamonds_1" />
                                     <div>50 DIAMONDS</div>
                                 </label>
                             </div>
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="another" />
+                                    <input type="radio" name="diamonds" value="diamonds_2" />
                                     <div>100 DIAMONDS</div>
                                 </label>
                             </div>
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="another" />
+                                    <input type="radio" name="diamonds" value="diamonds_3" />
                                     <div>310 DIAMONDS</div>
                                 </label>
                             </div>
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="another" />
+                                    <input type="radio" name="diamonds" value="diamonds_4" />
                                     <div>520 DIAMONDS</div>
                                 </label>
                             </div>
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="another" />
+                                    <input type="radio" name="diamonds" value="diamonds_5" />
                                     <div>1060 DIAMONDS</div>
                                 </label>
                             </div>
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="another" />
+                                    <input type="radio" name="diamonds" value="diamonds_6" />
                                     <div>2180 DIAMONDS</div>
                                 </label>
                             </div>
 
                             <div>
                                 <label class="labl">
-                                    <input type="radio" name="diamonds" value="another" />
+                                    <input type="radio" name="diamonds" value="diamonds_7" />
                                     <div>5600 DIAMONDS</div>
                                 </label>
                             </div>
@@ -245,18 +253,17 @@
                                 <td>Amount</td>
                             </tr>
                             <tr>
-                                <td>50.00</td>
-                                <td>160.00</td>
+                                <td id="freeFire-quantity--wrapper"></td>
+                                <td id="freeFire-amount--wrapper"></td>
                             </tr>
                             <tr>
                                 <td class="horizontal-line"></td>
-                                <td class="horizontal-line">20.00
-                                    <span class="table-inline--text">(Service Charge)</span>
+                                <td class="horizontal-line" id="freeFire-serviceCharge--wrapper">
                                 </td>
                             </tr>
                             <tr>
                                 <td>Total</td>
-                                <td>180.00</td>
+                                <td id="freeFire-total--wrapper"></td>
                             </tr>
                         </table>
                         <button type="button" id="freeFire_pay">PAY KHALTI</button>
