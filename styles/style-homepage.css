@@ -30,7 +30,7 @@ a {
 }
 
 #logo {
-  width: 80%;
+  width: 103px;
   height: auto;
 }
 
@@ -41,8 +41,23 @@ a {
   background-repeat: no-repeat;
 }
 
+.heroarea_header--wrapeer {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.store_wrapper {
+  margin-top: 20px;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.store_wrapper a {
+  text-decoration: none;
+  color: #e08012;
+}
+
 .heroarea__logo {
-  display: inline-block;
   margin-top: 0.66rem;
 }
 
@@ -512,6 +527,13 @@ hr {
     font-size: 1.1rem;
   }
 }
+
+@media only screen and (max-width: 862px) {
+  .heroarea_header--wrapeer {
+    grid-template-columns: 68% 30%;
+  }
+}
+
 @media only screen and (max-width: 770px) {
   .heroarea__text-background {
     width: 500px;
@@ -587,9 +609,24 @@ hr {
     width: 420px;
   }
 }
+
+@media only screen and (max-width: 596px) {
+  #logo {
+    width: 87px;
+  }
+
+  .heroarea_header--wrapeer {
+    grid-template-columns: 60% 38%;
+  }
+}
+
 @media only screen and (max-width: 426px) {
   .row {
     width: 95%;
+  }
+
+  .heroarea_header--wrapeer {
+    grid-template-columns: 40% 60%;
   }
 
   .heroarea__text-background {
