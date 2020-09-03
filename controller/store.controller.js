@@ -1,5 +1,6 @@
 const Store = require('../model/store.model');
 const storeKhaltiVerification = require('../middleware/storeKhaltiServer');
+const sendMailForStore = require('../middleware/storeNewOrder');
 
 exports.getStore = (req,res,next) => {
     return res.render('store')
@@ -169,8 +170,17 @@ exports.postStore = async (req, res, next) => {
                 dollarValue: Math.round(dollarValue).toFixed(2)
             }
         });
+
+        const mailData = {
+            buyer_email: store.email,
+            buyer_playerId: store.player_id,
+            item: store.item.name
+        }
     
         await store.save();
+
+        await sendMailForStore(mailData);
+        
         return res.json({
             status:true,
             message:"Your request has been made successfully made !! In 5 to 10 min, You will receive a confirmation mail"
