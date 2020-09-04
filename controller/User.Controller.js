@@ -1,25 +1,25 @@
-const Match = require("../model/createMatch");
-const User = require("../model/createUser");
+const Match = require("../model/createMatch.model");
+const User = require("../model/createUser.model");
 
-const AppError = require('../util/applicationError');
-const catchAsync = require('../util/catchAsync');
-const sortMatches = require('../util/sortMatches');
+const AppError = require("../util/applicationError");
+const catchAsync = require("../util/catchAsync");
+const sortMatches = require("../util/sortMatches");
 
 // !LOGIN PAGE
 async function NotAuthenticated_Page(req, res, next) {
   let match = await Match.find();
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
-  let existingMatch = match.filter(el => el.status.isFinished !== "true" && el.status.isFinished !== 'technical error');
+  let existingMatch = match.filter((el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error");
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const newVal = sortMatches(existingMatch);
 
-  console.log(newVal.length)
+  console.log(newVal.length);
   return res.render("index", {
     matchInfo: newVal,
   });
-};
+}
 
 // LOGIN PAGE
 async function Authenticated_Page(req, res, next) {
@@ -27,74 +27,89 @@ async function Authenticated_Page(req, res, next) {
   let match = [];
   let existingRegisteredMatches = [];
 
-  if (user.registerMatches.length > 0) match = await User.findById(user._id).populate('registerMatches');
+  if (user.registerMatches.length > 0) match = await User.findById(user._id).populate("registerMatches");
 
   // Filter the matches whose status is !== true; (Basically that is available)
-  if (match.registerMatches !== undefined) existingRegisteredMatches = match.registerMatches.filter(el => el.status.isFinished !== 'true' && el.status.isFinished !== 'technical error');
+  if (match.registerMatches !== undefined)
+    existingRegisteredMatches = match.registerMatches.filter(
+      (el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error"
+    );
 
-  user.isMatchFinished()
+  user.isMatchFinished();
 
   const result = {
+    name: user.name,
     matchPlayed: user.totalMatch,
     matchWon: user.matchWon,
     currentLeague: user.currentLeague,
-    upcoming_matches: existingRegisteredMatches
+    upcoming_matches: existingRegisteredMatches,
   };
 
   return res.render("Login-Dashboard.ejs", {
     path: "/",
-    data: result
+    data: result,
   });
 }
 
 exports.getHomePage = catchAsync(async (req, res, next) => {
   const isLogin = req.isLoggedIn;
   if (!isLogin) {
-    NotAuthenticated_Page(req, res, next)
+    NotAuthenticated_Page(req, res, next);
   } else {
-    Authenticated_Page(req, res, next)
+    Authenticated_Page(req, res, next);
   }
 });
 
 exports.getMatchHighlights = catchAsync(async (req, res) => {
-  const match = await Match.find({ 'status.isFinished': true });
+  const match = await Match.find({ "status.isFinished": true });
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);
 
-  return res.render('Match-Highlights', {
+  return res.render("Match-Highlights", {
     path: "/match-highlights",
-    data: data
+    data: data,
   });
 });
 
 exports.getTournaments = (req, res, next) => {
-  return res.render('Tournaments', {
-    path: '/upcoming-tournament'
+  return res.render("Tournaments", {
+    path: "/upcoming-tournament",
   });
 };
 
 exports.getRecentWinners = catchAsync(async (req, res, next) => {
-
-  const match = await Match.find({ 'status.isFinished': true });
+  const match = await Match.find({ "status.isFinished": true });
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);
 
-  return res.render('RecentWinner', {
+  return res.render("RecentWinner", {
     path: "/recent-winner",
-    data: data
+    data: data,
   });
 });
 
 exports.getBlogs = (req, res, next) => {
-  return res.render('Update-Blogs', {
-    path: '/blogs'
-  })
+  return res.render("Update-Blogs", {
+    path: "/blogs",
+  });
 };
 
 exports.getContactUs = (req, res, next) => {
-  return res.render('ContactUs', {
-    path: '/contact-us'
+  return res.render("ContactUs", {
+    path: "/contact-us",
   });
-}
+};
+
+exports.getUserSetting = (req, res, next) => {
+  return res.render("Setting", {
+    path: "/user/setting",
+    data: {
+      name: req.user.name,
+      email: req.user.email,
+      phoneNumber: req.user.phoneNumber,
+      khaltiId: req.user.khaltiId,
+    },
+  });
+};

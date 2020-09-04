@@ -268,7 +268,13 @@ function validateCreateAccount(inputData) {
           message: "Password should be more than 6 characters !!",
         };
       }),
-    confirmPassword: Joi.ref("password"),
+      confirmPassword: Joi.string().required().valid(Joi.ref('password')).options({
+        language: {
+          any: {
+            allowOnly: ' do not match !!',
+          }
+        } 
+      })
   };
 
   return Joi.validate(inputData, objectSchema);
@@ -295,6 +301,33 @@ function validateLogin(inputData) {
   };
 
   return Joi.validate(inputData, objectSchema);
+};
+
+function validateChangePassword(inputData) {
+  const schema = {
+    oldPassword: Joi.string().required().min(6).error(()=>{
+      return {
+        message: "Please enter your old password !!"
+      }
+    }),
+    newPassword: Joi.string()
+    .min(6)
+    .required()
+    .error(() => {
+      return {
+        message: "New password length need to be greater than 6 letters !!"
+      }
+    }),
+    confirmPassword: Joi.string().required().valid(Joi.ref('newPassword')).options({
+      language: {
+        any: {
+          allowOnly: ' do not match !!',
+        }
+      } 
+    })
+  };
+
+  return Joi.validate(inputData, schema);
 };
 
 // function shopAuthWithoutKhaltiData(inputData){
@@ -424,5 +457,7 @@ exports.validateWithoutKhaltiData = validateWithoutKhaltiData;
 exports.validateWithKhaltiData = validateWithKhaltiData;
 exports.validateCreateAccount = validateCreateAccount;
 exports.validateLogin = validateLogin;
+exports.validateChangePassword = validateChangePassword;
+
 // exports.shopAuth = shopAuthWithoutKhaltiData;
 // exports.shopAuthWithKhaltiData = shopAuthWithKhaltiData;

@@ -87,7 +87,7 @@ h2 {
   margin: 10px 0;
 }
 
-input[type="text"],
+input[type="number"],
 input[type="email"] {
   width: 200px;
   height: 30px;
@@ -97,6 +97,18 @@ input[type="email"] {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 400;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /* Radio button in a Div */
@@ -278,8 +290,188 @@ a {
   text-decoration: underline;
 }
 
+#overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 2;
+}
+
+/* Spinner */
+.spinner {
+  position: fixed;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(0%, -50%);
+  -webkit-transform: translate(0%, -50%);
+  -moz-transform: translate(0%, -50%);
+  -ms-transform: translate(0%, -50%);
+  -o-transform: translate(0%, -50%);
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #2ecc71;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #2ecc71 transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.ui.segments {
+  min-width: 0 !important;
+}
+
 @media only screen and (max-width: 1100px) {
+  header div:first-child {
+    margin-top: 15px;
+  }
+  .hero-area {
+    background-position: 0 -51px;
+  }
   .store-wrapper {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .pubg-store--wrapper .row {
+    margin-left: 7%;
+  }
+}
+
+@media only screen and (max-width: 936px) {
+  #logo {
+    width: 15%;
+  }
+  .hero-area {
+    min-height: 465px;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  #logo {
+    width: 78px;
+  }
+
+  header {
+    grid-template-columns: 65% 30%;
+  }
+
+  .hero-area {
+    min-height: 380px;
+  }
+}
+
+@media only screen and (max-width: 721px) {
+  header {
+    grid-template-columns: 54% 44%;
+  }
+
+  .hero-area {
+    min-height: 345px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  table {
+    width: 100%;
+  }
+  .hero-area {
+    min-height: 320px;
+  }
+}
+
+@media only screen and (max-width: 664px) {
+  .player-recharge-uc--wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-area {
+    min-height: 315px;
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  .hero-area {
+    min-height: 277px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .labl > input + div {
+    padding: 6px;
+    height: auto;
+  }
+
+  .elite-royalpass {
+    width: auto;
+  }
+
+  input[type="number"],
+  input[type="email"] {
+    width: 260px;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .hero-area {
+    min-height: 240px;
+  }
+}
+
+@media only screen and (max-width: 516px) {
+  header {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .hero-area {
+    min-height: 223px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .row {
+    width: 100%;
+  }
+  .hero-area {
+    min-height: 189px;
+  }
+  .pubg-store--wrapper .row {
+    margin-left: 1%;
   }
 }

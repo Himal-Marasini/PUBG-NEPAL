@@ -1,0 +1,124 @@
+@import "./common/Style-SideNav.css";
+
+.main-wrapper {
+  background: #252734;
+  font-size: 0.9em;
+}
+
+.parent-wrapper {
+  width: 97%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding-left: 20px;
+  background-color: #fafafa;
+  color: #212121;
+  padding-bottom: 20px;
+}
+
+h2 {
+  font-family: Teko;
+  font-size: 2em;
+  font-weight: 400;
+  color: #e08012;
+  text-transform: uppercase;
+}
+
+.user-details--title {
+  padding-top: 20px;
+}
+
+hr {
+  border-bottom: 2px solid #ccc;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 20px 0;
+  width: 80%;
+}
+
+hr.top {
+  margin-top: 10px;
+}
+
+.user-details--wrapper div {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin: 10px 0;
+}
+
+.left-side--user-details {
+  font-weight: 600;
+}
+
+.right-side--user-details {
+  color: #90949c;
+  font-weight: 600;
+}
+
+.old-password--wrapper {
+  margin-top: 10px;
+}
+
+.change-password--wrapper div {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin: 10px 0;
+}
+
+input[type="password"] {
+  border: 2px solid #cccccc;
+  outline: none;
+  padding-left: 3px;
+  height: 22px;
+  color: #212121;
+}
+
+button {
+  font-family: "Raleway";
+  background-color: #27ae60;
+  padding: 8px 25px;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.error-wrapper {
+  width: 98%;
+  height: 30px;
+  background: #e74c3c;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  -ms-border-radius: 1px;
+  -o-border-radius: 1px;
+  display: none;
+}
+
+.success-wrapper {
+  width: 98%;
+  height: 30px;
+  background: #27ae60;
+  margin-bottom: 10px;
+  display: none;
+  text-align: center;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  -ms-border-radius: 1px;
+  -o-border-radius: 1px;
+}
+
+.error-text {
+  padding-top: 7px;
+  font-size: 1em;
+  color: #fafafa;
+  text-transform: uppercase;
+}

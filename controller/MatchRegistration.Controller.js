@@ -1,17 +1,16 @@
-const User = require("../model/createUser");
-const Match = require("../model/createMatch");
+const User = require("../model/createUser.model");
+const Match = require("../model/createMatch.model");
 
-const khaltiVerification = require("../middleware/khaltiServer");
-const sendmail = require("../middleware/sendMail");
+const khalti_registration_verification = require("../services/khalti/registration_verification");
+const send_registration_mail = require("../services/mail/registration_mail");
 
 const validateWithoutKhaltiData = require("../util/validate").validateWithoutKhaltiData;
 const validateWithKhaltiData = require("../util/validate").validateWithKhaltiData;
-const AppError = require('../util/applicationError');
-const catchAsync = require('../util/catchAsync');
-const sortMatches = require('../util/sortMatches');
+const AppError = require("../util/applicationError");
+const catchAsync = require("../util/catchAsync");
+const sortMatches = require("../util/sortMatches");
 
 exports.getRegistration = catchAsync(async (req, res, next) => {
-
   const { id } = req.params;
   const user = req.user;
 
@@ -31,13 +30,12 @@ exports.getRegistration = catchAsync(async (req, res, next) => {
     phoneNumber: user.phoneNumber,
     email: user.email,
     khaltiId: user.khaltiId,
-    matchType: `${match.type}(${match.device})`,
+    matchType: `${match.type}(${match.device})`
   };
 
   return res.render("Register-Form.ejs", {
     data: matchData
   });
-
 });
 
 // WITH KHALTI DATA (THIS WILL BE TRIGGERED)
@@ -52,10 +50,10 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
   const match = await Match.findOne({ _id: req.body.id });
 
   if (!match) {
-    return next(new AppError('This match is not available !!', 503));
+    return next(new AppError("This match is not available !!", 503));
   }
 
-  const verified = await khaltiVerification(req.body.token, match.fee);
+  const verified = await khalti_registration_verification(req.body.token, match.fee);
 
   if (!verified) {
     return next(new AppError(verified.error, 400));
@@ -110,16 +108,13 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
     ]
   };
 
-
   if (userdata) {
-    if (process.env.NODE_ENV === "prod") await sendmail(matchInfo, res);
+    if (process.env.NODE_ENV === "prod") await send_registration_mail(matchInfo, res);
     return res.status(200).json({
       success: true,
-      message:
-        "You have been succesfully registered !! Please Check your mail for futher details",
+      message: "You have been succesfully registered !! Please Check your mail for futher details"
     });
-  };
-
+  }
 });
 
 // WITHOUT KHALTI DATA (THIS WILL BE TRIGGERED)
@@ -127,7 +122,7 @@ exports.validateData = catchAsync(async (req, res, next) => {
   const { error } = validateWithoutKhaltiData(req.body);
 
   if (error) {
-    // JOI INVALID STATUS CODE: UNDEFINED (WHEN WE SEND EXTRA VALUE FROM FRONT END) ======/ NEED TO FIX THIS LATER 
+    // JOI INVALID STATUS CODE: UNDEFINED (WHEN WE SEND EXTRA VALUE FROM FRONT END) ======/ NEED TO FIX THIS LATER
     return next(error.details[0].message, 400);
   }
 
@@ -135,9 +130,13 @@ exports.validateData = catchAsync(async (req, res, next) => {
 
   // CHECK IF MATCH EXISTS AND CHECK IF IT'S STILL AVALIABLE
   if (!match) {
-    return next(new AppError('Sorry, This match is not available anymore !! Try different matches'), 400);
-  } else if (match.status.isFinished == 'true' || match.status.isFinished == 'technical error' || match.status.isFinished == 'registration closed') {
-    return next(new AppError('Registration has been closed for this match !!'), 400);
+    return next(new AppError("Sorry, This match is not available anymore !! Try different matches", 400));
+  } else if (
+    match.status.isFinished == "true" ||
+    match.status.isFinished == "technical error" ||
+    match.status.isFinished == "registration closed"
+  ) {
+    return next(new AppError("Registration has been closed for this match !!", 400));
   }
 
   // Check total number of Squad registered
@@ -152,7 +151,7 @@ exports.validateData = catchAsync(async (req, res, next) => {
   });
 
   if (checkUser) {
-    return next(new AppError('You have already been registered for this match !!', 400));
+    return next(new AppError("You have already been registered for this match !!", 400));
   }
 
   // Check if Team Name is Unique or Not (This functionality is Skipping For Now)
@@ -165,10 +164,12 @@ exports.validateData = catchAsync(async (req, res, next) => {
 });
 
 exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
-  let match = await Match.find().populate('players');
+  let match = await Match.find().populate("players");
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
-  let existingMatch = match.filter(el => el.status.isFinished !== 'true' && el.status.isFinished !== 'technical error' && el.status.isFinished !== 'registration closed');
+  let existingMatch = match.filter(
+    (el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error" && el.status.isFinished !== "registration closed"
+  );
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const newVal = sortMatches(existingMatch);

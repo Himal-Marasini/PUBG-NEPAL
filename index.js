@@ -9,12 +9,11 @@ const morgan = require("morgan");
 const compression = require("compression");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
-const flash = require('connect-flash');
-const session = require('express-session');
+const flash = require("connect-flash");
+const session = require("express-session");
 
-const moment = require('moment');
-const cookieParser = require('cookie-parser');
-const cors = require("cors");
+const moment = require("moment");
+const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -26,17 +25,12 @@ const matchRegistration = require("./routes/matchRegistration.Route");
 const admin = require("./routes/admin.Route");
 const store = require("./routes/store.Route");
 
-const AppError = require('./util/applicationError');
+const AppError = require("./util/applicationError");
 const db = require("./util/databse");
 
 const errorGlobalHandler = require("./controller/error.Controller");
 
 app.use(morgan("dev"));
-
-if (process.env.NODE_ENV === "prod") {
-  // app.use(cors());
-  // app.options('*', cors());
-}
 
 app.use(helmet());
 
@@ -62,14 +56,14 @@ app.use("/styles", express.static("styles"));
 app.use(
   bodyparser.urlencoded({
     limit: "1mb",
-    extended: false,
+    extended: false
   })
 );
 
 // BODYPARSER - FOR JSON BODY
 app.use(
   bodyparser.json({
-    limit: "1mb",
+    limit: "1mb"
   })
 );
 
@@ -78,15 +72,15 @@ app.use(mongoSanitize());
 
 app.use(xss());
 
-app.use(session({
-  secret:process.env.SESSION_SECRET,
-  saveUninitialized:true,
-  resave:true
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true,
+    resave: true
+  })
+);
 
 app.use(flash());
-
-// app.use('trust proxy');
 
 app.get("/favico.ico", (req, res) => {
   res.sendStatus(404);
@@ -123,7 +117,7 @@ db.then(() => {
     errorType: "Server Down",
     message: {
       title: "500 !!! INTERNAL SERVER ERROR",
-      subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`,
-    },
+      subtitle: `PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.`
+    }
   });
 });

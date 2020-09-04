@@ -1,25 +1,24 @@
 const bcrypt = require("bcryptjs");
 
-const User = require("../model/createUser");
+const User = require("../model/createUser.model");
 
-const validate = require("../util/validate");
-const AppError = require('../util/applicationError');
+const AppError = require("../util/applicationError");
 const catchAsync = require("../util/catchAsync");
-
+const { validateCreateAccount, validateLogin, validateChangePassword } = require("../util/validate");
 
 exports.getLogin = (req, res) => {
-  let message = req.flash('error');
+  let message = req.flash("error");
   let messageType;
 
-  if(message.length > 0){
-    messageType = 'error-active';
+  if (message.length > 0) {
+    messageType = "error-active";
   }
 
   return res.status(200).render("CreateORLogin.ejs", {
     title: "LOGIN",
-    error:{
-      type:messageType,
-      message:message[0]
+    error: {
+      type: messageType,
+      message: message[0]
     }
   });
 };
@@ -27,16 +26,14 @@ exports.getLogin = (req, res) => {
 exports.postLogin = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  const { error } = validate.validateLogin(req.body);
+  const { error } = validateLogin(req.body);
 
   if (error) {
     next(new AppError(error.details[0].message, 400));
     return;
   }
 
-  const user = await User.findOne({ email: email.toLowerCase() }).select(
-    "+password"
-  );
+  const user = await User.findOne({ email: email.toLowerCase() }).select("+password");
 
   if (!user) {
     return next(new AppError(`User doesn't exist !! Please Create Account before login`, 400));
@@ -46,7 +43,7 @@ exports.postLogin = catchAsync(async (req, res, next) => {
 
   if (!doMatch) {
     return next(new AppError("Email or password is incorrect !!", 400));
-  };
+  }
 
   // GENERATING AUTH TOKEN
   const token = user.generateAuthToken();
@@ -54,19 +51,19 @@ exports.postLogin = catchAsync(async (req, res, next) => {
   // SETTING THE TOKEN IN COOKIES AND SENDING THEM TO FRONT END
   sendTokenInCookie(token, res);
 
-  return res.redirect('/');
+  return res.redirect("/");
 });
 
 exports.getCreateAccount = (req, res) => {
   return res.status(200).render("CreateORLogin.ejs", {
-    title: "SIGN-UP",
+    title: "SIGN-UP"
   });
 };
 
 exports.postCreateAccount = catchAsync(async (req, res, next) => {
   const { name, email, phoneNumber, khaltiId, password } = req.body;
 
-  const { error } = validate.validateCreateAccount(req.body);
+  const { error } = validateCreateAccount(req.body);
 
   if (error) {
     let err = error.details[0].message;
@@ -80,7 +77,7 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
   const userDoc = await User.findOne({ email });
 
   if (userDoc) {
-    next(new AppError('User already exists with this Email or Phone Number !!', 200));
+    next(new AppError("User already exists with this Email or Phone Number !!", 200));
     return;
   }
 
@@ -91,7 +88,7 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
     email,
     phoneNumber,
     khaltiId,
-    password: hashedPassword,
+    password: hashedPassword
   });
 
   await user.save();
@@ -109,6 +106,84 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.postChangePassword = catchAsync(async (req, res, next) => {
+  const { error } = validateChangePassword(req.body);
+
+  if (error) {
+    return next(new AppError(error.details[0].message, 400));
+  }
+
+  const user = await User.findById(req.user._id).select("+password");
+
+  const doMatch = await bcrypt.compare(req.body.oldPassword, user.password);
+
+  if (!doMatch) {
+    return next(new AppError("Old password doesn't match !!", 400));
+  }
+
+  const hashedPassword = await bcrypt.hash(req.body.newPassword, 13);
+
+  user.password = hashedPassword;
+
+  await user.save();
+
+  // GENERATING AUTH TOKEN
+  const token = user.generateAuthToken();
+
+  // SETTING THE TOKEN IN COOKIES AND SENDING THEM TO FRONT END
+  sendTokenInCookie(token, res);
+
+  return res.status(200).json({
+    success: false,
+    message: "Password has been changed !!"
+  });
+});
+
+exports.postResetPassword = catchAsync(async (req, res, next) => {
+  const { email } = req.body;
+  // Front End Data: {email:"abc@gmail.com"}
+
+  // 1. Check if user exists with email or not
+  const user = await User.findOne({ email: email.toLowerCase() });
+
+  if (!user) {
+    return next(new AppError("The email has been send if user exists with this email id", 200));
+  }
+
+  // 2. Generate a Reset Token
+  const resetToken = user.createPasswordResetToken();
+  await user.save(); // because we added the data in a schema inside createPasswordResetToken()
+
+  // 3. Send it to the user
+  const resetUrl = `${req.protocol}://${req.get("host")}/reset-password/${resetToken}`; // By clicking on this url, User will be able to reset the password
+
+  // 4. Here we using try and catch because error can be thrown by email
+  try {
+    // Need to build the email JS
+
+    // await sendEmail(resetToken, user.email);
+    return res.status(200).json({
+      success: true,
+      message: "Token has been send successfully"
+    });
+  } catch {
+    // Sending it to undefined because we have set this inside this function [ user.createPasswordResetToken() ];
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+
+    return next(new AppError("There was error sending the email. Please try again later!", 500));
+  }
+});
+
+exports.patchResetPassword = catchAsync(async (req, res, next) => {
+  // 1. Extract the token from param or query
+  // 2. Convert the token into hashed token because in DB, We have stored the hashed token
+  // 3. Find the user with hashedtoken {passwordResetToken:hashedToken} And Validate if it has been expired or not
+  // 4. Update the new password and set passwordResetToken && passwordExpiresAt === undefined So that token won't work again
+  // 5. Sign in the user by sending JWT
+});
+
 function sendTokenInCookie(token, res) {
   // EXPIRES TIME Is CONVERTED INTO MILLISECONDS
   const cookieOptions = {
@@ -116,7 +191,7 @@ function sendTokenInCookie(token, res) {
     httpOnly: true
   };
 
-  if (process.env.NODE_ENV === 'prod') cookieOptions.secure = true;
+  if (process.env.NODE_ENV === "prod") cookieOptions.secure = true;
 
-  res.cookie('jwt', token, cookieOptions);
-};
+  res.cookie("jwt", token, cookieOptions);
+}

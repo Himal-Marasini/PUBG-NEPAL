@@ -6,9 +6,9 @@
 }
 
 .header-wrapper {
-  display: grid;
+  /* display: grid; */
   /* grid-template-columns: repeat(2, 1fr); */
-  grid-template-columns: 9fr 1fr;
+  /* grid-template-columns: 87% 10%; */
   margin-top: 30px;
 }
 
@@ -31,6 +31,28 @@
   position: absolute;
   right: 110px;
   top: 14px;
+}
+
+.image-wrapper__text {
+  color: #e08012;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-right: 8px;
+}
+
+.drop-down__wrapper {
+  vertical-align: top;
+  cursor: pointer;
+}
+
+#drop-down {
+  width: 18px;
+}
+
+.drop-down__options {
+  background: #252743;
+  color: #212121;
+  position: absolute;
 }
 
 .statistics-wrapper {

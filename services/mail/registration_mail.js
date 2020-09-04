@@ -1,15 +1,15 @@
-const sgMail = require('@sendgrid/mail');
+const sgMail = require("@sendgrid/mail");
 
 module.exports = async function sendMail(matchInfo, res) {
-    try {
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  try {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-        const msg = {
-            to: matchInfo.email,
-            from: 'PUBG MOBILE NEPAL <contact@pubgmobilenp.com>',
-            subject: 'Match Details',
-            text: 'Please keep this all detail to Yourself only',
-            html: `<!DOCTYPE html>
+    const msg = {
+      to: matchInfo.email,
+      from: "PUBG MOBILE NEPAL <contact@pubgmobilenp.com>",
+      subject: "Match Details",
+      text: "Please keep this all detail to Yourself only",
+      html: `<!DOCTYPE html>
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
@@ -132,14 +132,14 @@ module.exports = async function sendMail(matchInfo, res) {
             </div>
             </body>
             </html>`
-        };
+    };
 
-        await sgMail.send(msg);
-    } catch (err) {
-        console.log(err);
-        return res.json({
-            success: false,
-            message: "Fail to send a mail !! You will be updated soon",
-        });
-    }
+    await sgMail.send(msg);
+  } catch (err) {
+    console.log(err);
+    return res.json({
+      success: false,
+      message: "Fail to send a mail !! You will be updated soon"
+    });
+  }
 };

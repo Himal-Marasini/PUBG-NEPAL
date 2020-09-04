@@ -16,4 +16,6 @@ Router.get("/recent-winner", isAuth, user.getRecentWinners);
 
 Router.get('/contact-us', isAuth, user.getContactUs);
 
+Router.get('/user/setting', isAuth, user.getUserSetting);
+
 module.exports = Router;

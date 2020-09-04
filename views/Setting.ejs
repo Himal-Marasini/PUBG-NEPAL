@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting</title>
+    <%- include('./Dashboard_Common/font.ejs') %>
+    <link rel="stylesheet" href="/Styles/style-setting.css" type="text/css" />
+    <link rel="icon" href="/assets/images/Logo.png" type="image/png" />
+</head>
+
+<body>
+    <section>
+        <%- include('./Dashboard_Common/side-nav.ejs') %>
+        <div class="main-wrapper">
+            <div class="parent-wrapper">
+                <h2 class="user-details--title">User Details</h2>
+                <hr class="top" />
+                <div class="user-details--wrapper">
+                    <div class="name-wrapper">
+                        <div class="left-side--user-details">
+                            <p>Name</p>
+                        </div>
+                        <div class="right-side--user-details">
+                            <p><%= data.name %></p>
+                        </div>
+                    </div>
+                    <div class="email-wrapper">
+                        <div class="left-side--user-details">
+                            <p>Email Id</p>
+                        </div>
+                        <div class="right-side--user-details">
+                            <p><%= data.email %></p>
+                        </div>
+                    </div>
+                    <div class="phone-wrapper">
+                        <div class="left-side--user-details">
+                            <p>Phone Number</p>
+                        </div>
+                        <div class="right-side--user-details number-text">
+                            <p><%= data.phoneNumber %></p>
+                        </div>
+                    </div>
+                    <div class="khalti-wrapper">
+                        <div class="left-side--user-details">
+                            <p>Khalti ID</p>
+                        </div>
+                        <div class="right-side--user-details number-text">
+                            <p><%= data.khaltiId %></p>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h2>Change Password</h2>
+                <div class="error-wrapper">
+                    <div class="error-text">New password length need to be greater than 6 letters !!</div>
+                </div>
+                <div class="change-password--wrapper">
+                    <div class="old-password--wrapper">
+                        <div class="left-side--password">
+                            Old Password:
+                        </div>
+                        <div class="right-side--password">
+                            <input type="password" id="oldPassword" />
+                        </div>
+                    </div>
+
+                    <div class="new-password--wrapper">
+                        <div class="left-side--password">
+                            New Password:
+                        </div>
+                        <div class="right-side--password">
+                            <input type="password" id="newPassword" />
+                        </div>
+                    </div>
+
+                    <div class="confirm-password--wrapper">
+                        <div class="left-side--password">
+                            Confirm Password:
+                        </div>
+                        <div class="right-side--password">
+                            <input type="password" id="confirmPassword" />
+                        </div>
+                    </div>
+                    <button type="button" id="btn-submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/assets/js/setting/setting.js"></script>
+</body>
+
+</html>
