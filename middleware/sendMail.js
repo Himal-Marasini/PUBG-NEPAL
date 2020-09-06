@@ -1,15 +1,15 @@
-const sgMail = require('@sendgrid/mail');
+const sgMail = require("@sendgrid/mail");
 
 module.exports = async function sendMail(userdata, res) {
-    try {
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  try {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-        const msg = {
-            to: userdata.emailId,
-            from: 'PUBG MOBILE NEPAL <contact@pubgmobilenp.com>',
-            subject: 'Match Details',
-            text: 'Please keep this all detail to Yourself only',
-            html: `<!DOCTYPE html>
+    const msg = {
+      to: userdata.emailId,
+      from: "PUBG MOBILE NEPAL <contact@pubgmobilenp.com>",
+      subject: "Match Details",
+      text: "Please keep this all detail to Yourself only",
+      html: `<!DOCTYPE html>
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
@@ -126,10 +126,10 @@ module.exports = async function sendMail(userdata, res) {
                     </tr>
                 </table>
                 <br />
-                <p>1. First Position : <b> 1200 </b> </p>
-                <p>2. Second Position : <b> 600 </b> </p>
-                <p>3. Second Position : <b> 300 </b> </p>
-                <p>4. Team with highest kill :  <b> Per Kill * 20</b> </p>
+                <p>1. First Position : <b> 2100 NRS </b> </p>
+                <p>2. Second Position : <b> 500 NRS </b> </p>
+                <p>3. Second Position : <b> 200 NRS </b> </p>
+                <p>4. Highest Team Kill :  <b> Per Kill * 30 NRS</b> </p>
                 <br />
                 <div class="note">
                     Note:- Sharing the room id and password with others or inviting the others people
@@ -138,14 +138,14 @@ module.exports = async function sendMail(userdata, res) {
             </div>
             </body>
             </html>`
-        };
+    };
 
-        await sgMail.send(msg);
-    } catch (err) {
-        console.log(err)
-        return res.json({
-            status: false,
-            message: "Successfully Registered !! You will be updated soon"
-        });
-    }
+    await sgMail.send(msg);
+  } catch (err) {
+    console.log(err);
+    return res.json({
+      status: false,
+      message: "Successfully Registered !! You will be updated soon"
+    });
+  }
 };
