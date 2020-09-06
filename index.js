@@ -24,6 +24,7 @@ const authentication = require("./routes/authentication.Route");
 const matchRegistration = require("./routes/matchRegistration.Route");
 const admin = require("./routes/admin.Route");
 const store = require("./routes/store.Route");
+const demo = require("./routes/demo.Route");
 
 const AppError = require("./util/applicationError");
 const db = require("./util/databse");
@@ -92,6 +93,7 @@ app.use(user);
 app.use(matchRegistration);
 app.use(store);
 app.use(admin);
+app.use(demo);
 
 // 404, Page not found
 app.all("*", function (req, res, next) {

@@ -10,14 +10,15 @@ async function NotAuthenticated_Page(req, res, next) {
   let match = await Match.find();
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
-  let existingMatch = match.filter((el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error");
+  let existingMatch = match.filter(
+    (el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error"
+  );
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const newVal = sortMatches(existingMatch);
 
-  console.log(newVal.length);
   return res.render("index", {
-    matchInfo: newVal,
+    matchInfo: newVal
   });
 }
 
@@ -27,7 +28,8 @@ async function Authenticated_Page(req, res, next) {
   let match = [];
   let existingRegisteredMatches = [];
 
-  if (user.registerMatches.length > 0) match = await User.findById(user._id).populate("registerMatches");
+  if (user.registerMatches.length > 0)
+    match = await User.findById(user._id).populate("registerMatches");
 
   // Filter the matches whose status is !== true; (Basically that is available)
   if (match.registerMatches !== undefined)
@@ -42,12 +44,12 @@ async function Authenticated_Page(req, res, next) {
     matchPlayed: user.totalMatch,
     matchWon: user.matchWon,
     currentLeague: user.currentLeague,
-    upcoming_matches: existingRegisteredMatches,
+    upcoming_matches: existingRegisteredMatches
   };
 
   return res.render("Login-Dashboard.ejs", {
     path: "/",
-    data: result,
+    data: result
   });
 }
 
@@ -68,13 +70,13 @@ exports.getMatchHighlights = catchAsync(async (req, res) => {
 
   return res.render("Match-Highlights", {
     path: "/match-highlights",
-    data: data,
+    data: data
   });
 });
 
 exports.getTournaments = (req, res, next) => {
   return res.render("Tournaments", {
-    path: "/upcoming-tournament",
+    path: "/upcoming-tournament"
   });
 };
 
@@ -86,19 +88,19 @@ exports.getRecentWinners = catchAsync(async (req, res, next) => {
 
   return res.render("RecentWinner", {
     path: "/recent-winner",
-    data: data,
+    data: data
   });
 });
 
 exports.getBlogs = (req, res, next) => {
   return res.render("Update-Blogs", {
-    path: "/blogs",
+    path: "/blogs"
   });
 };
 
 exports.getContactUs = (req, res, next) => {
   return res.render("ContactUs", {
-    path: "/contact-us",
+    path: "/contact-us"
   });
 };
 
@@ -109,7 +111,7 @@ exports.getUserSetting = (req, res, next) => {
       name: req.user.name,
       email: req.user.email,
       phoneNumber: req.user.phoneNumber,
-      khaltiId: req.user.khaltiId,
-    },
+      khaltiId: req.user.khaltiId
+    }
   });
 };

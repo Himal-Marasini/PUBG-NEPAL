@@ -1,0 +1,85 @@
+<%- include('./partial/common_header.ejs') %>
+<style>
+    .text--bold {
+        color: #e08012;
+        font-weight: 500;
+    }
+
+    .member__text {
+        padding-left: 2rem;
+        color: #272829;
+    }
+
+    .note {
+        margin-top: 2rem;
+        color: #c0392b;
+        text-transform: uppercase;
+        font-style: italic;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width:600px) {
+        .note {
+            font-size: 10px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <%- include("./partial/common_logo.ejs") %>
+        <div class="text-wrapper">
+            <h2>PUBG MOBILE NEPAL | CUSTOM MATCH | <%= date_in_month %> | <%= data.time %></h2>
+            Hii Himanshu,<br />
+            Thanks for participating in PUBG MOBILE NEPAL CUSTOM MATCHES, you will get the ROOM ID and PASSWORD on
+            registered email
+            address before starting of 15 minute of match, Here are the details of your registered team:-
+            <table>
+                <tr>
+                    <td width="20%">Registrator Name :</td>
+                    <td class="text--bold" width="30%"><%= data.registrator %></td>
+                    <td width="13%">Email Id :</td>
+                    <td class="text--bold" width="35%"><%= data.email %></td>
+                </tr>
+                <tr>
+                    <td>Phone Number :</td>
+                    <td class="text--bold"><%= data.phone_number %></td>
+                    <td>Khalti Id :</td>
+                    <td class="text--bold"><%= data.khalti_id %></td>
+                </tr>
+                <tr>
+                    <td>Team Name :</td>
+                    <td class="text--bold" style="text-transform: uppercase;"><%= data.team_name %></td>
+                    <td>Match Type :</td>
+                    <td class="text--bold"><%= data.match_type %></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Team Members name with Character Id:</td>
+                </tr>
+            </table>
+            <table width="100%">
+                <tr>
+                    <td width="30%"><%= data.members[0].name %></td>
+                    <td width="10%" class="text--bold"><%= data.members[0].character_id %></td>
+                    <td width="30%"><%= data.members[1].name %></td>
+                    <td width="10%" class="text--bold"><%= data.members[1].character_id %></td>
+                </tr>
+                <tr>
+                    <td><%= data.members[2].name %></td>
+                    <td class="text--bold"><%= data.members[2].character_id %></td>
+                    <td><%= data.members[3].name %></td>
+                    <td class="text--bold"><%= data.members[3].character_id %></td>
+                </tr>
+            </table>
+        </div>
+        <div class="note">
+            Note:- Sharing the room id and password with others or inviting the others people
+            in a room without PERMISSION of the authorized member will lead to the harsh action immediately.
+        </div>
+        <%- include('./partial/connect_with_us.ejs') %>
+    </div>
+</body>
+
+</html>

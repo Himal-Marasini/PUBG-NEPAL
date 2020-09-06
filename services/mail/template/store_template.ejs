@@ -1,0 +1,38 @@
+<%- include('./partial/common_header.ejs') %>
+<style>
+    .text-no-bold {
+        font-weight: 500;
+        font-size: 18px;
+        color: #212121;
+        padding-right: 20px;
+        text-transform: capitalize
+    }
+</style>
+
+</head>
+
+<body>
+    <div class="container">
+        <%- include("./partial/common_logo.ejs") %>
+        <div class="text-wrapper">
+            <p> Hello PUBG MOBILE NEPAL ADMINS, </p>
+            <P>The new order purchased has been made by "<%= data.buyer_email %>" Please any free admin respond
+                to this request by buying "<%= data.item %>".</P>
+            <p>Before purchasing the UC Or DIAMONDS please verify this is a valid transaction by visiting at
+                https://www.pubgmobilenp.com/admin/store/orders . </p>
+            <p>Below here is the more details about purchased :</p>
+            <div style="margin-top: 20px;">
+                <h2 style="text-align: left; font-size: 18px;"><span class="text-no-bold">Buyer
+                        Email:</span><%= data.buyer_email %></h2>
+                <h2 style="text-align: left; font-size: 18px;"><span class="text-no-bold">Player
+                        Id:</span><%= data.buyer_playerId %></h2>
+                <h2 style="text-align: left; font-size: 18px;"><span class="text-no-bold">Item:</span><%= data.item %>
+                </h2>
+            </div>
+            <p>Thank You !!</p>
+        </div>
+        <%- include('./partial/connect_with_us.ejs') %>
+    </div>
+</body>
+
+</html>

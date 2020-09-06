@@ -61,9 +61,13 @@ const Schema = new mongoose.Schema(
 );
 
 Schema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ id: this._id, name: this.name, currentLeague: this.currentLeague }, process.env.JWT_SECRET_TOKEN, {
-    expiresIn: process.env.JWT_EXPIRES_IN
-  });
+  const token = jwt.sign(
+    { id: this._id, name: this.name, currentLeague: this.currentLeague },
+    process.env.JWT_SECRET_TOKEN,
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN
+    }
+  );
   return token;
 };
 
@@ -71,6 +75,13 @@ Schema.methods.generateAuthToken = function () {
 Schema.methods.createPasswordResetToken = function () {
   // 1. Generate a random string
   const resetToken = crypto.randomBytes(32).toString("hex");
+
+  // Check if Token already exists or hasn't been expired yet
+  if (this.passwordResetExpires !== undefined) {
+    if (this.passwordResetExpires > Date.now()) {
+      return null;
+    }
+  }
 
   // 2. Store the hashed string on DB so that hacked won't get access to reset token
   // This will be hashed token and Will be stored in db, If even hacker get access to token, He won't be able to change the password because

@@ -140,7 +140,7 @@ exports.postAuthShop = (req, res, next) => {
 exports.postStore = catchAsync(async (req, res, next) => {
   const { email, id, dollarValue } = req.body;
 
-  const verified = await storeKhaltiVerification(req.body.token, req.body.amount);
+  const verified = await khalti_store_verification(req.body.token, req.body.amount);
 
   if (!verified) {
     return next(new AppError(verified.error, 400));
@@ -170,7 +170,7 @@ exports.postStore = catchAsync(async (req, res, next) => {
 
   await store.save();
 
-  if (process.env.NODE_ENV === "prod") await sendMailForStore(mailData);
+  if (process.env.NODE_ENV === "prod") await send_store_mail(mailData);
 
   return res.json({
     status: true,

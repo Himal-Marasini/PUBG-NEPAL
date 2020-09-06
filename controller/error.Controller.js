@@ -44,6 +44,18 @@ function sendErrorProd(err, req, res) {
       });
     }
 
+    // 500 USING FOR RESET EMAIL TOKEN EXPIRED
+    if (err.statusCode === 500) {
+      return res.status(500).render("error", {
+        errorType: "INTERNAL SERVER ERROR !!",
+        message: {
+          title: "RESET EMAIL IS NOT VALID ANYMORE (Session has been expired)",
+          subtitle:
+            "PLEASE TRY AGAIN TO RESET YOUR PASSWORD !! OR CONTACT US FOR HELP: https://www.facebook.com/pubgmobilefornepal"
+        }
+      });
+    }
+
     return res.status(err.statusCode).json({
       success: err.success,
       message: err.message
@@ -84,7 +96,8 @@ function sendErrorProd(err, req, res) {
       errorType: "INTERNAL SERVER ERROR !!",
       message: {
         title: "500 !! INTERNAL SERVER ERROR",
-        subtitle: "WE DIDN'T EXPECT THIS TAKING TOO LONG. TRY AGAIN LATER OR CONTACT US: https://www.facebook.com/pubgmobilefornepal"
+        subtitle:
+          "WE DIDN'T EXPECT THIS TAKING TOO LONG. TRY AGAIN LATER OR CONTACT US: https://www.facebook.com/pubgmobilefornepal"
       }
     });
   }
@@ -103,6 +116,6 @@ module.exports = (err, req, res, next) => {
     // Handles the DUPLICATE KEY OF MONGOOSE (UNIQUE OF MONGOOSE THROWS ERROR VALIDATION IF DATA IS NOT UNIQUE)
     if (error.name === "MongoError") error = handleDuplicateDataError(error);
     if (error.name === "JsonWebTokenError") error = handleJsonWebTokenError(error);
-    sendErrorProd(error, req, res);
+    sendErrorProd(err, req, res);
   }
 };

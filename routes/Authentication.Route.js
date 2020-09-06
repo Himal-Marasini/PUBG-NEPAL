@@ -14,8 +14,16 @@ Router.post("/sign-up", authentication.postCreateAccount);
 
 Router.post("/user/change-password", isAuth, authentication.postChangePassword);
 
-Router.post("/user/reset-password", authentication.postResetPassword);
+// Reset Password (EJS ENGINE)
+Router.route("/login/identity")
+  .get(authentication.getLoginIdentity)
+  .post(authentication.postLoginIdentity);
 
-Router.patch("/user/reset-password/:token", authentication.patchResetPassword);
+Router.route("/user/reset-password")
+  .get(authentication.getResetPassword)
+  .patch(authentication.patchResetPassword);
+
+// Router.get("/user/reset-password", authentication.getResetPassword);
+// Router.patch("/user/reset-password", authentication.patchResetPassword);
 
 module.exports = Router;

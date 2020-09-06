@@ -9,6 +9,7 @@ const validateWithKhaltiData = require("../util/validate").validateWithKhaltiDat
 const AppError = require("../util/applicationError");
 const catchAsync = require("../util/catchAsync");
 const sortMatches = require("../util/sortMatches");
+const { send } = require("@sendgrid/mail");
 
 exports.getRegistration = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -105,7 +106,9 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
       { name: req.body.memberTwo_name, character_id: req.body.memberTwo_charId },
       { name: req.body.memberThree_name, character_id: req.body.memberThree_charId },
       { name: req.body.memberFour_name, character_id: req.body.memberFour_charId }
-    ]
+    ],
+    time: match.time,
+    date: match.date
   };
 
   if (userdata) {
@@ -130,7 +133,9 @@ exports.validateData = catchAsync(async (req, res, next) => {
 
   // CHECK IF MATCH EXISTS AND CHECK IF IT'S STILL AVALIABLE
   if (!match) {
-    return next(new AppError("Sorry, This match is not available anymore !! Try different matches", 400));
+    return next(
+      new AppError("Sorry, This match is not available anymore !! Try different matches", 400)
+    );
   } else if (
     match.status.isFinished == "true" ||
     match.status.isFinished == "technical error" ||
@@ -168,7 +173,10 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
   let existingMatch = match.filter(
-    (el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error" && el.status.isFinished !== "registration closed"
+    (el) =>
+      el.status.isFinished !== "true" &&
+      el.status.isFinished !== "technical error" &&
+      el.status.isFinished !== "registration closed"
   );
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
