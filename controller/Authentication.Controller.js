@@ -33,6 +33,7 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+
   const { error } = validateLogin(req.body);
 
   if (error) {
