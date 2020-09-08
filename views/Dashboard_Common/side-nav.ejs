@@ -1,4 +1,4 @@
-<div class="nav-sidebar-wrapper">
+<div class="nav-sidebar-wrapper nav-desktop">
     <img src="/assets/images/pubg_logo.png" alt="PUBG MOBILE NEPAL" class="nav-logo" />
     <nav>
         <ul>
@@ -26,12 +26,50 @@
             <li class="<%= path === '/contact-us' ? 'list-active' : '' %>">
                 <a href="/contact-us" target="_self">Contact Us</a>
             </li>
-            <li class="<%= path === '/support' ? 'list-active' : '' %>">
+            <!-- <li class="<%= path === '/support' ? 'list-active' : '' %>">
                 <a href="" target="_self">Support Us</a>
-            </li>
+            </li> -->
             <li class="<%= path === '/user/setting' ? 'list-active' : '' %>">
                 <a href="/user/setting" target="_self">Settings</a>
             </li>
         </ul>
+    </nav>
+</div>
+
+<div class="nav-sidebar-wrapper nav-mobile">
+    <nav class="navigation-mobile">
+        <div class="nav-header"></div>
+        <div id="menuToggle">
+            <input type="checkbox" name="" id="">
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu">
+                <li class="<%= path === '/' ? 'list-active' : '' %>">
+                    <a href="/" target="_self">Dashboard</a>
+                </li>
+                <li class="<%= path === '/upcoming-match' ? 'list-active' : '' %>">
+                    <a href="/upcoming-match" target="_self">Upcoming Matches</a>
+                </li>
+                <li class="<%= path === '/upcoming-tournament' ? 'list-active' : '' %>">
+                    <a href="/upcoming-tournament" target="_self">Upcoming Tournament</a>
+                </li>
+                <li class="<%= path === '/match-highlights' ? 'list-active' : '' %>">
+                    <a href="/match-highlights" target="_self">Match Hightlights</a>
+                </li>
+                <li class="<%= path === '/recent-winner' ? 'list-active' : '' %>">
+                    <a href="/recent-winner" target="_self">Recent Winner</a>
+                </li>
+                <li>
+                    <a href="/store" target="_self">PUBGM Nepal store</a>
+                </li>
+                <li class="<%= path === '/contact-us' ? 'list-active' : '' %>">
+                    <a href="/contact-us" target="_self">Contact Us</a>
+                </li>
+                <li class="<%= path === '/user/setting' ? 'list-active' : '' %>">
+                    <a href="/user/setting" target="_self">Settings</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </div>

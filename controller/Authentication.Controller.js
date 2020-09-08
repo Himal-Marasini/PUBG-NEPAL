@@ -33,7 +33,6 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-
   const { error } = validateLogin(req.body);
 
   if (error) {
@@ -205,6 +204,7 @@ exports.postLoginIdentity = catchAsync(async (req, res, next) => {
 // getResetPassword => Shows the new password form page
 exports.getResetPassword = async (req, res, next) => {
   const { tok_id } = req.query;
+  return res.render("ResetPassword");
 
   if (!tok_id) {
     return res.redirect("/");

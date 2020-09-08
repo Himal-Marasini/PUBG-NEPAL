@@ -110,12 +110,13 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === "prod") {
     let error = { ...err };
+    error.message = err.message;
 
     // Handles the INVALID OBJECT ID OF MONGOOSE
     if (error.kind === "ObjectId") error = handleObjectIdError(error);
     // Handles the DUPLICATE KEY OF MONGOOSE (UNIQUE OF MONGOOSE THROWS ERROR VALIDATION IF DATA IS NOT UNIQUE)
     if (error.name === "MongoError") error = handleDuplicateDataError(error);
     if (error.name === "JsonWebTokenError") error = handleJsonWebTokenError(error);
-    sendErrorProd(err, req, res);
+    sendErrorProd(error, req, res);
   }
 };

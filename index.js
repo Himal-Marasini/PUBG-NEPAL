@@ -97,7 +97,12 @@ app.use(demo);
 
 // 404, Page not found
 app.all("*", function (req, res, next) {
-  next(new AppError(`CAN'T FIND THE PAGE YOU ARE LOOKING FOR https://pubgmobilenp.com${req.originalUrl} ON THIS SERVER !!`, 404));
+  next(
+    new AppError(
+      `CAN'T FIND THE PAGE YOU ARE LOOKING FOR https://pubgmobilenp.com${req.originalUrl} ON THIS SERVER !!`,
+      404
+    )
+  );
 });
 
 app.use(errorGlobalHandler);
@@ -105,12 +110,25 @@ app.use(errorGlobalHandler);
 db.then(() => {
   const server = app.listen(process.env.PORT);
   console.log(`Server is running at PORT ${process.env.PORT}`);
+
+  // Event Listener on SIGTERM
   process.on("SIGTERM", () => {
     console.log("SIGTERM !!!! SHUTTING DOWN SERVER");
     server.close(() => {
       console.log("Process Terminate !!");
     });
   });
+
+  // Event Listener on UNHANDLER REJECTION [will work when database is not getting connected]
+
+  // process.on("unhandledRejection", (err) => {
+  //   console.log(err.name, err.message);
+  //   console.log("Unhandled Rejection !!");
+  // server.close(() => {
+  //   process.exit(1);
+  // });
+
+  // });
 }).catch((err) => {
   console.error(err);
   // new AppError("PLEASE TRY AGAIN LATER, WE DIDN'T ANTICIPATE THIS TAKING SO LONG.", 500);

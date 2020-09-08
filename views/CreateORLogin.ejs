@@ -12,12 +12,31 @@
 </head>
 
 <body>
+
   <% if(title === "LOGIN"){ %>
+  <header>
+
+    <div class="logo-wrapper">
+      <a href="/">
+        <img src="../assets/images/Logo_without_shadown.png" alt="PUBG MOBILE NEPAL" id="logo">
+      </a>
+    </div>
+
+    <div class="store_wrapper">
+      <div class="store_wrapper_icons_text">
+        <a href="/store" target="_self">
+          <img src="/assets/images/icons/carts.svg" id="store_icon">
+          <span style="vertical-align: top;padding-left: 11px;">PUBG MOBILE NEPAL STORE</span>
+        </a>
+      </div>
+    </div>
+
+  </header>
   <section>
     <div class="row">
       <div class="main-wrapper">
-        <h2>Pubg Mobile Nepal</h2>
-        <h3>Login</h3>
+        <h2 class="main-wrapper--title">Pubg Mobile Nepal</h2>
+        <h3 class="main-wrapper--title">Login</h3>
         <div class="error-wrapper <%= error.type %>">
           <div class="text-message"><%= error.message %></div>
         </div>
@@ -26,19 +45,40 @@
           <input type="password" id="password" name="password" placeholder="Password" required><br />
           <input type="button" id="btn-submit" value="Login">
         </form>
+
         <div class="forgetPassword-wrapper">
           <a href="/login/identity" target="_self">Forget password?</a>
-          <a href="/sign-up" target="_self">Sign Up</a>
         </div>
+        <h2 class="main-wrapper__subtitle">OR</h2>
+        <a class="btn-login" href="/sign-up">Create Account</a>
       </div>
+    </div>
   </section>
   <script src="/assets/js/homepage/login.js"></script>
   <% }else if(title === "SIGN-UP"){ %>
+  <header>
+
+    <div class="logo-wrapper">
+      <a href="/">
+        <img src="../assets/images/Logo_without_shadown.png" alt="PUBG MOBILE NEPAL" id="logo">
+      </a>
+    </div>
+
+    <div class="store_wrapper">
+      <div class="store_wrapper_icons_text">
+        <a href="/store" target="_self">
+          <img src="/assets/images/icons/carts.svg" id="store_icon">
+          <span style="vertical-align: top;padding-left: 11px;">PUBG MOBILE NEPAL STORE</span>
+        </a>
+      </div>
+    </div>
+
+  </header>
   <section>
     <div class="row">
       <div class="main-wrapper sign-in">
-        <h2>Pubg Mobile Nepal</h2>
-        <h3>Create Account</h3>
+        <h2 class="main-wrapper--title">Pubg Mobile Nepal</h2>
+        <h3 class="main-wrapper--title">Create Account</h3>
         <div class="error-wrapper">
           <div class="text-message"></div>
         </div>
@@ -54,6 +94,8 @@
             required><br />
           <input type="button" id="btn-submit" value="Create Account">
         </form>
+        <h2 class="main-wrapper__subtitle">OR</h2>
+        <a class="btn-login" href="/login">Login</a>
       </div>
   </section>
   <script src="/assets/js/homepage/signup.js"></script>

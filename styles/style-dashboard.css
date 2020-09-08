@@ -1,4 +1,5 @@
 @import "./common/Style-SideNav.css";
+@import "./common/style-Footer.css";
 
 .main-wrapper {
   background: #252734;
@@ -187,4 +188,25 @@ option {
 .btn-discord-label {
   font-size: 0.725em;
   padding: 5px 0 10px;
+}
+
+@media screen and (max-width: 1353px) {
+  .header-wrapper {
+    margin-top: 0;
+    padding-top: 20px;
+  }
+
+  .main-wrapper {
+    min-height: 100vh;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .statistics--fontSize {
+    font-size: 1.3rem;
+  }
+
+  .statistics-wrapper {
+    padding: 10px 7px;
+  }
 }

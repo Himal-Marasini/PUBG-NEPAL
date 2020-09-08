@@ -1,4 +1,5 @@
 @import "./common/Style-SideNav.css";
+@import "./common/style-Footer.css";
 
 .main-wrapper {
   background: #252734;
@@ -109,4 +110,18 @@ h3 {
   color: white;
   font-family: "Teko";
   cursor: pointer;
+}
+
+@media screen and (max-width: 1353px) {
+  .row {
+    margin-top: 0;
+  }
+  .matches-wrapper {
+    grid-template-columns: repeat(10, 442px);
+  }
+
+  .main-wrapper {
+    min-height: 100vh;
+    padding-top: 20px;
+  }
 }

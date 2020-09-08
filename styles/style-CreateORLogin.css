@@ -16,7 +16,10 @@ section {
   display: table;
   height: 100%;
   width: 100%;
+  /* background: #252734; */
+  background: url("../assets/images/Image__2.png");
 }
+
 .row {
   display: table-cell;
   vertical-align: middle;
@@ -25,7 +28,13 @@ section {
   padding: 0.1em;
   width: 100%;
   height: 100vh;
-  background: #252734;
+}
+
+header {
+  display: grid;
+  position: absolute;
+  grid-template-columns: 354% 76%;
+  margin-left: 8%;
 }
 
 .main-wrapper {
@@ -41,8 +50,7 @@ section {
   -o-border-radius: 3px;
 }
 
-.main-wrapper h2,
-h3 {
+.main-wrapper--title {
   text-transform: uppercase;
   font-size: 2.5em;
   font-weight: 500;
@@ -87,7 +95,6 @@ input[type="button"] {
 }
 
 .forgetPassword-wrapper a:last-child {
-  justify-self: end;
   margin-right: 24%;
 }
 
@@ -121,6 +128,24 @@ input[type="number"] {
   margin-bottom: 10px;
 }
 
+.btn-login {
+  font-family: "Raleway Semibold";
+  display: block;
+  width: 300px;
+  height: 30px;
+  border: 1px solid #e08012;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 0 auto;
+  padding-top: 5px;
+}
+
+.main-wrapper__subtitle {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #e08012;
+}
+
 .error-wrapper {
   width: 100%;
   height: 30px;
@@ -147,4 +172,33 @@ input[type="number"] {
 
 .error-active {
   display: block;
+}
+
+/* STORE WRAPPER  */
+.store_wrapper {
+  margin-top: 20px;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.store_wrapper a {
+  text-decoration: none;
+  color: #e08012;
+}
+
+#store_icon {
+  width: 29px;
+  height: auto;
+  color: red;
+}
+
+.store_wrapper_icons_text {
+  border: 1px solid #e08012;
+  text-align: center;
+  padding-top: 13px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }

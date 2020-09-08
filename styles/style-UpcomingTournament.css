@@ -1,4 +1,5 @@
 @import "./common/Style-SideNav.css";
+@import "./common/style-Footer.css";
 
 .main-wrapper {
   background: #252734;
@@ -94,4 +95,15 @@
 .registration-endDate {
   color: #e08012;
   margin-bottom: 21px;
+}
+
+@media screen and (max-width: 1353px) {
+  .row {
+    margin-top: 0;
+  }
+
+  .main-wrapper {
+    min-height: 100vh;
+    padding-top: 20px;
+  }
 }
