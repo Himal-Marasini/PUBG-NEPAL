@@ -9,7 +9,6 @@ const validateWithKhaltiData = require("../util/validate").validateWithKhaltiDat
 const AppError = require("../util/applicationError");
 const catchAsync = require("../util/catchAsync");
 const sortMatches = require("../util/sortMatches");
-const { send } = require("@sendgrid/mail");
 
 exports.getRegistration = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -187,3 +186,7 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
     matchInfo: newVal
   });
 });
+
+exports.getArticles = (req, res, next) => {
+  return res.render("Article.ejs");
+};

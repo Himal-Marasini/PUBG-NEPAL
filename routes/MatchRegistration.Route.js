@@ -14,4 +14,6 @@ Router.post("/register/auth", isAuth, registration.validateData);
 
 Router.get("/upcoming-match", isAuth, registration.getUpcomingMatch);
 
+Router.get("/article/rule-regulations", registration.getArticles);
+
 module.exports = Router;

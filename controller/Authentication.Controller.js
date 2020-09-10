@@ -8,7 +8,8 @@ const catchAsync = require("../util/catchAsync");
 const {
   validateCreateAccount,
   validateLogin,
-  validateChangePassword
+  validateChangePassword,
+  validatePasswordReset
 } = require("../util/validate");
 
 const reset_token_mail = require("../services/mail/reset_password_mail");
@@ -205,7 +206,6 @@ exports.postLoginIdentity = catchAsync(async (req, res, next) => {
 // getResetPassword => Shows the new password form page
 exports.getResetPassword = async (req, res, next) => {
   const { tok_id } = req.query;
-  return res.render("ResetPassword");
 
   if (!tok_id) {
     return res.redirect("/");
@@ -228,11 +228,17 @@ exports.getResetPassword = async (req, res, next) => {
 // patchResetMethod => Verify the token then update the password and save it into db
 exports.patchResetPassword = catchAsync(async (req, res, next) => {
   // 1. Extract the token from param or query
-  const { tok_id, password } = req.query;
+  const { tok_id } = req.query;
+
+  // Doing JOI Validation
+  const { error } = validatePasswordReset(req.body);
+
+  if (error) {
+    return next(new AppError(error.details[0].message, 400));
+  }
 
   // 2. Convert the token into hashed token because in DB, We have stored the hashed token
   const getHashedPassword = crypto.createHash("sha256").update(tok_id).digest("hex");
-  console.log(1);
 
   // 3. Find the user with hashedtoken {passwordResetToken:hashedToken} And Validate if it has been expired or not
   const user = await User.findOne({
@@ -252,7 +258,7 @@ exports.patchResetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
   await user.save();
-  console.log(2);
+
   // 5. Sign in the user by sending JWT
   const token = user.generateAuthToken();
 
@@ -260,7 +266,8 @@ exports.patchResetPassword = catchAsync(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    message: "Password has been changed successfully !!"
+    message: "Password has been changed successfully !!",
+    redirect: "/"
   });
 });
 
