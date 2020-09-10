@@ -2,23 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = new mongoose.Schema(
   {
-    registratorName: {
-      type: String,
-      required: true
-    },
-    teamName: {
-      type: String,
-      required: true
-    },
     emailId: {
-      type: String,
-      required: true
-    },
-    phoneNumber: {
-      type: Number,
-      required: true
-    },
-    khaltiId: {
       type: String,
       required: true
     },
@@ -26,12 +10,12 @@ const Schema = new mongoose.Schema(
       type: String,
       required: true
     },
-    members: {
-      type: Array,
+    player_name: {
+      type: String,
       required: true
     },
-    khaltiDetail: {
-      type: Object,
+    player_id: {
+      type: String,
       required: true
     },
     matchId: {
@@ -48,4 +32,4 @@ const Schema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("user", Schema);
+module.exports = mongoose.model("freeRegistration", Schema);

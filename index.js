@@ -68,7 +68,7 @@ app.use(homepage);
 // app.use(authentication);
 app.use(admin);
 app.use(registration);
-app.use(pubgStore);
+// app.use(pubgStore);
 
 app.all("*", function (req, res, next) {
   const err = new Error("404 !!! PAGE NOT FOUND");

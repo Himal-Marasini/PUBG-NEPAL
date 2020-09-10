@@ -11,6 +11,7 @@ html {
   line-height: 32px;
   text-rendering: optimizeLegibility;
 }
+
 .row {
   width: 85%;
   margin: 0 auto;
@@ -30,6 +31,7 @@ a {
   outline: none;
 }
 section {
+  display: grid;
   min-height: 100vh;
   background: url(../assets/images/Image__4.png);
   background-position: 0 -88px;
@@ -39,10 +41,8 @@ section {
   color: #2d3436;
 }
 .parent__container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-column-gap: 10px;
-  margin-top: 4%;
+  width: 50%;
+  margin: 11% auto;
 }
 .registration__form {
   background: #fafafa;
@@ -50,7 +50,7 @@ section {
   padding-top: 13px;
 }
 .pubg_logo {
-  width: 32%;
+  width: 200px;
   height: auto;
 }
 .registration__error {
@@ -61,34 +61,21 @@ section {
   border-radius: 3px;
   display: none;
 }
-.registration__name,
-.registration__teamName,
-.registration__phoneNumber,
-.registration__emailId,
-.registration__payGateway,
-.registration__matchType {
-  display: inline-block;
-}
-.registration__nameLable,
 .registration__teamNameLable,
-.registration__phoneLable,
 .registration__emailLable,
-.registration__payGatewayLable,
 .registration__matchTypeLable {
   padding-right: 15px;
+}
+.registration__matchType {
+  margin-top: 22px;
 }
 .registration__teamName,
 .registration__emailId {
   padding-top: 10px;
   margin-left: 6%;
 }
-.registration__payGateway {
-  padding-top: 20px;
-}
-.registrator__memberOne,
-.registrator__memberTwo,
-.registrator__memberThree,
-.registrator__memberFour {
+
+.registrator__memberOne {
   display: block;
   margin-top: 10px;
 }
@@ -111,9 +98,7 @@ input[type="button"] {
 }
 .registrator_namefield,
 .registrator_teamNamefield,
-.registrator_phonefield,
 .registrator_emailfield,
-.registrator_payGatewayfield,
 .registrator_matchTypefield {
   width: 205px;
   height: 32px;
@@ -124,9 +109,6 @@ input[type="button"] {
   font-size: 18px;
   padding-left: 5px;
 }
-.registrator_payGatewayfield {
-  margin-right: 20px;
-}
 .registrator_matchTypefield {
   width: 172px;
   border: 2px solid #e08012;
@@ -135,9 +117,7 @@ input[type="button"] {
 }
 .registrator_namefield:focus,
 .registrator_teamNamefield:focus,
-.registrator_phonefield:focus,
-.registrator_emailfield:focus,
-.registrator_payGatewayfield:focus {
+.registrator_emailfield:focus {
   border: 2px solid #e08012;
 }
 .registration__teamMembers {
@@ -173,7 +153,7 @@ input[type="button"] {
 }
 .registration__submit {
   margin-top: 15px;
-  margin-bottom: 5px;
+  padding-bottom: 23px;
 }
 .registration__submitBtn {
   outline: none;
@@ -285,16 +265,28 @@ input[type="button"] {
   min-width: 0 !important;
 }
 @media only screen and (max-width: 1247px) {
+  .parent__container {
+    width: 90%;
+  }
   .registration__matchType {
     margin-top: 15px;
   }
 }
-@media only screen and (max-width: 1177px) {
-  .registration__phoneNumber {
-    margin-top: 15px;
+
+@media only screen and (max-width: 1015px) {
+  .parent__container {
+    width: 90%;
+  }
+  .registrator_memberNamefield {
+    margin-right: 0;
   }
 }
+
 @media only screen and (max-width: 937px) {
+  .parent__container {
+    width: 90%;
+  }
+
   section {
     background: #212121;
     height: auto;
@@ -320,24 +312,17 @@ input[type="button"] {
 @media only screen and (max-width: 780px) {
   .registrator_namefield,
   .registrator_teamNamefield,
-  .registrator_phonefield,
   .registrator_emailfield,
-  .registrator_payGatewayfield,
   .registrator_matchTypefield {
     width: 180px;
   }
 }
 @media only screen and (max-width: 642px) {
-  .registration__name,
-  .registration__teamName,
-  .registration__phoneNumber,
   .registration__emailId,
-  .registration__payGateway,
   .registration__matchType {
     display: block;
   }
 
-  .registration__teamName,
   .registration__emailId {
     margin-left: 0;
   }
@@ -348,13 +333,16 @@ input[type="button"] {
   }
 }
 @media only screen and (max-width: 520px) {
+  .parent__container {
+    width: 90%;
+  }
   .pubg_logo {
-    width: 42%;
+    width: 165px;
   }
 }
 @media only screen and (max-width: 425px) {
   .pubg_logo {
-    width: 45%;
+    width: 150px;
   }
 
   .registrator_memberNamefield {
@@ -364,7 +352,6 @@ input[type="button"] {
 @media only screen and (max-width: 320px) {
   .registrator_namefield,
   .registrator_teamNamefield,
-  .registrator_phonefield,
   .registrator_emailfield,
   .registrator_payGatewayfield,
   .registrator_matchTypefield {
