@@ -86,16 +86,16 @@ module.exports = async function sendMail(userdata, slot, res) {
                 <div class="container">
                 <p>Hii Soldiers,<br>
                     Thanks for participating in PUBG MOBILE NEPAL Free Custom Matches, you will get the
-                    ROOM ID and PASSWORD on our <a href="https://discord.gg/2cTUVdp" target="_self">DISCORD CHANNEL </a>, 
+                    ROOM ID and PASSWORD on our https://discord.gg/2cTUVdp, 
                     So Join Our Channel And Your SLOT NUMBER is ${slot}</p>
                 <br />
                 <p>The giveaway result will be posted on Discord Channel only.</p> <br />
                 <div>
                 Join Our Facebook Page and Discord for latest upgrade about Prize Pool and Free Giveaway Custom Matches:
-                <p><a href="https://www.facebook.com/pubgmobilefornepal/" target="_self">Facebook Page</a></p>
-                <p><a href="https://discord.gg/2cTUVdp" target="_self">Discord</a></p><br />
+                <p>Facebook Page : https://www.facebook.com/pubgmobilefornepal/ </p>
+                <p>Discord :  https://discord.gg/2cTUVdp</p><br />
                 Live Stream will be available at our youtube channel:
-                <p><a href="https://www.youtube.com/channel/UCjka13oB7AUQ35DMKVp0kxA" target="_self">Youtube Channel</a></p>
+                <p>Youtube Channel : https://www.youtube.com/channel/UCjka13oB7AUQ35DMKVp0kxA</p>
                 </div><br />
                 <p>Thank You !!</p>
                 <p>PUBG MOBILE NEPAL TEAM</p>
