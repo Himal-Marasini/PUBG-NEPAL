@@ -127,8 +127,8 @@ module.exports = async function sendMail(userdata, res) {
                 </table>
                 <br />
                 <p>1. First Position : <b> 2100 NRS </b> </p>
-                <p>2. Second Position : <b> 500 NRS </b> </p>
-                <p>3. Second Position : <b> 200 NRS </b> </p>
+                <p>2. Second Position : <b> 600 NRS </b> </p>
+                <p>3. Second Position : <b> 300 NRS </b> </p>
                 <p>4. Highest Team Kill :  <b> Per Kill * 30 NRS</b> </p>
                 <br />
                 <div class="note">
