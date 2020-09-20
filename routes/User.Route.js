@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 
-const user = require("../controller/user.Controller");
+const user = require("../controller/User.Controller");
 const isAuth = require("../middleware/isAuth");
 
 Router.get("/", isAuth, user.getHomePage);
@@ -14,8 +14,8 @@ Router.get("/recent-winner", isAuth, user.getRecentWinners);
 
 // Router.get('/blogs', isAuth, user.getBlogs);
 
-Router.get('/contact-us', isAuth, user.getContactUs);
+Router.get("/contact-us", isAuth, user.getContactUs);
 
-Router.get('/user/setting', isAuth, user.getUserSetting);
+Router.get("/user/setting", isAuth, user.getUserSetting);
 
 module.exports = Router;

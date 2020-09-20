@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 
-const store = require("../controller/store.Controller");
+const store = require("../controller/store.controller");
 
 Router.get("/store", store.getStore);
 
