@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 
-const adminController = require("../controller/admin.Controller");
+const adminController = require("../controller/admin.controller");
 
 Router.get("/admin/match-details", adminController.getMatchInformation);
 
