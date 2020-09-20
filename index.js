@@ -19,12 +19,12 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 
-const user = require("./routes/user.Route");
-const authentication = require("./routes/authentication.Route");
-const matchRegistration = require("./routes/matchRegistration.Route");
-const admin = require("./routes/admin.Route");
-const store = require("./routes/store.Route");
-const demo = require("./routes/demo.Route");
+const user = require("./routes/User.Route");
+const authentication = require("./routes/Authentication.Route");
+const matchRegistration = require("./routes/MatchRegistration.Route");
+const admin = require("./routes/Admin.Route");
+const store = require("./routes/Store.Route");
+// const demo = require("./routes/Demo.Route");
 
 const AppError = require("./util/applicationError");
 const db = require("./util/databse");
@@ -35,13 +35,13 @@ app.use(morgan("dev"));
 
 app.use(helmet());
 
-// const limit = rateLimit({
-//   max: 70,
-//   windowMs: 60 * 60 * 1000,
-//   message: "Too many request from same IP, Please try again after one hour !!!",
-// });
+const limit = rateLimit({
+  max: 70,
+  windowMs: 60 * 60 * 1000,
+  message: "Too many request from same IP, Please try again after one hour !!!"
+});
 
-// app.use(limit);
+app.use(limit);
 
 app.use(compression());
 
@@ -93,7 +93,7 @@ app.use(user);
 app.use(matchRegistration);
 app.use(store);
 app.use(admin);
-app.use(demo);
+// app.use(demo);
 
 // 404, Page not found
 app.all("*", function (req, res, next) {
