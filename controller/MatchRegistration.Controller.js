@@ -9,6 +9,7 @@ const validateWithKhaltiData = require("../util/validate").validateWithKhaltiDat
 const AppError = require("../util/applicationError");
 const catchAsync = require("../util/catchAsync");
 const sortMatches = require("../util/sortMatches");
+const load_updated_ejs = require("../util/preventFromCaching");
 
 exports.getRegistration = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -32,6 +33,8 @@ exports.getRegistration = catchAsync(async (req, res, next) => {
     khaltiId: user.khaltiId,
     matchType: `${match.type}(${match.device})`
   };
+
+  load_updated_ejs(res);
 
   return res.render("Register-Form.ejs", {
     data: matchData
@@ -180,7 +183,7 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const newVal = sortMatches(existingMatch);
-
+  load_updated_ejs(res);
   return res.render("UpcomingMatches", {
     path: "/upcoming-match",
     matchInfo: newVal
@@ -188,5 +191,6 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
 });
 
 exports.getArticles = (req, res, next) => {
+  load_updated_ejs(res);
   return res.render("Article.ejs");
 };

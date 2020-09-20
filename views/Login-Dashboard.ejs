@@ -8,8 +8,6 @@
     <%- include('./Dashboard_Common/font.ejs') %>
     <link rel="stylesheet" href="/Styles/style-dashboard.css" type="text/css" />
     <link rel="icon" href="/assets/images/Logo.png" type="image/png" />
-
-    <!-- <link rel="shortcut icon" href="" /> -->
 </head>
 
 <body>
@@ -20,6 +18,7 @@
                 <div>
                     <p>Welcome to PUBG MOBILE NEPAL, <span class="image-wrapper__text"><%= data.name %></span></p>
                 </div>
+                <div class="logout-wrapper">Logout</div>
                 <!-- <div class="image-wrapper">
                     Image Here
                     <div class="profile-circle"></div>
@@ -179,6 +178,7 @@
         </div>
     </section>
     <%- include("./Dashboard_Common/footer.ejs") %>
+    <script src="/assets/js/homepage/dashboard.js"></script>
 </body>
 
 </html>

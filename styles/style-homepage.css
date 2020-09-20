@@ -24,7 +24,7 @@ input::-webkit-inner-spin-button {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 85% 20%;
+  grid-template-columns: 74% 12% 15%;
 }
 
 .auth--wrapper {
@@ -39,6 +39,33 @@ input::-webkit-inner-spin-button {
 .auth--wrapper a {
   color: #e08012;
   text-decoration: none;
+}
+.store_wrapper {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.store_wrapper a {
+  text-decoration: none;
+  color: #e08012;
+}
+
+#store_icon {
+  width: 29px;
+  height: auto;
+  color: red;
+}
+
+.store_wrapper_icons_text {
+  border: 1px solid #e08012;
+  text-align: center;
+  padding-top: 13px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }
 
 input[type="number"] {

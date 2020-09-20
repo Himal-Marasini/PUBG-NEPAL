@@ -14,6 +14,7 @@ const {
 
 const reset_token_mail = require("../services/mail/reset_password_mail");
 // const reset_token_mail = require("../services/mail/mail_demo");
+const load_updated_ejs = require("../util/preventFromCaching");
 
 exports.getLogin = (req, res) => {
   let message = req.flash("error");
@@ -23,6 +24,7 @@ exports.getLogin = (req, res) => {
     messageType = "error-active";
   }
 
+  load_updated_ejs(res);
   return res.status(200).render("CreateORLogin.ejs", {
     title: "LOGIN",
     error: {
@@ -63,7 +65,20 @@ exports.postLogin = catchAsync(async (req, res, next) => {
   return res.redirect("/");
 });
 
+exports.getLogout = (req, res) => {
+  res.cookie("jwt", undefined, {
+    expires: new Date(Date.now() + 10 * 10),
+    httpOnly: true
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "You have been logout !!"
+  });
+};
+
 exports.getCreateAccount = (req, res) => {
+  load_updated_ejs(res);
   return res.status(200).render("CreateORLogin.ejs", {
     title: "SIGN-UP"
   });
@@ -150,6 +165,7 @@ exports.postChangePassword = catchAsync(async (req, res, next) => {
 
 // getLoginIdentity => shows the input form for submiting mail id
 exports.getLoginIdentity = catchAsync(async (req, res, next) => {
+  load_updated_ejs(res);
   return res.render("ForgetPassword");
 });
 
@@ -221,7 +237,7 @@ exports.getResetPassword = async (req, res, next) => {
   if (!user) {
     return next(new AppError("Token Is Invalid Or Session Has Been Expired", 500));
   }
-
+  load_updated_ejs(res);
   return res.render("ResetPassword");
 };
 

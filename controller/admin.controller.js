@@ -27,7 +27,10 @@ exports.postCreateMatch = catchAsync(async (req, res) => {
   // (status.isFinished == false || status.isFinished == technical error) => It mean with current time, match already exists on DB, It's not finished
   validateMatch = validateMatch.find((el) => {
     if (el.status) {
-      return el.time == time && (el.status.isFinished == "false" || el.status.isFinished == "technical error");
+      return (
+        el.time == time &&
+        (el.status.isFinished == "false" || el.status.isFinished == "technical error")
+      );
     }
   });
 
@@ -98,7 +101,7 @@ exports.postUpdateMatch = catchAsync(async (req, res, next) => {
           user.currentLeague = "Gold";
         } else if (user.totalMatch >= 45) {
           user.currentLeague = "Diamond";
-        } else if (user.totalMatch >= 90) {
+        } else if (user.totalMatch >= 95) {
           user.currentLeague = "Crown";
         }
       }

@@ -81,6 +81,8 @@
   border: 1px solid #e08012;
   color: #212121;
   padding: 10px 20px;
+  outline: none;
+  cursor: pointer;
 }
 
 .btn--apply:hover {

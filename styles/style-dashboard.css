@@ -7,14 +7,21 @@
 }
 
 .header-wrapper {
-  /* display: grid; */
+  display: grid;
   /* grid-template-columns: repeat(2, 1fr); */
-  /* grid-template-columns: 87% 10%; */
+  grid-template-columns: 87% 10%;
   margin-top: 30px;
 }
 
 .header-wrapper div:first-child {
   margin-left: 4%;
+}
+
+.logout-wrapper {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #e74c3c;
+  cursor: pointer;
 }
 
 .profile-circle {

@@ -4,6 +4,7 @@ const User = require("../model/createUser.model");
 const AppError = require("../util/applicationError");
 const catchAsync = require("../util/catchAsync");
 const sortMatches = require("../util/sortMatches");
+const load_updated_ejs = require("../util/preventFromCaching");
 
 // !LOGIN PAGE
 async function NotAuthenticated_Page(req, res, next) {
@@ -47,6 +48,9 @@ async function Authenticated_Page(req, res, next) {
     upcoming_matches: existingRegisteredMatches
   };
 
+  // Show new file, Not From Browser Cache
+  load_updated_ejs(res);
+
   return res.render("Login-Dashboard.ejs", {
     path: "/",
     data: result
@@ -68,6 +72,8 @@ exports.getMatchHighlights = catchAsync(async (req, res) => {
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);
 
+  load_updated_ejs(res);
+
   return res.render("Match-Highlights", {
     path: "/match-highlights",
     data: data
@@ -75,6 +81,7 @@ exports.getMatchHighlights = catchAsync(async (req, res) => {
 });
 
 exports.getTournaments = (req, res, next) => {
+  load_updated_ejs(res);
   return res.render("Tournaments", {
     path: "/upcoming-tournament"
   });
@@ -86,6 +93,8 @@ exports.getRecentWinners = catchAsync(async (req, res, next) => {
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);
 
+  load_updated_ejs(res);
+
   return res.render("RecentWinner", {
     path: "/recent-winner",
     data: data
@@ -93,18 +102,21 @@ exports.getRecentWinners = catchAsync(async (req, res, next) => {
 });
 
 exports.getBlogs = (req, res, next) => {
+  load_updated_ejs(res);
   return res.render("Update-Blogs", {
     path: "/blogs"
   });
 };
 
 exports.getContactUs = (req, res, next) => {
+  load_updated_ejs(res);
   return res.render("ContactUs", {
     path: "/contact-us"
   });
 };
 
 exports.getUserSetting = (req, res, next) => {
+  load_updated_ejs(res);
   return res.render("Setting", {
     path: "/user/setting",
     data: {
