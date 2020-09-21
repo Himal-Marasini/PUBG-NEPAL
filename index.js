@@ -29,7 +29,7 @@ const store = require("./routes/store.route");
 const AppError = require("./util/applicationError");
 const db = require("./util/databse");
 
-const errorGlobalHandler = require("./controller/error.Controller");
+const errorGlobalHandler = require("./controller/error.controller");
 
 app.use(morgan("dev"));
 
