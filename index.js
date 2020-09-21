@@ -19,12 +19,12 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 
-const user = require("./routes/User.Route");
-const authentication = require("./routes/Authentication.Route");
-const matchRegistration = require("./routes/MatchRegistration.Route");
-const admin = require("./routes/Admin.Route");
-const store = require("./routes/Store.Route");
-// const demo = require("./routes/Demo.Route");
+const user = require("./routes/user.route");
+const authentication = require("./routes/authentication.route");
+const matchRegistration = require("./routes/matchRegistration.route");
+const admin = require("./routes/admin.route");
+const store = require("./routes/store.route");
+// const demo = require("./routes/demo.route");
 
 const AppError = require("./util/applicationError");
 const db = require("./util/databse");
@@ -35,13 +35,13 @@ app.use(morgan("dev"));
 
 app.use(helmet());
 
-const limit = rateLimit({
-  max: 70,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many request from same IP, Please try again after one hour !!!"
-});
+// const limit = rateLimit({
+//   max: 70,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many request from same IP, Please try again after one hour !!!"
+// });
 
-app.use(limit);
+// app.use(limit);
 
 app.use(compression());
 

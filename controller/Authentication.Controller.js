@@ -17,6 +17,11 @@ const reset_token_mail = require("../services/mail/reset_password_mail");
 const load_updated_ejs = require("../util/preventFromCaching");
 
 exports.getLogin = (req, res) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    return res.redirect("/");
+  }
+
   let message = req.flash("error");
   let messageType;
 
@@ -78,6 +83,11 @@ exports.getLogout = (req, res) => {
 };
 
 exports.getCreateAccount = (req, res) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    return res.redirect("/");
+  }
+
   load_updated_ejs(res);
   return res.status(200).render("CreateORLogin.ejs", {
     title: "SIGN-UP"
@@ -164,10 +174,15 @@ exports.postChangePassword = catchAsync(async (req, res, next) => {
 });
 
 // getLoginIdentity => shows the input form for submiting mail id
-exports.getLoginIdentity = catchAsync(async (req, res, next) => {
+exports.getLoginIdentity = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    return res.redirect("/");
+  }
+
   load_updated_ejs(res);
   return res.render("ForgetPassword");
-});
+};
 
 // postLoginIdentity => After getting email id, check if user exists or not
 // IF EXISTS THEN SEND THE RESET TOKEN TO EMAIL
@@ -222,6 +237,12 @@ exports.postLoginIdentity = catchAsync(async (req, res, next) => {
 // getResetPassword => Shows the new password form page
 exports.getResetPassword = async (req, res, next) => {
   const { tok_id } = req.query;
+
+  // Check if user is logged in or not
+  const token = req.cookies.jwt;
+  if (token) {
+    return res.redirect("/");
+  }
 
   if (!tok_id) {
     return res.redirect("/");

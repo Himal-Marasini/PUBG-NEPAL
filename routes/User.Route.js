@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 
-const user = require("../controller/User.Controller");
+const user = require("../controller/user.controller");
 const isAuth = require("../middleware/isAuth");
 
 Router.get("/", isAuth, user.getHomePage);

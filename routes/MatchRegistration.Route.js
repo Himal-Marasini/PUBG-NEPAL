@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 
-const registration = require("../controller/MatchRegistration.Controller");
+const registration = require("../controller/matchRegistration.controller");
 
 // Protecting Route Module at last
 const isAuth = require("../middleware/isAuth");
