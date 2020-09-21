@@ -1,0 +1,219 @@
+@import "./common/Style-SideNav.css";
+@import "./common/style-Footer.css";
+
+.main-wrapper {
+  background: #252734;
+  font-size: 0.9em;
+}
+
+.header-wrapper {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: 87% 10%;
+  margin-top: 30px;
+}
+
+.header-wrapper div:first-child {
+  margin-left: 4%;
+}
+
+.logout-wrapper {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.profile-circle {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url("../assets/images/Image__3.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  position: absolute;
+  right: 110px;
+  top: 14px;
+}
+
+.image-wrapper__text {
+  color: #e08012;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-right: 8px;
+}
+
+.drop-down__wrapper {
+  vertical-align: top;
+  cursor: pointer;
+}
+
+#drop-down {
+  width: 18px;
+}
+
+.drop-down__options {
+  background: #252743;
+  color: #212121;
+  position: absolute;
+}
+
+.statistics-wrapper {
+  width: 92%;
+  margin: 2% auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #fafafa;
+  padding: 10px 30px;
+  min-height: 25%;
+}
+
+.statistics-text {
+  grid-column: 1/3;
+  text-transform: uppercase;
+  font-family: "Raleway Medium";
+}
+
+.statistics-season {
+  padding-right: 30px;
+  text-align: right;
+}
+
+select {
+  padding: 4px;
+  font-family: Raleway;
+  outline: none;
+  background: none;
+  border: 1px solid #fafafa;
+  color: #fafafa;
+}
+
+option {
+  background: #252743;
+}
+
+.statistics-matchPlayed,
+.statistics-matchWon,
+.statistics-currentLeague {
+  align-self: center;
+  justify-self: center;
+}
+
+.statistics-matchPlayed {
+  justify-self: flex-start;
+}
+
+.statistics-matchPlayed p,
+.statistics-matchWon p,
+.statistics-currentLeague p {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.statistics--uppercase {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.statistics--fontSize {
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.upcoming-registration-wrapper {
+  border: 1px solid #fafafa;
+  width: 92%;
+  margin: 0 auto;
+  overflow-y: auto;
+  min-height: 200px;
+  max-height: 410px;
+}
+
+.upcoming-registration-header {
+  background-color: #626ed4;
+  padding: 12px 28px;
+  font-family: "Raleway Medium";
+  text-transform: uppercase;
+}
+
+.upcoming-registration-match-wrapper {
+  background-color: #36394c;
+  margin-bottom: 5px;
+}
+
+.matches-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2em;
+  padding-top: 1%;
+  padding-left: 30px;
+}
+
+.match--bold {
+  font-weight: 600;
+}
+
+.btn {
+  outline: none;
+  font-family: Raleway;
+  background: transparent;
+  border: none;
+  color: #fafafa;
+  cursor: pointer;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+
+.btn--register {
+  background-color: #02a398;
+  margin-top: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  display: inline-block;
+}
+
+.upcoming-registration-btn-wrapper {
+  margin-left: 30px;
+}
+
+.btn-discord {
+  background-color: #02a398;
+  padding: 12px 21px;
+  margin-top: 20px;
+}
+
+.btn-discord-label {
+  font-size: 0.725em;
+  padding: 5px 0 10px;
+}
+
+@media screen and (max-width: 1353px) {
+  .header-wrapper {
+    margin-top: 0;
+    padding-top: 20px;
+  }
+
+  .main-wrapper {
+    min-height: 100vh;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .statistics--fontSize {
+    font-size: 1.3rem;
+  }
+
+  .statistics-wrapper {
+    padding: 10px 7px;
+  }
+}
