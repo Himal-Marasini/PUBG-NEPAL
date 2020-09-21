@@ -1,5 +1,3 @@
-// In Package.json, Change the start script from "Nodemon index.js" to "Node index.js"
-
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -12,7 +10,6 @@ dotenv.config({ path: "./config.env" });
 const flash = require("connect-flash");
 const session = require("express-session");
 
-const moment = require("moment");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");

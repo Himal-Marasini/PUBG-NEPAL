@@ -36,7 +36,7 @@ exports.getRegistration = catchAsync(async (req, res, next) => {
 
   load_updated_ejs(res);
 
-  return res.render("Register-Form.ejs", {
+  return res.render("register-form.ejs", {
     data: matchData
   });
 });
