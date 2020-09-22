@@ -265,8 +265,8 @@ exports.getResetPassword = async (req, res, next) => {
 // patchResetMethod => Verify the token then update the password and save it into db
 exports.patchResetPassword = catchAsync(async (req, res, next) => {
   // 1. Extract the token from param or query
-  const { tok_id } = req.query;
-
+  const { tok_id } = req.body;
+  console.log(tok_id);
   // Doing JOI Validation
   const { error } = validatePasswordReset(req.body);
 
@@ -289,7 +289,7 @@ exports.patchResetPassword = catchAsync(async (req, res, next) => {
 
   // 4. Update the new password and set passwordResetToken && passwordExpiresAt === undefined So that token won't work again
   // First, Change it to the hashed password
-  const hashedPassword = await bcrypt.hash(req.body.password, 13);
+  const hashedPassword = await bcrypt.hash(req.body.newPassword, 13);
 
   user.password = hashedPassword;
   user.passwordResetToken = undefined;

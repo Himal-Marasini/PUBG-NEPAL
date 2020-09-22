@@ -349,6 +349,13 @@ function validate_Password_Reset(inputData) {
             allowOnly: " do not match !!"
           }
         }
+      }),
+    tok_id: Joi.string()
+      .required()
+      .error(() => {
+        return {
+          message: "Sorry, Password can't be reset now !!"
+        };
       })
   };
 

@@ -49,6 +49,7 @@ const Schema = new mongoose.Schema(
       enum: ["Bronze", "Gold", "Diamond", "Crown"],
       default: "Bronze"
     },
+    passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date
   },
@@ -70,6 +71,14 @@ Schema.methods.generateAuthToken = function () {
   );
   return token;
 };
+
+Schema.pre("save", function (next) {
+  console.log(1);
+  if (!this.isModified("password") || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
 
 // In this function, We generate the reset token
 Schema.methods.createPasswordResetToken = function () {
@@ -93,6 +102,19 @@ Schema.methods.createPasswordResetToken = function () {
 
   // 4. At the end, Return the token
   return resetToken;
+};
+
+Schema.methods.changePasswordAfter = function (JWTTimeStamp) {
+  if (this.passwordChangedAt) {
+    const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+
+    console.log(JWTTimeStamp, changedTimeStamp);
+
+    return JWTTimeStamp < changedTimeStamp;
+  }
+
+  // False means not changed
+  return false;
 };
 
 Schema.methods.isMatchFinished = function () {

@@ -45,18 +45,22 @@
   };
 
   sendDataToServer = async function (inputData) {
+    const data = { ...inputData };
+    const url = window.location.href;
+    const tok_id = url.split("=");
+    data.tok_id = tok_id[1];
     const res = await fetch("/user/reset-password", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(inputData)
+      body: JSON.stringify(data)
     });
-    const data = await res.json();
+    const result = await res.json();
 
     if (res.status !== 200) {
       domVariables.error_wrapper.style.display = "block";
-      domVariables.error_text.textContent = data.message;
+      domVariables.error_text.textContent = result.message;
 
       setTimeout(function () {
         domVariables.error_wrapper.style.display = "none";
@@ -67,11 +71,11 @@
 
     domVariables.error_wrapper.classList = "success-wrapper";
     domVariables.error_wrapper.style.display = "block";
-    domVariables.error_text.textContent = data.message;
+    domVariables.error_text.textContent = result.message;
 
     // Redirect the user
     setTimeout(function () {
-      window.location.href = data.redirect;
+      window.location.href = result.redirect;
     }, 1000);
   };
 

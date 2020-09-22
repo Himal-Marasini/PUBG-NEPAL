@@ -43,11 +43,20 @@ module.exports = async function (req, res, next) {
       // return next(new AppError("The user no more exists", 401));
     }
 
-    // Here, Storing our user data on req so that we don't have to reach everytime to database for data
-    req.user = currentUser;
-
     // 5. If user password has been changed, We need to ask for login again
     // Will Integrate this later on
+    const isChanged = currentUser.changePasswordAfter(decode.iat);
+    console.log(isChanged);
+    if (isChanged) {
+      req.flash("error", "User no more exists !! Please login to get access");
+      return res.redirect("/login");
+
+      // Don't remove below line, It will be useful while building REST API
+      // return next(new AppError("Recently Password has been changed !! Please login again"));
+    }
+
+    // Here, Storing our user data on req so that we don't have to reach everytime to database for data
+    req.user = currentUser;
 
     // 6. Grant access to the protected route
     next();
