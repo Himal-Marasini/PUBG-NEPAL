@@ -24,7 +24,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 section {
-  height: 660px;
+  height: 100vh;
   background: url(../assets/images/Image__4.png);
   background-position: 0 -88px;
   background-repeat: no-repeat;

@@ -73,7 +73,6 @@ Schema.methods.generateAuthToken = function () {
 };
 
 Schema.pre("save", function (next) {
-  console.log(1);
   if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
@@ -107,9 +106,6 @@ Schema.methods.createPasswordResetToken = function () {
 Schema.methods.changePasswordAfter = function (JWTTimeStamp) {
   if (this.passwordChangedAt) {
     const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-
-    console.log(JWTTimeStamp, changedTimeStamp);
-
     return JWTTimeStamp < changedTimeStamp;
   }
 

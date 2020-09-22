@@ -2,7 +2,6 @@
   const btn_logout = document.querySelector(".logout-wrapper");
 
   btn_logout.addEventListener("click", function () {
-    console.log(1);
     fetch("/logout", {
       method: "GET"
     })

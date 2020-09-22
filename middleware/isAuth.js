@@ -44,13 +44,18 @@ module.exports = async function (req, res, next) {
     }
 
     // 5. If user password has been changed, We need to ask for login again
-    // Will Integrate this later on
     const isChanged = currentUser.changePasswordAfter(decode.iat);
-    console.log(isChanged);
-    if (isChanged) {
-      req.flash("error", "User no more exists !! Please login to get access");
-      return res.redirect("/login");
 
+    if (isChanged) {
+      req.flash("error", "Recently Password has been changed !! Please login again");
+
+      // GETTING THE ERROR OF TOO MANY REDIRECTS, SO CLEARING THE COOKIES
+      res.cookie("jwt", undefined, {
+        expires: new Date(Date.now() + 10 * 1),
+        httpOnly: true
+      });
+
+      return res.redirect("/login");
       // Don't remove below line, It will be useful while building REST API
       // return next(new AppError("Recently Password has been changed !! Please login again"));
     }
