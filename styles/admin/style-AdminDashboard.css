@@ -1,0 +1,74 @@
+html {
+  font-family: Roboto;
+  text-rendering: optimizeLegibility;
+}
+
+.row {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.row-center-content {
+  width: 80%;
+  margin: 0 auto;
+}
+
+h4 {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.heading-title {
+  margin-top: 10px;
+}
+
+.card {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.btn-view--details {
+  text-align: center;
+  background: #007bff;
+  padding: 6px 0;
+  border-radius: 4px;
+  color: #fafafa;
+  margin-bottom: 20px;
+}
+
+.btn-view--details:hover {
+  text-decoration: none;
+}
+
+.magnifying-icon--wrapper {
+  width: 60%;
+  margin: 20px 0 20px 15%;
+}
+
+.btn-search {
+  width: 120px;
+  margin-left: 20px;
+}
+
+.text-time {
+  color: #e08012;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.match-stats {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.status--pending {
+  color: #e74c3c;
+}
+
+.status--success {
+  color: #2ecc71;
+}

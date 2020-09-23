@@ -3,7 +3,11 @@ const Router = express.Router();
 
 const adminController = require("../controller/admin.controller");
 
-Router.get("/admin/match-details", adminController.getMatchInformation);
+Router.get("/admin/dashboard", adminController.getAllMatches);
+
+Router.get("/admin/match-detail", adminController.getMatchInformation);
+
+// Router.get("/admin/match-details", adminController.getMatchInformation);
 
 Router.post("/admin/create-match", adminController.postCreateMatch);
 

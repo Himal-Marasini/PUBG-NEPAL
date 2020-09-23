@@ -1,0 +1,125 @@
+html {
+  font-family: Roboto;
+  text-rendering: optimizeLegibility;
+}
+
+.row {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+h4,
+h5 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.row-center-content {
+  width: 98%;
+  margin: 0 auto;
+}
+
+.btn-view--details {
+  margin-bottom: 20px;
+}
+
+.input-field {
+  height: 24px;
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.text-time {
+  color: #e08012;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+select {
+  padding-bottom: 5px;
+  padding-left: 3px;
+}
+
+table {
+  width: 100%;
+}
+
+table td:first-child {
+  width: 20%;
+}
+
+.match-highlights {
+  width: 85%;
+  height: 28px;
+}
+
+.winning-team--wrapper {
+  margin-left: 0;
+}
+
+.member-team--wrapper {
+  margin: 5px 0;
+}
+
+.winning-team--title {
+  margin-top: 20px;
+}
+
+.winning-team--wrapper td:first-child {
+  width: 25%;
+}
+
+h6 {
+  margin: 20px 0 0px 16px;
+}
+
+.btn--wrapper {
+  margin-top: 7%;
+}
+
+.btn-update--details {
+  width: 100%;
+}
+
+#btn--update--details-spinner {
+  margin: 0 auto;
+  position: relative;
+  top: 32px;
+  display: none;
+}
+
+.btn-discard {
+  margin-top: 10px;
+}
+
+.team-name {
+  font-weight: 600;
+  color: #e08012;
+  text-transform: uppercase;
+}
+
+.team-members-name {
+  margin: 5px 0;
+}
+
+.team-name--wrapper {
+  width: 94%;
+}
+
+.team-name--wrapper h3 {
+  text-transform: uppercase;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.btn--winner {
+  width: 13%;
+  margin: 20px auto;
+}
+
+#btn-match--update-spinner {
+  position: relative;
+  top: 33px;
+  margin: 0 auto;
+  display: none;
+}

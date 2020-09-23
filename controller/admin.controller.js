@@ -4,17 +4,37 @@ const User = require("../model/createUser.model");
 const catchAsync = require("../util/catchAsync");
 const AppError = require("../util/applicationError");
 
-exports.getMatchInformation = catchAsync(async (req, res, next) => {
-  const { id, date, time } = req.query;
-  let match = [];
-  if (id) match = await Match.findById(id);
-  else match = await Match.findOne({ date, time });
+exports.getAllMatches = async (req, res, next) => {
+  const match = await Match.find();
 
-  return res.json({
-    success: true,
-    data: match.players
+  return res.render("Admin-Dashboard", {
+    data: match
+  });
+};
+
+exports.getMatchInformation = catchAsync(async (req, res, next) => {
+  const { id } = req.query;
+  if (!id) {
+    return res.redirect("/admin/dashboard");
+  }
+  const match = await Match.findById(id);
+
+  return res.render("Admin-MatchDetails.ejs", {
+    data: match
   });
 });
+
+// exports.getMatchInformation = catchAsync(async (req, res, next) => {
+//   const { id, date, time } = req.query;
+//   let match = [];
+//   if (id) match = await Match.findById(id);
+//   else match = await Match.findOne({ date, time });
+
+//   return res.json({
+//     success: true,
+//     data: match.players
+//   });
+// });
 
 exports.postCreateMatch = catchAsync(async (req, res) => {
   const { date, device, time, type, map, prize, fee, status } = req.body;

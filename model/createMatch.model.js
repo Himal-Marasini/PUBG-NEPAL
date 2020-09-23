@@ -54,6 +54,10 @@ const Schema = new mongoose.Schema(
       isFinished: {
         type: String,
         enum: ["technical error", "registration closed", true, false],
+        // technical error = match has been cancelled from admin of PUBG MOBILE NEPAL,
+        // registration closed = match registration has been closed
+        // true = match has been finished and played succesfull
+        // false = registration opened
         default: false
       },
       winner: {

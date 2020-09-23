@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/admin/style-AdminDashboard.css">
+    <link rel="icon" href="/assets/images/Logo.png" type="image/png">
+
+</head>
+
+<body>
+    <section>
+        <header>
+            <div class="row-center-content">
+                <h3 class="heading-title">PUBG MOBILE NEPAL ADMIN PANEL</h3>
+            </div>
+        </header>
+
+        <div class="input-group mb-3 row-center-content magnifying-icon--wrapper">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                    <img src="/assets/images/icons/search.svg" alt="search" class="search-icons">
+                </span>
+            </div>
+            <input type="text" class="form-control" placeholder="Search for matches with date or Id"
+                aria-label="Username" aria-describedby="basic-addon1">
+            <button type="button" class="btn btn-primary btn-search">Search</button>
+        </div>
+
+        <main class="row-center-content">
+            <h4>All Matches:</h4>
+
+            <div class="row">
+                <% if(data) { %>
+                <% data.forEach((el)=> { %>
+                <div class="card col-md-5">
+                    <div class="card-body">
+                        <h4>Match Will Start In:</h4>
+                        <% if(el.status.isFinished == "true") { %>
+                        <h5 class="text-time">GAME OVER</h5>
+                        <% }else if(el.status.isFinished == "technical error") { %>
+                        <h5 class="text-time" style="color: #e74c3c;">Technical Error</h5>
+                        <% } else { %>
+                        <h5 class="text-time"><%= el.time %></h5>
+                        <% } %>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Date: <span><%= el.date %></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Time: <span><%= el.time %></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Type: <span><%= el.type %></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Device: <span><%= el.device %></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Total Team: <span>24</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Map: <span><%= el.map %></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Entry Fee: <span><%= el.fee %></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Winning Prize: <span><%= el.prize %></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <% if(el.status.isFinished == "false") { %>
+                                <p>Status: <span class="match-stats status--success">Registration Opened</span></p>
+                                <% }else if(el.status.isFinished == "true"){ %>
+                                <p>Status: <span class="match-stats status--success">Completed</span></p>
+                                <% }else if(el.status.isFinished == "technical error"){ %>
+                                <p>Status: <span class="match-stats status--pending">Cancel(Technical Error)</span></p>
+                                <% }else if(el.status.isFinished == "registration closed"){ %>
+                                <p>Status: <span class="match-stats status--pending">Registration Closed</span></p>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/admin/match-detail?id=<%= el.id %>" target="_blank" class="btn-view--details">
+                        View Details
+                    </a>
+                </div>
+                <% }) %>
+                <% } %>
+
+                <!-- <div class="card col-md-5">
+                    <div class="card-body">
+                        <h4>Match Will Start In:</h4>
+                        <h5 class="text-time">game over</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Date: <span>14-05-2020</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Time: <span>9:00 PM</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Type: <span>Squad</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Device: <span>Emulator</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Total Team: <span>24</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Map: <span>Erangle</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Entry Fee: <span>200 NRS</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Winning Prize: <span>3500</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Status: <span class="match-stats status--success">Completed</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-view--details">View Details</button>
+                </div> -->
+            </div>
+        </main>
+
+    </section>
+</body>
+
+</html>
