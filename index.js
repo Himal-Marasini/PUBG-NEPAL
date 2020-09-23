@@ -1,4 +1,4 @@
-// In Package.json, Change the start script from "Nodemon index.js" to "Node index.js"
+const subdomain = require("express-subdomain");
 
 const express = require("express");
 const app = express();
@@ -70,7 +70,7 @@ app.use(homepage);
 app.use(admin);
 app.use(registration);
 app.use(pubgStore);
-app.use(subDomainRoute);
+app.use(subdomain("api", subDomainRoute));
 
 app.all("*", function (req, res, next) {
   const err = new Error("404 !!! PAGE NOT FOUND");

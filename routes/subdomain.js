@@ -1,4 +1,3 @@
-const subdomain = require("express-subdomain");
 const express = require("express");
 const router = express.Router();
 
@@ -13,4 +12,4 @@ router.get("/users", function (req, res) {
   });
 });
 
-module.exports = subdomain("api", router);
+module.exports = router;
