@@ -12,7 +12,10 @@ async function NotAuthenticated_Page(req, res, next) {
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
   let existingMatch = match.filter(
-    (el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error"
+    (el) =>
+      el.status.isFinished !== "registration closed" &&
+      el.status.isFinished !== "technical error" &&
+      el.status.isFinished !== "true"
   );
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
