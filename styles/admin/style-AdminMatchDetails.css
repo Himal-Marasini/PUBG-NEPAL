@@ -57,6 +57,19 @@ table td:first-child {
   margin-left: 0;
 }
 
+.alert-danger {
+  width: 98%;
+  text-align: center;
+}
+
+#winningTeam-error--wrapper {
+  display: none;
+}
+
+#winningTeam-success--wrapper {
+  display: none;
+}
+
 .member-team--wrapper {
   margin: 5px 0;
 }
@@ -83,8 +96,6 @@ h6 {
 
 #btn--update--details-spinner {
   margin: 0 auto;
-  position: relative;
-  top: 32px;
   display: none;
 }
 

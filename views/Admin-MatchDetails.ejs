@@ -284,7 +284,7 @@
                                 <table>
                                     <tr>
                                         <td style="width: 28%;">Match Id: </td>
-                                        <td><%= data._id %></td>
+                                        <td class="match_id"><%= data._id %></td>
                                     </tr>
                                 </table>
                             </div>
@@ -300,14 +300,186 @@
                 </div>
                 <div class="card col-md-5" style="margin-left: 15px;padding-bottom: 20px;">
                     <h5 class="winning-team--title">Winning Team Members Name</h5>
-                    <div class="row winning-team--wrapper" style="padding-top: 20px;">
+
+                    <div class="row winning-team--wrapper">
+                        <div class="alert alert-success" role="alert" id="winningTeam-success--wrapper"></div>
+                        <div class="alert alert-danger" role="alert" id="winningTeam-error--wrapper"></div>
+                    </div>
+                    <% if(data.status.winner.members.length > 0) { %>
+                    <div class="row winning-team--wrapper">
                         <div class="col-md-12">
                             <table>
                                 <tr>
                                     <td style="width: 18%;">User ID:</td>
                                     <td>
                                         <span>
-                                            <input type="text" id="user_id" class="input-field" />
+                                            <input type="text" value="<%= data.status.winner.user_id %>" id="user_id"
+                                                class="input-field" />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row winning-team--wrapper">
+                        <div class="col-md-12">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Team Name:</td>
+                                    <td>
+                                        <span>
+                                            <input type="text" value="<%= data.status.winner.team_name %>"
+                                                id="team_name" class="input-field" />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <h6>Members Name With Character Id:</h6>
+                    <div class="row member-team--wrapper">
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member One Name:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="text" value="<%= data.status.winner.members[0].name %>"
+                                            id="member_one_name_input" class="input-field"
+                                            aria-describedby="timeHelp" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member One Char Id:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>
+                                            <input type="text" value="<%= data.status.winner.members[0].character_id %>"
+                                                id="member_one_char" class="input-field" aria-describedby="timeHelp" />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row member-team--wrapper">
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member Two Name:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="text" value="<%= data.status.winner.members[1].name %>"
+                                            id="member_two_name_input" class="input-field"
+                                            aria-describedby="timeHelp" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member Two Char Id:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>
+                                            <input type="text" value="<%= data.status.winner.members[1].character_id %>"
+                                                id="member_two_char" class="input-field" aria-describedby="timeHelp" />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row member-team--wrapper">
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member Three Name:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="text" value="<%= data.status.winner.members[2].name %>"
+                                            id="member_three_name_input" class="input-field"
+                                            aria-describedby="timeHelp" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member Three Char Id:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>
+                                            <input type="text" value="<%= data.status.winner.members[2].character_id %>"
+                                                id="member_three_char" class="input-field"
+                                                aria-describedby="timeHelp" />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row member-team--wrapper">
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member Four Name:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="text" value="<%= data.status.winner.members[3].name %>"
+                                            id="member_four_name_input" class="input-field"
+                                            aria-describedby="timeHelp" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">Member Four Char Id:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span>
+                                            <input type="text" value="<%= data.status.winner.members[3].character_id %>"
+                                                id="member_four_char" class="input-field" aria-describedby="timeHelp" />
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <% } else { %>
+                    <div class=" row winning-team--wrapper">
+                        <div class="col-md-12">
+                            <table>
+                                <tr>
+                                    <td style="width: 18%;">User ID:</td>
+                                    <td>
+                                        <span>
+                                            <input type="text" value="<%= data.status.winner.user_id %>" id="user_id"
+                                                class="input-field" />
                                         </span>
                                     </td>
                                 </tr>
@@ -457,6 +629,7 @@
                             </table>
                         </div>
                     </div>
+                    <% } %>
 
                     <div class="row member-team--wrapper" style="margin-top: 20px;">
                         <div class="col-md-12">
@@ -483,6 +656,8 @@
                             </table>
                         </div>
                     </div>
+
+
 
                     <div class="btn--wrapper">
                         <div class="spinner-border text-success" role="status" id="btn--update--details-spinner">
@@ -536,7 +711,9 @@
                         <%= el.team_members[3].character_id %>
                     </div>
                 </div>
+                <% if(data.status.winner.members.length < 0) { %>
                 <button type="button" class="btn btn-info btn--winner">Select Winner</button>
+                <% } %>
             </div>
             <% }) %>
             <% } else{ %>

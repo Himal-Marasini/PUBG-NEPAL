@@ -93,6 +93,10 @@ exports.postUpdateMatch = catchAsync(async (req, res, next) => {
   }
 
   if (match.status.winner.user_id !== undefined) {
+    if (match_highlights) {
+      match.highlights = match_highlights;
+      await match.save();
+    }
     return next(new AppError("Match Winner has already been updated", 406));
   }
 
@@ -143,6 +147,7 @@ exports.postUpdateMatch = catchAsync(async (req, res, next) => {
 
   return res.json({
     success: true,
+    message: "Match Winner Has been Updated !!",
     data: match
   });
 });

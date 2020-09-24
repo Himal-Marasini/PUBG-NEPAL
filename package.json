@@ -5,10 +5,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "build": "webpack assets/js/admin/",
     "debug": "ndb index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Himanshu Marasini",
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^7.2.4",
