@@ -23,9 +23,13 @@
   let member_three_char = document.getElementById("member_three_char");
   let member_four_name = document.getElementById("member_four_name_input");
   let member_four_char = document.getElementById("member_four_char");
+  const match_highlights = document.querySelector(".match-highlights");
+  let match_highlights_value;
 
   const winning_team_error_wrapper = document.getElementById("winningTeam-error--wrapper");
+  const matchUpdate_error_wrapper = document.getElementById("matchUpdate-error--wrapper");
   const winning_team_success_wrapper = document.getElementById("winningTeam-success--wrapper");
+  const matchUpdate_success_wrapper = document.getElementById("matchUpdate-success--wrapper");
 
   const btn_discard = document.querySelector(".btn-discard");
   const btn_updateWinners = document.querySelector(".btn-update--details");
@@ -76,9 +80,28 @@
   });
 
   btn_updateWinners.addEventListener("click", async () => {
-    // Front End Validate
-    if (!validateInput(team_name.value)) return false;
-    if (!validateInput(user_id.value)) return false;
+    if (
+      !validateInput(
+        team_name.value,
+        winning_team_error_wrapper,
+        "No winner has been selected !! Please select the winner."
+      )
+    )
+      return false;
+    if (
+      !validateInput(
+        user_id.value,
+        winning_team_error_wrapper,
+        "No winner has been selected !! Please select the winner."
+      )
+    )
+      return false;
+
+    if (match_highlights.value == "" || match_highlights.value.length == 0) {
+      match_highlights_value = undefined;
+    } else {
+      match_highlights_value = match_highlights.value;
+    }
 
     const inputData = {
       match_id: match_id.textContent,
@@ -91,14 +114,14 @@
           { name: member_three_name.value, character_id: member_three_char.value },
           { name: member_four_name.value, character_id: member_four_char.value }
         ]
-      }
+      },
+      match_highlights: match_highlights_value
     };
 
+    // Show Spinner
+    btn_updateWinners_spinner.style.display = "block";
+    btn_updateWinners.style.display = "none";
     try {
-      // Show Spinner
-      btn_updateWinners_spinner.style.display = "block";
-      btn_updateWinners.style.display = "none";
-
       const res = await fetch("/admin/v1/update-match/winner-highlights/", {
         method: "POST",
         headers: {
@@ -113,7 +136,6 @@
         // Hide Spinner
         btn_updateWinners_spinner.style.display = "none";
         btn_updateWinners.style.display = "block";
-        console.log(data);
         winning_team_error_wrapper.style.display = "block";
         winning_team_error_wrapper.textContent = data.message;
         return;
@@ -134,25 +156,92 @@
     }
   });
 
-  btn_updateMatchStatus.addEventListener("click", () => {
-    const date_val = date.value;
-    const time_val = time.value;
-    const match_type_val = match_type.value;
-    const match_device_val = match_device.value;
-    const match_map_val = match_map.value;
-    const fee_val = fee.value;
-    const winning_prize_val = winning_prize.value;
-    const match_status_val = match_status.value;
-    console.log(match_type_val);
+  btn_updateMatchStatus.addEventListener("click", async () => {
+    if (!validateInput(date.value, matchUpdate_error_wrapper, "Date field can't be empty !!"))
+      return false;
+    if (!validateInput(time.value, matchUpdate_error_wrapper, "Time field can't be empty !!"))
+      return false;
+    if (!validateInput(fee.value, matchUpdate_error_wrapper, "Entry fee field can't be empty !!"))
+      return false;
+    if (
+      !validateInput(
+        winning_prize.value,
+        matchUpdate_error_wrapper,
+        "Winning Prize field can't be empty !!"
+      )
+    )
+      return false;
+
+    const inputData = {
+      id: match_id.textContent,
+      date: date.value,
+      time: time.value.toUpperCase(),
+      type: match_type.value.toUpperCase(),
+      device: match_device.value.toUpperCase(),
+      map: match_map.value.toUpperCase(),
+      entry_fee: fee.value.toUpperCase(),
+      winning_prize: winning_prize.value.toUpperCase(),
+      isFinished: match_status.value
+    };
+
+    // Show Spinner
+    btn_updateMatchStatus_spinner.style.display = "block";
+    btn_updateMatchStatus.style.display = "none";
+    try {
+      const res = await fetch("/admin/v1/update-match", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(inputData)
+      });
+
+      const data = await res.json();
+
+      if (res.status !== 200) {
+        // HIDE THE SPINNER
+        btn_updateMatchStatus_spinner.style.display = "none";
+        btn_updateMatchStatus.style.display = "block";
+
+        // SHOW THE CONTAINER
+        matchUpdate_error_wrapper.textContent = data.message;
+        matchUpdate_error_wrapper.style.display = "block";
+        setTimeout(function () {
+          matchUpdate_error_wrapper.textContent = "";
+          matchUpdate_error_wrapper.style.display = "none";
+        }, 9000);
+        return;
+      }
+
+      // HIDE THE SPINNER
+      btn_updateMatchStatus_spinner.style.display = "none";
+      btn_updateMatchStatus.style.display = "block";
+
+      // Success Message
+      matchUpdate_success_wrapper.textContent = data.message;
+      matchUpdate_success_wrapper.style.display = "block";
+    } catch (err) {
+      // HIDE THE SPINNER
+      btn_updateMatchStatus_spinner.style.display = "none";
+      btn_updateMatchStatus.style.display = "block";
+
+      // SHOW THE CONTAINER
+      matchUpdate_error_wrapper.textContent = err;
+      matchUpdate_error_wrapper.style.display = "block";
+      setTimeout(function () {
+        matchUpdate_error_wrapper.textContent = "";
+        matchUpdate_error_wrapper.style.display = "none";
+      }, 10000);
+      return;
+    }
   });
 
-  function validateInput(inputData) {
+  function validateInput(inputData, errorContainer, message) {
     if (inputData == "" || inputData.length == 0) {
-      winning_team_error_wrapper.textContent =
-        "No winner has been selected !! Please select the winner.";
-      winning_team_error_wrapper.style.display = "block";
+      errorContainer.textContent = message;
+      errorContainer.style.display = "block";
       setTimeout(function () {
-        winning_team_error_wrapper.style.display = "none";
+        errorContainer.style.display = "none";
       }, 9000);
       return false;
     }

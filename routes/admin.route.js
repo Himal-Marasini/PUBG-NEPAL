@@ -12,15 +12,15 @@ Router.get("/admin/match-detail", adminController.getMatchInformation);
 Router.post("/admin/create-match", adminController.postCreateMatch);
 
 // UPDATE THE MATCH HIGHLIGHTS AND WINNER NAME
-// Router.post("/admin/update-match", adminController.postUpdateMatch);
-Router.post("/admin/v1/update-match/winner-highlights/", adminController.postUpdateMatch);
-
-// UPDATE THE STAUS OF THE MATCH
-Router.get("/admin/update-match/status", adminController.getUpdateMatchStatus);
+Router.post(
+  "/admin/v1/update-match/winner-highlights/",
+  adminController.postUpdateWinner_Highlights
+);
 
 // FOR UPDATING MATCH
-// /admin/v1/update-match
+Router.post("/admin/v1/update-match", adminController.postUpdateMatch);
 
-// FOR UPDATING MATCH WINNER AND HIGHLIGHTS
-// /admin/v1/update-match/winner-highlights/
+// UPDATE THE STAUS OF THE MATCH
+// Router.get("/admin/update-match/status", adminController.getUpdateMatchStatus);
+
 module.exports = Router;

@@ -4,3 +4,5 @@ demo.Controller.js
 demo.Route.js
 mail_demo.js
 demo.ejs
+.babelrc
+webpack.config.js

@@ -57,7 +57,8 @@ table td:first-child {
   margin-left: 0;
 }
 
-.alert-danger {
+.alert-danger,
+.alert-success {
   width: 98%;
   text-align: center;
 }
@@ -129,8 +130,15 @@ h6 {
 }
 
 #btn-match--update-spinner {
-  position: relative;
-  top: 33px;
   margin: 0 auto;
+  display: none;
+  margin-bottom: 12px;
+}
+
+#matchUpdate-success--wrapper {
+  display: none;
+}
+
+#matchUpdate-error--wrapper {
   display: none;
 }
