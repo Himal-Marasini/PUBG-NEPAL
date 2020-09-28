@@ -1,0 +1,197 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Teko;
+  color: #212121;
+  text-rendering: optimizeLegibility;
+}
+
+.row {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.header--wrapper {
+  background-image: url(/assets/images/bg_uc.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  background-position: 0 -186px;
+}
+
+.logo {
+  width: 120px;
+}
+
+header .row {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.navigation {
+  margin-top: 29px;
+  justify-self: end;
+  font-size: 21px;
+}
+
+/*nav bar  */
+.nav_li {
+  display: inline-block;
+  color: #fafafa;
+  text-transform: uppercase;
+  font-family: Teko;
+  font-weight: 400;
+}
+
+.nav_a {
+  padding: 30px;
+  color: #e08012;
+  text-decoration: none;
+}
+
+/* Declearing Section Of (Redem your earn points)  */
+.redem_intro {
+  font-family: Teko;
+  background-color: #252734;
+  color: #fafafa;
+  height: 37px;
+  padding: 5px 0 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+/* Declearing Height of Redem Point Box  */
+.redem {
+  height: 600px;
+}
+
+.redeem-title {
+  font-family: Raleway;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #e08012;
+  text-align: center;
+  padding-top: 20px;
+  height: 60px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Redem Points all Boxes */
+.redeem--wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.redem_1,
+.redem_2,
+.redem_3,
+.redem_4,
+.redem_5,
+.redem_6 {
+  width: 275px;
+  height: 238px;
+  margin-top: 25px;
+  box-shadow: 0 0 10px #252734;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  justify-self: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Point Earn i.e 1000Points */
+.points {
+  font-size: 24px;
+  padding-top: 10px;
+}
+
+.image_wrapper {
+  background-repeat: no-repeat;
+  height: 100px;
+  margin-left: 35px;
+  background-size: contain;
+}
+
+.image_1,
+.image_2 {
+  background-image: url(/assets/images/30UC.png);
+}
+
+.image_3 {
+  background-image: url(/assets/images/300UC.png);
+}
+
+.image_4 {
+  background-image: url(/assets/images/600UC.png);
+}
+
+.uc_point {
+  font-size: 18px;
+  padding-top: 10px;
+  margin-bottom: 13px;
+}
+
+/* Anchor Tag Of Redem Point */
+#redeem_point {
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #212121;
+  /* background-color: #e08012; */
+  border: 2px solid #e08012;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+#redeem_point:hover {
+  background: #e08012;
+  color: #fafafa;
+}
+
+.contact-us {
+  margin-top: 5px;
+}
+
+.contact-us--wrapper {
+  background: #ececec;
+  padding-top: 10px;
+}
+
+.heading-title--wrapper {
+  background: #34495e;
+}
+
+.heading-title--wrapper h2 {
+  color: #fafafa;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 21px;
+  padding: 5px 0;
+}
+
+.contact-us--wrapper h3 {
+  font-weight: 400;
+}
+
+.contact-us--inline {
+  color: #e08012;
+  margin-right: 10px;
+}
+
+.contact-us--wrapper a {
+  text-decoration: none;
+  color: #212121;
+}

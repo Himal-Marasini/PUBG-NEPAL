@@ -14,6 +14,8 @@ Router.get("/recent-winner", isAuth, user.getRecentWinners);
 
 // Router.get('/blogs', isAuth, user.getBlogs);
 
+Router.get("/redeem", user.getRedeemCenter);
+
 Router.get("/contact-us", isAuth, user.getContactUs);
 
 Router.get("/user/setting", isAuth, user.getUserSetting);

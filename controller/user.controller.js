@@ -118,6 +118,12 @@ exports.getContactUs = (req, res, next) => {
   });
 };
 
+exports.getRedeemCenter = (req, res, next) => {
+  return res.render("Redeem-Center.ejs", {
+    path: "/redeem"
+  });
+};
+
 exports.getUserSetting = (req, res, next) => {
   load_updated_ejs(res);
   return res.render("Setting", {
