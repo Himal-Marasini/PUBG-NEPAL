@@ -49,6 +49,10 @@ const Schema = new mongoose.Schema(
       enum: ["Bronze", "Gold", "Diamond", "Crown"],
       default: "Bronze"
     },
+    redeemPoints: {
+      type: Number,
+      default: 0
+    },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date

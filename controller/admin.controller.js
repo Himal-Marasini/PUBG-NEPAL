@@ -86,7 +86,7 @@ exports.postCreateMatch = catchAsync(async (req, res) => {
   });
 });
 
-// This update the match highlights and winner name
+// This update the match highlights and winner name (UPDATING REDEEM POINTS FOR WINNER (30) AND ALL PLAYERS ACCOUNT WITH 5 WHO HAS PLAYED)
 exports.postUpdateWinner_Highlights = catchAsync(async (req, res, next) => {
   const { winners, match_highlights, match_id, isFinished } = req.body;
   let user = null;
@@ -127,6 +127,7 @@ exports.postUpdateWinner_Highlights = catchAsync(async (req, res, next) => {
         const element = match.players[i];
         user = await User.findById(element.user_id);
         user.totalMatch += 1;
+        user.redeemPoints += 5;
 
         //  Updating the league of the player
         if (user.totalMatch >= 20) {
@@ -145,6 +146,7 @@ exports.postUpdateWinner_Highlights = catchAsync(async (req, res, next) => {
       }
 
       matchWinner.matchWon += 1;
+      matchWinner.redeemPoints += 30;
       await matchWinner.save();
     }
   } else {

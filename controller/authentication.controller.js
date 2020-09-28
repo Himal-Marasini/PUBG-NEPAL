@@ -122,7 +122,8 @@ exports.postCreateAccount = catchAsync(async (req, res, next) => {
     email,
     phoneNumber,
     khaltiId,
-    password: hashedPassword
+    password: hashedPassword,
+    redeemPoints: 0
   });
 
   await user.save();
