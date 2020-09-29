@@ -15,7 +15,7 @@ async function NotAuthenticated_Page(req, res, next) {
     (el) =>
       el.status.isFinished !== "registration closed" &&
       el.status.isFinished !== "technical error" &&
-      el.status.isFinished !== "true"
+      el.status.isFinished !== "match finished"
   );
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
@@ -38,7 +38,8 @@ async function Authenticated_Page(req, res, next) {
   // Filter the matches whose status is !== true; (Basically that is available)
   if (match.registerMatches !== undefined)
     existingRegisteredMatches = match.registerMatches.filter(
-      (el) => el.status.isFinished !== "true" && el.status.isFinished !== "technical error"
+      (el) =>
+        el.status.isFinished !== "match finished" && el.status.isFinished !== "technical error"
     );
 
   user.isMatchFinished();
@@ -70,7 +71,7 @@ exports.getHomePage = catchAsync(async (req, res, next) => {
 });
 
 exports.getMatchHighlights = catchAsync(async (req, res) => {
-  const match = await Match.find({ "status.isFinished": true });
+  const match = await Match.find({ "status.isFinished": "match finished" });
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);
@@ -91,7 +92,7 @@ exports.getTournaments = (req, res, next) => {
 };
 
 exports.getRecentWinners = catchAsync(async (req, res, next) => {
-  const match = await Match.find({ "status.isFinished": true });
+  const match = await Match.find({ "status.isFinished": "match finished" });
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);

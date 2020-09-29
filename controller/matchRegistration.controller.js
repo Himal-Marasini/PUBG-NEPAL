@@ -139,9 +139,9 @@ exports.validateData = catchAsync(async (req, res, next) => {
       new AppError("Sorry, This match is not available anymore !! Try different matches", 400)
     );
   } else if (
-    match.status.isFinished == "true" ||
-    match.status.isFinished == "technical error" ||
-    match.status.isFinished == "registration closed"
+    match.status.isFinished === "match finished" ||
+    match.status.isFinished === "technical error" ||
+    match.status.isFinished === "registration closed"
   ) {
     return next(new AppError("Registration has been closed for this match !!", 400));
   }
@@ -176,7 +176,7 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
   let existingMatch = match.filter(
     (el) =>
-      el.status.isFinished !== "true" &&
+      el.status.isFinished !== "match finished" &&
       el.status.isFinished !== "technical error" &&
       el.status.isFinished !== "registration closed"
   );
