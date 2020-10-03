@@ -5,6 +5,9 @@ const playerSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "user"
   },
+  email: {
+    type: String
+  },
   team_name: {
     type: String
   },
@@ -13,6 +16,21 @@ const playerSchema = new mongoose.Schema({
   },
   khaltiDetail: {
     type: Object
+  }
+});
+
+const winnerSchema = new mongoose.Schema({
+  user_id: {
+    type: String,
+    required: true
+  },
+  team_name: {
+    type: String,
+    required: true
+  },
+  members: {
+    type: Array,
+    default: []
   }
 });
 
@@ -59,22 +77,65 @@ const Schema = new mongoose.Schema(
         // registration closed = match registration has been closed
         // true = match has been finished and played succesfull
         // false = registration opened
-        default: false
+        default: "registration opened"
       },
-      winner: {
-        user_id: {
-          type: String
+      winners: {
+        first_winner: {
+          user_id: {
+            type: String,
+            default: null
+          },
+          team_name: {
+            type: String,
+            default: null
+          },
+          members: {
+            type: Array,
+            default: []
+          }
         },
-        team_name: {
-          type: String
+        second_winner: {
+          user_id: {
+            type: String,
+            default: null
+          },
+          team_name: {
+            type: String,
+            default: null
+          },
+          members: {
+            type: Array,
+            default: []
+          }
         },
-        members: {
-          type: Array,
-          default: []
+        third_winner: {
+          user_id: {
+            type: String,
+            default: null
+          },
+          team_name: {
+            type: String,
+            default: null
+          },
+          members: {
+            type: Array,
+            default: []
+          }
+        },
+        highest_kill_team: {
+          user_id: {
+            type: String,
+            default: null
+          },
+          team_name: {
+            type: String,
+            default: null
+          },
+          members: {
+            type: Array,
+            default: []
+          }
         }
-      },
-      remark: {
-        type: String
       }
     },
     highlights: {
@@ -85,8 +146,21 @@ const Schema = new mongoose.Schema(
     timestamps: {
       createdAt: true,
       updatedAt: true
-    }
+    },
+    minimize: false
   }
 );
+
+Schema.methods.updateWinner = async function (winners, winner_position) {
+  this.status.winners[winner_position].user_id = winners.user_id;
+  this.status.winners[winner_position].team_name = winners.team_name;
+  this.status.winners[winner_position].members = [
+    { name: winners.members[0].name, id: winners.members[0].id },
+    { name: winners.members[1].name, id: winners.members[1].id },
+    { name: winners.members[2].name, id: winners.members[2].id },
+    { name: winners.members[3].name, id: winners.members[3].id }
+  ];
+  await this.save();
+};
 
 module.exports = mongoose.model("match", Schema);

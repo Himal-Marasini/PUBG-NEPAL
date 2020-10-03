@@ -66,6 +66,7 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
 
   const playerobj = {
     user_id: user._id,
+    email: user.email,
     team_name: req.body.registrator_teamName,
     team_members: [
       { name: req.body.memberOne_name, character_id: req.body.memberOne_charId },
@@ -128,7 +129,7 @@ exports.validateData = catchAsync(async (req, res, next) => {
 
   if (error) {
     // JOI INVALID STATUS CODE: UNDEFINED (WHEN WE SEND EXTRA VALUE FROM FRONT END) ======/ NEED TO FIX THIS LATER
-    return next(error.details[0].message, 400);
+    return next(new AppError(error.details[0].message, 400));
   }
 
   const match = await Match.findOne({ _id: req.body.id }).populate("players");

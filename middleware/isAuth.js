@@ -36,6 +36,11 @@ module.exports = async function (req, res, next) {
     const currentUser = await User.findById(decode.id);
 
     if (!currentUser) {
+      // GETTING THE ERROR OF TOO MANY REDIRECTS, SO CLEARING THE COOKIES
+      res.cookie("jwt", undefined, {
+        expires: new Date(Date.now() + 10 * 0),
+        httpOnly: true
+      });
       req.flash("error", "User no more exists !! Please login to get access");
       return res.redirect("/login");
 
@@ -47,14 +52,13 @@ module.exports = async function (req, res, next) {
     const isChanged = currentUser.changePasswordAfter(decode.iat);
 
     if (isChanged) {
-      req.flash("error", "Recently Password has been changed !! Please login again");
-
       // GETTING THE ERROR OF TOO MANY REDIRECTS, SO CLEARING THE COOKIES
       res.cookie("jwt", undefined, {
-        expires: new Date(Date.now() + 10 * 1),
+        expires: new Date(Date.now() + 10 * 0),
         httpOnly: true
       });
 
+      req.flash("error", "Recently Password has been changed !! Please login again");
       return res.redirect("/login");
       // Don't remove below line, It will be useful while building REST API
       // return next(new AppError("Recently Password has been changed !! Please login again"));

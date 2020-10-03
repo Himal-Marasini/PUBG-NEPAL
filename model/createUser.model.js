@@ -118,40 +118,32 @@ Schema.methods.changePasswordAfter = function (JWTTimeStamp) {
 };
 
 Schema.methods.isMatchFinished = function () {
-  console.log(this);
-
+  // console.log(this);
   // // Yesterday date
   // let yesterday = moment().subtract(1, "days");
   // yesterday = moment(yesterday).format("YYYY-MM-DD")
-
   // // Current time
   // let now = moment().format('YYYY-MM-DD h:mm A')
   // let time = now.split(" ");
   // time = `${time[1]} ${time[2]}`;
-
   // // Current Time, Parsing it into valid format
   // let current_time = moment(time, 'hh:mm A');
-
   // // Now, I need to loop through user Registered match for getting "1 day before registered match": Since in 24 hr match is played and over
   // const filtered_match = matches.filter((el) => {
   //   return el.date === yesterday;
   // });
-
   // const updated_match = filtered_match.forEach((el) => {
   //   // Formatting the time (Because it's throwing error Unsupported format) Need to refactor this later
-
   //   // MATCH TIME
   //   let isoFormatDate = new Date(`${el.date} ${el.time}`);
   //   let date = moment(isoFormatDate).format('YYYY-MM-DD h:mm A');
   //   date = date.split(" ");
   //   let match_time = `${date[1]} ${date[2]}`;
   //   match_time = moment(match_time, 'hh:mm A');
-
   //   let result = current_time.isAfter(match_time);
   //   if (result) {
   //     // Remove that Match from Upcoming Matches
   //     console.log("Match has been played !!", result);
-
   //     // Update the Match Played Field of Dashboard
   //   } else {
   //     // Do Nothing

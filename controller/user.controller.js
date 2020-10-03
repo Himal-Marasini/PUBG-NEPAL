@@ -29,19 +29,28 @@ async function NotAuthenticated_Page(req, res, next) {
 // LOGIN PAGE
 async function Authenticated_Page(req, res, next) {
   const user = req.user;
-  let match = [];
+  let match = [],
+    user_team_obj;
   let existingRegisteredMatches = [];
 
   if (user.registerMatches.length > 0)
     match = await User.findById(user._id).populate("registerMatches");
 
   // Filter the matches whose status is !== true; (Basically that is available)
-  if (match.registerMatches !== undefined)
-    existingRegisteredMatches = match.registerMatches.filter(
-      (el) =>
+  if (match.registerMatches !== undefined) {
+    existingRegisteredMatches = match.registerMatches.filter((el) => {
+      return (
         el.status.isFinished !== "match finished" && el.status.isFinished !== "technical error"
-    );
+      );
+    });
+    user_team_obj = existingRegisteredMatches.map((element) => {
+      return element.players.find((el) => {
+        return el.user_id.toString() === user._id.toString();
+      });
+    });
+  }
 
+  // This need to be removed
   user.isMatchFinished();
 
   const result = {
@@ -49,7 +58,8 @@ async function Authenticated_Page(req, res, next) {
     matchPlayed: user.totalMatch,
     matchWon: user.matchWon,
     currentLeague: user.currentLeague,
-    upcoming_matches: existingRegisteredMatches
+    upcoming_matches: existingRegisteredMatches,
+    team_name_array: user_team_obj
   };
 
   // Show new file, Not From Browser Cache
@@ -77,6 +87,11 @@ exports.getMatchHighlights = catchAsync(async (req, res) => {
   const data = sortMatches(match);
 
   load_updated_ejs(res);
+
+  // return res.json({
+  //   success: true,
+  //   data: data
+  // });
 
   return res.render("Match-Highlights", {
     path: "/match-highlights",
@@ -133,7 +148,8 @@ exports.getUserSetting = (req, res, next) => {
       name: req.user.name,
       email: req.user.email,
       phoneNumber: req.user.phoneNumber,
-      khaltiId: req.user.khaltiId
+      khaltiId: req.user.khaltiId,
+      redeemPoints: req.user.redeemPoints
     }
   });
 };

@@ -19,7 +19,6 @@ const xss = require("xss-clean");
 const user = require("./routes/user.route");
 const authentication = require("./routes/authentication.route");
 const matchRegistration = require("./routes/matchRegistration.route");
-const admin = require("./routes/admin.route");
 const store = require("./routes/store.route");
 // const demo = require("./routes/demo.route");
 
@@ -89,7 +88,6 @@ app.use(authentication);
 app.use(user);
 app.use(matchRegistration);
 app.use(store);
-app.use(admin);
 // app.use(demo);
 
 // 404, Page not found
