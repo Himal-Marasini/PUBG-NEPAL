@@ -71,7 +71,6 @@ const Schema = new mongoose.Schema(
     status: {
       isFinished: {
         type: String,
-        // enum: ["technical error", "registration closed", true, false],
         enum: ["technical error", "registration closed", "match finished", "registration opened"],
         // technical error = match has been cancelled from admin of PUBG MOBILE NEPAL,
         // registration closed = match registration has been closed
@@ -122,7 +121,7 @@ const Schema = new mongoose.Schema(
             default: []
           }
         },
-        highest_kill_team: {
+        highest_team_kill_winner: {
           user_id: {
             type: String,
             default: null
