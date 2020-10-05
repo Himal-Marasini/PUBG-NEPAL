@@ -54,37 +54,37 @@
                             <div class="vertical-line"></div>
                         </div>
                         <div class="winner-text--wrapper">
-                            <% if(element.status.winners[0].first_winner.members.length > 0) { %>
+                            <% if(element.status.winners.first_winner.members.length > 0) { %>
                             <h3 class="winner--title">WINNER</h3>
-                            <h2 class="winner--subtitle"><%= element.status.winners[0].first_winner.team_name %></h2>
+                            <h2 class="winner--subtitle"><%= element.status.winners.first_winner.team_name %></h2>
                             <table width="100%">
                                 <tr>
                                     <td width="30%" class="member-name-bold">
-                                        <%= element.status.winners[0].first_winner.members[0].name %>
+                                        <%= element.status.winners.first_winner.members[0].name %>
                                     </td>
                                     <td width="30%" class="member-charId-bold">
-                                        <%= element.status.winners[0].first_winner.members[0].character_id %></td>
+                                        <%= element.status.winners.first_winner.members[0].id %></td>
                                 </tr>
                                 <tr>
                                     <td width="30%" class="member-name-bold">
-                                        <%= element.status.winners[0].first_winner.members[1].name %>
+                                        <%= element.status.winners.first_winner.members[1].name %>
                                     </td>
                                     <td width="30%" class="member-charId-bold">
-                                        <%= element.status.winners[0].first_winner.members[1].character_id %></td>
+                                        <%= element.status.winners.first_winner.members[1].id %></td>
                                 </tr>
                                 <tr>
                                     <td width="30%" class="member-name-bold">
-                                        <%= element.status.winners[0].first_winner.members[2].name %>
+                                        <%= element.status.winners.first_winner.members[2].name %>
                                     </td>
                                     <td width="30%" class="member-charId-bold">
-                                        <%= element.status.winners[0].first_winner.members[2].character_id %></td>
+                                        <%= element.status.winners.first_winner.members[2].id %></td>
                                 </tr>
                                 <tr>
                                     <td width="30%" class="member-name-bold">
-                                        <%= element.status.winners[0].first_winner.members[3].name %>
+                                        <%= element.status.winners.first_winner.members[3].name %>
                                     </td>
                                     <td width="30%" class="member-charId-bold">
-                                        <%= element.status.winners[0].first_winner.members[3].character_id %></td>
+                                        <%= element.status.winners.first_winner.members[3].id %></td>
                                 </tr>
                             </table>
                             <% } else { %>
