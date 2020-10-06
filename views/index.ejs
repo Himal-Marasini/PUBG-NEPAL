@@ -75,8 +75,8 @@
         <div class="row">
 
             <div class="match__upcomingMatchesContainer">
-                <% if(matchInfo.length > 0) { %>
-                <% matchInfo.forEach((el)=>{ %>
+                <% if(paidMatches.length > 0) { %>
+                <% paidMatches.forEach((el)=>{ %>
                 <h3 class="match__headingThree">Upcoming Matches : (<%= el.date %>)</h3>
                 <div class="match__container">
                     <% el.match.forEach((element)=>{ %>
@@ -110,7 +110,7 @@
                             </p>
                         </div>
                         <div class="match__registerNow">
-                            <a href="/register/<%= element._id %>">
+                            <a href="/register/paid-match/<%= element._id %>">
                                 <input type="button" value="register now" class="btn_register_result"
                                     id="registerBtn__first">
                             </a>
@@ -123,6 +123,42 @@
                 <h3 class="match__headingThree">Upcoming Matches </h3>
                 <h2 style="text-transform: uppercase; font-weight: 400;">No matches are available for now !!</h2>
                 <% } %>
+
+                <div class="match__upcomingMatchesContainer">
+                    <% if(freeMatches.length > 0) { %>
+                    <% freeMatches.forEach((el)=>{ %>
+                    <h3 class="match__headingThree">Free Upcoming Matches : (<%= el.date %>) </h3>
+                    <div class="match__container">
+                        <% el.match.forEach((element)=>{ %>
+                        <div class="match">
+                            <p class="match__p">Match will start in:</p>
+                            <h2 class="match__time"><%= element.time %></h2>
+                            <div class="container__matchType">
+                                <p class="matchTypeContainer__text">
+                                    Match Type :<span class="matchTypeContainer__type match--mobile">
+                                        (<%= element.type %>) <%= element.device %>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="container__matchMap">
+                                <p class="matchMapContainer__text">
+                                    Match Map :<span class="matchMapContainer__type">
+                                        <%= element.map %>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="match__registerNow">
+                                <a href="/register/free-match/<%= element._id %>">
+                                    <input type="button" value="register now" class="btn_register_result"
+                                        id="registerBtn__first">
+                                </a>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <% }) %>
+                    <% } %>
+                </div>
             </div>
 
         </div>

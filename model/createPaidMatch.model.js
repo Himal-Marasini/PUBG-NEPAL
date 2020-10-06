@@ -162,4 +162,4 @@ Schema.methods.updateWinner = async function (winners, winner_position) {
   await this.save();
 };
 
-module.exports = mongoose.model("match", Schema);
+module.exports = mongoose.model("paid_matches", Schema);

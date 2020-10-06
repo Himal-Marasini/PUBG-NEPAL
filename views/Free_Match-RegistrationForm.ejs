@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>PUBG MOBILE NEPAL | FREE MATCH REGISTRATION |</title>
+    <%- include('./GoogleAnalytic.ejs') %>
+    <link href="/styles/style-FreeMatchRegistrationForm.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="/assets/images/Logo.png" type="image/png" />
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <div class="spinner">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <section>
+        <div class="row">
+            <div class="parent__container">
+                <div class="registration__form">
+                    <div class="registration__logo">
+                        <img src="/assets/images/pubg_logo.png" alt="PUBG REGISTRATION" class="pubg_logo" />
+                    </div>
+
+                    <div id="registration__error">
+                        <span class="registrationError__text"></span>
+                    </div>
+
+                    <form>
+                        <div class="registration__emailId">
+                            <span class="registration__emailLable">Email ID :</span>
+                            <input type="email" name="emailId" id="registrator_emailId" class="registrator_emailfield"
+                                value="<%= email %>" readonly disabled />
+                        </div>
+
+                        <div class="registration__matchType">
+                            <span class="registration__matchTypeLable">Match Type:</span>
+                            <input type="text" name="matchType" value="<%= matchType %>" id="registrator_matchType"
+                                class="registrator_matchTypefield" readonly disabled>
+                        </div>
+
+                        <div class="registration__teamMembers">
+                            <span class="registration__teamMembersLable"> PUBG Player Name with Character
+                                ID:</span>
+                            <span class="registrator__memberOne">
+                                <input type="text" placeholder="Player Name" class="registrator_memberNamefield"
+                                    name="memberOneName" id="player_name" />
+                                <input type="number" placeholder="Character ID" class="registrator_memberCharfield"
+                                    name="memberOneCharId" onkeydown="return event.keyCode !== 69" id="player_id" />
+                            </span>
+                        </div>
+                        <div class="registration__submit">
+                            <input type="hidden" value="<%= id %>" id="id" />
+                            <input type="button" value="Submit" class="registration__submitBtn" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/assets/js/registration/freeMatchValidation.js"></script>
+</body>
+
+</html>

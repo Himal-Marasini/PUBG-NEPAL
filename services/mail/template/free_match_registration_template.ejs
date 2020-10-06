@@ -1,0 +1,55 @@
+<%- include('./partial/common_header.ejs') %>
+<style>
+    .text--bold {
+        color: #e08012;
+        font-weight: 500;
+    }
+
+    .note {
+        margin-top: 2rem;
+        color: #c0392b;
+        text-transform: uppercase;
+        font-style: italic;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width:600px) {
+        .note {
+            font-size: 10px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <%- include("./partial/common_logo.ejs") %>
+        <div class="text-wrapper">
+            <h2>PUBG MOBILE NEPAL | FREE CUSTOM GIVEAWAY MATCH | <%= date_in_month %> | <%= data.time %></h2>
+            Hello Soldier,<br />
+            <p>Thanks for participating in PUBG MOBILE NEPAL FREE GIVEAWAY CUSTOM MATCHES, you will get the ROOM ID and
+                PASSWORD on
+                registered email
+                address before starting of 15 minute of match and Your slot number is <span
+                    class="text--bold"><%= slot %></span>.</p>
+            <div>
+                Join Our Facebook Page and Discord for latest upgrade about Prize Pool and Free Giveaway Custom Matches:
+                <p>Facebook Page : https://www.facebook.com/pubgmobilefornepal/ </p>
+                <p>Discord : https://discord.gg/2cTUVdp</p><br />
+                Live Stream will be available at our youtube channel:
+                <p>Youtube Channel : https://www.youtube.com/channel/UCjka13oB7AUQ35DMKVp0kxA</p>
+            </div><br />
+            <p>Thank You !!</p>
+            <p>PUBG MOBILE NEPAL TEAM</p>
+        </div>
+    </div>
+    <div class="note">
+        Note:- Sharing the room id and password with others or inviting the others people
+        in a room without PERMISSION of the authorized member will lead to the harsh action immediately.
+    </div>
+    <%- include('./partial/connect_with_us.ejs') %>
+    </div>
+</body>
+
+</html>

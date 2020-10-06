@@ -1,4 +1,5 @@
-const Match = require("../model/createMatch.model");
+const PaidMatch = require("../model/createPaidMatch.model");
+const FreeMatch = require("../model/createFreeMatch.model");
 const User = require("../model/createUser.model");
 
 const AppError = require("../util/applicationError");
@@ -8,10 +9,18 @@ const load_updated_ejs = require("../util/preventFromCaching");
 
 // !LOGIN PAGE
 async function NotAuthenticated_Page(req, res, next) {
-  let match = await Match.find();
+  const paidMatch = await PaidMatch.find();
+  const freeMatch = await FreeMatch.find();
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
-  let existingMatch = match.filter(
+  let existingPaidMatch = paidMatch.filter(
+    (el) =>
+      el.status.isFinished !== "registration closed" &&
+      el.status.isFinished !== "technical error" &&
+      el.status.isFinished !== "match finished"
+  );
+
+  let exisitingFreeMatch = freeMatch.filter(
     (el) =>
       el.status.isFinished !== "registration closed" &&
       el.status.isFinished !== "technical error" &&
@@ -19,10 +28,12 @@ async function NotAuthenticated_Page(req, res, next) {
   );
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
-  const newVal = sortMatches(existingMatch);
+  const paidMatches = sortMatches(existingPaidMatch);
+  const freeMatches = sortMatches(exisitingFreeMatch);
 
   return res.render("index", {
-    matchInfo: newVal
+    paidMatches,
+    freeMatches
   });
 }
 
@@ -33,12 +44,12 @@ async function Authenticated_Page(req, res, next) {
     user_team_obj;
   let existingRegisteredMatches = [];
 
-  if (user.registerMatches.length > 0)
-    match = await User.findById(user._id).populate("registerMatches");
+  if (user.paid_register_matches.length > 0)
+    match = await User.findById(user._id).populate("paid_register_matches");
 
   // Filter the matches whose status is !== true; (Basically that is available)
-  if (match.registerMatches !== undefined) {
-    existingRegisteredMatches = match.registerMatches.filter((el) => {
+  if (match.paid_register_matches !== undefined) {
+    existingRegisteredMatches = match.paid_register_matches.filter((el) => {
       return (
         el.status.isFinished !== "match finished" && el.status.isFinished !== "technical error"
       );
@@ -81,7 +92,7 @@ exports.getHomePage = catchAsync(async (req, res, next) => {
 });
 
 exports.getMatchHighlights = catchAsync(async (req, res) => {
-  const match = await Match.find({ "status.isFinished": "match finished" });
+  const match = await PaidMatch.find({ "status.isFinished": "match finished" });
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);
@@ -107,7 +118,7 @@ exports.getTournaments = (req, res, next) => {
 };
 
 exports.getRecentWinners = catchAsync(async (req, res, next) => {
-  const match = await Match.find({ "status.isFinished": "match finished" });
+  const match = await PaidMatch.find({ "status.isFinished": "match finished" });
 
   // SORT AND GROUP MATCHES ACCORDING TO DATE
   const data = sortMatches(match);

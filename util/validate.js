@@ -362,6 +362,34 @@ function validate_Password_Reset(inputData) {
   return Joi.validate(inputData, schema);
 }
 
+function validateFreeMatch(inputData) {
+  const objectSchema = {
+    id: Joi.string()
+      .required()
+      .error(() => {
+        return {
+          message: "Sorry, Some problem has occured !!!"
+        };
+      }),
+    player_name: Joi.string()
+      .required()
+      .error(() => {
+        return {
+          message: "PLEASE ENTER THE PLAYER NAME !!!"
+        };
+      }),
+    player_id: Joi.number()
+      .required()
+      .error(() => {
+        return {
+          message: "PLEASE ENTER THE PLAYER CHARACTER ID !!!"
+        };
+      })
+  };
+
+  return Joi.validate(inputData, objectSchema);
+}
+
 // function shopAuthWithoutKhaltiData(inputData){
 //   const objectSchema = {
 //     email: Joi.string()
@@ -486,6 +514,7 @@ function validate_Password_Reset(inputData) {
 
 exports.validateWithoutKhaltiData = validateWithoutKhaltiData;
 exports.validateWithKhaltiData = validateWithKhaltiData;
+exports.validateFreeMatch = validateFreeMatch;
 exports.validateCreateAccount = validateCreateAccount;
 exports.validateLogin = validateLogin;
 exports.validateChangePassword = validateChangePassword;

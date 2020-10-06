@@ -1,21 +1,40 @@
 const User = require("../model/createUser.model");
-const Match = require("../model/createMatch.model");
+const PaidMatch = require("../model/createPaidMatch.model");
+const FreeMatch = require("../model/createFreeMatch.model");
 
 const khalti_registration_verification = require("../services/khalti/registration_verification");
-const send_registration_mail = require("../services/mail/registration_mail");
+const paid_registration_mail = require("../services/mail/paid_custom_registration_mail");
+const free_registration_mail = require("../services/mail/free_custom_registration_mail");
 
 const validateWithoutKhaltiData = require("../util/validate").validateWithoutKhaltiData;
 const validateWithKhaltiData = require("../util/validate").validateWithKhaltiData;
+const validateFreeMatch = require("../util/validate").validateFreeMatch;
 const AppError = require("../util/applicationError");
 const catchAsync = require("../util/catchAsync");
 const sortMatches = require("../util/sortMatches");
 const load_updated_ejs = require("../util/preventFromCaching");
 
-exports.getRegistration = catchAsync(async (req, res, next) => {
+exports.getFreeMatchRegistrationForm = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const match = await FreeMatch.findOne({ _id: id });
+
+  if (!match) {
+    return next(new AppError("Sorry this match is not available !!", 400));
+  }
+
+  return res.render("Free_Match-RegistrationForm", {
+    matchType: `${match.type}(${match.device})`,
+    id: match._id,
+    email: req.user.email
+  });
+});
+
+exports.getPaidMatchRegistrationForm = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const user = req.user;
 
-  const match = await Match.findOne({ _id: id });
+  const match = await PaidMatch.findOne({ _id: id });
 
   if (!match) {
     return next(new AppError("Sorry this match is not available !!", 400));
@@ -36,21 +55,21 @@ exports.getRegistration = catchAsync(async (req, res, next) => {
 
   load_updated_ejs(res);
 
-  return res.render("register-form.ejs", {
+  return res.render("Paid_Match-RegistrationForm", {
     data: matchData
   });
 });
 
 // WITH KHALTI DATA (THIS WILL BE TRIGGERED)
-exports.postRegistration = catchAsync(async (req, res, next) => {
+exports.postPaidMatchRegistration = catchAsync(async (req, res, next) => {
   const { error } = validateWithKhaltiData(req.body);
 
   if (error) {
     return next(new AppError(error.details[0].message, 400));
   }
 
-  // Check Match is Available or Not
-  const match = await Match.findOne({ _id: req.body.id });
+  // Check Paid Match is Available or Not
+  const match = await PaidMatch.findOne({ _id: req.body.id });
 
   if (!match) {
     return next(new AppError("This match is not available !!", 503));
@@ -85,7 +104,7 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
   match.players.push(playerobj);
 
   // Save the MATCH ID into USER REGISTERED MATCH ARRAY
-  user.registerMatches.push(match._id);
+  user.paid_register_matches.push(match._id);
 
   // Save to DB (MATCH)
   const updatedMatch = await match.save();
@@ -115,7 +134,7 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
   };
 
   if (userdata) {
-    if (process.env.NODE_ENV === "prod") await send_registration_mail(matchInfo, res);
+    if (process.env.NODE_ENV === "prod") await paid_registration_mail(matchInfo, res);
     return res.status(200).json({
       success: true,
       message: "You have been succesfully registered !! Please Check your mail for futher details"
@@ -123,8 +142,70 @@ exports.postRegistration = catchAsync(async (req, res, next) => {
   }
 });
 
+// FOR FREE MATCH REGISTRATION
+exports.postFreeMatchRegistration = catchAsync(async (req, res, next) => {
+  const { error } = validateFreeMatch(req.body);
+
+  if (error) {
+    return next(new AppError(error.details[0].message, 400));
+  }
+
+  // Check Paid Match is Available or Not
+  const match = await FreeMatch.findOne({ _id: req.body.id }).populate("players");
+
+  if (!match) {
+    return next(new AppError("This match is not available !!", 503));
+  }
+
+  if (match.players.length > 98) {
+    return next(new AppError("Lobby is full !! Please check different matches"));
+  }
+
+  // Checking if current user is already registered or not
+  const checkUser = match.players.find((el) => {
+    return req.user._id.toString() === el.user_id.toString();
+  });
+
+  if (checkUser) {
+    return next(new AppError("You have already been registered for this match !!", 400));
+  }
+
+  const user = await User.findOne({ _id: req.user._id });
+
+  // Push the User Object Id into Players Array of Match
+  match.players.push({
+    user_id: req.user._id,
+    player_name: req.body.player_name,
+    player_id: req.body.player_id
+  });
+
+  // Save the MATCH ID into USER REGISTERED MATCH ARRAY
+  user.free_register_matches.push(match._id);
+
+  // Save into db
+  await match.save();
+  await user.save();
+
+  // At the end, Send Email
+  const slot = match.players.length;
+
+  const matchInfo = {
+    email: user.email,
+    date: match.date,
+    time: match.time,
+    slot
+  };
+
+  if (process.env.NODE_ENV === "prod") await free_registration_mail(matchInfo, res);
+
+  return res.json({
+    status: true,
+    message: "You have been succesfully registered !!! Please Check your mail for futher details"
+  });
+});
+
 // WITHOUT KHALTI DATA (THIS WILL BE TRIGGERED)
-exports.validateData = catchAsync(async (req, res, next) => {
+exports.validateData_PaidMatch = catchAsync(async (req, res, next) => {
   const { error } = validateWithoutKhaltiData(req.body);
 
   if (error) {
@@ -132,7 +213,7 @@ exports.validateData = catchAsync(async (req, res, next) => {
     return next(new AppError(error.details[0].message, 400));
   }
 
-  const match = await Match.findOne({ _id: req.body.id }).populate("players");
+  const match = await PaidMatch.findOne({ _id: req.body.id }).populate("players");
 
   // CHECK IF MATCH EXISTS AND CHECK IF IT'S STILL AVALIABLE
   if (!match) {
@@ -172,7 +253,7 @@ exports.validateData = catchAsync(async (req, res, next) => {
 });
 
 exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
-  let match = await Match.find().populate("players");
+  let match = await PaidMatch.find().populate("players");
 
   // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
   let existingMatch = match.filter(
@@ -187,6 +268,26 @@ exports.getUpcomingMatch = catchAsync(async (req, res, next) => {
   load_updated_ejs(res);
   return res.render("UpcomingMatches", {
     path: "/upcoming-match",
+    matchInfo: newVal
+  });
+});
+
+exports.getUpcomingFreeMatch = catchAsync(async (req, res, next) => {
+  let match = await FreeMatch.find().populate("players");
+
+  // GET ALL THE MATCHES WHOSE STATUS IS NOT TRUE (MEANS MATCH IS NOT OVER)
+  let existingMatch = match.filter(
+    (el) =>
+      el.status.isFinished !== "match finished" &&
+      el.status.isFinished !== "technical error" &&
+      el.status.isFinished !== "registration closed"
+  );
+
+  // SORT AND GROUP MATCHES ACCORDING TO DATE
+  const newVal = sortMatches(existingMatch);
+  load_updated_ejs(res);
+  return res.render("UpcomingFreeMatches", {
+    path: "/upcoming/free-match",
     matchInfo: newVal
   });
 });

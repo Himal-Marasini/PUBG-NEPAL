@@ -30,10 +30,16 @@ const Schema = new mongoose.Schema(
       required: true,
       select: false
     },
-    registerMatches: [
+    paid_register_matches: [
       {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: "match"
+        ref: "paid_matches"
+      }
+    ],
+    free_register_matches: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "free_matches"
       }
     ],
     totalMatch: {

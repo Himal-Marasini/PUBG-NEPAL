@@ -25,18 +25,18 @@ module.exports = async function sendMail(matchInfo, res) {
     date_in_month = `${date_in_month[2]} ${month[parseInt(date_in_month[1]) - 1]}`;
 
     const emailTemplate = await ejs.renderFile(
-      path.join(__dirname, "template/registration_template.ejs"),
+      path.join(__dirname, "template/free_match_registration_template.ejs"),
       {
         data: matchInfo,
         date_in_month: date_in_month.toUpperCase(),
-        title: "Registration Mail"
+        title: "Free Giveaway Custom Match Registration Mail"
       }
     );
 
     const msg = {
       to: matchInfo.email,
       from: "PUBG MOBILE NEPAL <contact@pubgmobilenp.com>",
-      subject: "Match Details",
+      subject: "Free Giveaway Custom Match Details",
       text: "Please keep this all detail to Yourself only",
       html: emailTemplate
     };
@@ -46,7 +46,7 @@ module.exports = async function sendMail(matchInfo, res) {
     console.log(err);
     return res.json({
       success: false,
-      message: "Fail to send a mail !! You will be updated soon"
+      message: "Fail to send a mail !! You will be updated soon or Contact our page admin."
     });
   }
 };
